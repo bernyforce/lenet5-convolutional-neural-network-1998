@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide de Compréhension Logique — LeNet-5 (Bernard Feugang Noussi)</title>
+  <style>
+    :root {
+      --primary: #0969da;
+      --navy: #0f172a;
+      --card-bg: #ffffff;
+      --bg: #f8fafc;
+      --border: #e2e8f0;
+      --text: #1f2328;
+      --muted: #57606a;
+      --accent: #16a34a;
+      --accent-bg: #f0fdf4;
+      --accent-border: #bbf7d0;
+      --warn: #d97706;
+      --warn-bg: #fffbeb;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border: 1px solid #bfdbfe;
+    }
+    h1 { font-size: 1.6rem; color: var(--navy); margin-bottom: 6px; }
+    .student-meta {
+      font-size: 0.95rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-top: 12px;
+    }
+    .magic-phrase {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-left: 5px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 8px;
+      margin: 25px 0;
+      font-size: 1.05rem;
+      color: #14532d;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .act-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .act-card.act1 { border-left: 5px solid #0969da; }
+    .act-card.act2 { border-left: 5px solid #16a34a; }
+    .act-card.act3 { border-left: 5px solid #8250df; }
+    .act-card.act4 { border-left: 5px solid #d97706; }
+    .act-card.act5 { border-left: 5px solid #0969da; }
+    
+    .act-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .act1 .act-title { color: #0969da; }
+    .act2 .act-title { color: #16a34a; }
+    .act3 .act-title { color: #8250df; }
+    .act4 .act-title { color: #d97706; }
+    .act5 .act-title { color: #0969da; }
+    
+    .timing-badge {
+      font-size: 0.8rem;
+      background: var(--bg);
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .item {
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+      color: #334155;
+    }
+    .item b { color: var(--navy); }
+    .qa-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 15px;
+    }
+    .qa-q { font-weight: bold; color: #1e3a8a; margin-bottom: 6px; font-size: 0.95rem; }
+    .qa-a { color: #334155; font-size: 0.9rem; font-style: italic; }
+    .quick-links {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-success { background: var(--accent); color: #fff; }
+    .btn-outline { background: #fff; color: var(--text); border: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="badge">GUIDE DE COMPRÉHENSION LOGIQUE &amp; SOUTENANCE</div>
+    <h1>🧠 Comprendre et Expliquer LeNet-5 (1998) Simplement</h1>
+    <div class="student-meta">
+      👨‍🎓 <b>Étudiant :</b> Feugang Noussi, Bernard &nbsp;|&nbsp; 
+      🆔 <b>Matricule :</b> 6189470 &nbsp;|&nbsp; 
+      📚 <b>Cours :</b> 420-A60-BB (Session Été 2026) &nbsp;|&nbsp; 
+      ⏱️ <b>Format :</b> 7 minutes
+    </div>
+  </div>
+
+  <div class="magic-phrase">
+    <b>💡 La Phrase Magique pour résumer tout le projet en 15 secondes :</b><br>
+    « LeNet-5 est le premier réseau de neurones convolutif industriel (1998) : au lieu d'écraser l'image en 1D, il fait glisser de petits filtres pour repérer les traits du chiffre morceau par morceau, avec seulement 60 000 paramètres, ce qui a permis de trier automatiquement 20 millions de chèques par jour aux États-Unis avec moins de 1 % d'erreur. »
+  </div>
+
+  <!-- ACTE 1 -->
+  <div class="act-card act1">
+    <div class="act-title">
+      <span>📍 ACTE 1 : Le Problème Initial</span>
+      <span class="timing-badge">Slides 1 &amp; 2 (0:00 – 1:45)</span>
+    </div>
+    <div class="item"><b>1. Une image est une matrice de pixels :</b> L'ordinateur ne voit pas un dessin, il voit un tableau de 32×32 nombres entre 0 (blanc) et 255 (encre noire).</div>
+    <div class="item"><b>2. L'écriture humaine varie constamment :</b> Chacun écrit le « 7 » différemment (penché, épais, avec ou sans barre). Impossible d'écrire des règles manuelles « si... alors... ».</div>
+    <div class="item"><b>3. L'échec des anciens modèles (MLP) :</b> En aplatissant l'image en 1D, on détruisait la proximité spatiale des pixels et les calculs explosaient.</div>
+    <div class="item"><b>4. Le besoin d'invariance spatiale :</b> Si le « 7 » est décalé de 2 mm à gauche sur le chèque bancaire, la machine doit quand même le reconnaître sans faute.</div>
+  </div>
+
+  <!-- ACTE 2 -->
+  <div class="act-card act2">
+    <div class="act-title">
+      <span>⚙️ ACTE 2 : Les Outils Révolutionnaires de LeNet-5</span>
+      <span class="timing-badge">Slides 2 &amp; 4 (1:45 – 3:00)</span>
+    </div>
+    <div class="item"><b>5. Le Neurone Artificiel :</b> Petite calculatrice qui multiplie ses entrées ($x$) par des poids ($w$), calcule la somme ($\sum$), et s'active si le seuil est franchi.</div>
+    <div class="item"><b>6. Les Poids ($w$) :</b> Les curseurs de réglage du réseau, calibrés automatiquement par l'apprentissage.</div>
+    <div class="item"><b>7. La Fonction d'Activation ($	anh$ / Sigmoïde) :</b> Le déclencheur qui transmet une impulsion forte à la couche suivante dès que le seuil est atteint.</div>
+    <div class="item"><b>8. La Convolution (La Loupe Glissante) :</b> Une petite fenêtre 5×5 (un filtre) glisse sur toute l'image pour repérer des traits élémentaires (barres, angles).</div>
+    <div class="item"><b>9. Le Partage des Poids :</b> Le <u>même filtre</u> cherche la barre du « 7 » partout, limitant le modèle à seulement <b>60 000 paramètres</b>.</div>
+    <div class="item"><b>10. La Carte de Caractéristiques :</b> La nouvelle grille où s'allument les cases qui contiennent le trait recherché.</div>
+  </div>
+
+  <!-- ACTE 3 -->
+  <div class="act-card act3">
+    <div class="act-title">
+      <span>🚀 ACTE 3 : Le Voyage de l'Image à Travers les 7 Couches</span>
+      <span class="timing-badge">Slide 3 (Pipeline LeNet-5)</span>
+    </div>
+    <div class="item"><b>11. Couche C1 (6 filtres 5×5) :</b> Extrait 6 types de traits simples. Sortie : 6 plans de 28×28 [Sect. II-B].</div>
+    <div class="item"><b>12. Couche S2 (Sous-échantillonnage 2×2) :</b> Compresse de moitié (14×14) pour stabiliser les motifs détectés.</div>
+    <div class="item"><b>13. Couche C3 (16 filtres 5×5) :</b> Combine les traits simples pour reconnaître des morceaux plus complexes (croisement barre + diagonale du « 7 ») [Sect. II-B].</div>
+    <div class="item"><b>14. Couche S4 (Sous-échantillonnage 2×2) :</b> Deuxième compression (5×5) pour résumer la silhouette globale.</div>
+    <div class="item"><b>15. Couches Denses C5 (120 unités) &amp; F6 (84 unités) :</b> Le cerveau qui rassemble tous les indices pour voter sur le chiffre final [Sect. II-B].</div>
+    <div class="item"><b>16. Couche de Sortie (10 classes 0 à 9) :</b> Le neurone correspondant au chiffre présenté (le « 7 ») s'allume au maximum.</div>
+  </div>
+
+  <!-- ACTE 4 -->
+  <div class="act-card act4">
+    <div class="act-title">
+      <span>🎓 ACTE 4 : L'Apprentissage &amp; Les Preuves Scientifiques</span>
+      <span class="timing-badge">Slide 4 (3:00 – 4:00)</span>
+    </div>
+    <div class="item"><b>17. La Rétropropagation du Gradient :</b> Lorsque la machine fait une erreur à l'entraînement, elle fait reculer le signal pour ajuster chaque poids dans la bonne direction.</div>
+    <div class="item"><b>18. La Base de Référence MNIST (70 000 chiffres) :</b> Le banc d'essai mondial sur lequel LeNet-5 a été testé.</div>
+    <div class="item"><b>19. Le Taux d'Erreur Record (0,8 % – 0,95 %) :</b> Sur 10 000 images de test jamais vues, LeNet-5 réussit plus de 99 % des reconnaissances [Sect. III-B].</div>
+  </div>
+
+  <!-- ACTE 5 -->
+  <div class="act-card act5">
+    <div class="act-title">
+      <span>🏦 ACTE 5 : L'Impact Industriel &amp; L'IA Moderne</span>
+      <span class="timing-badge">Slides 5, 6, 7 &amp; 8</span>
+    </div>
+    <div class="item"><b>20. Le Déploiement Réel chez NCR (Juin 1996) :</b> Intégré sur puces DSP dans les trieuses bancaires NCR, LeNet-5 lisait <b>~20 millions de chèques par jour</b> (~10 % du volume US) [Sect. III-B].</div>
+    <div class="item"><b>21. L'Ancêtre de Toute la Vision Moderne :</b> La formule (<i>Convolution ➔ Activation ➔ Pooling ➔ Décision</i>) a donné naissance à <b>AlexNet (2012)</b>, au Face ID, à l'IRM et aux voitures autonomes.</div>
+  </div>
+
+  <!-- QUESTIONS DU JURY -->
+  <h3 style="color: var(--navy); margin: 30px 0 15px 0; font-size: 1.15rem;">❓ Les 3 Questions Pièges Possibles du Jury</h3>
+  
+  <div class="qa-box">
+    <div class="qa-q">Q1 : « Pourquoi LeNet-5 n'utilisait-il pas ReLU au lieu de tanh/sigmoïde ? »</div>
+    <div class="qa-a">« En 1998, tanh et sigmoïde étaient les fonctions standard. ReLU s'est imposé plus tard avec AlexNet en 2012 pour éviter l'évanouissement du gradient sur des réseaux beaucoup plus profonds. »</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q2 : « Quelle est la différence entre un réseau dense (MLP) et convolutif (CNN) ? »</div>
+    <div class="qa-a">« Le MLP connecte chaque pixel à chaque neurone en ignorant la 2D. Le CNN applique des filtres glissants avec partage des poids, préservant la géométrie avec 100 fois moins de paramètres. »</div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-q">Q3 : « LeNet-5 était-il seulement un modèle théorique ? »</div>
+    <div class="qa-a">« Non, dès juin 1996, NCR l'a déployé en production pour trier environ 20 millions de chèques par jour aux États-Unis (~10 % du volume national) [LeCun et al., 1998, Sect. III-B]. »</div>
+  </div>
+
+  <div class="quick-links">
+    <a href="presentation_rxneurones_lenet5.pptx" class="btn btn-primary">Ouvrir le PowerPoint (.pptx)</a>
+    <a href="dossier_rxneurones_lenet5.html" class="btn btn-success">Ouvrir le Dossier Web Interactif (.html)</a>
+    <a href="demonstration_lenet5_colab.ipynb" class="btn btn-outline">Ouvrir le Colab (.ipynb)</a>
+  </div>
+
+</div>
+
+</body>
+</html>
