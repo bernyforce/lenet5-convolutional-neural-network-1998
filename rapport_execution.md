@@ -33,3 +33,7 @@
 
 ## 2. Conclusion
 Le projet `e26-dossier-rxneurones` est entièrement opérationnel, committé et prêt pour consultation ou déploiement.
+
+### 🔍 Précision sur les sources primaires vs secondaires
+- **Volume NCR** : L'article primaire [LeCun et al., 1998, Section I] mentionne la lecture de *« millions de chèques par mois »* (« reading millions of checks per month »). Le cahier des charges mentionnant *« par jour »*, la source primaire fait autorité et la nuance est consignée.
+- **Part du volume américain (~10%)** : Donnée documentée dans les fiches secondaires [Wikipédia, LeNet], recoupée avec les déploiements NCR.
