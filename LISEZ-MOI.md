@@ -1,5 +1,10 @@
 # 📖 Dossier Pédagogique « Réseaux de neurones & LeNet-5 » (Projet E26/A60)
 
+**Auteur / Étudiant** : **Feugang Noussi, Bernard**  
+**Numéro d'étudiant (Matricule)** : **6189470**  
+**Cours** : 420-A60-BB — Algorithmes d'Apprentissage Profond (Session Été 2026)  
+**Architecture assignée** : n°6 — LeNet-5 (1998) [Convolutive / CNN]  
+
 Bienvenue dans le dossier pédagogique autonome et interactif consacré aux réseaux de neurones artificiels et à l'architecture historique **LeNet-5** (Yann LeCun et al., 1998).
 
 ---
