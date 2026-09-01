@@ -1,5 +1,11 @@
 # 📋 Rapport d'Exécution — Dossier Pédagogique LeNet-5 (E26/A60)
 
+**Auteur / Étudiant** : **Feugang Noussi, Bernard** (Matricule : **6189470**)  
+**Cours** : 420-A60-BB — Algorithmes d'Apprentissage Profond (Session Été 2026)  
+**Date d'exécution** : 2026-08-31  
+**Directive de référence** : Framework Karpathy v1.0 (`REGLES-OR-KARPATHY`)  
+**Projet** : `/home/bf/Bureau/projets-dev/e26-dossier-rxneurones`  
+
 **Date d'exécution** : 2026-08-31  
 **Projet** : `/home/bf/Bureau/projets-dev/e26-dossier-rxneurones`  
 **Directive méthodologique** : RÈGLES D'OR v1.0 / Karpathy (Simplicité d'abord, changements chirurgicaux, aucun fichier ressource modifié, rapport Fait / Preuve / Écart).
