@@ -1428,37 +1428,37 @@
       <div class="layer-card conv">
         <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C1 (Convolution 5×5)</div>
         <div class="layer-role">Extrait 6 types de traits élémentaires (lignes, angles et bordures).</div>
-        <div class="layer-meta">Sortie : 6 plans 28×28 | 156 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 6 plans 28×28 | 156 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card pool">
         <div class="layer-title" style="color: #15803d;">📉 Couche S2 (Sous-échantillonnage 2×2)</div>
         <div class="layer-role">Compresse de moitié la résolution pour stabiliser les motifs détectés.</div>
-        <div class="layer-meta">Sortie : 6 plans 14×14 | 12 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 6 plans 14×14 | 12 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card conv">
         <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C3 (Convolution 5×5)</div>
         <div class="layer-role">Combine les traits simples pour reconnaître des parties complexes de chiffres.</div>
-        <div class="layer-meta">Sortie : 16 plans 10×10 | 1 516 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 16 plans 10×10 | 1 516 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card pool">
         <div class="layer-title" style="color: #15803d;">📉 Couche S4 (Sous-échantillonnage 2×2)</div>
         <div class="layer-role">Seconde réduction spatiale pour rendre le modèle robuste aux déformations.</div>
-        <div class="layer-meta">Sortie : 16 plans 5×5 | 32 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 16 plans 5×5 | 32 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card dense">
         <div class="layer-title" style="color: #7e22ce;">🧠 Couche C5 (Convolution dense)</div>
         <div class="layer-role">Connecte toutes les caractéristiques spatiales dans 120 unités de décision.</div>
-        <div class="layer-meta">Sortie : 120 unités | 48 120 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 120 unités | 48 120 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card dense">
         <div class="layer-title" style="color: #7e22ce;">🧠 Couche F6 (Couche connectée)</div>
         <div class="layer-role">Effectue la synthèse finale des formes pour chaque style d'écriture.</div>
-        <div class="layer-meta">Sortie : 84 unités | 10 164 paramètres [LeCun 1998, Table 1]</div>
+        <div class="layer-meta">Sortie : 84 unités | 10 164 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card out">
@@ -1470,11 +1470,11 @@
     </div>
 
     <p style="margin-top: 16px;">
-      Au total, LeNet-5 ne compte qu'environ <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, p.6 « only 60 000 trainable free parameters »]. C'est un cahier de réglages très compact, équivalent à la taille d'un petit livre, là où les modèles d'intelligence artificielle modernes mobilisent des centaines de millions ou des milliards de paramètres.
+      Au total, LeNet-5 ne compte qu'environ <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, Sect. II-A « only 60 000 trainable free parameters »]. C'est un cahier de réglages très compact, équivalent à la taille d'un petit livre, là où les modèles d'intelligence artificielle modernes mobilisent des centaines de millions ou des milliards de paramètres.
     </p>
 
     <div class="citation">
-      Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B, Table 1, p. 6].
+      Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B].
     </div>
 
     <div class="box-remember">
@@ -1553,7 +1553,7 @@
           <text x="45" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">Chiffre validé</text>
         </g>
 
-        <text x="325" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Déploiement réel (1998) : millions de chèques/mois [LeCun 1998], ~10% volume US [Wikipédia - À RECOUPER]</text>
+        <text x="325" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Déploiement commercial (depuis juin 1996) : ~20 millions par jour (~10 % du volume US) [LeCun et al., 1998, Sect. III-B]</text>
 
         <defs>
           <marker id="arrow-blue3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -1574,17 +1574,17 @@
       <li><b>Taux d'erreur record</b> : Sur la base de test MNIST (10 000 chiffres manuscrits), l'erreur s'établit à <b>0,95 % sans distorsion</b> [LeCun et al., 1998, sec. III « stabilizes … at 0.95% »] et descend à <b>0,8 % avec distorsions</b> [LeCun et al., 1998, sec. III « dropped to 0.8% »].</li>
       <li><b>Volume industriel</b> : Les machines NCR traitaient <b>plusieurs millions de chèques par mois (source primaire)</b> [LeCun et al., 1998, sec. I « reading millions of checks per month »].</li>
       <li><b>Part de marché</b> : Ce volume est estimé à environ <b>10 % de l'ensemble des chèques bancaires américains</b> [Wikipédia, LeNet (source secondaire - À RECOUPER)].</li>
-      <li><b>Compacité</b> : L'ensemble de l'architecture repose sur seulement <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, p.6 « only 60 000 trainable free parameters »].</li>
+      <li><b>Compacité</b> : L'ensemble de l'architecture repose sur seulement <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, Sect. II-A « only 60 000 trainable free parameters »].</li>
     </ul>
 
     <div class="citation">
-      Sources : [LeCun et al., 1998, Section I « Introduction », Section III « Experiments on MNIST », p. 6-12] &amp; [Wikipédia, LeNet].
+      Sources : [LeCun et al., 1998, Section I « Introduction », Section III « Experiments on MNIST », Sect. II-A-12] &amp; [Wikipédia, LeNet].
     </div>
 
     <div class="box-remember">
       <h4>💡 À retenir</h4>
       <ul>
-        <li>LeNet-5 a prouvé la viabilité industrielle des réseaux convolutifs dès 1998 en traitant des millions de chèques par mois.</li>
+        <li>LeNet-5 a prouvé la viabilité industrielle des réseaux convolutifs dès 1998 en traitant ~20 millions de chèques par jour (~10 % du volume US).</li>
         <li>Son taux d'erreur inférieur à 1% sur MNIST a posé le standard mondial pour la vision par ordinateur.</li>
       </ul>
     </div>
@@ -2120,18 +2120,7 @@
   /* ==========================================================================
      4. QUIZ D'AUTO-ÉVALUATION (10 QUESTIONS)
      ========================================================================== */
-  const quizAnswers = {
-    1: { correct: 'B', expl: 'Une image numérique est perçue par l'ordinateur comme une matrice de pixels numérotés de 0 (blanc pur) à 255 (noir pur).' },
-    2: { correct: 'A', expl: 'Le neurone calcule la somme pondérée de ses entrées (Entrée × Poids) puis la compare à son seuil d'activation.' },
-    3: { correct: 'B', expl: 'Les poids agissent comme des curseurs de réglage pour pondérer l'importance relative de chaque connexion.' },
-    4: { correct: 'B', expl: 'La convolution fait glisser un filtre sur l'image pour détecter des motifs visuels locaux (barres, angles, boucles).' },
-    5: { correct: 'A', expl: 'Le Max-Pooling réduit la taille spatiale en ne conservant que la valeur maximale de chaque zone 2×2.' },
-    6: { correct: 'A', expl: 'LeNet-5 compte précisément environ 60 000 paramètres entraînables [LeCun et al., 1998, Table 1].' },
-    7: { correct: 'B', expl: 'La société NCR a intégré LeNet-5 dans ses trieuses automatiques de chèques bancaires aux États-Unis.' },
-    8: { correct: 'A', expl: 'LeNet-5 a atteint un taux d'erreur de 0,8 % à 0,95 % sur la base de référence standard MNIST (10 000 images de test).' },
-    9: { correct: 'A', expl: 'La rétropropagation du gradient mesure l'écart d'erreur en sortie et ajuste chaque poids dans la bonne direction.' },
-    10: { correct: 'B', expl: 'Les CNN préservent la structure spatiale 2D et partagent les mêmes filtres sur toute la surface de l'image.' }
-  };
+  const quizAnswers={1:{correct:"B",expl:"Une image numérique est perçue par l'ordinateur comme une matrice de pixels de 0 (blanc) à 255 (noir)."},2:{correct:"A",expl:"Le neurone calcule la somme pondérée de ses entrées puis la compare à son seuil d'activation."},3:{correct:"B",expl:"Les poids pondèrent l'importance relative de chaque connexion."},4:{correct:"B",expl:"La convolution fait glisser un filtre sur l'image pour détecter des motifs locaux (barres, angles, boucles)."},5:{correct:"A",expl:"Le Max-Pooling réduit la taille en ne gardant que la valeur maximale de chaque zone 2×2."},6:{correct:"A",expl:"LeNet‑5 compte environ 60 000 paramètres entraînables [LeCun et al., 1998, Section II‑B]."},7:{correct:"B",expl:"NCR a intégré LeNet‑5 dans ses trieuses automatiques de chèques bancaires aux États-Unis."},8:{correct:"A",expl:"LeNet‑5 atteint 0.8 %‑0.95 % d'erreur sur MNIST (10 000 images de test)."},9:{correct:"A",expl:"La rétropropagation mesure l'erreur en sortie et ajuste chaque poids dans la bonne direction."},10:{correct:"B",expl:"Les CNN préservent la structure 2D et partagent les mêmes filtres sur toute l'image."}};
 
   function checkAnswer(qNum, selected) {
     const fb = document.getElementById('fb' + qNum);
