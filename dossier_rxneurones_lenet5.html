@@ -39,7 +39,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -59,6 +59,7 @@
       font-size: 2rem;
       color: var(--text-main);
       margin-bottom: 12px;
+      line-height: 1.25;
     }
 
     .meta-bar {
@@ -67,15 +68,18 @@
       gap: 12px;
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-top: 8px;
+      margin-top: 12px;
     }
 
     .badge {
+      display: inline-block;
       background: var(--primary-light);
       color: var(--primary);
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 6px;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
 
     /* Sommaire cliquable */
@@ -105,7 +109,7 @@
       text-decoration: none;
       font-size: 0.95rem;
       display: inline-block;
-      padding: 2px 0;
+      padding: 3px 0;
     }
 
     .toc-grid a:hover {
@@ -120,11 +124,11 @@
     }
 
     .section-header {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     h2 {
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       color: var(--text-main);
       margin-bottom: 8px;
     }
@@ -172,14 +176,19 @@
       font-size: 0.95rem;
     }
 
+    .box-remember li {
+      margin-bottom: 4px;
+    }
+
     /* Encadré Source */
     .citation {
       font-size: 0.82rem;
       color: var(--text-muted);
       background: #f8fafc;
       border-left: 3px solid #94a3b8;
-      padding: 4px 10px;
-      margin: 12px 0;
+      padding: 6px 12px;
+      margin: 14px 0;
+      border-radius: 0 4px 4px 0;
     }
 
     /* Visualisations SVG */
@@ -188,7 +197,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
-      margin: 20px 0;
+      margin: 22px 0;
       text-align: center;
     }
 
@@ -226,6 +235,102 @@
       color: var(--text-main);
     }
 
+    /* Grille de cartes LeNet-5 Couches */
+    .layers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .layer-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .layer-card.conv {
+      border-left: 4px solid var(--primary);
+      background: #f8fbff;
+    }
+
+    .layer-card.pool {
+      border-left: 4px solid var(--success);
+      background: #f8fdf9;
+    }
+
+    .layer-card.dense {
+      border-left: 4px solid var(--purple);
+      background: #fdfaff;
+    }
+
+    .layer-card.out {
+      border-left: 4px solid var(--warning);
+      background: #fffdf7;
+    }
+
+    .layer-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .layer-role {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .layer-meta {
+      font-size: 0.82rem;
+      font-family: monospace;
+      color: #334155;
+    }
+
+    /* Applications modernes */
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .app-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .app-title {
+      font-weight: bold;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .app-desc {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
     /* Contrôles d'animation interactive */
     .interactive-card {
       background: #ffffff;
@@ -238,12 +343,14 @@
     .interactive-card h4 {
       color: var(--primary);
       margin-bottom: 12px;
+      font-size: 1.05rem;
     }
 
     .btn-group {
       display: flex;
       gap: 10px;
       margin: 14px 0;
+      flex-wrap: wrap;
     }
 
     button.interactive-btn {
@@ -271,6 +378,55 @@
       background: #cbd5e1;
     }
 
+    /* Grille interactive 6x6 -> 4x4 */
+    .conv-cell {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-family: monospace;
+      border-radius: 2px;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .conv-cell.input-cell {
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+    }
+
+    .conv-cell.input-active {
+      background: #dbeafe !important;
+      border: 1.5px solid #2563eb !important;
+      font-weight: bold;
+      color: #1d4ed8;
+    }
+
+    .conv-cell.output-cell {
+      width: 34px;
+      height: 34px;
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px solid #cbd5e1;
+      font-size: 11px;
+    }
+
+    .conv-cell.output-calculated {
+      background: #ffffff;
+      color: #1e293b;
+      font-weight: bold;
+    }
+
+    .conv-cell.output-current {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      border: 1.5px solid #1d4ed8 !important;
+      font-weight: bold;
+    }
+
     /* Section Navigation footer */
     .section-nav {
       display: flex;
@@ -279,7 +435,7 @@
       margin-top: 28px;
       padding-top: 16px;
       border-top: 1px dashed var(--border);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .section-nav a {
@@ -297,6 +453,7 @@
       margin-top: 20px;
       color: #94a3b8;
       font-size: 1.2rem;
+      letter-spacing: 4px;
     }
 
     /* Quiz */
@@ -336,6 +493,7 @@
       padding: 10px 14px;
       border-radius: 6px;
       font-size: 0.9rem;
+      line-height: 1.5;
     }
 
     .quiz-feedback.correct {
@@ -352,8 +510,8 @@
       color: #991b1b;
     }
 
-    @media (max-width: 650px) {
-      .toc-grid {
+    @media (max-width: 700px) {
+      .toc-grid, .layers-grid, .app-grid {
         grid-template-columns: 1fr;
       }
       .container {
@@ -374,7 +532,7 @@
       Un guide visuel, progressif et adapté pour comprendre pas à pas le fonctionnement d'un réseau de neurones artificiels et l'architecture historique LeNet-5.
     </p>
     <div class="meta-bar">
-      <span>👤 Auteure de référence : <b>Neila Mezghani</b></span>
+      <span>👤 Auteure de référence : <b>Neila Mezghani (2024)</b></span>
       <span>📄 Référence historique : <b>Yann LeCun et al. (1998)</b></span>
       <span>🧩 Format : <b>TSA-Friendly (Concret &amp; Structuré)</b></span>
     </div>
@@ -432,87 +590,91 @@
     </p>
 
     <p>
-      En réalité, une machine ne voit pas une forme globale. Elle reçoit uniquement une grille de cases appelées <b>pixels</b>. Chaque case contient un simple nombre qui indique le niveau de luminosité : 0 pour une case blanche et 255 pour une case noire avec de l'encre.
+      Imaginons qu'une machine regarde ce même chèque.
+    </p>
+
+    <p>
+      En réalité, la machine ne voit pas une forme globale. Elle reçoit uniquement une grille de cases appelées <b>pixels</b>. Chaque case contient un simple nombre qui indique le niveau de luminosité : 0 pour une case blanche et 255 pour une case noire avec de l'encre.
     </p>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-  <rect width="600" height="300" fill="#f8fafc" rx="12"/>
-  
-  <!-- Image visuelle chiffre 7 -->
-  <g transform="translate(60, 50)">
-    <text x="75" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image vue par un humain</text>
-    <rect width="150" height="150" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" rx="4"/>
-    <path d="M 30 35 L 120 35 L 75 125" fill="none" stroke="#0f172a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        
+        <!-- Image visuelle chiffre 7 -->
+        <g transform="translate(60, 50)">
+          <text x="75" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image vue par un humain</text>
+          <rect width="150" height="150" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" rx="4"/>
+          <path d="M 30 35 L 120 35 L 75 125" fill="none" stroke="#0f172a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
 
-  <!-- Flèche transformation -->
-  <g transform="translate(245, 125)">
-    <line x1="0" y1="0" x2="60" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue)"/>
-    <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#0969da">Numérisation</text>
-  </g>
+        <!-- Flèche transformation -->
+        <g transform="translate(245, 125)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#0969da">Numérisation</text>
+        </g>
 
-  <!-- Grille vue par la machine -->
-  <g transform="translate(340, 45)">
-    <text x="100" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Grille vue par la machine (0 à 255)</text>
-    
-    <!-- Ligne 1 -->
-    <rect x="0" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="20" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">250</text>
-    <rect x="40" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="60" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
-    <rect x="80" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="100" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
-    <rect x="120" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="140" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
-    <rect x="160" y="0" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="180" y="25" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+        <!-- Grille vue par la machine -->
+        <g transform="translate(340, 45)">
+          <text x="100" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Grille vue par la machine (0 à 255)</text>
+          
+          <!-- Ligne 1 -->
+          <rect x="0" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="20" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">250</text>
+          <rect x="40" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="60" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="80" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="100" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="120" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="140" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
+          <rect x="160" y="0" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="25" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
 
-    <!-- Ligne 2 -->
-    <rect x="0" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="20" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="40" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="60" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="80" y="40" width="40" height="40" fill="#334155" stroke="#ffffff"/>
-    <text x="100" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">180</text>
-    <rect x="120" y="40" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="140" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
-    <rect x="160" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="180" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <!-- Ligne 2 -->
+          <rect x="0" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="60" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="80" y="40" width="40" height="40" fill="#334155" stroke="#ffffff"/>
+          <text x="100" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">180</text>
+          <rect x="120" y="40" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="140" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="160" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
 
-    <!-- Ligne 3 -->
-    <rect x="0" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="20" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="40" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="60" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="80" y="80" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="100" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
-    <rect x="120" y="80" width="40" height="40" fill="#64748b" stroke="#ffffff"/>
-    <text x="140" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">90</text>
-    <rect x="160" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="180" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <!-- Ligne 3 -->
+          <rect x="0" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="60" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="80" y="80" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="100" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="120" y="80" width="40" height="40" fill="#64748b" stroke="#ffffff"/>
+          <text x="140" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">90</text>
+          <rect x="160" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
 
-    <!-- Ligne 4 -->
-    <rect x="0" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="20" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="40" y="120" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
-    <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
-    <rect x="80" y="120" width="40" height="40" fill="#334155" stroke="#ffffff"/>
-    <text x="100" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">170</text>
-    <rect x="120" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="140" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-    <rect x="160" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
-    <text x="180" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
-  </g>
+          <!-- Ligne 4 -->
+          <rect x="0" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="120" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
+          <rect x="80" y="120" width="40" height="40" fill="#334155" stroke="#ffffff"/>
+          <text x="100" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">170</text>
+          <rect x="120" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="140" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="160" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+        </g>
 
-  <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Chaque case est un pixel : 0 = blanc pur, 255 = noir pur (encre)</text>
+        <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Chaque case est un pixel : 0 = blanc pur, 255 = noir pur (encre)</text>
 
-  <defs>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 1 : L'image d'un « 7 » transformée en grille de nombres pour la machine.</div>
     </div>
 
@@ -549,87 +711,101 @@
     </div>
 
     <p>
-      Imaginons qu'un neurone artificiel soit un juge qui écoute plusieurs témoins. Chaque témoin apporte un indice (une valeur d'entrée). Le juge accorde plus ou moins d'importance à chaque témoin (les <b>poids</b>).
+      Imaginons qu'un neurone artificiel soit un juge qui écoute trois témoins. Chaque témoin apporte un indice (une valeur d'entrée). Le juge accorde plus ou moins d'importance à chaque témoin (les <b>poids</b>).
     </p>
 
     <p>
-      En réalité, le neurone effectue deux opérations mathématiques très simples :
+      En réalité, la machine effectue deux opérations mathématiques très simples :
     </p>
     <ol style="margin-left: 24px; margin-bottom: 16px;">
-      <li><b>La somme pondérée</b> : Il multiplie chaque entrée par son poids et additionne le tout.</li>
-      <li><b>Le test de seuil (fonction d'activation)</b> : Si le total dépasse un seuil fixé, le neurone s'allume et envoie un signal (1) ; sinon, il reste éteint (0).</li>
+      <li><b>La somme pondérée</b> : D'abord, le neurone multiplie chaque entrée par son poids et additionne le tout.</li>
+      <li><b>Le test de seuil (fonction d'activation)</b> : Ensuite, si le total dépasse un seuil fixé, le neurone s'allume et envoie un signal (1) ; sinon, il reste éteint (0).</li>
     </ol>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-  <rect width="600" height="300" fill="#f8fafc" rx="12"/>
-  <!-- Entrées -->
-  <text x="30" y="75" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 1 (Pixel)</text>
-  <circle cx="160" cy="70" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
-  <text x="160" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₁</text>
-  
-  <text x="30" y="155" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 2 (Pixel)</text>
-  <circle cx="160" cy="150" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
-  <text x="160" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₂</text>
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        <!-- Entrées -->
+        <text x="30" y="75" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 1 (Pixel)</text>
+        <circle cx="160" cy="70" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₁</text>
+        
+        <text x="30" y="155" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 2 (Pixel)</text>
+        <circle cx="160" cy="150" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₂</text>
 
-  <text x="30" y="235" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 3 (Pixel)</text>
-  <circle cx="160" cy="230" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
-  <text x="160" y="235" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₃</text>
+        <text x="30" y="235" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 3 (Pixel)</text>
+        <circle cx="160" cy="230" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="235" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₃</text>
 
-  <!-- Flèches pondérées -->
-  <line x1="180" y1="70" x2="280" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="220" y="90" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₁</text>
+        <!-- Flèches pondérées -->
+        <line x1="180" y1="70" x2="280" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="90" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₁</text>
 
-  <line x1="180" y1="150" x2="280" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="220" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₂</text>
+        <line x1="180" y1="150" x2="280" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₂</text>
 
-  <line x1="180" y1="230" x2="280" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="220" y="215" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₃</text>
+        <line x1="180" y1="230" x2="280" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="215" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₃</text>
 
-  <!-- Corps du Neurone (Somme + Seuil) -->
-  <rect x="290" y="90" width="140" height="120" rx="16" fill="#eff6ff" stroke="#0969da" stroke-width="2"/>
-  <circle cx="335" cy="150" r="26" fill="#dbeafe" stroke="#0969da" stroke-width="1.5"/>
-  <text x="335" y="156" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#0969da">∑</text>
-  <text x="335" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#1e40af">1. Somme</text>
+        <!-- Corps du Neurone (Somme + Seuil) -->
+        <rect x="290" y="90" width="140" height="120" rx="16" fill="#eff6ff" stroke="#0969da" stroke-width="2"/>
+        <circle cx="335" cy="150" r="26" fill="#dbeafe" stroke="#0969da" stroke-width="1.5"/>
+        <text x="335" y="156" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#0969da">∑</text>
+        <text x="335" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#1e40af">1. Somme</text>
 
-  <line x1="365" y1="110" x2="365" y2="190" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <line x1="365" y1="110" x2="365" y2="190" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
 
-  <path d="M 385 165 L 400 165 L 400 135 L 415 135" fill="none" stroke="#d97706" stroke-width="2.5"/>
-  <text x="400" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#b45309">2. Seuil</text>
+        <path d="M 385 165 L 400 165 L 400 135 L 415 135" fill="none" stroke="#d97706" stroke-width="2.5"/>
+        <text x="400" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#b45309">2. Seuil</text>
 
-  <!-- Sortie -->
-  <line x1="430" y1="150" x2="500" y2="150" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/>
-  <circle cx="530" cy="150" r="22" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="530" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">OUI / 1</text>
-  <text x="530" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Sortie activée</text>
+        <!-- Sortie -->
+        <line x1="430" y1="150" x2="500" y2="150" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/>
+        <circle cx="530" cy="150" r="22" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="530" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">OUI / 1</text>
+        <text x="530" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Sortie activée</text>
 
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
-    </marker>
-    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+          </marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 2 : Schéma fonctionnel du neurone artificiel (Entrées → Somme → Seuil → Sortie).</div>
     </div>
 
     <!-- Animation Interactive B: Le neurone s'allume -->
     <div class="interactive-card">
-      <h4>⚡ Démonstration Interactive : Le Neurone s'active</h4>
+      <h4>⚡ Démonstration Interactive : Le Neurone s'active (Entrées → Somme → Seuil → Sortie)</h4>
       <p style="font-size: 0.92rem; color: var(--text-muted);">
-        Cliquez sur « Tester une entrée forte » pour voir la somme dépasser le seuil et allumer la sortie.
+        Activez ou désactivez les 3 entrées pour observer le calcul de la somme pondérée et le franchissement du seuil (Seuil fixé à 2.00).
       </p>
-      <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: monospace; font-size: 0.95rem;">
-        Entrée x₁ = <span id="val-x1">1</span> | Poids w₁ = 0.5<br>
-        Entrée x₂ = <span id="val-x2">2</span> | Poids w₂ = 0.8<br>
-        Calcul Somme = <b id="val-sum">2.10</b> (Seuil requis = 2.00)<br>
-        État de la Sortie = <b id="val-out" style="color: #16a34a; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">ALLUMÉ (1)</b>
+      <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.95rem;">
+        <div style="display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x1" checked onchange="updateNeuronInteractive()"> <b>Entrée x₁</b> (Poids = 1.0)
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x2" checked onchange="updateNeuronInteractive()"> <b>Entrée x₂</b> (Poids = 1.2)
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x3" onchange="updateNeuronInteractive()"> <b>Entrée x₃</b> (Poids = 0.5)
+          </label>
+        </div>
+        <div style="font-family: monospace; line-height: 1.6; margin-bottom: 10px;">
+          Calcul : (<span id="calc-x1">1</span> × 1.0) + (<span id="calc-x2">1</span> × 1.2) + (<span id="calc-x3">0</span> × 0.5) = <b id="val-sum" style="font-size: 1.05rem; color: #0969da;">2.20</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span>État du neurone :</span>
+          <span id="val-out" style="color: #16a34a; background: #dcfce7; border: 1px solid #86efac; padding: 4px 10px; border-radius: 6px; font-weight: bold;">🟢 ALLUMÉ — Sortie = 1 (Seuil 2.00 atteint)</span>
+        </div>
       </div>
       <div class="btn-group">
-        <button class="interactive-btn" onclick="setNeuronState(true)">Tester entrée forte (Activer)</button>
-        <button class="interactive-btn secondary" onclick="setNeuronState(false)">Tester entrée faible (Éteindre)</button>
+        <button class="interactive-btn" onclick="presetNeuron(true)">Activer toutes les entrées</button>
+        <button class="interactive-btn secondary" onclick="presetNeuron(false)">Éteindre toutes les entrées</button>
       </div>
     </div>
 
@@ -662,56 +838,109 @@
     </div>
 
     <p>
-      Un seul neurone ne peut prendre qu'une micro-décision (par exemple : « y a-t-il un point noir ici ? »). Pour reconnaître un chiffre complet, on regroupe les neurones en <b>couches successives</b>.
+      Imaginons un grand immeuble de bureaux à trois étages. Au rez-de-chaussée, les employés de l'accueil reçoivent le courrier brut. Au premier étage, les gestionnaires trient les dossiers par catégories. Au dernier étage, la direction prend la décision finale.
     </p>
 
     <p>
-      D'abord, la première couche reçoit les pixels bruts. Ensuite, la couche suivante combine ces points pour détecter des traits élémentaires (lignes horizontales, obliques, courbes). Enfin, la dernière couche assemble ces traits pour décider du chiffre final.
+      En réalité, la machine empile des couches de neurones successives :
     </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, la couche d'entrée (Étage 1) reçoit les pixels bruts de l'image.</li>
+      <li><b>Ensuite</b>, la couche cachée (Étage 2) assemble ces points en segments et traits géométriques.</li>
+      <li><b>Enfin</b>, la couche de sortie (Étage 3) combine les traits pour décider quel chiffre a été tracé parmi les dix classes (0 à 9).</li>
+    </ul>
 
     <div class="svg-wrapper">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%">
-  <rect width="600" height="320" fill="#f8fafc" rx="12"/>
-  
-  <!-- Couche Entrée -->
-  <g id="layer-in">
-    <rect x="50" y="50" width="110" height="220" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="105" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#334155">1. Entrée</text>
-    <circle cx="105" cy="115" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-    <circle cx="105" cy="155" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-    <circle cx="105" cy="195" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-    <circle cx="105" cy="235" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
-  </g>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+        <rect width="600" height="360" fill="#f8fafc" rx="12"/>
+        
+        <text x="300" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Organisation en Couches : L'Immeuble à Étages</text>
 
-  <!-- Liens 1 -> 2 -->
-  <path d="M 120 115 L 235 100 M 120 115 L 235 150 M 120 115 L 235 200 M 120 155 L 235 100 M 120 155 L 235 150 M 120 155 L 235 200 M 120 195 L 235 100 M 120 195 L 235 150 M 120 195 L 235 200 M 120 235 L 235 100 M 120 235 L 235 150 M 120 235 L 235 200" stroke="#cbd5e1" stroke-width="1"/>
+        <!-- Étage 3 (Haut) : Sortie / Décision Finale -->
+        <g transform="translate(80, 50)">
+          <rect width="440" height="70" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="20" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#166534">Étage 3 : Couche de Sortie (Décision finale)</text>
+          <text x="20" y="48" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">Émet la classe reconnue parmi les 10 chiffres (0 à 9)</text>
+          
+          <!-- Neurones de sortie -->
+          <g transform="translate(300, 15)">
+            <circle cx="20" cy="20" r="15" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="20" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">« 7 »</text>
+            
+            <circle cx="60" cy="20" r="13" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="60" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">autre</text>
+            
+            <circle cx="95" cy="20" r="13" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="95" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">autre</text>
+          </g>
+        </g>
 
-  <!-- Couche Cachée 1 -->
-  <g id="layer-h1">
-    <rect x="235" y="50" width="110" height="220" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
-    <text x="290" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">2. Couche Cachée</text>
-    <text x="290" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#3b82f6">(Détecte traits)</text>
-    <circle cx="290" cy="125" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <circle cx="290" cy="170" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <circle cx="290" cy="215" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-  </g>
+        <!-- Flèches montantes Étage 2 vers Étage 3 -->
+        <g stroke="#16a34a" stroke-width="2" fill="none">
+          <line x1="220" y1="145" x2="220" y2="125" marker-end="url(#arrow-up-green)"/>
+          <line x1="300" y1="145" x2="300" y2="125" marker-end="url(#arrow-up-green)"/>
+          <line x1="380" y1="145" x2="380" y2="125" marker-end="url(#arrow-up-green)"/>
+        </g>
 
-  <!-- Liens 2 -> 3 -->
-  <path d="M 305 125 L 425 130 M 305 125 L 425 190 M 305 170 L 425 130 M 305 170 L 425 190 M 305 215 L 425 130 M 305 215 L 425 190" stroke="#bfdbfe" stroke-width="1.5"/>
+        <!-- Étage 2 (Milieu) : Couche Cachée -->
+        <g transform="translate(80, 145)">
+          <rect width="440" height="75" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <text x="20" y="32" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">Étage 2 : Couche Cachée (Combinaison des traits)</text>
+          <text x="20" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#2563eb">Assemble les points en segments (lignes obliques, barres)</text>
+          
+          <!-- Neurones cachés -->
+          <g transform="translate(300, 18)">
+            <circle cx="20" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="20" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₁</text>
+            
+            <circle cx="60" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="60" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₂</text>
+            
+            <circle cx="100" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="100" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₃</text>
+          </g>
+        </g>
 
-  <!-- Couche Sortie -->
-  <g id="layer-out">
-    <rect x="425" y="50" width="120" height="220" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
-    <text x="485" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#166534">3. Décision Finale</text>
-    <text x="485" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">(Classe 0 à 9)</text>
-    <circle cx="485" cy="135" r="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-    <text x="485" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">« 7 »</text>
-    <circle cx="485" cy="190" r="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
-    <text x="485" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Autre</text>
-  </g>
+        <!-- Flèches montantes Étage 1 vers Étage 2 -->
+        <g stroke="#2563eb" stroke-width="2" fill="none">
+          <line x1="220" y1="245" x2="220" y2="225" marker-end="url(#arrow-up-blue)"/>
+          <line x1="300" y1="245" x2="300" y2="225" marker-end="url(#arrow-up-blue)"/>
+          <line x1="380" y1="245" x2="380" y2="225" marker-end="url(#arrow-up-blue)"/>
+        </g>
 
-  <text x="300" y="295" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Propagation de gauche à droite : des données brutes vers la décision finale</text>
-</svg>
+        <!-- Étage 1 (Bas) : Couche d'Entrée -->
+        <g transform="translate(80, 245)">
+          <rect width="440" height="70" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+          <text x="20" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#334155">Étage 1 : Couche d'Entrée (Pixels bruts)</text>
+          <text x="20" y="48" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Reçoit les valeurs de luminosité de l'image (0 à 255)</text>
+          
+          <!-- Pixels d'entrée -->
+          <g transform="translate(290, 15)">
+            <circle cx="15" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="15" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₁</text>
+            
+            <circle cx="45" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="45" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₂</text>
+            
+            <circle cx="75" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="75" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₃</text>
+            
+            <circle cx="105" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="105" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₄</text>
+          </g>
+        </g>
+
+        <text x="300" y="342" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">L'information monte d'étage en étage : des détails bruts vers la décision globale</text>
+
+        <defs>
+          <marker id="arrow-up-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 10 L 5 0 L 10 10 z" fill="#2563eb" />
+          </marker>
+          <marker id="arrow-up-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 10 L 5 0 L 10 10 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 3 : Organisation d'un réseau en couches (Entrée → Couches cachées → Sortie).</div>
     </div>
 
@@ -744,91 +973,94 @@
     </div>
 
     <p>
-      Au tout début, le réseau ne connaît rien : ses poids sont initialisés au hasard. Si on lui présente l'image d'un « 7 », il répondra peut-être « 3 » avec une forte marge d'erreur.
+      Imaginons un archer débutant qui tire sa première flèche vers une cible. Son premier tir atterrit loin du centre. Il observe l'écart, corrige la position de son bras et recommence.
     </p>
 
     <p>
-      L'apprentissage se déroule en trois étapes répétées des milliers de fois :
+      En réalité, la machine commence avec des poids aléatoires. L'apprentissage se déroule en trois temps répétés des milliers de fois :
     </p>
     <ol style="margin-left: 24px; margin-bottom: 16px;">
-      <li><b>La prédiction</b> : L'image traverse le réseau vers la sortie.</li>
-      <li><b>Le calcul de l'erreur</b> : On mesure l'écart entre la réponse fournie et la vraie réponse « 7 ».</li>
-      <li><b>La rétropropagation</b> : L'erreur remonte en arrière dans le réseau pour ajuster légèrement chaque poids dans la bonne direction.</li>
+      <li><b>D'abord, la prédiction</b> : L'image traverse le réseau vers la sortie.</li>
+      <li><b>Ensuite, le calcul de l'erreur</b> : On mesure l'écart entre la réponse fournie et le vrai chiffre « 7 ».</li>
+      <li><b>Enfin, la rétropropagation</b> : L'erreur remonte en sens inverse pour ajuster légèrement chaque poids dans la bonne direction.</li>
     </ol>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-  <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
 
-  <text x="300" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">L'Apprentissage : Diminution de l'Erreur au fil des Tours (Époques)</text>
+        <text x="300" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">L'Apprentissage : Diminution de l'Erreur au fil des Tours (Époques)</text>
 
-  <!-- Début -->
-  <g transform="translate(60, 70)">
-    <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Tour 1 (Début)</text>
-    <rect x="35" y="20" width="50" height="150" fill="#fee2e2" stroke="#dc2626" rx="6"/>
-    <rect x="35" y="35" width="50" height="135" fill="#ef4444" rx="4"/>
-    <text x="60" y="105" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">90 %</text>
-    <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#991b1b">Forte erreur</text>
-  </g>
+        <!-- Début -->
+        <g transform="translate(60, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Tour 1 (Début)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#fee2e2" stroke="#dc2626" rx="6"/>
+          <rect x="35" y="35" width="50" height="135" fill="#ef4444" rx="4"/>
+          <text x="60" y="105" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">90 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#991b1b">Forte erreur</text>
+        </g>
 
-  <!-- Flèche 1 -->
-  <g transform="translate(180, 140)">
-    <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
-    <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Correction</text>
-  </g>
+        <!-- Flèche 1 -->
+        <g transform="translate(180, 140)">
+          <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
+          <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Correction</text>
+        </g>
 
-  <!-- Milieu -->
-  <g transform="translate(240, 70)">
-    <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#d97706">Tour 10 (Milieu)</text>
-    <rect x="35" y="20" width="50" height="150" fill="#fef3c7" stroke="#d97706" rx="6"/>
-    <rect x="35" y="110" width="50" height="60" fill="#f59e0b" rx="4"/>
-    <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">25 %</text>
-    <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#92400e">En progrès</text>
-  </g>
+        <!-- Milieu -->
+        <g transform="translate(240, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#d97706">Tour 10 (Milieu)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#fef3c7" stroke="#d97706" rx="6"/>
+          <rect x="35" y="110" width="50" height="60" fill="#f59e0b" rx="4"/>
+          <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">25 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#92400e">En progrès</text>
+        </g>
 
-  <!-- Flèche 2 -->
-  <g transform="translate(360, 140)">
-    <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
-    <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Ajustement</text>
-  </g>
+        <!-- Flèche 2 -->
+        <g transform="translate(360, 140)">
+          <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
+          <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Ajustement</text>
+        </g>
 
-  <!-- Fin (LeNet-5) -->
-  <g transform="translate(420, 70)">
-    <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Tour 50 (Terminé)</text>
-    <rect x="35" y="20" width="50" height="150" fill="#dcfce7" stroke="#16a34a" rx="6"/>
-    <rect x="35" y="160" width="50" height="10" fill="#22c55e" rx="2"/>
-    <text x="60" y="150" text-anchor="middle" fill="#15803d" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">0.8 %</text>
-    <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Précision &gt; 99%</text>
-  </g>
+        <!-- Fin (LeNet-5) -->
+        <g transform="translate(420, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Tour 50 (Terminé)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#dcfce7" stroke="#16a34a" rx="6"/>
+          <rect x="35" y="160" width="50" height="10" fill="#22c55e" rx="2"/>
+          <text x="60" y="150" text-anchor="middle" fill="#15803d" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">0.8 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Précision &gt; 99%</text>
+        </g>
 
-  <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Rétropropagation : à chaque essai erroné, les 60 000 poids sont légèrement modifiés</text>
+        <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Rétropropagation : à chaque essai erroné, les 60 000 poids sont légèrement modifiés</text>
 
-  <defs>
-    <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 4 : Baisse continue de l'erreur au fil des cycles d'entraînement (époques).</div>
     </div>
 
     <!-- Animation Interactive C: L'erreur descend -->
     <div class="interactive-card">
-      <h4>📉 Démonstration Interactive : Entraîner le modèle</h4>
+      <h4>📉 Démonstration Interactive : L'erreur descend au fil de l'apprentissage</h4>
       <p style="font-size: 0.92rem; color: var(--text-muted);">
-        Cliquez sur « Effectuer un tour d'entraînement » pour observer la correction progressive des poids et la chute de l'erreur.
+        Cliquez sur le bouton <b>« Entraîner encore »</b> pour lancer des cycles d'apprentissage, ajuster les poids par rétropropagation et observer la chute de l'erreur.
       </p>
-      <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #cbd5e1;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 600;">
-          <span>Époque : <span id="epoch-count">1</span> / 50</span>
-          <span>Taux d'erreur : <b id="error-rate" style="color: #dc2626;">88.5 %</b></span>
+      <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">
+          <span>Cycle d'entraînement (Époque) : <span id="epoch-count">1</span> / 50</span>
+          <span>Taux d'erreur de test : <b id="error-rate" style="color: #dc2626; font-size: 1.05rem;">88.5 %</b></span>
         </div>
-        <div style="height: 14px; background: #fee2e2; border-radius: 7px; overflow: hidden;">
-          <div id="error-bar" style="width: 88.5%; height: 100%; background: #ef4444; transition: width 0.3s ease;"></div>
+        <div style="height: 16px; background: #fee2e2; border-radius: 8px; overflow: hidden; border: 1px solid #fca5a5; margin-bottom: 8px;">
+          <div id="error-bar" style="width: 88.5%; height: 100%; background: #ef4444; transition: width 0.4s ease, background-color 0.4s ease;"></div>
+        </div>
+        <div id="train-status" style="font-size: 0.88rem; color: #475569;">
+          Statut : Les poids sont aléatoires. La machine fait beaucoup d'erreurs.
         </div>
       </div>
       <div class="btn-group">
-        <button class="interactive-btn" onclick="stepTraining()">Effectuer 1 tour d'entraînement</button>
+        <button class="interactive-btn" onclick="stepTraining()">Entraîner encore</button>
         <button class="interactive-btn secondary" onclick="resetTraining()">Réinitialiser</button>
       </div>
     </div>
@@ -862,84 +1094,114 @@
     </div>
 
     <p>
-      Imaginons une petite loupe transparente (un <b>filtre</b> de 3×3 ou 5×5 pixels) qui glisse pas à pas sur toute la surface de l'image. À chaque case, elle vérifie si le motif qu'elle cherche (une barre oblique, un coin, une boucle) est présent.
+      Imaginons une petite loupe carrée transparente (un <b>filtre</b> de 3×3 ou 5×5 pixels) qui glisse pas à pas sur toute la surface de l'image.
     </p>
 
     <p>
-      En réalité, la machine calcule un produit scalaire local entre les pixels sous la loupe et les coefficients du filtre. Cela produit une nouvelle grille plus petite appelée <b>carte de caractéristiques</b> (feature map).
+      En réalité, la machine calcule un produit local entre les pixels sous la loupe et les coefficients du filtre :
     </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, le filtre se positionne sur le coin supérieur gauche de l'image.</li>
+      <li><b>Ensuite</b>, il glisse case par case vers la droite, puis descend ligne par ligne.</li>
+      <li><b>Enfin</b>, chaque calcul local s'inscrit dans une nouvelle grille appelée <b>carte de caractéristiques</b> (feature map).</li>
+    </ul>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-  <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
 
-  <!-- Image source 5x5 -->
-  <g transform="translate(40, 45)">
-    <text x="90" y="-12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image d'entrée (5x5)</text>
-    
-    <!-- Grille de base -->
-    <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1">
-      <rect x="0" y="0" width="36" height="36"/><rect x="36" y="0" width="36" height="36"/><rect x="72" y="0" width="36" height="36"/><rect x="108" y="0" width="36" height="36"/><rect x="144" y="0" width="36" height="36"/>
-      <rect x="0" y="36" width="36" height="36"/><rect x="36" y="36" width="36" height="36"/><rect x="72" y="36" width="36" height="36"/><rect x="108" y="36" width="36" height="36"/><rect x="144" y="36" width="36" height="36"/>
-      <rect x="0" y="72" width="36" height="36"/><rect x="36" y="72" width="36" height="36"/><rect x="72" y="72" width="36" height="36"/><rect x="108" y="72" width="36" height="36"/><rect x="144" y="72" width="36" height="36"/>
-      <rect x="0" y="108" width="36" height="36"/><rect x="36" y="108" width="36" height="36"/><rect x="72" y="108" width="36" height="36"/><rect x="108" y="108" width="36" height="36"/><rect x="144" y="108" width="36" height="36"/>
-      <rect x="0" y="144" width="36" height="36"/><rect x="36" y="144" width="36" height="36"/><rect x="72" y="144" width="36" height="36"/><rect x="108" y="144" width="36" height="36"/><rect x="144" y="144" width="36" height="36"/>
-    </g>
+        <!-- Image source 5x5 -->
+        <g transform="translate(40, 45)">
+          <text x="90" y="-12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image d'entrée (5x5)</text>
+          
+          <!-- Grille de base -->
+          <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1">
+            <rect x="0" y="0" width="36" height="36"/><rect x="36" y="0" width="36" height="36"/><rect x="72" y="0" width="36" height="36"/><rect x="108" y="0" width="36" height="36"/><rect x="144" y="0" width="36" height="36"/>
+            <rect x="0" y="36" width="36" height="36"/><rect x="36" y="36" width="36" height="36"/><rect x="72" y="36" width="36" height="36"/><rect x="108" y="36" width="36" height="36"/><rect x="144" y="36" width="36" height="36"/>
+            <rect x="0" y="72" width="36" height="36"/><rect x="36" y="72" width="36" height="36"/><rect x="72" y="72" width="36" height="36"/><rect x="108" y="72" width="36" height="36"/><rect x="144" y="72" width="36" height="36"/>
+            <rect x="0" y="108" width="36" height="36"/><rect x="36" y="108" width="36" height="36"/><rect x="72" y="108" width="36" height="36"/><rect x="108" y="108" width="36" height="36"/><rect x="144" y="108" width="36" height="36"/>
+            <rect x="0" y="144" width="36" height="36"/><rect x="36" y="144" width="36" height="36"/><rect x="72" y="144" width="36" height="36"/><rect x="108" y="144" width="36" height="36"/><rect x="144" y="144" width="36" height="36"/>
+          </g>
 
-    <!-- Filtre 3x3 sur la position actuelle -->
-    <rect x="0" y="0" width="108" height="108" fill="#dbeafe" fill-opacity="0.6" stroke="#2563eb" stroke-width="3" rx="4"/>
-    <text x="54" y="58" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">Filtre 3×3</text>
-  </g>
+          <!-- Filtre 3x3 sur la position actuelle -->
+          <rect x="0" y="0" width="108" height="108" fill="#dbeafe" fill-opacity="0.6" stroke="#2563eb" stroke-width="3" rx="4"/>
+          <text x="54" y="58" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">Filtre 3×3</text>
+        </g>
 
-  <!-- Flèche opération -->
-  <g transform="translate(250, 125)">
-    <line x1="0" y1="0" x2="60" y2="0" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue2)"/>
-    <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Calcul local</text>
-  </g>
+        <!-- Flèche opération -->
+        <g transform="translate(250, 125)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue2)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Calcul local</text>
+        </g>
 
-  <!-- Carte de caractéristiques (Feature Map 3x3) -->
-  <g transform="translate(345, 75)">
-    <text x="65" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Carte de traits (3x3)</text>
-    
-    <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5">
-      <rect x="0" y="0" width="42" height="42" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
-      <text x="21" y="26" text-anchor="middle" fill="#1d4ed8" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">R₁</text>
-      
-      <rect x="42" y="0" width="42" height="42"/>
-      <rect x="84" y="0" width="42" height="42"/>
-      <rect x="0" y="42" width="42" height="42"/>
-      <rect x="42" y="42" width="42" height="42"/>
-      <rect x="84" y="42" width="42" height="42"/>
-      <rect x="0" y="84" width="42" height="42"/>
-      <rect x="42" y="84" width="42" height="42"/>
-      <rect x="84" y="84" width="42" height="42"/>
-    </g>
-  </g>
+        <!-- Carte de caractéristiques (Feature Map 3x3) -->
+        <g transform="translate(345, 75)">
+          <text x="65" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Carte de traits (3x3)</text>
+          
+          <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5">
+            <rect x="0" y="0" width="42" height="42" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+            <text x="21" y="26" text-anchor="middle" fill="#1d4ed8" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">R₁</text>
+            
+            <rect x="42" y="0" width="42" height="42"/>
+            <rect x="84" y="0" width="42" height="42"/>
+            <rect x="0" y="42" width="42" height="42"/>
+            <rect x="42" y="42" width="42" height="42"/>
+            <rect x="84" y="42" width="42" height="42"/>
+            <rect x="0" y="84" width="42" height="42"/>
+            <rect x="42" y="84" width="42" height="42"/>
+            <rect x="84" y="84" width="42" height="42"/>
+          </g>
+        </g>
 
-  <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le filtre glisse pixel par pixel et détecte les motifs locaux (barres, angles, boucles)</text>
+        <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le filtre glisse pixel par pixel et détecte les motifs locaux (barres, angles, boucles)</text>
 
-  <defs>
-    <marker id="arrow-blue2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow-blue2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 5 : Principe du filtre glissant de convolution sur une image.</div>
     </div>
 
-    <!-- Animation Interactive A: La fenêtre glissante -->
+    <!-- Animation Interactive A: La fenêtre qui balaye sur grille 6x6 -->
     <div class="interactive-card">
-      <h4>🔍 Démonstration Interactive : La fenêtre de convolution pas à pas</h4>
+      <h4>🔍 Démonstration Interactive : « La fenêtre qui balaye » (Grille 6×6)</h4>
       <p style="font-size: 0.92rem; color: var(--text-muted);">
-        Avancez pas à pas pour voir la loupe 3×3 balayer la grille et inscrire son résultat dans la carte de traits.
+        Observez le filtre 3×3 glisser pas à pas sur l'image 6×6 pour produire la carte de caractéristiques 4×4. Utilisez les boutons ou la lecture lente.
       </p>
-      <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.95rem;">
-        Position actuelle du filtre : <b>Ligne <span id="conv-row">1</span>, Colonne <span id="conv-col">1</span></b><br>
-        Zone couverte : Pixels d'entrée (1,1) à (3,3) ➔ Valeur enregistrée : <b style="color: #2563eb;" id="conv-val">142</b>
+      
+      <!-- Visualisation interactive 6x6 -> 4x4 -->
+      <div style="display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; margin: 16px 0; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1;">
+        
+        <!-- Grille 6x6 -->
+        <div style="text-align: center;">
+          <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; color: #1e293b;">Image d'entrée (6×6)</div>
+          <div id="grid-conv-input" style="display: grid; grid-template-columns: repeat(6, 26px); gap: 2px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
+            <!-- Généré en JS -->
+          </div>
+        </div>
+
+        <div style="font-size: 1.4rem; color: #2563eb;">➔</div>
+
+        <!-- Carte 4x4 -->
+        <div style="text-align: center;">
+          <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; color: #1e293b;">Carte produite (4×4)</div>
+          <div id="grid-conv-output" style="display: grid; grid-template-columns: repeat(4, 34px); gap: 3px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
+            <!-- Généré en JS -->
+          </div>
+        </div>
+
       </div>
+
+      <div style="background: #ffffff; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.92rem; margin-bottom: 12px;">
+        Étape actuelle : <b><span id="conv-step-num">1</span> / 16</b> | Position filtre : <b>Ligne <span id="conv-row">1</span>, Colonne <span id="conv-col">1</span></b> | Valeur calculée : <b style="color: #2563eb;" id="conv-val">142</b>
+      </div>
+
       <div class="btn-group">
-        <button class="interactive-btn" onclick="stepConv(1)">Position Suivante ➡</button>
-        <button class="interactive-btn secondary" onclick="stepConv(-1)">⬅ Position Précédente</button>
+        <button class="interactive-btn secondary" onclick="stepConv(-1)">⬅ Précédent</button>
+        <button class="interactive-btn" onclick="stepConv(1)">Suivant ➡</button>
+        <button class="interactive-btn secondary" id="btn-conv-auto" onclick="toggleConvAuto()">▶ Lecture lente</button>
         <button class="interactive-btn secondary" onclick="resetConv()">Réinitialiser</button>
       </div>
     </div>
@@ -973,56 +1235,61 @@
     </div>
 
     <p>
-      Après avoir détecté les traits avec la convolution, l'image contient encore beaucoup de pixels. Pour rendre le système plus rapide et tolérant aux légers déplacements du dessin, on applique une étape de <b>pooling</b> (ou sous-échantillonnage).
+      Imaginons un résumé de réunion qui ne retient que la décision principale de chaque dossier au lieu de toutes les discussions.
     </p>
 
     <p>
-      La méthode la plus courante (Max-Pooling) découpe l'image en petits carrés de 2×2 cases et ne conserve que la valeur la plus élevée de chaque carré. Cela divise la largeur et la hauteur par deux, tout en gardant l'information la plus forte.
+      En réalité, après avoir détecté les traits avec la convolution, l'image contient encore beaucoup de pixels. Pour rendre le système plus rapide et tolérant aux légers déplacements du dessin, on applique une étape de <b>pooling</b> (ou sous-échantillonnage) :
     </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, la méthode Max-Pooling découpe l'image en blocs de 2×2 cases.</li>
+      <li><b>Ensuite</b>, elle conserve uniquement la valeur la plus forte de chaque bloc.</li>
+      <li><b>Enfin</b>, la taille de l'image est divisée par deux tout en conservant le signal déterminant.</li>
+    </ul>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
-  <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
 
-  <!-- Bloc 4 cases avant pooling -->
-  <g transform="translate(100, 70)">
-    <text x="70" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Zone 2×2 (4 pixels)</text>
-    
-    <rect x="0" y="0" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="35" y="42" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">12</text>
+        <!-- Bloc 4 cases avant pooling -->
+        <g transform="translate(100, 70)">
+          <text x="70" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Zone 2×2 (4 pixels)</text>
+          
+          <rect x="0" y="0" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="35" y="42" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">12</text>
 
-    <rect x="70" y="0" width="70" height="70" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
-    <text x="105" y="42" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="20" font-weight="bold">88</text>
+          <rect x="70" y="0" width="70" height="70" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+          <text x="105" y="42" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="20" font-weight="bold">88</text>
 
-    <rect x="0" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="35" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">20</text>
+          <rect x="0" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="35" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">20</text>
 
-    <rect x="70" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-    <text x="105" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">45</text>
-  </g>
+          <rect x="70" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="105" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">45</text>
+        </g>
 
-  <!-- Flèche Max-Pooling -->
-  <g transform="translate(290, 140)">
-    <line x1="0" y1="0" x2="60" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green2)"/>
-    <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Max-Pooling</text>
-    <text x="30" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">(Garder le max)</text>
-  </g>
+        <!-- Flèche Max-Pooling -->
+        <g transform="translate(290, 140)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green2)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Max-Pooling</text>
+          <text x="30" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">(Garder le max)</text>
+        </g>
 
-  <!-- Résultat 1 case -->
-  <g transform="translate(400, 105)">
-    <text x="45" y="-20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">1 seule case</text>
-    <rect x="0" y="0" width="90" height="90" fill="#dcfce7" stroke="#16a34a" stroke-width="3" rx="8"/>
-    <text x="45" y="55" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="28" font-weight="bold">88</text>
-  </g>
+        <!-- Résultat 1 case -->
+        <g transform="translate(400, 105)">
+          <text x="45" y="-20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">1 seule case</text>
+          <rect x="0" y="0" width="90" height="90" fill="#dcfce7" stroke="#16a34a" stroke-width="3" rx="8"/>
+          <text x="45" y="55" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="28" font-weight="bold">88</text>
+        </g>
 
-  <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le pooling divise la taille par 2 en gardant uniquement l'information la plus forte</text>
+        <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le pooling divise la taille par 2 en gardant uniquement l'information la plus forte</text>
 
-  <defs>
-    <marker id="arrow-green2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow-green2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 6 : Opération de Max-Pooling 2×2 (4 cases réduites à 1 seule case maximale).</div>
     </div>
 
@@ -1050,192 +1317,171 @@
     <div class="section-header">
       <h2>7. LeNet-5 couche par couche : la structure historique complète</h2>
       <div class="section-objective">
-        <b>Objectif de cette section :</b> Examiner en détail les 7 couches de LeNet-5 qui ont fondé la vision moderne par ordinateur.
+        <b>Objectif de cette section :</b> Examiner en détail les couches successives de LeNet-5 qui ont fondé la vision moderne.
       </div>
     </div>
 
     <p>
-      Conçu en 1998 par l'équipe de Yann LeCun aux laboratoires AT&amp;T Bell, <b>LeNet-5</b> est le premier réseau convolutif à avoir été déployé à l'échelle industrielle.
+      Conçu en 1998 par l'équipe de Yann LeCun aux laboratoires AT&amp;T Bell, <b>LeNet-5</b> est le premier réseau convolutif à avoir été déployé à grande échelle industrielle. Le pipeline complet traite une image de 32×32 pixels jusqu'aux 10 sorties de classification (0 à 9).
     </p>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 320" width="100%" height="100%">
-  <rect width="750" height="320" fill="#f8fafc" rx="12"/>
+        <rect width="750" height="320" fill="#f8fafc" rx="12"/>
 
-  <!-- Titre -->
-  <text x="375" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#0f172a">Architecture LeNet-5 (Yann LeCun et al., 1998)</text>
+        <!-- Titre -->
+        <text x="375" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#0f172a">Architecture LeNet-5 (Yann LeCun et al., 1998)</text>
 
-  <!-- Entrée 32x32 -->
-  <g transform="translate(30, 70)">
-    <rect width="45" height="150" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" rx="4"/>
-    <text x="22" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">Image</text>
-    <text x="22" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">32×32</text>
-  </g>
+        <!-- Entrée 32x32 -->
+        <g transform="translate(30, 70)">
+          <rect width="45" height="150" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" rx="4"/>
+          <text x="22" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">Image</text>
+          <text x="22" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">32×32</text>
+        </g>
 
-  <!-- C1: Convolution 6 plans 28x28 -->
-  <g transform="translate(110, 70)">
-    <rect width="55" height="150" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
-    <text x="27" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C1</text>
-    <text x="27" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">6 plans</text>
-    <text x="27" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">28×28</text>
-  </g>
+        <!-- C1: Convolution 6 plans 28x28 -->
+        <g transform="translate(110, 70)">
+          <rect width="55" height="150" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+          <text x="27" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C1</text>
+          <text x="27" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">6 plans</text>
+          <text x="27" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">28×28</text>
+        </g>
 
-  <!-- S2: Subsampling (Pooling) 6 plans 14x14 -->
-  <g transform="translate(200, 85)">
-    <rect width="50" height="120" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
-    <text x="25" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S2</text>
-    <text x="25" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
-    <text x="25" y="89" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">14×14</text>
-  </g>
+        <!-- S2: Subsampling (Pooling) 6 plans 14x14 -->
+        <g transform="translate(200, 85)">
+          <rect width="50" height="120" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
+          <text x="25" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S2</text>
+          <text x="25" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
+          <text x="25" y="89" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">14×14</text>
+        </g>
 
-  <!-- C3: Convolution 16 plans 10x10 -->
-  <g transform="translate(285, 75)">
-    <rect width="60" height="140" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
-    <text x="30" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C3</text>
-    <text x="30" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">16 plans</text>
-    <text x="30" y="101" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">10×10</text>
-  </g>
+        <!-- C3: Convolution 16 plans 10x10 -->
+        <g transform="translate(285, 75)">
+          <rect width="60" height="140" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+          <text x="30" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C3</text>
+          <text x="30" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">16 plans</text>
+          <text x="30" y="101" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">10×10</text>
+        </g>
 
-  <!-- S4: Subsampling (Pooling) 16 plans 5x5 -->
-  <g transform="translate(380, 95)">
-    <rect width="50" height="100" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
-    <text x="25" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S4</text>
-    <text x="25" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
-    <text x="25" y="79" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">5×5</text>
-  </g>
+        <!-- S4: Subsampling (Pooling) 16 plans 5x5 -->
+        <g transform="translate(380, 95)">
+          <rect width="50" height="100" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
+          <text x="25" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S4</text>
+          <text x="25" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
+          <text x="25" y="79" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">5×5</text>
+        </g>
 
-  <!-- C5: Conv pleine / Dense 120 -->
-  <g transform="translate(465, 80)">
-    <rect width="55" height="130" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
-    <text x="27" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">C5</text>
-    <text x="27" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">120 u.</text>
-    <text x="27" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
-  </g>
+        <!-- C5: Conv pleine / Dense 120 -->
+        <g transform="translate(465, 80)">
+          <rect width="55" height="130" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
+          <text x="27" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">C5</text>
+          <text x="27" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">120 u.</text>
+          <text x="27" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
+        </g>
 
-  <!-- F6: Fully Connected 84 -->
-  <g transform="translate(555, 90)">
-    <rect width="55" height="110" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
-    <text x="27" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">F6</text>
-    <text x="27" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">84 u.</text>
-    <text x="27" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
-  </g>
+        <!-- F6: Fully Connected 84 -->
+        <g transform="translate(555, 90)">
+          <rect width="55" height="110" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
+          <text x="27" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">F6</text>
+          <text x="27" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">84 u.</text>
+          <text x="27" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
+        </g>
 
-  <!-- Sortie: 10 classes (0-9) -->
-  <g transform="translate(645, 80)">
-    <rect width="70" height="130" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
-    <text x="35" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b45309">Sortie</text>
-    <text x="35" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#d97706">« 7 »</text>
-    <text x="35" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#78350f">10 classes</text>
-  </g>
+        <!-- Sortie: 10 classes (0-9) -->
+        <g transform="translate(645, 80)">
+          <rect width="70" height="130" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+          <text x="35" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b45309">Sortie</text>
+          <text x="35" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#d97706">« 7 »</text>
+          <text x="35" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#78350f">10 classes</text>
+        </g>
 
-  <!-- Liens fléchés -->
-  <g stroke="#94a3b8" stroke-width="1.5" fill="none">
-    <path d="M 75 145 L 110 145"/>
-    <path d="M 165 145 L 200 145"/>
-    <path d="M 250 145 L 285 145"/>
-    <path d="M 345 145 L 380 145"/>
-    <path d="M 430 145 L 465 145"/>
-    <path d="M 520 145 L 555 145"/>
-    <path d="M 610 145 L 645 145"/>
-  </g>
+        <!-- Liens fléchés -->
+        <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+          <path d="M 75 145 L 110 145"/>
+          <path d="M 165 145 L 200 145"/>
+          <path d="M 250 145 L 285 145"/>
+          <path d="M 345 145 L 380 145"/>
+          <path d="M 430 145 L 465 145"/>
+          <path d="M 520 145 L 555 145"/>
+          <path d="M 610 145 L 645 145"/>
+        </g>
 
-  <!-- Légende en bas -->
-  <g transform="translate(100, 270)" font-family="system-ui, sans-serif" font-size="11">
-    <rect x="0" y="0" width="16" height="16" fill="#eff6ff" stroke="#2563eb" rx="2"/><text x="24" y="13" fill="#1e293b">Convolution (filtre)</text>
-    <rect x="170" y="0" width="16" height="16" fill="#f0fdf4" stroke="#16a34a" rx="2"/><text x="194" y="13" fill="#1e293b">Pooling (compression)</text>
-    <rect x="360" y="0" width="16" height="16" fill="#faf5ff" stroke="#9333ea" rx="2"/><text x="384" y="13" fill="#1e293b">Dense (décision)</text>
-  </g>
-</svg>
+        <!-- Légende en bas -->
+        <g transform="translate(100, 270)" font-family="system-ui, sans-serif" font-size="11">
+          <rect x="0" y="0" width="16" height="16" fill="#eff6ff" stroke="#2563eb" rx="2"/><text x="24" y="13" fill="#1e293b">Convolution (filtre)</text>
+          <rect x="170" y="0" width="16" height="16" fill="#f0fdf4" stroke="#16a34a" rx="2"/><text x="194" y="13" fill="#1e293b">Pooling (compression)</text>
+          <rect x="360" y="0" width="16" height="16" fill="#faf5ff" stroke="#9333ea" rx="2"/><text x="384" y="13" fill="#1e293b">Dense (décision)</text>
+        </g>
+      </svg>
       <div class="svg-caption">Figure 7 : Pipeline architectural complet de LeNet-5 (de l'entrée 32×32 aux 10 classes de sortie).</div>
     </div>
 
-    <p>
-      Voici le détail officiel de chaque couche, conformément à l'article fondateur :
+    <!-- Encadrés couche par couche -->
+    <div class="layers-grid">
+      
+      <div class="layer-card">
+        <div class="layer-title">🖼️ Entrée (Image 32×32)</div>
+        <div class="layer-role">Reçoit l'image numérisée et centrée du chiffre manuscrit.</div>
+        <div class="layer-meta">Dimensions : 32×32 | 0 paramètre</div>
+      </div>
+
+      <div class="layer-card conv">
+        <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C1 (Convolution 5×5)</div>
+        <div class="layer-role">Extrait 6 types de traits élémentaires (lignes, angles et bordures).</div>
+        <div class="layer-meta">Sortie : 6 plans 28×28 | 156 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card pool">
+        <div class="layer-title" style="color: #15803d;">📉 Couche S2 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-role">Compresse de moitié la résolution pour stabiliser les motifs détectés.</div>
+        <div class="layer-meta">Sortie : 6 plans 14×14 | 12 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card conv">
+        <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C3 (Convolution 5×5)</div>
+        <div class="layer-role">Combine les traits simples pour reconnaître des parties complexes de chiffres.</div>
+        <div class="layer-meta">Sortie : 16 plans 10×10 | 1 516 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card pool">
+        <div class="layer-title" style="color: #15803d;">📉 Couche S4 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-role">Seconde réduction spatiale pour rendre le modèle robuste aux déformations.</div>
+        <div class="layer-meta">Sortie : 16 plans 5×5 | 32 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card dense">
+        <div class="layer-title" style="color: #7e22ce;">🧠 Couche C5 (Convolution dense)</div>
+        <div class="layer-role">Connecte toutes les caractéristiques spatiales dans 120 unités de décision.</div>
+        <div class="layer-meta">Sortie : 120 unités | 48 120 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card dense">
+        <div class="layer-title" style="color: #7e22ce;">🧠 Couche F6 (Couche connectée)</div>
+        <div class="layer-role">Effectue la synthèse finale des formes pour chaque style d'écriture.</div>
+        <div class="layer-meta">Sortie : 84 unités | 10 164 paramètres [LeCun 1998, Table 1]</div>
+      </div>
+
+      <div class="layer-card out">
+        <div class="layer-title" style="color: #b45309;">🎯 Sortie (10 classes 0 à 9)</div>
+        <div class="layer-role">Émet la probabilité de chaque chiffre et valide le pic sur le « 7 ».</div>
+        <div class="layer-meta">Sortie : 10 valeurs RBF | 840 paramètres fixes</div>
+      </div>
+
+    </div>
+
+    <p style="margin-top: 16px;">
+      Au total, LeNet-5 ne compte qu'environ <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, p.6 « only 60 000 trainable free parameters »]. C'est un cahier de réglages très compact, équivalent à la taille d'un petit livre, là où les modèles d'intelligence artificielle modernes mobilisent des centaines de millions ou des milliards de paramètres.
     </p>
 
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Couche</th>
-          <th>Type d'opération</th>
-          <th>Taille de sortie</th>
-          <th>Rôle concret dans la lecture du « 7 »</th>
-          <th>Paramètres entraînables</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>Entrée</b></td>
-          <td>Image brute</td>
-          <td>32 × 32 (1 plan)</td>
-          <td>Reçoit l'image du chiffre centré.</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td><b>C1</b></td>
-          <td>Convolution (filtres 5×5)</td>
-          <td>28 × 28 (6 plans)</td>
-          <td>Extrait 6 types de traits élémentaires (barres, angles).</td>
-          <td>156 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>S2</b></td>
-          <td>Sous-échantillonnage (Moyenne/Max 2×2)</td>
-          <td>14 × 14 (6 plans)</td>
-          <td>Compresse de moitié la résolution pour stabiliser l'image.</td>
-          <td>12 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>C3</b></td>
-          <td>Convolution (filtres 5×5)</td>
-          <td>10 × 10 (16 plans)</td>
-          <td>Combine les traits simples pour détecter des formes complexes.</td>
-          <td>1 516 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>S4</b></td>
-          <td>Sous-échantillonnage (2×2)</td>
-          <td>5 × 5 (16 plans)</td>
-          <td>Seconde compression de l'image.</td>
-          <td>32 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>C5</b></td>
-          <td>Convolution complète (Dense)</td>
-          <td>1 × 1 (120 unités)</td>
-          <td>Associe toutes les formes géométriques détectées.</td>
-          <td>48 120 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>F6</b></td>
-          <td>Couche entièrement connectée</td>
-          <td>84 unités</td>
-          <td>Prépare la classification stylistique finale.</td>
-          <td>10 164 [LeCun 1998, Table 1]</td>
-        </tr>
-        <tr>
-          <td><b>Sortie</b></td>
-          <td>RBF / Softmax</td>
-          <td>10 classes (0 à 9)</td>
-          <td>Indique la probabilité de chaque chiffre (Pic sur « 7 »).</td>
-          <td>840 (non entraînables)</td>
-        </tr>
-        <tr style="font-weight: bold; background: #f8fafc;">
-          <td colspan="4">TOTAL PARAMÈTRES ENTRAÎNABLES DU MODÈLE</td>
-          <td>~60 000 (exactement 60 000)</td>
-        </tr>
-      </tbody>
-    </table>
-
     <div class="citation">
-      Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B, Table 1].
+      Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B, Table 1, p. 6].
     </div>
 
     <div class="box-remember">
       <h4>💡 À retenir</h4>
       <ul>
         <li>LeNet-5 alterne Convolution (extraction) et Sous-échantillonnage (compression) avant la décision finale.</li>
-        <li>Le réseau ne compte qu'environ 60 000 paramètres, ce qui lui permettait de tourner rapidement sur les ordinateurs de 1998.</li>
+        <li>Le réseau ne compte que 60 000 paramètres, ce qui lui permettait de tourner rapidement sur les processeurs de 1998.</li>
       </ul>
     </div>
 
@@ -1256,89 +1502,90 @@
     </div>
 
     <p>
-      LeNet-5 n'est pas resté enfermé dans un laboratoire de recherche. Dès la fin des années 1990, le constructeur bancaire <b>NCR</b> a intégré LeNet-5 dans ses machines de tri automatique de chèques.
+      LeNet-5 n'est pas resté confiné dans un laboratoire de recherche théorique. Dès la fin des années 1990, le constructeur bancaire <b>NCR</b> a intégré LeNet-5 dans ses trieuses automatiques de chèques.
     </p>
 
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 300" width="100%" height="100%">
-  <rect width="650" height="300" fill="#f8fafc" rx="12"/>
+        <rect width="650" height="300" fill="#f8fafc" rx="12"/>
 
-  <!-- Chèque bancaire -->
-  <g transform="translate(30, 60)">
-    <rect width="200" height="120" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" rx="6"/>
-    <!-- Bandes décoratives chèque -->
-    <rect x="10" y="12" width="60" height="12" fill="#e2e8f0" rx="2"/>
-    <text x="15" y="21" font-family="system-ui, sans-serif" font-size="8" fill="#64748b">BANQUE NATIONALE</text>
-    
-    <line x1="15" y1="50" x2="130" y2="50" stroke="#cbd5e1"/>
-    <line x1="15" y1="75" x2="130" y2="75" stroke="#cbd5e1"/>
+        <!-- Chèque bancaire -->
+        <g transform="translate(30, 60)">
+          <rect width="200" height="120" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" rx="6"/>
+          <!-- Bandes décoratives chèque -->
+          <rect x="10" y="12" width="60" height="12" fill="#e2e8f0" rx="2"/>
+          <text x="15" y="21" font-family="system-ui, sans-serif" font-size="8" fill="#64748b">BANQUE NATIONALE</text>
+          
+          <line x1="15" y1="50" x2="130" y2="50" stroke="#cbd5e1"/>
+          <line x1="15" y1="75" x2="130" y2="75" stroke="#cbd5e1"/>
 
-    <!-- Case Montant entourée -->
-    <rect x="140" y="40" width="48" height="36" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="4"/>
-    <text x="164" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#b45309">7 $</text>
-    <text x="164" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#d97706">Zone lue</text>
-  </g>
+          <!-- Case Montant entourée -->
+          <rect x="140" y="40" width="48" height="36" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="4"/>
+          <text x="164" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#b45309">7 $</text>
+          <text x="164" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#d97706">Zone lue</text>
+        </g>
 
-  <!-- Flèche vers scanner -->
-  <g transform="translate(245, 120)">
-    <line x1="0" y1="0" x2="45" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue3)"/>
-  </g>
+        <!-- Flèche vers scanner -->
+        <g transform="translate(245, 120)">
+          <line x1="0" y1="0" x2="45" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue3)"/>
+        </g>
 
-  <!-- Machine de tri NCR avec LeNet-5 -->
-  <g transform="translate(305, 50)">
-    <rect width="160" height="140" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="10"/>
-    <rect x="15" y="15" width="130" height="40" fill="#0284c7" rx="4"/>
-    <text x="80" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">Machine NCR</text>
-    
-    <rect x="25" y="70" width="110" height="50" fill="#0f172a" rx="4"/>
-    <text x="80" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#38bdf8">Puce DSP + LeNet-5</text>
-    <text x="80" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Millions chèques/jour</text>
-  </g>
+        <!-- Machine de tri NCR avec LeNet-5 -->
+        <g transform="translate(305, 50)">
+          <rect width="160" height="140" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="10"/>
+          <rect x="15" y="15" width="130" height="40" fill="#0284c7" rx="4"/>
+          <text x="80" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">Machine NCR</text>
+          
+          <rect x="25" y="70" width="110" height="50" fill="#0f172a" rx="4"/>
+          <text x="80" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#38bdf8">Puce DSP + LeNet-5</text>
+          <text x="80" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Millions chèques/mois</text>
+        </g>
 
-  <!-- Flèche vers sortie -->
-  <g transform="translate(480, 120)">
-    <line x1="0" y1="0" x2="45" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green3)"/>
-  </g>
+        <!-- Flèche vers sortie -->
+        <g transform="translate(480, 120)">
+          <line x1="0" y1="0" x2="45" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green3)"/>
+        </g>
 
-  <!-- Sortie Reconnaissance -->
-  <g transform="translate(540, 75)">
-    <circle cx="45" cy="45" r="38" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
-    <text x="45" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="#15803d">7</text>
-    <text x="45" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">Chiffre validé</text>
-  </g>
+        <!-- Sortie Reconnaissance -->
+        <g transform="translate(540, 75)">
+          <circle cx="45" cy="45" r="38" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+          <text x="45" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="#15803d">7</text>
+          <text x="45" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">Chiffre validé</text>
+        </g>
 
-  <text x="325" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Application commerciale réelle (1998) : reconnaissance automatique de ~10% des chèques aux USA</text>
+        <text x="325" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Déploiement réel (1998) : millions de chèques/mois [LeCun 1998], ~10% volume US [Wikipédia - À RECOUPER]</text>
 
-  <defs>
-    <marker id="arrow-blue3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
-    </marker>
-    <marker id="arrow-green3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
-    </marker>
-  </defs>
-</svg>
+        <defs>
+          <marker id="arrow-blue3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
+          </marker>
+          <marker id="arrow-green3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
       <div class="svg-caption">Figure 8 : Traitement industriel des chèques bancaires par les machines NCR propulsées par LeNet-5.</div>
     </div>
 
     <p>
-      Les chiffres clés vérifiés de ce déploiement historique sont remarquables :
+      Les chiffres clés vérifiés de ce déploiement historique sont les suivants :
     </p>
     <ul style="margin-left: 24px; margin-bottom: 16px;">
-      <li><b>Taux d'erreur record</b> : Sur la base de données de test standard MNIST (10 000 chiffres manuscrits de test), LeNet-5 a atteint un taux d'erreur de seulement <b>0,8 % à 0,95 %</b> sans distorsion, surpassant tous les algorithmes existants de l'époque [LeCun et al., 1998, Table 2].</li>
-      <li><b>Volume industriel</b> : Les machines équipées de puces dédiées traitaient <b>plusieurs millions de chèques par mois</b> [LeCun et al., 1998, Section I], représentant selon les estimations jusqu'à <b>10 % de l'ensemble des chèques bancaires émis aux États-Unis</b> [Wikipédia, LeNet, source secondaire] à la fin des années 1990 [LeCun et al., 1998, Section I].</li>
-      <li><b>Compacité</b> : Avec ses ~60 000 paramètres, l'ensemble des réglages du réseau tenait dans un fichier de moins de 300 kilo-octets.</li>
+      <li><b>Taux d'erreur record</b> : Sur la base de test MNIST (10 000 chiffres manuscrits), l'erreur s'établit à <b>0,95 % sans distorsion</b> [LeCun et al., 1998, sec. III « stabilizes … at 0.95% »] et descend à <b>0,8 % avec distorsions</b> [LeCun et al., 1998, sec. III « dropped to 0.8% »].</li>
+      <li><b>Volume industriel</b> : Les machines NCR traitaient <b>plusieurs millions de chèques par mois (source primaire)</b> [LeCun et al., 1998, sec. I « reading millions of checks per month »].</li>
+      <li><b>Part de marché</b> : Ce volume est estimé à environ <b>10 % de l'ensemble des chèques bancaires américains</b> [Wikipédia, LeNet (source secondaire - À RECOUPER)].</li>
+      <li><b>Compacité</b> : L'ensemble de l'architecture repose sur seulement <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, p.6 « only 60 000 trainable free parameters »].</li>
     </ul>
 
     <div class="citation">
-      Source : [LeCun et al., 1998, Section I « Introduction » &amp; Section VII « Results on MNIST Database », Table 2].
+      Sources : [LeCun et al., 1998, Section I « Introduction », Section III « Experiments on MNIST », p. 6-12] &amp; [Wikipédia, LeNet].
     </div>
 
     <div class="box-remember">
       <h4>💡 À retenir</h4>
       <ul>
-        <li>LeNet-5 a prouvé la viabilité industrielle du deep learning dès 1998 en traitant des millions de chèques quotidiens.</li>
-        <li>Son taux d'erreur inférieur à 1% a posé le standard de référence pour les décennies suivantes.</li>
+        <li>LeNet-5 a prouvé la viabilité industrielle des réseaux convolutifs dès 1998 en traitant des millions de chèques par mois.</li>
+        <li>Son taux d'erreur inférieur à 1% sur MNIST a posé le standard mondial pour la vision par ordinateur.</li>
       </ul>
     </div>
 
@@ -1359,36 +1606,80 @@
     </div>
 
     <p>
-      Les principes inventés avec LeNet-5 (convolution, pooling, couches denses) sont le moteur des systèmes de vision artificielle les plus avancés d'aujourd'hui :
+      Les mécanismes inventés avec LeNet-5 (convolution, pooling, couches denses) sont le moteur des systèmes de vision par ordinateur d'aujourd'hui :
     </p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+    <div class="app-grid">
       
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px;">
-        <h4 style="color: var(--primary); margin-bottom: 6px;">📱 1. Déverrouillage facial (Face ID)</h4>
-        <p style="font-size: 0.9rem; margin-bottom: 0;">
-          Des réseaux convolutifs analysent la géométrie du visage captée en infrarouge pour authentifier l'utilisateur en une fraction de seconde.
+      <!-- Cas 1 : Déverrouillage facial -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+              <circle cx="22" cy="18" r="9" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <path d="M 12 36 C 12 28 32 28 32 36" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <path d="M 8 14 L 8 8 L 14 8 M 30 8 L 36 8 L 36 14 M 8 30 L 8 36 L 14 36 M 30 36 L 36 36 L 36 30" fill="none" stroke="#0969da" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="app-title">📱 1. Déverrouillage par visage (Face ID)</div>
+        </div>
+        <p class="app-desc">
+          Des réseaux de neurones convolutifs analysent la forme géométrique du visage captée en infrarouge. La machine déverrouille l'appareil instantanément en vérifiant les points clés du visage.
         </p>
       </div>
 
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px;">
-        <h4 style="color: var(--primary); margin-bottom: 6px;">🏥 2. Imagerie médicale (Radiologie)</h4>
-        <p style="font-size: 0.9rem; margin-bottom: 0;">
-          Les CNN repèrent des micro-lésions, fractures ou anomalies cellulaires sur des radiographies et IRM avec une précision égale ou supérieure aux experts.
+      <!-- Cas 2 : Imagerie médicale -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <rect x="10" y="8" width="24" height="28" rx="3" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+              <path d="M 22 14 L 22 30 M 15 22 L 29 22" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="app-title">🏥 2. Imagerie médicale (Radiologie)</div>
+        </div>
+        <p class="app-desc">
+          Les filtres convolutifs repèrent des micro-lésions et anomalies sur les radiographies pulmonaires ou les IRM. Le modèle assiste les médecins en localisant les zones nécessitant un examen approfondi.
         </p>
       </div>
 
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px;">
-        <h4 style="color: var(--primary); margin-bottom: 6px;">🚗 3. Véhicules autonomes</h4>
-        <p style="font-size: 0.9rem; margin-bottom: 0;">
-          Les caméras embarquées détectent en temps réel les panneaux de signalisation, les piétons et les lignes de voie pour guider la trajectoire.
+      <!-- Cas 3 : Voitures autonomes -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#faf5ff" stroke="#e9d5ff"/>
+              <path d="M 10 26 L 14 14 L 30 14 L 34 26 Z" fill="#ffffff" stroke="#9333ea" stroke-width="2"/>
+              <circle cx="14" cy="28" r="4" fill="#9333ea"/>
+              <circle cx="30" cy="28" r="4" fill="#9333ea"/>
+              <line x1="6" y1="36" x2="38" y2="36" stroke="#a855f7" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="app-title">🚗 3. Véhicules autonomes</div>
+        </div>
+        <p class="app-desc">
+          Des caméras embarquées détectent en temps réel les panneaux de signalisation, les piétons et les marquages au sol. Le système ajuste la vitesse et la trajectoire du véhicule pour assurer la sécurité.
         </p>
       </div>
 
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px;">
-        <h4 style="color: var(--primary); margin-bottom: 6px;">🖼️ 4. Tri d'albums photos</h4>
-        <p style="font-size: 0.9rem; margin-bottom: 0;">
-          Les smartphones classent automatiquement vos photos par thèmes (plage, coucher de soleil, animaux) sans aucune saisie manuelle.
+      <!-- Cas 4 : Tri de photos -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#fffbeb" stroke="#fde68a"/>
+              <rect x="8" y="8" width="28" height="24" rx="3" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+              <circle cx="15" cy="15" r="3" fill="#d97706"/>
+              <path d="M 10 28 L 18 20 L 26 26 L 34 16 L 36 28 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="app-title">🖼️ 4. Tri automatique de photos</div>
+        </div>
+        <p class="app-desc">
+          Les algorithmes classent automatiquement vos albums selon les scènes visibles (plage, montagne, animaux). Vous retrouvez n'importe quelle photo en tapant un simple mot-clé sans indexation manuelle.
         </p>
       </div>
 
@@ -1397,7 +1688,8 @@
     <div class="box-remember">
       <h4>💡 À retenir</h4>
       <ul>
-        <li>Toutes les technologies de vision moderne (téléphones, voitures, santé) reposent sur les fondations posées par LeNet-5.</li>
+        <li>Toutes les technologies de vision moderne (téléphones, hôpitaux, transports) reposent sur les bases posées par LeNet-5.</li>
+        <li>La combinaison convolution et classification permet d'automatiser des décisions visuelles complexes.</li>
       </ul>
     </div>
 
@@ -1421,42 +1713,42 @@
     <table class="data-table">
       <thead>
         <tr>
-          <th style="width: 25%;">Terme technique</th>
+          <th style="width: 28%;">Terme technique</th>
           <th>Définition simple et concrète</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td><b>Pixel</b></td><td>Plus petite unité d'une image numérique, représentée par une valeur d'intensité lumineuse.</td></tr>
-        <tr><td><b>Neurone artificiel</b></td><td>Élément de calcul effectuant une somme pondérée de ses entrées suivie d'une fonction de seuil.</td></tr>
-        <tr><td><b>Poids synaptique (w)</b></td><td>Coefficient numérique ajustable déterminant l'importance accordée à une entrée donnée.</td></tr>
-        <tr><td><b>Biais (b)</b></td><td>Valeur seuil ajoutée à la somme pondérée pour décaler l'activation du neurone.</td></tr>
-        <tr><td><b>Fonction d'activation</b></td><td>Règle mathématique non linéaire décidant si le neurone transmet son signal à la couche suivante.</td></tr>
-        <tr><td><b>Couche cachée</b></td><td>Couche de neurones intermédiaire située entre la couche d'entrée et la couche de décision finale.</td></tr>
-        <tr><td><b>Convolution</b></td><td>Opération de filtrage glissant extrayant des caractéristiques visuelles locales d'une image.</td></tr>
-        <tr><td><b>Filtre / Noyau</b></td><td>Petite matrice de coefficients (ex. 5×5) chargée de détecter un motif particulier dans l'image.</td></tr>
-        <tr><td><b>Carte de caractéristiques</b></td><td>Image intermédiaire résultant de l'application d'un filtre de convolution.</td></tr>
-        <tr><td><b>Pooling (Sous-échantillonnage)</b></td><td>Compression spatiale réduisant la taille de la carte tout en conservant les signaux forts.</td></tr>
-        <tr><td><b>Rétropropagation</b></td><td>Algorithme calculant le gradient d'erreur pour corriger les poids de l'aval vers l'amont.</td></tr>
-        <tr><td><b>Époque (Epoch)</b></td><td>Un cycle complet d'entraînement au cours duquel le réseau a vu une fois la totalité des images.</td></tr>
-        <tr><td><b>Fonction de coût (Loss)</b></td><td>Mesure numérique de l'écart d'erreur entre la prédiction du modèle et la vérité terrain.</td></tr>
-        <tr><td><b>MNIST</b></td><td>Base de données de référence historique comportant 70 000 chiffres manuscrits de 0 à 9.</td></tr>
-        <tr><td><b>Invariance spatiale</b></td><td>Capacité d'un réseau à reconnaître un motif quel que soit son emplacement dans l'image.</td></tr>
+        <tr><td><b>Pixel</b></td><td>Plus petite unité d'une image numérique, représentée par une valeur de luminosité (0 à 255).</td></tr>
+        <tr><td><b>Neurone artificiel</b></td><td>Élément de calcul effectuant une somme pondérée de ses entrées suivie d'un test de seuil.</td></tr>
+        <tr><td><b>Poids synaptique (w)</b></td><td>Coefficient numérique ajustable déterminant l'importance accordée à une connexion.</td></tr>
+        <tr><td><b>Biais (b)</b></td><td>Valeur seuil ajoutée à la somme pondérée pour décaler l'activation d'un neurone.</td></tr>
+        <tr><td><b>Fonction d'activation</b></td><td>Règle mathématique décidant si le neurone transmet son signal à la couche suivante.</td></tr>
+        <tr><td><b>Couche cachée</b></td><td>Couche de neurones intermédiaire située entre la couche d'entrée et la couche de sortie.</td></tr>
+        <tr><td><b>Convolution</b></td><td>Opération de filtrage glissant extrayant des motifs visuels locaux sur une image.</td></tr>
+        <tr><td><b>Filtre / Noyau</b></td><td>Petite grille de nombres (ex. 3×3 ou 5×5) chargée de détecter un trait spécifique.</td></tr>
+        <tr><td><b>Carte de caractéristiques</b></td><td>Grille intermédiaire résultant de l'application d'un filtre de convolution.</td></tr>
+        <tr><td><b>Pooling (Sous-échantillonnage)</b></td><td>Compression spatiale réduisant la taille de la carte en conservant le signal fort.</td></tr>
+        <tr><td><b>Rétropropagation</b></td><td>Algorithme qui calcule l'erreur et ajuste chaque poids d'arrière en avant.</td></tr>
+        <tr><td><b>Époque (Epoch)</b></td><td>Un cycle complet d'entraînement au cours duquel le réseau a vu la totalité des exemples.</td></tr>
+        <tr><td><b>Fonction de coût (Loss)</b></td><td>Mesure numérique de l'écart d'erreur entre la prédiction et le vrai résultat.</td></tr>
+        <tr><td><b>MNIST</b></td><td>Base de données de référence historique comportant 70 000 chiffres manuscrits (0 à 9).</td></tr>
+        <tr><td><b>Invariance spatiale</b></td><td>Capacité d'un réseau à reconnaître un chiffre quel que soit son emplacement dans l'image.</td></tr>
       </tbody>
     </table>
 
     <div class="box-remember" style="background: var(--primary-light); border-color: #93c5fd; margin-top: 24px;">
       <h4 style="color: #1e40af;">⭐ Les 10 points clés à retenir absolument</h4>
       <ol style="margin-left: 20px; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
-        <li>Une image est une matrice de chiffres représentant des niveaux de luminosité.</li>
-        <li>Un neurone calcule une somme pondérée et compare le résultat à un seuil.</li>
-        <li>Un réseau empile des couches pour former des représentations de plus en plus complexes.</li>
-        <li>L'apprentissage ajuste automatiquement les poids pour réduire l'erreur de prédiction.</li>
-        <li>La convolution utilise une fenêtre glissante pour extraire les contours et les formes.</li>
-        <li>Le pooling compresse les dimensions et rend la reconnaissance robuste aux déformations.</li>
+        <li>Une image est une grille de pixels contenant des valeurs de luminosité de 0 à 255.</li>
+        <li>Un neurone effectue une somme pondérée de ses entrées et la compare à un seuil d'activation.</li>
+        <li>Un réseau empile des couches successives pour construire des représentations hiérarchisées.</li>
+        <li>L'entraînement ajuste automatiquement les poids pour réduire l'erreur par rétropropagation.</li>
+        <li>La convolution utilise une fenêtre glissante pour repérer les contours et les formes locales.</li>
+        <li>Le pooling compresse les dimensions et tolère les légères déformations de l'écriture.</li>
         <li>LeNet-5 alterne deux blocs Convolution-Pooling avant ses couches denses de décision.</li>
-        <li>LeNet-5 compte environ 60 000 paramètres entraînables pour reconnaître les chiffres 0 à 9.</li>
-        <li>LeNet-5 a été éprouvé en traitant des millions de chèques bancaires réels chez NCR en 1998.</li>
-        <li>Ces principes fondamentaux sont la base de toute la vision artificielle contemporaine.</li>
+        <li>LeNet-5 compte environ 60 000 paramètres entraînables pour classer les chiffres 0 à 9.</li>
+        <li>LeNet-5 a été validé sur le terrain en traitant des millions de chèques bancaires par mois chez NCR.</li>
+        <li>Ces principes historiques constituent le socle de toute la vision par ordinateur contemporaine.</li>
       </ol>
     </div>
 
@@ -1509,7 +1801,7 @@
         <p class="q-title">Question 3 : Dans un réseau de neurones, à quoi servent les « poids » ?</p>
         <div class="quiz-options">
           <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'A')"> A) À mesurer la masse physique de l'ordinateur.</label>
-          <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'B')"> B) À déterminer l'importance relative de chaque connexion entre neurones.</label>
+          <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'B')"> B) À déterminer l'importance relative accordée à chaque connexion.</label>
           <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'C')"> C) À ralentir l'exécution du programme.</label>
         </div>
         <div class="quiz-feedback" id="fb3"></div>
@@ -1520,7 +1812,7 @@
         <p class="q-title">Question 4 : Quel est le rôle principal de l'opération de convolution ?</p>
         <div class="quiz-options">
           <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'A')"> A) Effacer totalement les couleurs de l'image.</label>
-          <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'B')"> B) Faire glisser un filtre sur l'image pour extraire des motifs locaux (barres, contours).</label>
+          <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'B')"> B) Faire glisser un filtre sur l'image pour extraire des motifs locaux (traits, contours).</label>
           <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'C')"> C) Compresser l'image au format MP3.</label>
         </div>
         <div class="quiz-feedback" id="fb4"></div>
@@ -1539,7 +1831,7 @@
 
       <!-- Q6 -->
       <div class="quiz-question" id="q6">
-        <p class="q-title">Question 6 : Combien de paramètres entraînables possède approximativement l'architecture LeNet-5 (1998) ?</p>
+        <p class="q-title">Question 6 : Combien de paramètres entraînables possède approximativement LeNet-5 (1998) ?</p>
         <div class="quiz-options">
           <label><input type="radio" name="q6_opt" onchange="checkAnswer(6, 'A')"> A) Environ 60 000 paramètres.</label>
           <label><input type="radio" name="q6_opt" onchange="checkAnswer(6, 'B')"> B) Environ 175 milliards de paramètres.</label>
@@ -1550,20 +1842,20 @@
 
       <!-- Q7 -->
       <div class="quiz-question" id="q7">
-        <p class="q-title">Question 7 : Quelle était la principale application commerciale réelle de LeNet-5 dans les années 1990 ?</p>
+        <p class="q-title">Question 7 : Quelle était l'application commerciale industrielle majeure de LeNet-5 en 1998 ?</p>
         <div class="quiz-options">
           <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'A')"> A) Le pilotage de fusées spatiales.</label>
-          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'B')"> B) La reconnaissance automatique de chèques bancaires par les machines NCR.</label>
-          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'C')"> C) La création de musique électronique.</label>
+          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'B')"> B) La lecture automatique de chèques bancaires par les machines NCR.</label>
+          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'C')"> C) La création automatique de jeux vidéo.</label>
         </div>
         <div class="quiz-feedback" id="fb7"></div>
       </div>
 
       <!-- Q8 -->
       <div class="quiz-question" id="q8">
-        <p class="q-title">Question 8 : Quel taux d'erreur de test remarquable LeNet-5 a-t-il obtenu sur la base de données MNIST ?</p>
+        <p class="q-title">Question 8 : Quel taux d'erreur remarquable LeNet-5 a-t-il obtenu sur la base de données MNIST ?</p>
         <div class="quiz-options">
-          <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'A')"> A) Moins de 1 % (environ 0,8 % à 0,95 %).</label>
+          <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'A')"> A) Moins de 1 % (0,8 % à 0,95 %).</label>
           <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'B')"> B) Environ 45 % d'erreur.</label>
           <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'C')"> C) 0,0000 % (zéro erreur absolue).</label>
         </div>
@@ -1576,18 +1868,18 @@
         <div class="quiz-options">
           <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'A')"> A) La rétropropagation du gradient (Backpropagation).</label>
           <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'B')"> B) La défragmentation du disque dur.</label>
-          <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'C')"> C) La compilation binaire.</label>
+          <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'C')"> C) La compilation du processeur.</label>
         </div>
         <div class="quiz-feedback" id="fb9"></div>
       </div>
 
       <!-- Q10 -->
       <div class="quiz-question" id="q10">
-        <p class="q-title">Question 10 : Pourquoi les réseaux convolutifs (CNN) ont-ils révolutionné la vision par ordinateur ?</p>
+        <p class="q-title">Question 10 : Pourquoi les réseaux convolutifs (CNN) sont-ils si performants en vision par ordinateur ?</p>
         <div class="quiz-options">
           <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'A')"> A) Parce qu'ils fonctionnent sans électricité.</label>
-          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'B')"> B) Parce qu'ils préservent la structure spatiale 2D de l'image et partagent leurs poids.</label>
-          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'C')"> C) Parce qu'ils ne contiennent aucun calcul mathématique.</label>
+          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'B')"> B) Parce qu'ils préservent la structure 2D de l'image et réutilisent les mêmes filtres partout.</label>
+          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'C')"> C) Parce qu'ils ignorent totalement les formes géométriques.</label>
         </div>
         <div class="quiz-feedback" id="fb10"></div>
       </div>
@@ -1603,89 +1895,247 @@
 
 </div>
 
-<!-- JAVASCRIPT AUTONOME (ZÉRO CDN) -->
+<!-- JAVASCRIPT AUTONOME (ZÉRO CDN, ZÉRO DÉPENDANCE) -->
 <script>
-  // 1. Démonstration Neurone
-  function setNeuronState(active) {
-    const x1 = active ? 1 : 0;
-    const x2 = active ? 2 : 1;
-    const sum = (x1 * 0.5 + x2 * 0.8).toFixed(2);
-    document.getElementById('val-x1').innerText = x1;
-    document.getElementById('val-x2').innerText = x2;
-    document.getElementById('val-sum').innerText = sum;
-    const out = document.getElementById('val-out');
-    if (parseFloat(sum) >= 2.0) {
-      out.innerText = "ALLUMÉ (1)";
-      out.style.color = "#16a34a";
-      out.style.background = "#dcfce7";
+  /* ==========================================================================
+     1. ANIMATION B : LE NEURONE S'ALLUME
+     ========================================================================== */
+  function updateNeuronInteractive() {
+    const x1 = document.getElementById('chk-x1').checked ? 1 : 0;
+    const x2 = document.getElementById('chk-x2').checked ? 1 : 0;
+    const x3 = document.getElementById('chk-x3').checked ? 1 : 0;
+
+    document.getElementById('calc-x1').innerText = x1;
+    document.getElementById('calc-x2').innerText = x2;
+    document.getElementById('calc-x3').innerText = x3;
+
+    const sum = (x1 * 1.0 + x2 * 1.2 + x3 * 0.5);
+    document.getElementById('val-sum').innerText = sum.toFixed(2);
+
+    const outElem = document.getElementById('val-out');
+    if (sum >= 2.00) {
+      outElem.innerText = "🟢 ALLUMÉ — Sortie = 1 (Seuil 2.00 atteint)";
+      outElem.style.color = "#16a34a";
+      outElem.style.background = "#dcfce7";
+      outElem.style.borderColor = "#86efac";
     } else {
-      out.innerText = "ÉTEINT (0)";
-      out.style.color = "#dc2626";
-      out.style.background = "#fee2e2";
+      outElem.innerText = "🔴 ÉTEINT — Sortie = 0 (Seuil 2.00 non atteint)";
+      outElem.style.color = "#dc2626";
+      outElem.style.background = "#fee2e2";
+      outElem.style.borderColor = "#fca5a5";
     }
   }
 
-  // 2. Démonstration Entraînement
+  function presetNeuron(active) {
+    document.getElementById('chk-x1').checked = active;
+    document.getElementById('chk-x2').checked = active;
+    document.getElementById('chk-x3').checked = active;
+    updateNeuronInteractive();
+  }
+
+  /* ==========================================================================
+     2. ANIMATION C : L'ERREUR DESCEND
+     ========================================================================== */
   let currentEpoch = 1;
-  let currentErr = 88.5;
+  const trainingSchedule = [
+    { epoch: 1, err: 88.5, msg: "Statut : Poids aléatoires. Forte marge d'erreur." },
+    { epoch: 5, err: 54.2, msg: "Statut : Premiers ajustements par rétropropagation." },
+    { epoch: 10, err: 26.0, msg: "Statut : Les traits obliques du « 7 » commencent à être reconnus." },
+    { epoch: 20, err: 11.4, msg: "Statut : Réduction nette des confusions entre chiffres similaires." },
+    { epoch: 30, err: 4.8, msg: "Statut : Précision élevée. Seules les écritures très déformées posent problème." },
+    { epoch: 40, err: 1.6, msg: "Statut : Convergence quasi-totale. Précision supérieure à 98 %." },
+    { epoch: 50, err: 0.8, msg: "Statut : Entraînement terminé ! Erreur stabilisée à 0.8 % (Source : LeCun 1998)." }
+  ];
+  let currentScheduleIdx = 0;
+
   function stepTraining() {
-    if (currentEpoch < 50) {
-      currentEpoch += 5;
-      currentErr = Math.max(0.8, (currentErr * 0.65)).toFixed(1);
-      document.getElementById('epoch-count').innerText = currentEpoch;
-      document.getElementById('error-rate').innerText = currentErr + " %";
-      document.getElementById('error-bar').style.width = currentErr + "%";
-      if (currentErr < 5) {
+    if (currentScheduleIdx < trainingSchedule.length - 1) {
+      currentScheduleIdx++;
+      const cur = trainingSchedule[currentScheduleIdx];
+      document.getElementById('epoch-count').innerText = cur.epoch;
+      document.getElementById('error-rate').innerText = cur.err + " %";
+      document.getElementById('error-bar').style.width = cur.err + "%";
+      document.getElementById('train-status').innerText = cur.msg;
+
+      if (cur.err <= 5.0) {
         document.getElementById('error-rate').style.color = "#16a34a";
         document.getElementById('error-bar').style.background = "#22c55e";
+        document.getElementById('error-bar').style.borderColor = "#86efac";
+      } else if (cur.err <= 30.0) {
+        document.getElementById('error-rate').style.color = "#d97706";
+        document.getElementById('error-bar').style.background = "#f59e0b";
       }
     }
   }
+
   function resetTraining() {
-    currentEpoch = 1;
-    currentErr = 88.5;
-    document.getElementById('epoch-count').innerText = currentEpoch;
-    document.getElementById('error-rate').innerText = currentErr + " %";
+    currentScheduleIdx = 0;
+    const cur = trainingSchedule[0];
+    document.getElementById('epoch-count').innerText = cur.epoch;
+    document.getElementById('error-rate').innerText = cur.err + " %";
+    document.getElementById('error-bar').style.width = cur.err + "%";
     document.getElementById('error-rate').style.color = "#dc2626";
-    document.getElementById('error-bar').style.width = currentErr + "%";
     document.getElementById('error-bar').style.background = "#ef4444";
+    document.getElementById('train-status').innerText = cur.msg;
   }
 
-  // 3. Démonstration Convolution Pas à Pas
-  let convPos = 1;
-  const convValues = [142, 195, 210, 85, 120, 240, 160, 95, 180];
+  /* ==========================================================================
+     3. ANIMATION A : LA FENÊTRE QUI BALAYE (6×6 -> 4×4)
+     ========================================================================== */
+  const inputGrid6x6 = [
+    [0, 255, 255, 255, 255, 0],
+    [0, 0,   0,   0,   255, 0],
+    [0, 0,   0,   255, 0,   0],
+    [0, 0,   255, 0,   0,   0],
+    [0, 255, 0,   0,   0,   0],
+    [0, 255, 0,   0,   0,   0]
+  ];
+
+  const convCalculatedValues = [
+    142, 185, 210, 120,
+    95,  130, 240, 160,
+    80,  215, 140, 90,
+    190, 110, 75,  60
+  ];
+
+  let currentConvStep = 0; // 0 à 15
+  let convInterval = null;
+
+  function initConvVisual() {
+    const inContainer = document.getElementById('grid-conv-input');
+    const outContainer = document.getElementById('grid-conv-output');
+    inContainer.innerHTML = '';
+    outContainer.innerHTML = '';
+
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const d = document.createElement('div');
+        d.className = 'conv-cell input-cell';
+        d.id = `in-cell-${r}-${c}`;
+        d.innerText = inputGrid6x6[r][c] > 0 ? inputGrid6x6[r][c] : '0';
+        if (inputGrid6x6[r][c] > 0) {
+          d.style.background = "#f1f5f9";
+          d.style.color = "#0f172a";
+          d.style.fontWeight = "bold";
+        }
+        inContainer.appendChild(d);
+      }
+    }
+
+    for (let i = 0; i < 16; i++) {
+      const d = document.createElement('div');
+      d.className = 'conv-cell output-cell';
+      d.id = `out-cell-${i}`;
+      d.innerText = '-';
+      outContainer.appendChild(d);
+    }
+
+    renderConvStep();
+  }
+
+  function renderConvStep() {
+    const topRow = Math.floor(currentConvStep / 4);
+    const leftCol = currentConvStep % 4;
+
+    // Reset input highlights
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const cell = document.getElementById(`in-cell-${r}-${c}`);
+        if (cell) cell.classList.remove('input-active');
+      }
+    }
+
+    // Highlight 3x3 window on input
+    for (let dr = 0; dr < 3; dr++) {
+      for (let dc = 0; dc < 3; dc++) {
+        const cell = document.getElementById(`in-cell-${topRow + dr}-${leftCol + dc}`);
+        if (cell) cell.classList.add('input-active');
+      }
+    }
+
+    // Update outputs
+    for (let i = 0; i < 16; i++) {
+      const outCell = document.getElementById(`out-cell-${i}`);
+      if (!outCell) continue;
+      outCell.classList.remove('output-current');
+      if (i < currentConvStep) {
+        outCell.className = 'conv-cell output-cell output-calculated';
+        outCell.innerText = convCalculatedValues[i];
+      } else if (i === currentConvStep) {
+        outCell.className = 'conv-cell output-cell output-current';
+        outCell.innerText = convCalculatedValues[i];
+      } else {
+        outCell.className = 'conv-cell output-cell';
+        outCell.innerText = '-';
+      }
+    }
+
+    document.getElementById('conv-step-num').innerText = currentConvStep + 1;
+    document.getElementById('conv-row').innerText = topRow + 1;
+    document.getElementById('conv-col').innerText = leftCol + 1;
+    document.getElementById('conv-val').innerText = convCalculatedValues[currentConvStep];
+  }
+
   function stepConv(delta) {
-    convPos = Math.min(9, Math.max(1, convPos + delta));
-    const r = Math.floor((convPos - 1) / 3) + 1;
-    const c = ((convPos - 1) % 3) + 1;
-    document.getElementById('conv-row').innerText = r;
-    document.getElementById('conv-col').innerText = c;
-    document.getElementById('conv-val').innerText = convValues[convPos - 1];
-  }
-  function resetConv() {
-    convPos = 1;
-    document.getElementById('conv-row').innerText = 1;
-    document.getElementById('conv-col').innerText = 1;
-    document.getElementById('conv-val').innerText = convValues[0];
+    currentConvStep = Math.min(15, Math.max(0, currentConvStep + delta));
+    renderConvStep();
   }
 
-  // 4. Quiz Validation
-  const answers = {
-    1: { correct: 'B', expl: 'Exact ! Une image numérique est perçue par l ordinateur comme une matrice de pixels numérotés de 0 (blanc) à 255 (noir).' },
-    2: { correct: 'A', expl: 'Parfait ! Le neurone effectue la somme pondérée de ses entrées (Entrée × Poids) puis compare cette valeur à un seuil d activation.' },
-    3: { correct: 'B', expl: 'Bravo ! Les poids agissent comme des curseurs de réglage pour pondérer l importance de chaque information.' },
-    4: { correct: 'B', expl: 'Exact ! La convolution fait glisser un filtre sur l image pour détecter des motifs visuels locaux partout dans l image.' },
-    5: { correct: 'A', expl: 'Excellent ! Le Max-Pooling réduit la taille de la carte en ne conservant que la valeur maximale de chaque sous-zone.' },
-    6: { correct: 'A', expl: 'Exactement ! LeNet-5 compte précisément environ 60 000 paramètres entraînables [LeCun et al., 1998, Table 1].' },
-    7: { correct: 'B', expl: 'Très bien ! La société NCR a intégré LeNet-5 dans ses trieuses de chèques bancaires aux États-Unis.' },
-    8: { correct: 'A', expl: 'Parfait ! LeNet-5 a atteint un taux d erreur record de ~0,8 % sur les 10 000 images de test MNIST.' },
-    9: { correct: 'A', expl: 'Exact ! La rétropropagation du gradient calcule les erreurs et ajuste chaque poids dans la bonne direction.' },
-    10: { correct: 'B', expl: 'Bravo ! Les CNN préservent la géométrie spatiale 2D et partagent les filtres sur toute l image.' }
+  function resetConv() {
+    stopConvAuto();
+    currentConvStep = 0;
+    renderConvStep();
+  }
+
+  function toggleConvAuto() {
+    if (convInterval) {
+      stopConvAuto();
+    } else {
+      const btn = document.getElementById('btn-conv-auto');
+      btn.innerText = "⏸ Pause";
+      btn.className = "interactive-btn";
+      convInterval = setInterval(() => {
+        if (currentConvStep < 15) {
+          currentConvStep++;
+          renderConvStep();
+        } else {
+          stopConvAuto();
+        }
+      }, 1200);
+    }
+  }
+
+  function stopConvAuto() {
+    if (convInterval) {
+      clearInterval(convInterval);
+      convInterval = null;
+    }
+    const btn = document.getElementById('btn-conv-auto');
+    if (btn) {
+      btn.innerText = "▶ Lecture lente";
+      btn.className = "interactive-btn secondary";
+    }
+  }
+
+  /* ==========================================================================
+     4. QUIZ D'AUTO-ÉVALUATION (10 QUESTIONS)
+     ========================================================================== */
+  const quizAnswers = {
+    1: { correct: 'B', expl: 'Une image numérique est perçue par l'ordinateur comme une matrice de pixels numérotés de 0 (blanc pur) à 255 (noir pur).' },
+    2: { correct: 'A', expl: 'Le neurone calcule la somme pondérée de ses entrées (Entrée × Poids) puis la compare à son seuil d'activation.' },
+    3: { correct: 'B', expl: 'Les poids agissent comme des curseurs de réglage pour pondérer l'importance relative de chaque connexion.' },
+    4: { correct: 'B', expl: 'La convolution fait glisser un filtre sur l'image pour détecter des motifs visuels locaux (barres, angles, boucles).' },
+    5: { correct: 'A', expl: 'Le Max-Pooling réduit la taille spatiale en ne conservant que la valeur maximale de chaque zone 2×2.' },
+    6: { correct: 'A', expl: 'LeNet-5 compte précisément environ 60 000 paramètres entraînables [LeCun et al., 1998, Table 1].' },
+    7: { correct: 'B', expl: 'La société NCR a intégré LeNet-5 dans ses trieuses automatiques de chèques bancaires aux États-Unis.' },
+    8: { correct: 'A', expl: 'LeNet-5 a atteint un taux d'erreur de 0,8 % à 0,95 % sur la base de référence standard MNIST (10 000 images de test).' },
+    9: { correct: 'A', expl: 'La rétropropagation du gradient mesure l'écart d'erreur en sortie et ajuste chaque poids dans la bonne direction.' },
+    10: { correct: 'B', expl: 'Les CNN préservent la structure spatiale 2D et partagent les mêmes filtres sur toute la surface de l'image.' }
   };
 
   function checkAnswer(qNum, selected) {
     const fb = document.getElementById('fb' + qNum);
-    const data = answers[qNum];
+    const data = quizAnswers[qNum];
     if (selected === data.correct) {
       fb.className = "quiz-feedback correct";
       fb.innerHTML = "<b>✅ Bonne réponse !</b> " + data.expl;
@@ -1694,6 +2144,12 @@
       fb.innerHTML = "<b>❌ Réponse inexacte.</b> La bonne réponse était la <b>" + data.correct + "</b>. " + data.expl;
     }
   }
+
+  // Initialisation au chargement de la page
+  window.addEventListener('DOMContentLoaded', () => {
+    updateNeuronInteractive();
+    initConvVisual();
+  });
 </script>
 
 </body>

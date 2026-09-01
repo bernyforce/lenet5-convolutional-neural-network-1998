@@ -1,54 +1,70 @@
 # 📖 Dossier Pédagogique « Réseaux de neurones & LeNet-5 » (Projet E26/A60)
 
-Bienvenue dans le dossier pédagogique interactif et vulgarisé sur les réseaux de neurones artificiels et l'architecture historique **LeNet-5**.
+Bienvenue dans le dossier pédagogique autonome et interactif consacré aux réseaux de neurones artificiels et à l'architecture historique **LeNet-5** (Yann LeCun et al., 1998).
 
 ---
 
 ## 🚀 Comment consulter le livrable ?
 
-Le dossier principal est contenu dans un **fichier HTML unique, autonome et sans aucune dépendance externe** :
+Le dossier principal est réuni dans un **fichier HTML unique, autonome et sans aucune dépendance externe** :
 👉 [`dossier_rxneurones_lenet5.html`](./dossier_rxneurones_lenet5.html)
 
-- **Double-cliquez sur le fichier HTML** pour l'ouvrir dans n'importe quel navigateur web (Chrome, Firefox, Safari, Edge).
-- **Consultable 100% hors ligne** : Tous les styles, scripts JavaScript, figures vectorielles et animations sont intégrés dans ce fichier unique.
+- **Ouverture directe** : Double-cliquez sur le fichier HTML pour l'ouvrir dans votre navigateur web habituel (Chrome, Firefox, Safari, Edge).
+- **Consultable 100 % hors ligne (`file://`)** : Zéro CDN, zéro police distante, zéro requête réseau. L'ensemble des styles CSS, scripts JavaScript vanilla et illustrations vectorielles SVG sont embarqués dans ce fichier unique.
 
 ---
 
-## 📂 Contenu du Répertoire
+## 📂 Organisation des Livrables
 
-- 📄 [`dossier_rxneurones_lenet5.html`](./dossier_rxneurones_lenet5.html) : Le dossier interactif complet (12 sections structurées, 3 animations pas à pas, quiz d'auto-évaluation).
-- 📁 [`figures/`](./figures/) : Les 8 figures vectorielles SVG réutilisables au format standard.
-  - `fig01_neurone.svg` : Le neurone artificiel (Entrées → Somme pondérée → Seuil → Sortie).
-  - `fig02_reseau.svg` : Organisation en couches du réseau.
-  - `fig03_image_pixels.svg` : Grille de pixels numériques (0 à 255).
-  - `fig04_convolution.svg` : Principe du filtre glissant de convolution.
-  - `fig05_pooling.svg` : Compression par Max-Pooling 2×2.
-  - `fig06_lenet5_pipeline.svg` : Architecture complète LeNet-5 légendée.
-  - `fig07_apprentissage.svg` : Jauge de réduction de l'erreur par rétropropagation.
-  - `fig08_cheque.svg` : Déploiement industriel historique sur les trieuses NCR.
-- 📁 [`ressources/`](./ressources/) : Les documents sources et articles de recherche (LeCun 1998, chapitres de référence).
-- 📄 [`rapport_execution.md`](./rapport_execution.md) : Rapport d'exécution formel (Fait, Preuve, Écart).
+Le projet se compose exactement des livrables requis :
+
+1. 📄 [`dossier_rxneurones_lenet5.html`](./dossier_rxneurones_lenet5.html) : Dossier pédagogique complet (12 sections structurées de 0 à 11, gabarit constant, 3 animations interactives pas à pas, quiz de 10 questions avec correction instantanée).
+2. 📁 [`figures/`](./figures/) : 8 schémas vectoriels SVG autonomes et réutilisables (palette sobre ≤ 5 couleurs) :
+   - [`fig01_neurone.svg`](./figures/fig01_neurone.svg) : Le neurone artificiel (Entrées → Somme pondérée → Seuil → Sortie).
+   - [`fig02_reseau.svg`](./figures/fig02_reseau.svg) : Le réseau en immeuble à étages (Entrée → Couche cachée → Sortie avec flèches montantes).
+   - [`fig03_image_pixels.svg`](./figures/fig03_image_pixels.svg) : L'image vue comme une grille de cases numérotées (0 à 255).
+   - [`fig04_convolution.svg`](./figures/fig04_convolution.svg) : La convolution avec fenêtre glissante locale.
+   - [`fig05_pooling.svg`](./figures/fig05_pooling.svg) : Le Max-Pooling 2×2 (compression de 4 cases vers 1 case maximale).
+   - [`fig06_lenet5_pipeline.svg`](./figures/fig06_lenet5_pipeline.svg) : Pipeline architectural complet de LeNet-5 légendé par rôle.
+   - [`fig07_apprentissage.svg`](./figures/fig07_apprentissage.svg) : Jauge de réduction de l'erreur au fil des tours d'entraînement.
+   - [`fig08_cheque.svg`](./figures/fig08_cheque.svg) : Déploiement industriel historique sur les trieuses de chèques NCR.
+3. 📄 [`LISEZ-MOI.md`](./LISEZ-MOI.md) : Présentation des livrables, guide de lecture et checklist de conformité TSA détaillée.
+4. 📄 [`rapport_execution.md`](./rapport_execution.md) : Rapport d'exécution formel (Fait / Preuve / Écart).
+5. 📁 [`ressources/`](./ressources/) : Documents de référence en lecture seule (articles fondateurs, chapitres théoriques).
 
 ---
 
-## ✅ Check-list de Conformité TSA-FRIENDLY
+## ✅ Check-list de Conformité TSA-FRIENDLY (Cahier des charges §4)
 
-| Critère TSA | Statut | Détail de l'implémentation |
+Chaque critère a été rigoureusement respecté dans la conception du dossier :
+
+| Exigence TSA | Statut | Modalité concrète d'implémentation |
 |---|:---:|---|
-| **Langage littéral et concret** | ✅ Conforme | Zéro ironie, zéro implicite. Chaque analogie est balisée (« Imaginons que... » puis refermée par « En réalité, la machine... »). |
-| **Phrases courtes et concises** | ✅ Conforme | Phrases courtes (≤ 20 mots en moyenne) avec vocabulaire technique rigoureusement défini dès le premier usage. |
-| **Prédictibilité & Gabarit constant** | ✅ Conforme | Chaque section suit le même gabarit : Titre numéroté → Objectif (1 ligne) → Paragraphes courts → Encadré « À retenir » → Pictogramme de fin. |
-| **Navigation fluide** | ✅ Conforme | Liens « Section précédente / Section suivante » constants en bas de chaque section et sommaire cliquable en tête. |
-| **Transitions explicites** | ✅ Conforme | Utilisation systématique de connecteurs logiques balisés (« D'abord... Ensuite... Enfin... »). |
-| **Code couleur constant** | ✅ Conforme | 1 couleur = 1 seul rôle dans tout le dossier (Bleu = Information/Entrée, Vert = Succès/Validation, Ambre = Attention/Résultat, Violet = Couches denses). |
-| **Confort sensoriel** | ✅ Conforme | Fond clair neutre (`#f8fafc`), police sans-serif lisible ≥ 17px, espaces généreux, **AUCUN autoplay, AUCUN clignotement, AUCUN son**. |
-| **Animations contrôlées** | ✅ Conforme | 3 animations lentes, déclenchées uniquement au clic de l'utilisateur avec équivalent statique toujours visible. |
-| **Charge cognitive réduite** | ✅ Conforme | Petits blocs digestes, résumés réguliers, glossaire de 15 termes et 10 points clés à retenir. |
-| **Quiz bienveillant** | ✅ Conforme | 10 questions d'auto-évaluation avec retours explicatifs immédiats et constructifs. |
+| **Langage littéral et concret** | ✅ Conforme | Zéro ironie, zéro implicite. Chaque analogie est explicitement ouverte par *« Imaginons que... »* et systématiquement refermée par *« En réalité, la machine... »*. |
+| **Phrases courtes & claires** | ✅ Conforme | Phrases concises (≤ 20 mots en moyenne générale) et 1 seule idée directrice par paragraphe. |
+| **Vocabulaire stable** | ✅ Conforme | Chaque terme technique est défini rigoureusement dès son premier usage et réutilisé à l'identique tout au long du texte. |
+| **Prédictibilité & Gabarit constant** | ✅ Conforme | Chaque section adopte le gabarit strict : Titre numéroté → Objectif (1 ligne) → Paragraphes courts → Encadré « À retenir » (2 puces max) → Pictogramme de fin (`✦ ✦ ✦`). |
+| **Navigation fluide et repérable** | ✅ Conforme | Sommaire complet cliquable en tête et boutons constants *« ⬅ Section précédente / Section suivante ➡ »* au bas de chaque section. |
+| **Transitions explicites** | ✅ Conforme | Utilisation systématique de connecteurs ordonnés (*« D'abord... Ensuite... Enfin... »*). |
+| **Code couleur constant** | ✅ Conforme | 1 couleur = 1 seul rôle dans tout le dossier (Bleu = Information/Convolution, Vert = Validation/Pooling, Ambre = Attention/Sortie/Fil rouge, Violet = Couches denses, Gris = Fond neutre). |
+| **Confort sensoriel absolu** | ✅ Conforme | Fond clair reposant (`#f8fafc`), police sans-serif lisible ≥ 17px, espaces généreux, **AUCUN autoplay, AUCUN clignotement, AUCUN son**. |
+| **Animations maîtrisées par l'utilisateur** | ✅ Conforme | 3 animations lentes (vitesse ≥ 1 s/étape), déclenchées uniquement au clic avec boutons de contrôle et équivalent statique (schéma SVG) toujours visible. |
+| **Charge cognitive réduite** | ✅ Conforme | Découpage en blocs digestes, résumés réguliers, glossaire de 15 termes et synthèse des 10 points clés. |
+| **Quiz bienveillant** | ✅ Conforme | 10 questions à choix unique avec retours explicatifs immédiats, constructifs et valorisants. |
 
 ---
 
-## 📚 Sources et Références Vérifiées
+## 📚 Chiffres Vérifiés & Sources Primaires
 
-1. **Y. LeCun, L. Bottou, Y. Bengio, P. Haffner (1998)** : *« Gradient-Based Learning Applied to Document Recognition »*, Proceedings of the IEEE, 86(11):2278-2324.
-2. **Neila Mezghani (2024)** : *« Apprentissage profond — Théorie et applications »*, 1re édition, Chapitres 1 à 6.
+Toutes les données quantitatives figurant dans le dossier proviennent des sources documentaires authentifiées :
+
+1. **Paramètres entraînables de LeNet-5** : **60 000 paramètres**  
+   *Source primaire :* `[LeCun et al., 1998, p. 6 « only 60 000 trainable free parameters »]`.
+2. **Taux d'erreur de test sur MNIST** : **0,95 % sans distorsions** et **0,8 % avec distorsions**  
+   *Source primaire :* `[LeCun et al., 1998, Section III, p. 9 « stabilizes … at 0.95% » et « dropped to 0.8% »]`.
+3. **Volume de tri industriel NCR** : **Millions de chèques par mois (source primaire)**  
+   *Source primaire :* `[LeCun et al., 1998, Section I, p. 1 « reading millions of checks per month »]`.
+4. **Part du volume des chèques américains** : **~10 % du volume US**  
+   *Source secondaire :* `[Wikipédia, LeNet]` (signalé comme À RECOUPER).
+5. **Ouvrage pédagogique de référence** :  
+   *Neila Mezghani (2024)*, *« Apprentissage profond — Théorie et applications »*, 1re édition, Chapitres 1 à 6.
