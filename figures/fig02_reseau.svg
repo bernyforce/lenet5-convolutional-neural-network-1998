@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="100%" height="100%">
+  <rect width="600" height="320" fill="#f8fafc" rx="12"/>
+  
+  <!-- Couche Entrée -->
+  <g id="layer-in">
+    <rect x="50" y="50" width="110" height="220" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="105" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#334155">1. Entrée</text>
+    <circle cx="105" cy="115" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="105" cy="155" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="105" cy="195" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="105" cy="235" r="14" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+  </g>
+
+  <!-- Liens 1 -> 2 -->
+  <path d="M 120 115 L 235 100 M 120 115 L 235 150 M 120 115 L 235 200 M 120 155 L 235 100 M 120 155 L 235 150 M 120 155 L 235 200 M 120 195 L 235 100 M 120 195 L 235 150 M 120 195 L 235 200 M 120 235 L 235 100 M 120 235 L 235 150 M 120 235 L 235 200" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Couche Cachée 1 -->
+  <g id="layer-h1">
+    <rect x="235" y="50" width="110" height="220" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="290" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">2. Couche Cachée</text>
+    <text x="290" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#3b82f6">(Détecte traits)</text>
+    <circle cx="290" cy="125" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <circle cx="290" cy="170" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <circle cx="290" cy="215" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  </g>
+
+  <!-- Liens 2 -> 3 -->
+  <path d="M 305 125 L 425 130 M 305 125 L 425 190 M 305 170 L 425 130 M 305 170 L 425 190 M 305 215 L 425 130 M 305 215 L 425 190" stroke="#bfdbfe" stroke-width="1.5"/>
+
+  <!-- Couche Sortie -->
+  <g id="layer-out">
+    <rect x="425" y="50" width="120" height="220" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="485" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#166534">3. Décision Finale</text>
+    <text x="485" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">(Classe 0 à 9)</text>
+    <circle cx="485" cy="135" r="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="485" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">« 7 »</text>
+    <circle cx="485" cy="190" r="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+    <text x="485" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Autre</text>
+  </g>
+
+  <text x="300" y="295" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Propagation de gauche à droite : des données brutes vers la décision finale</text>
+</svg>
