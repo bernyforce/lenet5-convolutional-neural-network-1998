@@ -13,6 +13,7 @@ const MIME_TYPES = {
   '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
+  '.webp': 'image/webp',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.gif': 'image/gif',
@@ -109,27 +110,35 @@ const server = http.createServer((req, res) => {
         });
         return fileStream.pipe(res);
       } else {
-        res.writeHead(200, {
+        const headers = {
           ...SECURITY_HEADERS,
           'Content-Length': fileSize,
           'Content-Type': contentType,
           'Accept-Ranges': 'bytes',
           'Access-Control-Allow-Origin': '*'
-        });
+        };
+        if (['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.mp4'].includes(ext)) {
+          headers['Cache-Control'] = 'public, max-age=31536000, immutable';
+        }
+        res.writeHead(200, headers);
         const fileStream = fs.createReadStream(safePath);
         fileStream.on('error', () => res.end());
         return fileStream.pipe(res);
       }
     }
 
-    // Default static file serving
     const headers = {
       ...SECURITY_HEADERS,
       'Content-Type': contentType,
       'Content-Length': stats.size,
-      'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'no-cache'
+      'Access-Control-Allow-Origin': '*'
     };
+
+    if (['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg'].includes(ext)) {
+      headers['Cache-Control'] = 'public, max-age=31536000, immutable';
+    } else {
+      headers['Cache-Control'] = 'no-cache';
+    }
 
     // Force download for PPTX if needed
     if (ext === '.pptx') {

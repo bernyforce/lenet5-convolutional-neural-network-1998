@@ -7,8 +7,11 @@
     "seconds": 0.0,
     "notes": "Bienvenue dans cette exploration. Aujourd'hui, on plonge directement dans les fondations mêmes de la vision par ordinateur moderne. On va décortiquer comment concrètement les machines ont appris à voir et à lire l'écriture humaine. Et tout ça grâce à un véritable chef-d'œuvre technologique qui date de 1998. C'est une histoire d'ingéniosité mathématique pure qui a littéralement changé le monde.\n\nPour faire simple, si on devait résumer tout ce projet en une seule phrase magique, la voici : LeNet-5 est le premier réseau de neurones convolutifs industriel, créé en 1998. Au lieu d'écraser l'image en 1D, il fait glisser de petits filtres pour repérer les traits du chiffre morceau par morceau avec seulement 60 000 paramètres, ce qui a permis de trier automatiquement 20 millions de chèques par jour aux États-Unis avec moins de 1 % d'erreurs. Voilà, c'est le fil rouge de tout ce dont on va parler.",
     "number": "01",
-    "file": "slides_exported/slide_01.png",
-    "timestamp": "00:00.000"
+    "file": "slides_exported/slide_01.webp",
+    "timestamp": "00:00.000",
+    "webp": "slides_exported/slide_01.webp",
+    "thumb": "slides_exported/thumb_01.webp",
+    "png": "slides_exported/slide_01.png"
   },
   {
     "id": 2,
@@ -18,8 +21,11 @@
     "seconds": 23.875,
     "notes": "Au programme, aujourd'hui : on commence par le défi du chiffre manuscrit. Ensuite, on verra les outils révolutionnaires de LeNet-5, à savoir, la lectrue, la mini-décision, le filtrage et le pooling,  puis son architecture en sept couches. On parlera de l'apprentissage par les données et on terminera sur son impact industriel moderne et quel héritage pour l’avenir de l’ia. Allez, c'est parti !",
     "number": "02",
-    "file": "slides_exported/slide_02.png",
-    "timestamp": "00:23.875"
+    "file": "slides_exported/slide_02.webp",
+    "timestamp": "00:23.875",
+    "webp": "slides_exported/slide_02.webp",
+    "thumb": "slides_exported/thumb_02.webp",
+    "png": "slides_exported/slide_02.png"
   },
   {
     "id": 3,
@@ -29,8 +35,11 @@
     "seconds": 41.333,
     "notes": "Première étape : le défi du chiffre manuscrit.",
     "number": "03",
-    "file": "slides_exported/slide_03.png",
-    "timestamp": "00:41.333"
+    "file": "slides_exported/slide_03.webp",
+    "timestamp": "00:41.333",
+    "webp": "slides_exported/slide_03.webp",
+    "thumb": "slides_exported/thumb_03.webp",
+    "png": "slides_exported/slide_03.png"
   },
   {
     "id": 4,
@@ -40,8 +49,11 @@
     "seconds": 45.791,
     "notes": "Quand on regarde un chiffre 7 gribouillé sur un bout de papier, notre cerveau le reconnaît instantanément, même s'il est raturé, penché ou au trait très épais. Mais pour une machine, c'est une toute autre histoire : elle ne perçoit aucune forme globale. Tout ce qu'elle voit, c'est une grille de 32 par 32 pixels, juste des nombres entre 0 pour le blanc et 255 pour l'encre noire. Face à ce nuage de données froides, impossible de coder des règles manuelles rigides du genre « si ce pixel est noir, alors c'est un 7 ». L'écriture humaine est beaucoup trop imprévisible et variée pour ça.",
     "number": "04",
-    "file": "slides_exported/slide_04.png",
-    "timestamp": "00:45.791"
+    "file": "slides_exported/slide_04.webp",
+    "timestamp": "00:45.791",
+    "webp": "slides_exported/slide_04.webp",
+    "thumb": "slides_exported/thumb_04.webp",
+    "png": "slides_exported/slide_04.png"
   },
   {
     "id": 5,
@@ -51,8 +63,11 @@
     "seconds": 68.791,
     "notes": "Alors, comment est-ce qu'on tentait de résoudre ça avant ? Et bien, les anciens modèles comme les Perceptrons multicouches prenaient cette image en 2D et l'aplatissaient brutalement en une seule ligne de plus de 1000 nombres. Le gros problème, c'est que ça détruisait complètement la géométrie spatiale : des pixels qui étaient voisins sur le papier se retrouvaient totalement séparés. Du coup, si le chiffre était décalé d'un minuscule millimètre sur le chèque, le système entier plantait. LeNet-5 a introduit un concept fondamental : il fallait absolument maintenir cette structure en 2D pour conserver ce qu'on appelle l'invariance.",
     "number": "05",
-    "file": "slides_exported/slide_05.png",
-    "timestamp": "01:08.791"
+    "file": "slides_exported/slide_05.webp",
+    "timestamp": "01:08.791",
+    "webp": "slides_exported/slide_05.webp",
+    "thumb": "slides_exported/thumb_05.webp",
+    "png": "slides_exported/slide_05.png"
   },
   {
     "id": 6,
@@ -62,8 +77,11 @@
     "seconds": 99.333,
     "notes": "Ce qui nous amène directement aux outils révolutionnaires de LeNet-5.",
     "number": "06",
-    "file": "slides_exported/slide_06.png",
-    "timestamp": "01:39.333"
+    "file": "slides_exported/slide_06.webp",
+    "timestamp": "01:39.333",
+    "webp": "slides_exported/slide_06.webp",
+    "thumb": "slides_exported/thumb_06.webp",
+    "png": "slides_exported/slide_06.png"
   },
   {
     "id": 7,
@@ -73,8 +91,11 @@
     "seconds": 104.417,
     "notes": "La base absolue du système, c'est le neurone artificiel. Concrètement, c'est comme une petite calculatrice ultra rapide : ce neurone prend plusieurs informations, les multiplie par des coefficients d'importance — ce qu'on appelle les poids et le biais — et il additionne le tout. Si le résultat dépasse un certain seuil d'activation, boum, le neurone s'allume et transmet un signal, sinon il reste éteint. C'est cette mini-décision répétée des milliers de fois qui va créer l'intelligence du système.",
     "number": "07",
-    "file": "slides_exported/slide_07.png",
-    "timestamp": "01:44.417"
+    "file": "slides_exported/slide_07.webp",
+    "timestamp": "01:44.417",
+    "webp": "slides_exported/slide_07.webp",
+    "thumb": "slides_exported/thumb_07.webp",
+    "png": "slides_exported/slide_07.png"
   },
   {
     "id": 8,
@@ -84,8 +105,11 @@
     "seconds": 134.292,
     "notes": "Sur cet exemple concret : avec des entrées x1=1 (poids 0.5), x2=2 (poids 0.8) et x3=1 (poids 0.4), le neurone calcule une somme cumulée de 1,50. Comme le seuil requis est de 2,00, la condition n'est pas atteinte : la sortie reste à 0 (neurone éteint).\n\nLe neurone calcule ainsi une somme pondérée et teste le seuil. C'est cette règle binaire et mathématiquement déterministe qui permet au réseau d'éliminer le bruit et de ne transmettre que les signaux pertinents.",
     "number": "08",
-    "file": "slides_exported/slide_08.png",
-    "timestamp": "02:14.292"
+    "file": "slides_exported/slide_08.webp",
+    "timestamp": "02:14.292",
+    "webp": "slides_exported/slide_08.webp",
+    "thumb": "slides_exported/thumb_08.webp",
+    "png": "slides_exported/slide_08.png"
   },
   {
     "id": 9,
@@ -101,8 +125,11 @@
     "seconds": 140.0,
     "notes": "Sur cet exemple concret : avec des entrées x1=1 (poids 0.5), x2=2 (poids 0.8) et x3=1 (poids 0.4), le neurone calcule une somme cumulée de 1,50. Il compare ce résultat au seuil d'activation fixé à 1,0. La condition étant validée (1,50 >= 1,0), le signal électrique se déclenche. Le neurone s'illumine et transmet la valeur 1 à la couche suivante. C'est le principe élémentaire de la décision binaire artificielle.",
     "number": "09",
-    "file": "slides_exported/slide_09.png",
-    "timestamp": "02:20.000"
+    "file": "slides_exported/slide_09.webp",
+    "timestamp": "02:20.000",
+    "webp": "slides_exported/slide_09.webp",
+    "thumb": "slides_exported/thumb_09.webp",
+    "png": "slides_exported/slide_09.png"
   },
   {
     "id": 10,
@@ -112,8 +139,11 @@
     "seconds": 155.083,
     "notes": "Troisième étape : le filtrage et le pooling, c'est-à-dire l'extraction et la compression des caractéristiques visuelles.",
     "number": "10",
-    "file": "slides_exported/slide_10.png",
-    "timestamp": "02:35.083"
+    "file": "slides_exported/slide_10.webp",
+    "timestamp": "02:35.083",
+    "webp": "slides_exported/slide_10.webp",
+    "thumb": "slides_exported/thumb_10.webp",
+    "png": "slides_exported/slide_10.png"
   },
   {
     "id": 11,
@@ -123,8 +153,11 @@
     "seconds": 158.417,
     "notes": "Mais l'outil visuel le plus puissant ici, c'est la convolution. Imaginons une petite loupe glissante, disons une grille de 5 pixels par 5 (ou 3x3). Au lieu de regarder toute l'image d'un seul coup, cette loupe va balayer la grille de gauche à droite et de haut en bas pour repérer des motifs locaux, par exemple une barre horizontale ou un angle.\n\nEt le vrai coup de génie, c'est le partage des poids : la loupe utilise exactement les mêmes réglages pour chercher la barre du 7 partout sur l'image. Ça permet de créer une nouvelle carte de caractéristiques tout en économisant une puissance de calcul gigantesque.",
     "number": "11",
-    "file": "slides_exported/slide_11.png",
-    "timestamp": "02:38.417"
+    "file": "slides_exported/slide_11.webp",
+    "timestamp": "02:38.417",
+    "webp": "slides_exported/slide_11.webp",
+    "thumb": "slides_exported/thumb_11.webp",
+    "png": "slides_exported/slide_11.png"
   },
   {
     "id": 12,
@@ -140,8 +173,11 @@
     "seconds": 175.0,
     "notes": "Visualisation du balayage 2D par filtre glissant 5×5 sur l'image source, réalisant l'extraction des motifs élémentaires (bords, coins, textures) avec partage universel des poids synaptiques.",
     "number": "12",
-    "file": "slides_exported/slide_12.png",
-    "timestamp": "02:55.000"
+    "file": "slides_exported/slide_12.webp",
+    "timestamp": "02:55.000",
+    "webp": "slides_exported/slide_12.webp",
+    "thumb": "slides_exported/thumb_12.webp",
+    "png": "slides_exported/slide_12.png"
   },
   {
     "id": 13,
@@ -151,8 +187,11 @@
     "seconds": 192.417,
     "notes": "Juste après le passage de cette fameuse loupe, le réseau applique le pooling, ou sous-échantillonnage. Le principe est redoutable : on prend un petit carré de 4 pixels et on ne garde que le signal dominant, le plus fort. Le reste est ignoré.\n\nÇa permet de compresser la taille de l'image de moitié tout en gardant l'essence visuelle. L'avantage énorme du pooling, c'est que si l'écriture tremble un peu ou est légèrement décalée, le réseau s'en fiche complètement car le signal fort est toujours là dans la zone condensée.",
     "number": "13",
-    "file": "slides_exported/slide_13.png",
-    "timestamp": "03:12.417"
+    "file": "slides_exported/slide_13.webp",
+    "timestamp": "03:12.417",
+    "webp": "slides_exported/slide_13.webp",
+    "thumb": "slides_exported/thumb_13.webp",
+    "png": "slides_exported/slide_13.png"
   },
   {
     "id": 14,
@@ -168,8 +207,11 @@
     "seconds": 205.0,
     "notes": "Visualisation de la compression spatiale 2×2 par sous-échantillonnage : réduction de résolution d'un facteur 2 et acquisition d'invariance aux translations et distorsions d'écriture.",
     "number": "14",
-    "file": "slides_exported/slide_14.png",
-    "timestamp": "03:25.000"
+    "file": "slides_exported/slide_14.webp",
+    "timestamp": "03:25.000",
+    "webp": "slides_exported/slide_14.webp",
+    "thumb": "slides_exported/thumb_14.webp",
+    "png": "slides_exported/slide_14.png"
   },
   {
     "id": 15,
@@ -179,8 +221,11 @@
     "seconds": 219.458,
     "notes": "Maintenant qu'on a les outils, voyons comment tout ça s'assemble avec l'architecture complète en sept couches.",
     "number": "15",
-    "file": "slides_exported/slide_15.png",
-    "timestamp": "03:39.458"
+    "file": "slides_exported/slide_15.webp",
+    "timestamp": "03:39.458",
+    "webp": "slides_exported/slide_15.webp",
+    "thumb": "slides_exported/thumb_15.webp",
+    "png": "slides_exported/slide_15.png"
   },
   {
     "id": 16,
@@ -196,8 +241,11 @@
     "seconds": 225.225,
     "notes": "Voici le légendaire pipeline visuel de LeNet-5. C'est le trajet exact que suit l'image de notre chèque bancaire. Tout à gauche, on entre la grille brute de 32 par 32 pixels. Ensuite, le signal va rebondir de couche en couche à travers différents blocs imbriqués pour finalement arriver tout à droite. Et là, on trouve les 10 neurones de sortie qui correspondent aux chiffres de 0 à 9. Le neurone qui crie le plus fort donne la décision finale de la machine.\n\nCe qui est brillant, c'est la logique d'alternance de ces couches : on commence par extraire des traits de base avec six filtres dans la couche C1. Bam ! On compresse immédiatement avec la couche S2 pour stabiliser l'image. Ensuite, on relance l'extraction dans la couche C3 avec 16 filtres cette fois pour repérer des formes plus complexes comme le croisement de deux lignes. Nouvelle compression avec S4. Et pour finir, les couches denses C5 avec ses 120 unités et F6 avec ses 84 unités jouent le rôle du cerveau final : elles rassemblent toutes les pièces du puzzle pour prendre la décision. C'est un entonnoir absolument parfait.",
     "number": "16",
-    "file": "slides_exported/slide_16.png",
-    "timestamp": "03:45.225"
+    "file": "slides_exported/slide_16.webp",
+    "timestamp": "03:45.225",
+    "webp": "slides_exported/slide_16.webp",
+    "thumb": "slides_exported/thumb_16.webp",
+    "png": "slides_exported/slide_16.png"
   },
   {
     "id": 17,
@@ -207,8 +255,11 @@
     "seconds": 260.25,
     "notes": "4e étape : l'apprentissage et les données chiffrées. Car oui, sans entraînement, tout ça ne sert à rien. Mais alors, comment ce réseau devient-il intelligent ? Et bien, par l'erreur, c'est le mécanisme de la rétropropagation du gradient.\n\nImaginons un archer débutant : son tout premier tir atterrit loin de la cible. C'est la prédiction initiale de la machine. On calcule l'écart avec le centre, donc l'erreur, et l'archer ajuste très légèrement son arc pour le prochain tir. Le réseau fait exactement la même chose : l'erreur mathématique remonte à l'envers à travers les couches pour corriger infimement chaque petit poids interne. On répète ce cycle des dizaines de milliers de fois et le modèle finit par viser juste.",
     "number": "17",
-    "file": "slides_exported/slide_17.png",
-    "timestamp": "04:20.250"
+    "file": "slides_exported/slide_17.webp",
+    "timestamp": "04:20.250",
+    "webp": "slides_exported/slide_17.webp",
+    "thumb": "slides_exported/thumb_17.webp",
+    "png": "slides_exported/slide_17.png"
   },
   {
     "id": 18,
@@ -218,8 +269,11 @@
     "seconds": 284.708,
     "notes": "Et le chiffre qu'il faut absolument garder en tête ici, c'est 60 000. LeNet-5 parvient à analyser l'image de façon ultra fiable en utilisant seulement 60 000 paramètres ajustables. À notre époque où les IA tournent avec des centaines de milliards de paramètres, c'est microscopique mais c'est d'une élégance absolue.\n\nEn 1998, cette compacité mathématique de 60 000 poids, c'était le secret pour que le système puisse fonctionner en temps réel sur les processeurs de l'époque. Les résultats de cette optimisation ont brisé tous les standards : LeNet-5 a été entraîné sur la fameuse base de données MNIST qui contient 70 000 chiffres manuscrits et a atteint un taux d'erreurs record de seulement 0,8 % sur des données de test qu'il n'avait jamais vues, même avec des ratures et des distorsions. Ce niveau de précision prouvait enfin qu'un algorithme pouvait vraiment rivaliser avec l'œil humain sur ce type de tâche.",
     "number": "18",
-    "file": "slides_exported/slide_18.png",
-    "timestamp": "04:44.708"
+    "file": "slides_exported/slide_18.webp",
+    "timestamp": "04:44.708",
+    "webp": "slides_exported/slide_18.webp",
+    "thumb": "slides_exported/thumb_18.webp",
+    "png": "slides_exported/slide_18.png"
   },
   {
     "id": 19,
@@ -233,8 +287,11 @@
     "seconds": 311.542,
     "notes": "Ce qui nous mène logiquement à notre dernier acte, l'impact industriel et l'IA moderne. Ce qui mène à la cinquième étape : le déploiement industriel chez NCR.",
     "number": "19",
-    "file": "slides_exported/slide_19.png",
-    "timestamp": "05:11.542"
+    "file": "slides_exported/slide_19.webp",
+    "timestamp": "05:11.542",
+    "webp": "slides_exported/slide_19.webp",
+    "thumb": "slides_exported/thumb_19.webp",
+    "png": "slides_exported/slide_19.png"
   },
   {
     "id": 20,
@@ -244,8 +301,11 @@
     "seconds": 316.292,
     "notes": "Parce que LeNet-5, ce n'est pas juste resté un projet dans un laboratoire. Dès l'été 1996, l'entreprise NCR l'a intégré directement dans ses trieuses bancaires aux États-Unis.\n\nCes machines tournaient à plein régime, déchiffrant de manière totalement autonome des millions de chèques par jour grâce à une puce DSP dédiée. C'était une application commerciale réelle dès 1998, assurant la reconnaissance automatique de près de 10 % des chèques circulant sur le territoire américain.",
     "number": "20",
-    "file": "slides_exported/slide_20.png",
-    "timestamp": "05:16.292"
+    "file": "slides_exported/slide_20.webp",
+    "timestamp": "05:16.292",
+    "webp": "slides_exported/slide_20.webp",
+    "thumb": "slides_exported/thumb_20.webp",
+    "png": "slides_exported/slide_20.png"
   },
   {
     "id": 21,
@@ -255,8 +315,11 @@
     "seconds": 340.208,
     "notes": "Ces machines tournaient à plein régime, déchiffrant de manière totalement autonome environ 20 millions de chèques par jour. Ça représentait à peu près 10 % de tout le volume bancaire américain. C'était littéralement de l'intelligence artificielle de pointe utilisée tous les jours au cœur de l'économie réelle.\n\nD'ailleurs, petit détail technique en passant, certains se demandent peut-être pourquoi LeNet-5 utilisait la fonction d'activation tanh ou la sigmoïde au lieu de la fonction ReLU qu'on voit absolument partout dans l'IA moderne. La réponse est simple, c'est une question d'époque : en 98, ces fonctions étaient la norme théorique héritée directement des recherches en neurosciences sur le cerveau. La fonction ReLU n'a vraiment été popularisée qu'en 2012 avec l'arrivée d'AlexNet pour contourner certains blocages sur des réseaux beaucoup plus gros.",
     "number": "21",
-    "file": "slides_exported/slide_21.png",
-    "timestamp": "05:40.208"
+    "file": "slides_exported/slide_21.webp",
+    "timestamp": "05:40.208",
+    "webp": "slides_exported/slide_21.webp",
+    "thumb": "slides_exported/thumb_21.webp",
+    "png": "slides_exported/slide_21.png"
   },
   {
     "id": 22,
@@ -266,8 +329,11 @@
     "seconds": 356.917,
     "notes": "L'héritage technologique de LeNet-5 donne vraiment le vertige. Il a posé le standard incontournable : la convolution suivie du pooling. C'est ce modèle qui a directement inspiré AlexNet en 2012, déclenchant la révolution du deep learning qu'on connaît.",
     "number": "22",
-    "file": "slides_exported/slide_22.png",
-    "timestamp": "05:56.917"
+    "file": "slides_exported/slide_22.webp",
+    "timestamp": "05:56.917",
+    "webp": "slides_exported/slide_22.webp",
+    "thumb": "slides_exported/thumb_22.webp",
+    "png": "slides_exported/slide_22.png"
   },
   {
     "id": 23,
@@ -277,8 +343,11 @@
     "seconds": 361.625,
     "notes": "Aujourd'hui, les principes exacts inventés pour lire des chèques en 1998 sont utilisés quand un téléphone se déverrouille avec Face ID, quand une IA analyse une radiographie ou quand une voiture autonome détecte un piéton. Tout cet arbre technologique puise ses racines ici.",
     "number": "23",
-    "file": "slides_exported/slide_23.png",
-    "timestamp": "06:01.625"
+    "file": "slides_exported/slide_23.webp",
+    "timestamp": "06:01.625",
+    "webp": "slides_exported/slide_23.webp",
+    "thumb": "slides_exported/thumb_23.webp",
+    "png": "slides_exported/slide_23.png"
   },
   {
     "id": 24,
@@ -292,8 +361,11 @@
     "seconds": 380.0,
     "notes": "Recapitulons et démonstration dans le google colab. Synthèse animée du pipeline complet et ouverture vers l'expérimentation interactive du modèle sous Google Colab.",
     "number": "24",
-    "file": "slides_exported/slide_24.png",
-    "timestamp": "06:20.000"
+    "file": "slides_exported/slide_24.webp",
+    "timestamp": "06:20.000",
+    "webp": "slides_exported/slide_24.webp",
+    "thumb": "slides_exported/thumb_24.webp",
+    "png": "slides_exported/slide_24.png"
   },
   {
     "id": 25,
@@ -303,8 +375,11 @@
     "seconds": 400.0,
     "notes": "⭐ Les 10 points clés à retenir absolument :\n1. Une image est une grille de pixels contenant des valeurs de luminosité de 0 à 255.\n2. Un neurone effectue une somme pondérée de ses entrées et la compare à un seuil d'activation.\n3. Un réseau empile des couches successives pour construire des représentations hiérarchisées.\n4. L'entraînement ajuste automatiquement les poids pour réduire l'erreur par rétropropagation.\n5. La convolution utilise une fenêtre glissante pour repérer les contours et les formes locales.\n6. Le pooling compresse les dimensions et tolère les légères déformations de l'écriture.\n7. LeNet-5 alterne deux blocs Convolution-Pooling avant ses couches denses de décision.\n8. LeNet-5 compte environ 60 000 paramètres entraînables pour classer les chiffres 0 à 9.\n9. LeNet-5 a été validé sur le terrain en traitant des millions de chèques bancaires par mois chez NCR.\n10. Ces principes historiques constituent le socle de toute la vision par ordinateur contemporaine.",
     "number": "25",
-    "file": "slides_exported/slide_25.png",
-    "timestamp": "06:40.000"
+    "file": "slides_exported/slide_25.webp",
+    "timestamp": "06:40.000",
+    "webp": "slides_exported/slide_25.webp",
+    "thumb": "slides_exported/thumb_25.webp",
+    "png": "slides_exported/slide_25.png"
   },
   {
     "id": 26,
@@ -314,8 +389,11 @@
     "seconds": 420.0,
     "notes": "Session interactive de questions/réponses et quiz d'auto-évaluation pour consolider la compréhension de l'architecture LeNet-5, de ses hyperparamètres et de son impact industriel.",
     "number": "26",
-    "file": "slides_exported/slide_26.png",
-    "timestamp": "07:00.000"
+    "file": "slides_exported/slide_26.webp",
+    "timestamp": "07:00.000",
+    "webp": "slides_exported/slide_26.webp",
+    "thumb": "slides_exported/thumb_26.webp",
+    "png": "slides_exported/slide_26.png"
   },
   {
     "id": 27,
@@ -325,8 +403,11 @@
     "seconds": 435.0,
     "notes": "Démonstration pratique en direct : exécution du code PyTorch/TensorFlow de LeNet-5 sur le jeu de données MNIST dans Google Colab.",
     "number": "27",
-    "file": "slides_exported/slide_27.png",
-    "timestamp": "07:15.000"
+    "file": "slides_exported/slide_27.webp",
+    "timestamp": "07:15.000",
+    "webp": "slides_exported/slide_27.webp",
+    "thumb": "slides_exported/thumb_27.webp",
+    "png": "slides_exported/slide_27.png"
   },
   {
     "id": 28,
@@ -336,7 +417,10 @@
     "seconds": 450.0,
     "notes": "Ce qui amène une réflexion plutôt provocatrice pour terminer : aujourd'hui, on s'extasie tous devant des modèles d'IA titanesques qui engloutissent des milliards de paramètres et une énergie colossale. Mais dans un quart de siècle, comment est-ce qu'on regardera ces géants ? Face à la pureté, l'élégance et l'incroyable efficacité des 60 000 paramètres de LeNet, la course au gigantisme est-elle vraiment le seul avenir de l'intelligence artificielle, ou l'industrie finira-t-elle par revenir à cette ingéniosité minimaliste ? C'est une excellente question qui mérite qu'on s'y attarde.",
     "number": "28",
-    "file": "slides_exported/slide_28.png",
-    "timestamp": "07:30.000"
+    "file": "slides_exported/slide_28.webp",
+    "timestamp": "07:30.000",
+    "webp": "slides_exported/slide_28.webp",
+    "thumb": "slides_exported/thumb_28.webp",
+    "png": "slides_exported/slide_28.png"
   }
 ]

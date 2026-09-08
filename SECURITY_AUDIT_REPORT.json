@@ -1,0 +1,66 @@
+{
+  "passed": [
+    {
+      "id": "SEC-01",
+      "title": "Aucun secret, token ou fuite de topologie interne détecté dans les fichiers suivis.",
+      "detail": ""
+    },
+    {
+      "id": "HDR-01-Serveur Local Node.js",
+      "title": "X-Content-Type-Options présent ('nosniff') sur Serveur Local Node.js",
+      "detail": ""
+    },
+    {
+      "id": "HDR-02-Serveur Local Node.js",
+      "title": "X-Frame-Options présent sur Serveur Local Node.js (SAMEORIGIN)",
+      "detail": ""
+    },
+    {
+      "id": "HDR-03-Serveur Local Node.js",
+      "title": "Bannière serveur masquée ou proxifiée par Cloudflare sur Serveur Local Node.js",
+      "detail": ""
+    },
+    {
+      "id": "HDR-01-Exposition Publique Cloudflare",
+      "title": "X-Content-Type-Options présent ('nosniff') sur Exposition Publique Cloudflare",
+      "detail": ""
+    },
+    {
+      "id": "HDR-02-Exposition Publique Cloudflare",
+      "title": "X-Frame-Options présent sur Exposition Publique Cloudflare (SAMEORIGIN)",
+      "detail": ""
+    },
+    {
+      "id": "HDR-03-Exposition Publique Cloudflare",
+      "title": "Bannière serveur masquée ou proxifiée par Cloudflare sur Exposition Publique Cloudflare",
+      "detail": ""
+    },
+    {
+      "id": "TRAV-01",
+      "title": "Résistance au Path Traversal validée (Le confinement ROOT_DIR et path.normalize bloquent les évasions).",
+      "detail": ""
+    },
+    {
+      "id": "XSS-01",
+      "title": "Aucun sink DOM dangereux (eval, document.write, injection directe de location.hash) détecté.",
+      "detail": ""
+    },
+    {
+      "id": "RANGE-Plage st",
+      "title": "Test 'Plage standard (bytes=0-511)' géré avec succès (HTTP 206).",
+      "detail": ""
+    },
+    {
+      "id": "RANGE-Plage in",
+      "title": "Test 'Plage invalide hors limites (bytes=999999999-)' rejeté proprement (HTTP 416).",
+      "detail": ""
+    },
+    {
+      "id": "RANGE-Plage in",
+      "title": "Test 'Plage inversée (bytes=500-100)' rejeté proprement (HTTP 416).",
+      "detail": ""
+    }
+  ],
+  "findings": [],
+  "score": "12/12"
+}
