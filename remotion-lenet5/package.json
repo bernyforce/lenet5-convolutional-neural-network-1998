@@ -1,0 +1,23 @@
+{
+  "name": "remotion-lenet5",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "build": "remotion render src/index.ts MainPresentation out/lenet5_pedagogique.mp4",
+    "render-conv": "remotion render src/index.ts ConvolutionComp out/01_convolution.mp4",
+    "render-neuron": "remotion render src/index.ts NeuronComp out/02_neurone.mp4",
+    "render-pooling": "remotion render src/index.ts PoolingComp out/03_pooling.mp4",
+    "render-pipeline": "remotion render src/index.ts PipelineComp out/04_lenet5_pipeline.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

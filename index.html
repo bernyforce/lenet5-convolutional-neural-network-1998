@@ -1,0 +1,3207 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="origine">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeNet-5 (1998) — Visionneuse &amp; Démonstration CNN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       BASE RESETS & VARIABLES SYSTÈME (Conforme checklist-20260904-002237)
+       ========================================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      
+      --bg-void: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent-cyan: #00f0ff;
+      --accent-blue: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-gray: #64748b;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background-color: var(--bg-void);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       SHOWCASE TOP BAR / SÉLECTEUR DE THÈME INTÉGRÉ (RÉFÉRENCE EXACTE)
+       ========================================================================== */
+    .showcase-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 10, 18, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 1rem;
+    }
+    @media (max-width: 860px) {
+      .showcase-bar {
+        flex-wrap: wrap;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    /* ==========================================================================
+       SÉLECTEUR DE THÈME DÉROULANT ET DISCRET (CSS DE BASE INDISPENSABLE)
+       ========================================================================== */
+    .theme-dropdown {
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .theme-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .theme-dropdown-trigger:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .theme-dropdown.open .theme-chevron {
+      transform: rotate(180deg);
+    }
+
+    .theme-dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      padding: 6px;
+      min-width: 250px;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .theme-dropdown.open .theme-dropdown-menu {
+      display: flex;
+    }
+
+    .theme-menu-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      padding: 6px 10px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 3px;
+      font-family: var(--font-mono);
+    }
+
+    .theme-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+      font-family: inherit;
+    }
+
+    .theme-menu-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-menu-item.active {
+      background: rgba(9, 105, 218, 0.18);
+      border-color: rgba(9, 105, 218, 0.4);
+    }
+
+    .theme-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dot-origine { background: #0969da; border-color: #0969da; }
+    .dot-theme1 { background: linear-gradient(135deg, #10b981, #00f0ff); }
+    .dot-theme2 { background: #00ffaa; box-shadow: 0 0 6px #00ffaa; }
+    .dot-theme3 { background: linear-gradient(135deg, #fb7185, #c084fc); }
+
+    .theme-menu-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .theme-menu-text b {
+      font-size: 0.82rem;
+      color: #f8fafc;
+    }
+
+    .theme-menu-text small {
+      font-size: 0.70rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+
+    .showcase-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .pulsar {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 12px var(--accent-emerald), 0 0 24px var(--accent-emerald);
+      animation: pulsar-glow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulsar-glow {
+      0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 8px var(--accent-emerald)); }
+      50% { transform: scale(0.7); opacity: 0.5; filter: drop-shadow(0 0 2px var(--accent-emerald)); }
+    }
+
+    .theme-selector {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 0.25rem;
+      gap: 0.3rem;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .theme-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      color: #fff;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    /* ==========================================================================
+       LES 3 THÈMES D'ARCHIVE COMPLETS
+       ========================================================================== */
+    /* THEME 1 : ZERO-G QUANTUM */
+    body[data-theme="theme-1"] {
+      background-color: #030712;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-1"] .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    body[data-theme="theme-1"] .hero-title {
+      background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body[data-theme="theme-1"] .header-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    body[data-theme="theme-1"] .header-pill .pulse-dot,
+    body[data-theme="theme-1"] .pulsar {
+      background: #34d399;
+      box-shadow: 0 0 12px #34d399, 0 0 24px #34d399;
+    }
+
+    body[data-theme="theme-1"] .theme-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      color: #fff;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    body[data-theme="theme-1"] .tab-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+      color: #fff;
+    }
+
+    body[data-theme="theme-1"] .tag-primary {
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* THEME 2 : ORBITAL HUD */
+    body[data-theme="theme-2"] {
+      background-color: #020307;
+      background-image: 
+        linear-gradient(rgba(0, 255, 170, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 170, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-2"] .glass-panel {
+      background: rgba(4, 12, 18, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 255, 170, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 255, 170, 0.08), inset 0 0 15px rgba(0, 255, 170, 0.02);
+    }
+
+    body[data-theme="theme-2"] .hero-title {
+      color: #00ffaa;
+      -webkit-text-fill-color: #00ffaa;
+      text-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    body[data-theme="theme-2"] .header-pill {
+      background: rgba(0, 255, 170, 0.12);
+      border-color: rgba(0, 255, 170, 0.4);
+      color: #00ffaa;
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.2);
+    }
+
+    body[data-theme="theme-2"] .header-pill .pulse-dot,
+    body[data-theme="theme-2"] .pulsar {
+      background: #00ffaa;
+      box-shadow: 0 0 12px #00ffaa, 0 0 24px #00ffaa;
+    }
+
+    body[data-theme="theme-2"] .theme-btn.active {
+      background: rgba(0, 255, 170, 0.2);
+      border: 1px solid rgba(0, 255, 170, 0.5);
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.25);
+      color: #00ffaa;
+    }
+
+    body[data-theme="theme-2"] .tab-btn.active {
+      background: rgba(0, 255, 170, 0.15);
+      border: 1px solid rgba(0, 255, 170, 0.5);
+      box-shadow: 0 0 12px rgba(0, 255, 170, 0.25);
+      color: #00ffaa;
+    }
+
+    body[data-theme="theme-2"] .tag-primary,
+    body[data-theme="theme-2"] .tag-ledger {
+      background: rgba(0, 255, 170, 0.1);
+      color: #00ffaa;
+      border: 1px solid rgba(0, 255, 170, 0.3);
+    }
+
+    /* THEME 3 : SUPERNOVA */
+    body[data-theme="theme-3"] {
+      background-color: #06020c;
+      background-image: 
+        radial-gradient(circle at 80% 20%, rgba(244, 63, 94, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(251, 113, 133, 0.08) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-3"] .glass-panel {
+      background: rgba(22, 10, 32, 0.75);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 25px 50px -12px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    body[data-theme="theme-3"] .hero-title {
+      background: linear-gradient(135deg, #fb7185 0%, #e879f9 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body[data-theme="theme-3"] .header-pill {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: rgba(244, 63, 94, 0.4);
+      color: #fb7185;
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.25);
+    }
+
+    body[data-theme="theme-3"] .header-pill .pulse-dot,
+    body[data-theme="theme-3"] .pulsar {
+      background: #fb7185;
+      box-shadow: 0 0 12px #fb7185, 0 0 24px #fb7185;
+    }
+
+    body[data-theme="theme-3"] .theme-btn.active {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(168, 85, 247, 0.3));
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.25);
+      color: #fff;
+    }
+
+    body[data-theme="theme-3"] .tab-btn.active {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.3), rgba(168, 85, 247, 0.3));
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
+      color: #fff;
+    }
+
+    body[data-theme="theme-3"] .tag-primary,
+    body[data-theme="theme-3"] .tag-ledger {
+      background: rgba(244, 63, 94, 0.12);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    
+    /* ==========================================================================
+       THEME 4 : ORIGINE (VUE DOCUMENTAIRE CLASSIQUE • HAUT CONTRASTE)
+       ========================================================================== */
+    body[data-theme="origine"] {
+      background-color: #f8fafc !important;
+      background-image: none !important;
+      color: #0f172a !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    }
+
+    body[data-theme="origine"] .showcase-bar {
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    body[data-theme="origine"] .showcase-brand {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .pulsar {
+      background: #0969da !important;
+      box-shadow: 0 0 10px rgba(9, 105, 218, 0.6) !important;
+    }
+
+    body[data-theme="origine"] .tag-ledger {
+      background: #eff6ff !important;
+      color: #0969da !important;
+      border: 1px solid #bfdbfe !important;
+    }
+
+    body[data-theme="origine"] .glass-panel {
+      background: #ffffff !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .hero-title {
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+      color: #0f172a !important;
+      text-shadow: none !important;
+    }
+
+    body[data-theme="origine"] .header-pill {
+      background: #eff6ff !important;
+      border: 1px solid #bfdbfe !important;
+      color: #0969da !important;
+      box-shadow: none !important;
+    }
+
+    body[data-theme="origine"] .header-pill .pulse-dot {
+      background: #0969da !important;
+      box-shadow: 0 0 8px rgba(9, 105, 218, 0.5) !important;
+    }
+
+    body[data-theme="origine"] .telemetry-card {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body[data-theme="origine"] .telemetry-label {
+      color: #64748b !important;
+    }
+
+    body[data-theme="origine"] .gauge-val {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .gauge-bg {
+      stroke: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .gauge-fill {
+      stroke: #0969da !important;
+    }
+
+    body[data-theme="origine"] .progress-track {
+      background: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .speaker-script-content {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .studio-module-btn {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #334155 !important;
+    }
+
+    body[data-theme="origine"] .studio-module-btn:hover {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .studio-module-btn.active {
+      background: #eff6ff !important;
+      border-color: #0969da !important;
+      color: #0969da !important;
+      box-shadow: 0 2px 8px rgba(9, 105, 218, 0.15) !important;
+    }
+
+    body[data-theme="origine"] .tab-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #475569 !important;
+    }
+
+    body[data-theme="origine"] .tab-btn:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .tab-btn.active {
+      background: #0969da !important;
+      border-color: #0969da !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(9, 105, 218, 0.3) !important;
+    }
+
+    body[data-theme="origine"] .telemetry-item {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .telemetry-num {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .telemetry-sub {
+      color: #64748b !important;
+    }
+
+    body[data-theme="origine"] .nav-control-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .nav-control-btn:hover {
+      background: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .thumb-node {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .thumb-node-title {
+      color: #475569 !important;
+    }
+
+    body[data-theme="origine"] .phase-header {
+      background: #f8fafc !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .phase-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .phase-badge {
+      background: #eff6ff !important;
+      border: 1px solid #bfdbfe !important;
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .tag-primary {
+      background: #eff6ff !important;
+      color: #0969da !important;
+      border: 1px solid #bfdbfe !important;
+    }
+
+    body[data-theme="origine"] .tag-amber {
+      background: #fffbeb !important;
+      color: #b45309 !important;
+      border: 1px solid #fde68a !important;
+    }
+
+    body[data-theme="origine"] .tag-emerald {
+      background: #f0fdf4 !important;
+      color: #15803d !important;
+      border: 1px solid #86efac !important;
+    }
+
+    body[data-theme="origine"] .stage-controls {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .btn-media-toggle {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #334155 !important;
+    }
+
+    body[data-theme="origine"] .btn-media-toggle:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .btn-media-toggle.active {
+      background: #eff6ff !important;
+      border-color: #0969da !important;
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .timer-clock {
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] footer {
+      border-top: 1px solid #e2e8f0 !important;
+      color: #64748b !important;
+    }
+
+    body[data-theme="origine"] footer p {
+      color: #64748b !important;
+    }
+
+    /* Dropdown pour thème Origine dans index.html */
+    body[data-theme="origine"] .theme-dropdown-trigger {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-trigger:hover {
+      background: #e2e8f0 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-menu {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-header {
+      color: #64748b !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item:hover {
+      background: #f8fafc !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item.active {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text b {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text small {
+      color: #64748b !important;
+    }
+
+    /* ==========================================================================
+       MAIN VIEWPORT CONTAINER & SECTIONS
+       ========================================================================== */
+    .container {
+      max-width: 1120px;
+      margin: 2rem auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    header {
+      margin-bottom: 2.2rem;
+      position: relative;
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #34d399;
+      margin-bottom: 1.2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    .header-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 4px #34d399); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 900px;
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       CARTE DE TÉLÉMÉTRIE (EXACTEMENT COMME CHECKLIST-20260904-002237)
+       ========================================================================== */
+    .telemetry-card {
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+
+    .metric-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .metric-value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .metric-value.val-verified {
+      color: var(--accent-emerald);
+      text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .metric-value.val-claimed {
+      color: var(--accent-amber);
+      text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+
+    .metric-value.val-in-progress {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+    }
+
+    .metric-value.val-todo {
+      color: var(--text-muted);
+    }
+
+    /* Piste de progression segmentée */
+    .progress-track-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .progress-segment {
+      height: 100%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .seg-verified {
+      background: linear-gradient(90deg, #059669, #10b981);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+    }
+
+    .seg-claimed {
+      background: linear-gradient(90deg, #d97706, #f59e0b);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+    }
+
+    .seg-in-progress {
+      background: linear-gradient(90deg, #0284c7, #00f0ff);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+    }
+
+    .progress-legend {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .dot-verified { background: var(--accent-emerald); box-shadow: 0 0 6px var(--accent-emerald); }
+    .dot-claimed { background: var(--accent-amber); box-shadow: 0 0 6px var(--accent-amber); }
+    .dot-in-progress { background: var(--accent-cyan); box-shadow: 0 0 6px var(--accent-cyan); }
+    .dot-todo { background: var(--text-dim); }
+
+    /* ==========================================================================
+       BARRE DE NAVIGATION PAR ONGLETS (TABS)
+       ========================================================================== */
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .tabs {
+      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.3rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      gap: 0.3rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       COMPOSANTS : CARTES PHASE & ÉTAPES (GLASS-PANEL)
+       ========================================================================== */
+    .phase-card {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .phase-header {
+      padding: 1.25rem 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .phase-title-group { display: flex; align-items: center; gap: 0.85rem; }
+
+    .phase-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .phase-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .tag-ledger {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .tag-primary {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    .tag-amber {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    .tag-emerald {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    /* ==========================================================================
+       STAGE VISIONNEUSE DE DIAPOSITIVES
+       ========================================================================== */
+    .stage-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .stage-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .stage-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(14, 18, 28, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.25s;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .stage-arrow:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-50%) scale(1.08);
+      border-color: #fff;
+    }
+
+    .stage-arrow-left { left: 16px; }
+    .stage-arrow-right { right: 16px; }
+
+    .stage-controls-bar {
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.015);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #34d399;
+    }
+
+    .btn-primary:hover {
+      background: rgba(16, 185, 129, 0.35);
+      border-color: #34d399;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Notes de discours / Prompteur */
+    .step-item {
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.01);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .step-desc {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .step-criterion {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.85rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #a5f3fc;
+    }
+
+    .step-criterion.success-crit {
+      border-left-color: var(--accent-emerald);
+      color: #a7f3d0;
+    }
+
+    /* Carrousel de vignettes */
+    .thumb-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 12px 1.5rem 16px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+
+    .thumb-node {
+      flex: 0 0 145px;
+      position: relative;
+      background: rgba(14, 18, 28, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .thumb-node:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .thumb-node.active {
+      border-color: var(--accent-emerald);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .thumb-node img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+
+    .thumb-badge-video {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0, 240, 255, 0.9);
+      color: #030712;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      z-index: 2;
+    }
+
+    .thumb-node-title {
+      padding: 6px 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: var(--font-mono);
+    }
+
+    /* ==========================================================================
+       STUDIO ANIMATIONS REMOTION (6 MODULES)
+       ========================================================================== */
+    .studio-modules-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .studio-module-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .studio-module-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .studio-module-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(0, 240, 255, 0.2));
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.25);
+    }
+
+    .studio-module-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .studio-module-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ==========================================================================
+       CONSOLE CONFÉRENCIER (MODE PRÉSENTATEUR)
+       ========================================================================== */
+    .presenter-split {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 990px) {
+      .presenter-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .presenter-timer-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timer-clock {
+      font-family: var(--font-mono);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       ANIMATION REMOTION & LECTEUR VIDÉO MP4
+       ========================================================================== */
+    .video-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .video-viewport {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .video-viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .frames-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .frame-item {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .frame-item img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .frame-item-info {
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    /* Grille de cartes téléchargements */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+      padding: 1.5rem;
+    }
+
+    .download-tile {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+      transition: all 0.25s ease;
+    }
+
+    .download-tile:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .code-snippet {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #93c5fd;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .code-copy-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      transition: color 0.2s;
+    }
+
+    .code-copy-btn:hover {
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 0 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+    }
+
+    /* ==========================================================================
+       ÉLÉMENTS DYNAMIQUES & CONTRASTE HAUTE LISIBILITÉ (TOUS THÈMES)
+       ========================================================================== */
+    .slide-selector-dropdown {
+      background: rgba(9, 12, 20, 0.85);
+      color: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+    }
+
+    .resource-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .notes-text-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #f8fafc;
+    }
+
+    .next-slide-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .remotion-feature-title {
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 0.95rem;
+    }
+
+    /* Adaptations Contraste Thème Origine (Vue Claire Haute Lisibilité) */
+    body[data-theme="origine"] .slide-selector-dropdown {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] .resource-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .notes-text-body {
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .next-slide-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .remotion-feature-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .step-item {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #1e293b !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    body[data-theme="origine"] .step-item b,
+    body[data-theme="origine"] .step-item strong {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .step-item .step-num {
+      background: #eff6ff !important;
+      color: #0969da !important;
+      border-color: #bfdbfe !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #334155 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+
+    /* ==========================================================================
+       SURCHARGES DE CONTRASTE ABSOLU POUR THÈME ORIGINE (LIGHT)
+       ========================================================================== */
+    body[data-theme="origine"] #slideSelector,
+    body[data-theme="origine"] select.slide-selector-dropdown {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] #pNextTitle,
+    body[data-theme="origine"] .next-slide-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] #pNotesText,
+    body[data-theme="origine"] .notes-text-body,
+    body[data-theme="origine"] .step-desc {
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .remotion-feature-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] #studioDescTitle,
+    body[data-theme="origine"] #studioDescConcept {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] #studioDescText {
+      color: #334155 !important;
+    }
+
+    body[data-theme="origine"] #stageSlideHeader,
+    body[data-theme="origine"] #pSlideTitle {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] #notesTitleLabel {
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .resource-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .stage-viewport {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+    }
+
+
+    /* ==========================================================================
+       TAB-VIDEO (STUDIO ANIMATIONS) CONTRASTE TOTAL THÈME ORIGINE
+       ========================================================================== */
+    body[data-theme="origine"] .studio-module-btn {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #1e293b !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body[data-theme="origine"] .studio-module-btn:hover {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .studio-module-btn.active {
+      background: #eff6ff !important;
+      border-color: #0969da !important;
+      color: #0969da !important;
+      box-shadow: 0 2px 10px rgba(9, 105, 218, 0.25) !important;
+    }
+
+    body[data-theme="origine"] .studio-module-badge {
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .studio-module-name {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .studio-concept-box {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #1e293b !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body[data-theme="origine"] .studio-concept-box #studioDescTitle {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+
+    body[data-theme="origine"] .studio-concept-box #studioDescText {
+      color: #334155 !important;
+    }
+
+    body[data-theme="origine"] .btn {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .btn:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .btn-primary {
+      background: #0969da !important;
+      border-color: #0969da !important;
+      color: #ffffff !important;
+    }
+
+    body[data-theme="origine"] .btn-primary:hover {
+      background: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] #ncrGallerySection {
+      border-top-color: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .metric-label {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+
+    body[data-theme="origine"] .frame-item {
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body[data-theme="origine"] .frame-item-info {
+      color: #334155 !important;
+      background: #f8fafc !important;
+      border-top: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .download-tile {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body[data-theme="origine"] .download-tile:hover {
+      border-color: #93c5fd !important;
+      box-shadow: 0 6px 18px rgba(9, 105, 218, 0.1) !important;
+    }
+
+
+    /* ==========================================================================
+       SÉLECTEUR DE THÈMES DÉROULANT AU PIED DE PAGE (DROPUP)
+       ========================================================================== */
+    .theme-dropdown.dropup .theme-dropdown-menu {
+      bottom: calc(100% + 10px);
+      top: auto;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    body[data-theme="origine"] .theme-dropdown.dropup .theme-dropdown-menu {
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+  </style>
+</head>
+<body data-theme="origine">
+
+  <!-- ==========================================================================
+       SHOWCASE BAR AVEC SÉLECTEUR DE THÈMES (RÉFÉRENCE EXACTE)
+       ========================================================================== -->
+  <div class="showcase-bar">
+    <div class="showcase-brand">
+      <div class="pulsar"></div>
+      <span>LENET-5 CNN TELEMETRY // 1998-2026</span>
+      <span class="tag-ledger" style="margin-left: 0.5rem;">HTTP/2 STREAMING</span>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="nav-link-pill github-pill" style="color:var(--text-main); text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); display:inline-flex; align-items:center; gap:5px;">⭐ GitHub Repository ↗</a>
+      <a href="dossier_rxneurones_lenet5.html" class="nav-link-pill" style="color:var(--text-main); text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); display:inline-flex; align-items:center; gap:4px;">📄 Dossier Pédagogique</a>
+      <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" style="color:#93c5fd; text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(37,99,235,0.2); border:1px solid rgba(37,99,235,0.5); display:inline-flex; align-items:center; gap:4px;">🚀 Google Colab ↗</a>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- En-tête Hero -->
+    <header>
+      <div class="header-pill">
+        <span class="pulse-dot"></span>
+        <span>LeNet-5 (1998) • 28 Diapositives 16:9 • Suite Complète des 6 Animations Remotion</span>
+      </div>
+      <h1 class="hero-title">LeNet-5 : Vision par Ordinateur &amp; Déploiement NCR</h1>
+      <p class="hero-subtitle">Architecture convolutive fondatrice de Yann LeCun (1998) : 60 000 paramètres, convolution 2D, sous-échantillonnage invariant, reconnaissance de millions de chèques bancaires sur guichets automatiques NCR et matrice du Deep Learning contemporain.</p>
+    </header>
+
+    <!-- Télémétrie Card conforme checklist-20260904-002237 -->
+    <div class="telemetry-card glass-panel">
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <span class="metric-label">Progression Présentation</span>
+          <span class="metric-value val-verified" id="count-verified">1 / 28</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">Paramètres Réseau</span>
+          <span class="metric-value val-claimed" id="count-claimed">60 000</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">Précision ATM (NCR)</span>
+          <span class="metric-value val-in-progress" id="count-in-progress">99.2%</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">Architecture Convolutive</span>
+          <span class="metric-value val-todo" id="count-todo">7 Couches</span>
+        </div>
+      </div>
+
+      <div class="progress-track-wrapper">
+        <div class="progress-track">
+          <div class="progress-segment seg-verified" id="seg-slide" style="width: 3.6%;"></div>
+          <div class="progress-segment seg-claimed" id="seg-ncr" style="width: 30%;"></div>
+          <div class="progress-segment seg-in-progress" id="seg-arch" style="width: 25%;"></div>
+        </div>
+        <div class="progress-legend">
+          <div class="legend-item"><span class="legend-dot dot-verified"></span> <span id="txt-slide">Diapositive 1 / 28 (4%)</span></div>
+          <div class="legend-item"><span class="legend-dot dot-claimed"></span> <span id="txt-ncr">Animations Remotion (6 Modules Intégrés)</span></div>
+          <div class="legend-item"><span class="legend-dot dot-in-progress"></span> <span id="txt-arch">Pipeline C1-S2-C3-S4-C5-F6-Sortie</span></div>
+          <div class="legend-item"><span class="legend-dot dot-todo"></span> <span id="txt-server">Déploiement Web Actif (Port 8080)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation par Onglets -->
+    <div class="filter-bar">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-slides', this)">🖥️ Diaporama</button>
+        <button class="tab-btn" onclick="switchTab('tab-presenter', this)">🎙️ Mode Présentateur</button>
+        <button class="tab-btn" onclick="switchTab('tab-video', this)">🎬 Studio Animations</button>
+        <button class="tab-btn" onclick="switchTab('tab-pipeline', this)">🏛️ Pipeline 7 Couches</button>
+        <button class="tab-btn" onclick="switchTab('tab-downloads', this)">📥 Téléchargements &amp; Accès</button>
+        <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="tab-btn" style="text-decoration:none; color:var(--text-main);">⭐ GitHub Repo ↗</a>
+        <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="tab-btn" style="text-decoration:none; color:#38bdf8;">🚀 Google Colab ↗</a>
+      </div>
+      <div>
+        <span class="tag-ledger">LIVE: lenet5.iatuto.com</span>
+      </div>
+    </div>
+
+    <!-- ==================== ONGLET 1 : DIAPORAMA ==================== -->
+    <section id="tab-slides" class="tab-pane">
+      <div class="phase-card glass-panel">
+        <div class="phase-header">
+          <div class="phase-title-group">
+            <span class="phase-badge" id="slidePhaseNum">SLIDE 01</span>
+            <h2 class="phase-title" id="stageSlideHeader">01. Décoder LeNet-5 (1998) : L'Origine de la Vision par Ordinateur</h2>
+          </div>
+          <span class="tag-primary" id="stageTimestampTag">⏱ 00:00.000</span>
+        </div>
+
+        <div class="stage-wrapper" id="slideStage">
+          <button class="stage-arrow stage-arrow-left" onclick="prevSlide()" title="Précédente (Flèche Gauche)">❮</button>
+          <img id="mainSlideImg" src="slides_exported/slide_01.png" alt="Slide LeNet-5">
+          <video id="mainSlideVideo" controls preload="metadata" playsinline style="display:none; width:100%; height:100%; object-fit:contain; border-radius:12px;"></video>
+          <button class="stage-arrow stage-arrow-right" onclick="nextSlide()" title="Suivante (Flèche Droite / Espace)">❯</button>
+        </div>
+
+        <div class="stage-controls-bar">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button class="btn" onclick="prevSlide()">◀ Précédente</button>
+            <button class="btn btn-primary" onclick="nextSlide()">Suivante ▶</button>
+            <button class="btn" id="slideMediaToggleBtn" onclick="toggleSlideMediaMode()" style="display:none;">🎬 Basculer Vidéo</button>
+            <span class="tag-ledger" style="margin-left:6px;">Nav : Flèches Clavier ou Swipe</span>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:center;">
+            <select class="btn slide-selector-dropdown" id="slideSelector"></select>
+            <button class="btn" onclick="toggleAutoplay()" id="autoplayBtn">▶ Lecture Auto</button>
+            <button class="btn" onclick="toggleFullscreen()">⛶ Plein Écran</button>
+          </div>
+        </div>
+
+        <!-- Notes de discours intégrées -->
+        <div class="step-item">
+          <div class="step-title">
+            <span class="tag-primary">NOTES DE CONFÉRENCIER</span>
+            <span id="notesTitleLabel">01. Décoder LeNet-5 (1998)</span>
+          </div>
+          <p class="step-desc" id="notesTextBody">Chargement des notes...</p>
+          <div class="step-criterion success-crit">✓ Documenté dans le volet Présentateur du fichier PowerPoint <code>LeNet-5.pptx</code>.</div>
+        </div>
+
+        <!-- Carrousel de miniatures -->
+        <div style="border-top: 1px solid var(--border-subtle); padding: 0.8rem 1.5rem 0;">
+          <span class="metric-label">INDEX CHRONOLOGIQUE DES 28 DIAPOSITIVES 16:9 :</span>
+        </div>
+        <div class="thumb-strip" id="thumbnailsStrip"></div>
+      </div>
+    </section>
+
+    <!-- ==================== ONGLET 2 : MODE PRÉSENTATEUR ==================== -->
+    <section id="tab-presenter" class="tab-pane" style="display:none;">
+      <div class="presenter-split">
+        <!-- Colonne de gauche : Diapositive en cours + Prochaine -->
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <div class="phase-card glass-panel" style="margin-bottom:0;">
+            <div class="phase-header">
+              <div class="phase-title-group">
+                <span class="phase-badge">VUE ACTUELLE</span>
+                <span class="phase-title" id="pSlideTitle">01. Décoder LeNet-5</span>
+              </div>
+              <span class="tag-primary" id="pTimestamp">⏱ 00:00.000</span>
+            </div>
+            <div class="stage-wrapper">
+              <img id="pMainImg" src="slides_exported/slide_01.png" alt="Slide Présentateur">
+              <video id="pMainVideo" controls preload="metadata" playsinline style="display:none; width:100%; height:100%; object-fit:contain; border-radius:12px;"></video>
+            </div>
+            <div class="stage-controls-bar">
+              <button class="btn" onclick="prevSlide()">◀ Précédente</button>
+              <button class="btn btn-primary" onclick="nextSlide()">Suivante ▶</button>
+              <span class="tag-ledger">Diapositive <span id="pSlideIndexDisplay">1</span> / 28</span>
+            </div>
+          </div>
+
+          <!-- Aperçu diapositive suivante -->
+          <div class="phase-card glass-panel" style="margin-bottom:0; padding:1.2rem;">
+            <div class="metric-label" style="margin-bottom:8px;">À SUIVRE // PROCHAINE DIAPOSITIVE :</div>
+            <div style="display:flex; gap:16px; align-items:center;">
+              <img id="pNextImg" src="slides_exported/slide_02.png" style="width:160px; aspect-ratio:16/9; border-radius:8px; object-fit:cover; border:1px solid var(--border-subtle);" alt="Prochaine slide">
+              <div>
+                <div id="pNextTitle" class="next-slide-title">Titre suivant</div>
+                <div id="pNextTimestamp" style="font-size:0.8rem; color:var(--accent-cyan); font-family:var(--font-mono); margin-top:4px;">⏱ 00:23.875</div>
+                <div id="pNextVideoBadge" class="phase-badge" style="display:none; background:rgba(0,240,255,0.2); color:var(--accent-cyan); border-color:var(--accent-cyan); margin-top:6px;">🎬 PROCHAINE DIAPO : ANIMATION VIDÉO</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne de droite : Chronomètre & Script conférencier -->
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <!-- Chronomètre -->
+          <div class="presenter-timer-box glass-panel">
+            <div>
+              <div class="metric-label">TEMPS ÉCOULÉ EN PRÉSENTATION</div>
+              <div class="timer-clock" id="timerDisplay">00:00:00</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn" id="timerToggleBtn" onclick="toggleTimer()">Pause</button>
+              <button class="btn" onclick="resetTimer()">Reset</button>
+            </div>
+          </div>
+
+          <!-- Script Conférencier -->
+          <div class="phase-card glass-panel" style="margin-bottom:0; flex:1;">
+            <div class="phase-header">
+              <span class="phase-title">Script Conférencier Intégral</span>
+              <span class="tag-amber">Texte Intégral</span>
+            </div>
+            <div class="step-item" style="max-height: 520px; overflow-y: auto;">
+              <div class="step-desc notes-text-body" id="pNotesText">
+                Chargement des notes...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ONGLET 3 : STUDIO ANIMATIONS REMOTION ==================== -->
+    <section id="tab-video" class="tab-pane" style="display:none;">
+      <div class="phase-card glass-panel">
+        <div class="phase-header">
+          <div class="phase-title-group">
+            <span class="phase-badge" id="studioModuleBadge">MODULE 01</span>
+            <h2 class="phase-title" id="studioModuleHeader">Animation Remotion : 01. Convolution 2D</h2>
+          </div>
+          <span class="tag-emerald">1080P @ 30 FPS • H.264 • 6 MODULES DÉTERMINISTES</span>
+        </div>
+
+        <div class="video-card-body">
+          <!-- Barre de sélection des 6 modules -->
+          <div class="studio-modules-bar" id="studioModulesBar">
+            <button class="studio-module-btn active" onclick="studioSelectModule(0)">
+              <div class="studio-module-badge"><span>MODULE 01</span><span>SLIDE 12</span></div>
+              <div class="studio-module-name">01. Convolution 2D</div>
+            </button>
+            <button class="studio-module-btn" onclick="studioSelectModule(1)">
+              <div class="studio-module-badge"><span>MODULE 02</span><span>SLIDE 09</span></div>
+              <div class="studio-module-name">02. Neurone Formel</div>
+            </button>
+            <button class="studio-module-btn" onclick="studioSelectModule(2)">
+              <div class="studio-module-badge"><span>MODULE 03</span><span>SLIDE 14</span></div>
+              <div class="studio-module-name">03. Pooling 2×2</div>
+            </button>
+            <button class="studio-module-btn" onclick="studioSelectModule(3)">
+              <div class="studio-module-badge"><span>MODULE 04</span><span>SLIDE 16</span></div>
+              <div class="studio-module-name">04. Pipeline 7 Couches</div>
+            </button>
+            <button class="studio-module-btn" onclick="studioSelectModule(4)">
+              <div class="studio-module-badge"><span>MODULE 05</span><span>SLIDE 19</span></div>
+              <div class="studio-module-name">05. Déploiement NCR</div>
+            </button>
+            <button class="studio-module-btn" onclick="studioSelectModule(5)">
+              <div class="studio-module-badge"><span>MODULE 06</span><span>SLIDE 24</span></div>
+              <div class="studio-module-name">06. Synthèse &amp; Colab</div>
+            </button>
+          </div>
+
+          <!-- Lecteur Vidéo / GIF -->
+          <div class="video-viewport" style="position:relative; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+            <video id="studioVideo" controls preload="metadata" playsinline poster="animations/01_convolution_poster.png" style="width:100%; height:100%; object-fit:contain;">
+              <source id="studioVideoSrc" src="animations/01_convolution.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+            <img id="studioGif" style="display:none; width:100%; height:100%; object-fit:contain;" alt="Animation GIF en boucle">
+          </div>
+
+          <!-- Barre de contrôle & Téléchargements -->
+          <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-top:1rem;">
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <span class="tag-primary" id="studioTagCodec">CODEC: H.264</span>
+              <span class="tag-ledger" id="studioTagDuration">DURÉE: 5.0s (150 FRAMES)</span>
+              <span class="tag-amber" id="studioTagSlide">ASSOCIÉ: SLIDE 12</span>
+              <span class="tag-emerald">HTTP RANGE 206 SUPPORTÉ</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <button class="btn" id="studioGifToggleBtn" onclick="studioToggleGifMode()">🎞️ Mode GIF Animé</button>
+              <button class="btn" id="studioJumpSlideBtn" onclick="studioJumpToSlide()">🖥️ Voir sur Diapo</button>
+              <a id="studioDownloadMp4" href="animations/01_convolution.mp4" download class="btn btn-primary">⬇ MP4 HD (528 Ko)</a>
+              <a id="studioDownloadGif" href="animations/01_convolution.gif" download class="btn">⬇ GIF (882 Ko)</a>
+              <a id="studioDownloadPoster" href="animations/01_convolution_poster.png" download class="btn">⬇ Poster</a>
+            </div>
+          </div>
+
+          <!-- Description Théorique & Mathématique -->
+          <div class="step-item studio-concept-box" style="border-radius:10px; margin-top:1rem;">
+            <div class="step-title">
+              <span class="tag-primary" id="studioDescConcept">FONDATION THÉORIQUE</span>
+              <span id="studioDescTitle">Balayage Convolutif 2D par Filtre Glissant 5×5</span>
+            </div>
+            <p class="step-desc" id="studioDescText">Extraction déterministe des contours primaires locaux sur l'image source avec partage invariant des poids synaptiques.</p>
+          </div>
+
+          <!-- Galerie de contrôle NCR -->
+          <div id="ncrGallerySection" style="border-top:1px solid var(--border-subtle); padding-top:1.25rem; margin-top:1rem;">
+            <div class="metric-label" style="margin-bottom:0.8rem;">GALERIE DES CAPTURES DE CONTRÔLE NCR (AUDIT MULTI-RÔLES PASS) :</div>
+            <div class="frames-grid">
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_01_0.5s.png" alt="Frame 0.5s">
+                <div class="frame-item-info">0.5s — Séparateur &amp; Kicker</div>
+              </div>
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_02_1.2s.png" alt="Frame 1.2s">
+                <div class="frame-item-info">1.2s — Entrée Titre (18px)</div>
+              </div>
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_03_1.8s.png" alt="Frame 1.8s">
+                <div class="frame-item-info">1.8s — Sous-titre &amp; Corps</div>
+              </div>
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_04_2.5s.png" alt="Frame 2.5s">
+                <div class="frame-item-info">2.5s — Trait d'accent 60px</div>
+              </div>
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_05_3.0s.png" alt="Frame 3.0s">
+                <div class="frame-item-info">3.0s — Cartes visuelles NNC &amp; Robot</div>
+              </div>
+              <div class="frame-item">
+                <img src="remotion-lenet5-ncr/out/frames/frame_06_4.0s.png" alt="Frame 4.0s">
+                <div class="frame-item-info">4.0s — Plateau de lecture stable</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ONGLET 4 : PIPELINE 7 COUCHES ==================== -->
+    <section id="tab-pipeline" class="tab-pane" style="display:none;">
+      <div class="phase-card glass-panel">
+        <div class="phase-header">
+          <div class="phase-title-group">
+            <span class="phase-badge">PIPELINE ARCHITECTURE</span>
+            <h2 class="phase-title">Décomposition Technique des 7 Couches LeNet-5 (1998)</h2>
+          </div>
+          <span class="tag-amber">YANN LECUN ET AL. (BELL LABS)</span>
+        </div>
+
+        <div style="padding:1.5rem; display:flex; flex-direction:column; gap:1.25rem;">
+          <!-- Animation Pipeline intégrée -->
+          <div style="background:rgba(0,0,0,0.4); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:8px;">
+              <div class="remotion-feature-title">🎬 Animation Remotion : Traversée Complète des 7 Couches (Slide 16)</div>
+              <a href="animations/04_lenet5_pipeline.mp4" download class="btn btn-primary" style="font-size:0.75rem; padding:0.3rem 0.75rem;">⬇ Télécharger 04_lenet5_pipeline.mp4 (592 Ko)</a>
+            </div>
+            <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:8px; overflow:hidden;">
+              <video controls preload="metadata" playsinline poster="animations/04_lenet5_pipeline_poster.png" style="width:100%; height:100%; object-fit:contain;">
+                <source src="animations/04_lenet5_pipeline.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHE 00</span>
+              <span>Entrée 32×32 pixels (Niveaux de gris)</span>
+              <span class="tag-ledger">Normalisation [-0.1, +1.175]</span>
+            </div>
+            <p class="step-desc">Grille brute bidimensionnelle issue du chèque bancaire scanné. Conservation stricte de la topologie 2D pour garantir l'invariance géométrique face aux décalages spatiaux.</p>
+            <div class="step-criterion success-crit">✓ Résolution native 32×32 préservant le contexte périphérique du chiffre manuscrit centré sur 28×28.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHE C1</span>
+              <span>Première Convolution (6 filtres 5×5)</span>
+              <span class="tag-primary">Sortie : 6 cartes 28×28 • 156 poids</span>
+            </div>
+            <p class="step-desc">Balayage par filtres glissants avec partage des poids pour extraire les contours et traits primaires élémentaires (barres horizontales, verticales, angles).</p>
+            <div class="step-criterion">✓ Réduction spectaculaire des paramètres : 156 poids au lieu de dizaines de milliers dans un modèle dense.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHE S2</span>
+              <span>Premier Sous-Échantillonnage / Pooling (2×2)</span>
+              <span class="tag-emerald">Sortie : 6 cartes 14×14 • 12 poids</span>
+            </div>
+            <p class="step-desc">Compression par moitié de l'information tout en conservant le signal dominant. Immunise le réseau contre les micro-distorsions et tremblements du tracé manuscrit.</p>
+            <div class="step-criterion success-crit">✓ Invariance aux petites translations et déformations locales du tracé.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHE C3</span>
+              <span>Seconde Convolution (16 filtres 5×5)</span>
+              <span class="tag-primary">Sortie : 16 cartes 10×10 • 1 516 poids</span>
+            </div>
+            <p class="step-desc">Combinaisons non complètes et asymétriques des 6 cartes précédentes pour forcer chaque carte à apprendre des motifs composites distincts (boucles, intersections, arcs).</p>
+            <div class="step-criterion">✓ Brisure de symétrie délibérée forçant la spécialisation fonctionnelle des détecteurs.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHE S4</span>
+              <span>Deuxième Sous-Échantillonnage (2×2)</span>
+              <span class="tag-emerald">Sortie : 16 cartes 5×5 • 32 poids</span>
+            </div>
+            <p class="step-desc">Dernière étape de compression spatiale stabilisant définitivement les caractéristiques avant la transition vers la classification dense.</p>
+            <div class="step-criterion success-crit">✓ Distillation de l'essence topologique du caractère manuscrit.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">COUCHES C5 &amp; F6</span>
+              <span>Couches Entièrement Connectées (Dense)</span>
+              <span class="tag-amber">120 unités (C5) puis 84 unités (F6) • 48 120 + 10 164 poids</span>
+            </div>
+            <p class="step-desc">Le « cerveau décisionnel » qui agrège l'ensemble des motifs spatiaux extraits pour synthétiser la représentation abstraite du chiffre.</p>
+            <div class="step-criterion">✓ Convergence vers l'espace de décision sémantique des 10 classes numériques.</div>
+          </div>
+
+          <div class="step-item" style="border-radius:12px; border:1px solid var(--border-subtle); background:rgba(0,0,0,0.25);">
+            <div class="step-title">
+              <span class="phase-badge">SORTIE</span>
+              <span>10 Unités RBF (Chiffres 0 à 9)</span>
+              <span class="tag-emerald">Classification Finale • Décision Euclidienne</span>
+            </div>
+            <p class="step-desc">Calcul de la distance Euclidienne par rapport au motif de référence de chaque chiffre. L'unité avec la distance minimale désigne le chiffre reconnu.</p>
+            <div class="step-criterion success-crit">✓ Précision opérationnelle éprouvée sur des centaines de millions de chèques réels (ATM NCR).</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ONGLET 5 : TÉLÉCHARGEMENTS & ACCÈS ==================== -->
+    <section id="tab-downloads" class="tab-pane" style="display:none;">
+      <div class="phase-card glass-panel">
+        <div class="phase-header">
+          <div class="phase-title-group">
+            <span class="phase-badge">LIVRABLES &amp; ARTEFACTS</span>
+            <h2 class="phase-title">Ressources Téléchargeables &amp; Accès Déploiement</h2>
+          </div>
+          <span class="tag-emerald">SUITE MULTIMÉDIA</span>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Carte PowerPoint Master 28 Slides -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-amber" style="margin-bottom:8px;">DIAPORAMA POWERPOINT MASTER</span>
+              <h3 class="resource-title">LeNet-5.pptx</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">28 diapositives 16:9 haute résolution, intégration native des 5 vidéos MP4 plein écran et des notes intégrales de conférencier dans le volet Présentateur.</p>
+            </div>
+            <a href="LeNet-5.pptx" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger Master PPTX (27 Mo)</a>
+          </div>
+
+          <!-- Carte 04 Pipeline MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-emerald" style="margin-bottom:8px;">ANIMATION 04 • PIPELINE 7 COUCHES</span>
+              <h3 class="resource-title">04_lenet5_pipeline.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Animation 1080p @ 30 fps de la traversée intégrale des 7 couches convolutives, de sous-échantillonnage et denses.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <a href="animations/04_lenet5_pipeline.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (592 Ko)</a>
+              <a href="animations/04_lenet5_pipeline.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (1.36 Mo)</a>
+            </div>
+          </div>
+
+          <!-- Carte 01 Convolution MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-primary" style="margin-bottom:8px;">ANIMATION 01 • CONVOLUTION 2D</span>
+              <h3 class="resource-title">01_convolution.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Balayage 2D par filtre glissant 5×5, extraction de contours élémentaires et partage des poids.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <a href="animations/01_convolution.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (528 Ko)</a>
+              <a href="animations/01_convolution.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (882 Ko)</a>
+            </div>
+          </div>
+
+          <!-- Carte 02 Neurone MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-amber" style="margin-bottom:8px;">ANIMATION 02 • NEURONE FORMEL</span>
+              <h3 class="resource-title">02_neurone.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Somme pondérée synaptique et test de seuil d'activation déterministe.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <a href="animations/02_neurone.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (708 Ko)</a>
+              <a href="animations/02_neurone.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (1.37 Mo)</a>
+            </div>
+          </div>
+
+          <!-- Carte 03 Pooling MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-emerald" style="margin-bottom:8px;">ANIMATION 03 • POOLING 2×2</span>
+              <h3 class="resource-title">03_pooling.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Sous-échantillonnage 2×2, compression spatiale de moitié et invariance géométrique.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <a href="animations/03_pooling.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (384 Ko)</a>
+              <a href="animations/03_pooling.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (320 Ko)</a>
+            </div>
+          </div>
+
+          <!-- Carte NCR MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-primary" style="margin-bottom:8px;">ANIMATION 05 • DÉPLOIEMENT NCR</span>
+              <h3 class="resource-title">ncr-slide.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Rendu de la diapositive « Déploiement NCR », 20 millions de chèques/jour, 99.2% de précision.</p>
+            </div>
+            <a href="animations/ncr-slide.mp4" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 (446 Ko)</a>
+          </div>
+
+          <!-- Carte Synthèse Colab MP4 -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-amber" style="margin-bottom:8px;">ANIMATION 06 • SYNTHÈSE &amp; COLAB</span>
+              <h3 class="resource-title">lenet5_pedagogique.mp4</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Film complet de synthèse de la vision par ordinateur et démonstration du modèle interactif.</p>
+            </div>
+            <a href="animations/lenet5_pedagogique.mp4" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 (1.89 Mo)</a>
+          </div>
+
+          <!-- Carte slides.json -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-ledger" style="margin-bottom:8px;">MÉTADONNÉES STRUCTURÉES</span>
+              <h3 class="resource-title">slides.json</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Base JSON complète des 28 diapositives, horodatages, objets multimédias typés et notes intégrales.</p>
+            </div>
+            <a href="slides.json" download class="btn" style="text-align:center;">⬇ Télécharger slides.json</a>
+          </div>
+
+          <!-- Carte Index & Timestamps -->
+          <div class="download-tile glass-panel">
+            <div>
+              <span class="tag-primary" style="margin-bottom:8px;">TABLE DES TIMESTAMPS</span>
+              <h3 class="resource-title">index.tsv</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Tableau chronologique des 21 timestamps précis correspondant à chaque capture de la présentation vidéo.</p>
+            </div>
+            <a href="index.tsv" download class="btn" style="text-align:center;">⬇ Télécharger index.tsv</a>
+          </div>
+        </div>
+
+        <!-- Section URLs Déploiement -->
+        <div style="padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--border-subtle);">
+          <div class="metric-label" style="margin-bottom:8px;">POINTS D'ACCÈS EN LIGNE &amp; DÉVELOPPEMENT LOCAL :</div>
+
+          <div class="code-snippet">
+            <span>https://lenet5.iatuto.com/ (Déploiement Public Cloudflare SSL/TLS)</span>
+            <button class="code-copy-btn" onclick="navigator.clipboard.writeText('https://lenet5.iatuto.com/')">Copier</button>
+          </div>
+
+          <div class="code-snippet">
+            <span>http://localhost:8080/ (Serveur Node.js Local avec Streaming HTTP 206)</span>
+            <button class="code-copy-btn" onclick="navigator.clipboard.writeText('http://localhost:8080/')">Copier</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <!-- SÉLECTEUR DE THÈMES AU PIED DE PAGE (DROPUP) -->
+      <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+        <div class="theme-dropdown dropup" id="themeDropdown">
+          <button class="theme-dropdown-trigger" id="themeDropdownBtn" onclick="toggleThemeDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Changer le thème visuel">
+            <span>🎨</span>
+            <span id="themeCurrentLabel">📜 Origine</span>
+            <svg class="theme-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+          <div class="theme-dropdown-menu" id="themeDropdownMenu">
+            <div class="theme-menu-header">Thème Visuel</div>
+            <button class="theme-menu-item active" data-theme-val="origine" onclick="switchTheme('origine')">
+              <span class="theme-preview dot-origine"></span>
+              <span class="theme-menu-text">
+                <b>📜 Origine</b>
+                <small>Vue d'origine documentaire (Défaut)</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-1" onclick="switchTheme('theme-1')">
+              <span class="theme-preview dot-theme1"></span>
+              <span class="theme-menu-text">
+                <b>🌌 Zero-G Quantum</b>
+                <small>Fond nébuleuse émeraude &amp; cyan</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-2" onclick="switchTheme('theme-2')">
+              <span class="theme-preview dot-theme2"></span>
+              <span class="theme-menu-text">
+                <b>🛰️ Orbital HUD</b>
+                <small>Matrice technique phosphorescente</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-3" onclick="switchTheme('theme-3')">
+              <span class="theme-preview dot-theme3"></span>
+              <span class="theme-menu-text">
+                <b>💥 Supernova</b>
+                <small>Cyberpunk cosmique ultraviolet</small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; letter-spacing: 0.02em; color: var(--text-main);">
+        Projet d'Étude &amp; Rétrospective Historique LeNet-5 (1998)
+      </div>
+      <p style="margin: 4px 0; font-size: 0.88rem; color: var(--text-muted);">
+        Travail réalisé par <b>Bernard Feugang Noussi</b> dans le cadre du <b>Cours d'Apprentissage Profond &amp; Réseaux de Neurones</b>
+      </p>
+      <p style="margin-top: 4px; font-size: 0.82rem; color: var(--text-dim);">
+        <b>Collège de Bois-de-Boulogne</b> • Montréal (Québec) • Spécialisation technique en intelligence artificielle
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // Données intégrées (28 diapositives Master LeNet-5)
+    const fallbackSlides = [
+  {
+    "id": 1,
+    "title": "Décoder LeNet-5 (1998) : L'Origine de la Vision par Ordinateur",
+    "section": "Introduction",
+    "type": "image",
+    "seconds": 0.0,
+    "notes": "Bienvenue dans cette exploration. Aujourd'hui, on plonge directement dans les fondations mêmes de la vision par ordinateur moderne. On va décortiquer comment concrètement les machines ont appris à voir et à lire l'écriture humaine. Et tout ça grâce à un véritable chef-d'œuvre technologique qui date de 1998. C'est une histoire d'ingéniosité mathématique pure qui a littéralement changé le monde.\n\nPour faire simple, si on devait résumer tout ce projet en une seule phrase magique, la voici : LeNet-5 est le premier réseau de neurones convolutifs industriel, créé en 1998. Au lieu d'écraser l'image en 1D, il fait glisser de petits filtres pour repérer les traits du chiffre morceau par morceau avec seulement 60 000 paramètres, ce qui a permis de trier automatiquement 20 millions de chèques par jour aux États-Unis avec moins de 1 % d'erreurs. Voilà, c'est le fil rouge de tout ce dont on va parler.",
+    "number": "01",
+    "file": "slides_exported/slide_01.png",
+    "timestamp": "00:00.000"
+  },
+  {
+    "id": 2,
+    "title": "Au programme : Les 6 piliers de LeNet-5",
+    "section": "Sommaire",
+    "type": "image",
+    "seconds": 23.875,
+    "notes": "Au programme, aujourd'hui : on commence par le défi du chiffre manuscrit. Ensuite, on verra les outils révolutionnaires de LeNet-5, à savoir, la lectrue, la mini-décision, le filtrage et le pooling,  puis son architecture en sept couches. On parlera de l'apprentissage par les données et on terminera sur son impact industriel moderne et quel héritage pour l’avenir de l’ia. Allez, c'est parti !",
+    "number": "02",
+    "file": "slides_exported/slide_02.png",
+    "timestamp": "00:23.875"
+  },
+  {
+    "id": 3,
+    "title": "1. Le défi du chiffre : Lecture manuscrite",
+    "section": "Chapitre 1 : Le Défi du Chiffre",
+    "type": "image",
+    "seconds": 41.333,
+    "notes": "Première étape : le défi du chiffre manuscrit.",
+    "number": "03",
+    "file": "slides_exported/slide_03.png",
+    "timestamp": "00:41.333"
+  },
+  {
+    "id": 4,
+    "title": "Comment la machine lit-elle un chiffre manuscrit ?",
+    "section": "Chapitre 1 : Le Défi du Chiffre",
+    "type": "image",
+    "seconds": 45.791,
+    "notes": "Quand on regarde un chiffre 7 gribouillé sur un bout de papier, notre cerveau le reconnaît instantanément, même s'il est raturé, penché ou au trait très épais. Mais pour une machine, c'est une toute autre histoire : elle ne perçoit aucune forme globale. Tout ce qu'elle voit, c'est une grille de 32 par 32 pixels, juste des nombres entre 0 pour le blanc et 255 pour l'encre noire. Face à ce nuage de données froides, impossible de coder des règles manuelles rigides du genre « si ce pixel est noir, alors c'est un 7 ». L'écriture humaine est beaucoup trop imprévisible et variée pour ça.",
+    "number": "04",
+    "file": "slides_exported/slide_04.png",
+    "timestamp": "00:45.791"
+  },
+  {
+    "id": 5,
+    "title": "Perception : Forme globale vs Grille brute & Perceptron",
+    "section": "Chapitre 1 : Le Défi du Chiffre",
+    "type": "image",
+    "seconds": 68.791,
+    "notes": "Alors, comment est-ce qu'on tentait de résoudre ça avant ? Et bien, les anciens modèles comme les Perceptrons multicouches prenaient cette image en 2D et l'aplatissaient brutalement en une seule ligne de plus de 1000 nombres. Le gros problème, c'est que ça détruisait complètement la géométrie spatiale : des pixels qui étaient voisins sur le papier se retrouvaient totalement séparés. Du coup, si le chiffre était décalé d'un minuscule millimètre sur le chèque, le système entier plantait. LeNet-5 a introduit un concept fondamental : il fallait absolument maintenir cette structure en 2D pour conserver ce qu'on appelle l'invariance.",
+    "number": "05",
+    "file": "slides_exported/slide_05.png",
+    "timestamp": "01:08.791"
+  },
+  {
+    "id": 6,
+    "title": "2. La mini-décision : Le neurone artificiel",
+    "section": "Chapitre 2 : Outils Révolutionnaires",
+    "type": "image",
+    "seconds": 99.333,
+    "notes": "Ce qui nous amène directement aux outils révolutionnaires de LeNet-5.",
+    "number": "06",
+    "file": "slides_exported/slide_06.png",
+    "timestamp": "01:39.333"
+  },
+  {
+    "id": 7,
+    "title": "Le neurone artificiel : Somme pondérée et seuil d'activation",
+    "section": "Chapitre 2 : Outils Révolutionnaires",
+    "type": "image",
+    "seconds": 104.417,
+    "notes": "La base absolue du système, c'est le neurone artificiel. Concrètement, c'est comme une petite calculatrice ultra rapide : ce neurone prend plusieurs informations, les multiplie par des coefficients d'importance — ce qu'on appelle les poids et le biais — et il additionne le tout. Si le résultat dépasse un certain seuil d'activation, boum, le neurone s'allume et transmet un signal, sinon il reste éteint. C'est cette mini-décision répétée des milliers de fois qui va créer l'intelligence du système.",
+    "number": "07",
+    "file": "slides_exported/slide_07.png",
+    "timestamp": "01:44.417"
+  },
+  {
+    "id": 8,
+    "title": "Démonstration numérique : Somme pondérée & test de seuil",
+    "section": "Chapitre 2 : Outils Révolutionnaires",
+    "type": "image",
+    "seconds": 134.292,
+    "notes": "Sur cet exemple concret : avec des entrées x1=1 (poids 0.5), x2=2 (poids 0.8) et x3=1 (poids 0.4), le neurone calcule une somme cumulée de 1,50. Comme le seuil requis est de 2,00, la condition n'est pas atteinte : la sortie reste à 0 (neurone éteint).\n\nLe neurone calcule ainsi une somme pondérée et teste le seuil. C'est cette règle binaire et mathématiquement déterministe qui permet au réseau d'éliminer le bruit et de ne transmettre que les signaux pertinents.",
+    "number": "08",
+    "file": "slides_exported/slide_08.png",
+    "timestamp": "02:14.292"
+  },
+  {
+    "id": 9,
+    "title": "Animation : Le Neurone Artificiel en Action",
+    "section": "Chapitre 2 : Outils Révolutionnaires",
+    "type": "video",
+    "media": {
+      "mp4": "animations/02_neurone.mp4",
+      "gif": "animations/02_neurone.gif",
+      "poster": "animations/02_neurone_poster.png",
+      "duration": 5.0
+    },
+    "seconds": 140.0,
+    "notes": "Sur cet exemple concret : avec des entrées x1=1 (poids 0.5), x2=2 (poids 0.8) et x3=1 (poids 0.4), le neurone calcule une somme cumulée de 1,50. Il compare ce résultat au seuil d'activation fixé à 1,0. La condition étant validée (1,50 >= 1,0), le signal électrique se déclenche. Le neurone s'illumine et transmet la valeur 1 à la couche suivante. C'est le principe élémentaire de la décision binaire artificielle.",
+    "number": "09",
+    "file": "slides_exported/slide_09.png",
+    "timestamp": "02:20.000"
+  },
+  {
+    "id": 10,
+    "title": "3. Filtrage et pooling : Extraction et compression",
+    "section": "Chapitre 3 : Filtrage et Pooling",
+    "type": "image",
+    "seconds": 155.083,
+    "notes": "Troisième étape : le filtrage et le pooling, c'est-à-dire l'extraction et la compression des caractéristiques visuelles.",
+    "number": "10",
+    "file": "slides_exported/slide_10.png",
+    "timestamp": "02:35.083"
+  },
+  {
+    "id": 11,
+    "title": "La Convolution en Mouvement : Filtre Glissant et Partage des Poids",
+    "section": "Chapitre 3 : Filtrage et Pooling",
+    "type": "image",
+    "seconds": 158.417,
+    "notes": "Mais l'outil visuel le plus puissant ici, c'est la convolution. Imaginons une petite loupe glissante, disons une grille de 5 pixels par 5 (ou 3x3). Au lieu de regarder toute l'image d'un seul coup, cette loupe va balayer la grille de gauche à droite et de haut en bas pour repérer des motifs locaux, par exemple une barre horizontale ou un angle.\n\nEt le vrai coup de génie, c'est le partage des poids : la loupe utilise exactement les mêmes réglages pour chercher la barre du 7 partout sur l'image. Ça permet de créer une nouvelle carte de caractéristiques tout en économisant une puissance de calcul gigantesque.",
+    "number": "11",
+    "file": "slides_exported/slide_11.png",
+    "timestamp": "02:38.417"
+  },
+  {
+    "id": 12,
+    "title": "Animation : La Convolution en Action (Filtre Glissant 5x5)",
+    "section": "Chapitre 3 : Filtrage et Pooling",
+    "type": "video",
+    "media": {
+      "mp4": "animations/01_convolution.mp4",
+      "gif": "animations/01_convolution.gif",
+      "poster": "animations/01_convolution_poster.png",
+      "duration": 5.0
+    },
+    "seconds": 175.0,
+    "notes": "Visualisation du balayage 2D par filtre glissant 5×5 sur l'image source, réalisant l'extraction des motifs élémentaires (bords, coins, textures) avec partage universel des poids synaptiques.",
+    "number": "12",
+    "file": "slides_exported/slide_12.png",
+    "timestamp": "02:55.000"
+  },
+  {
+    "id": 13,
+    "title": "Le Max-Pooling : Compression & Invariance Spatiale 2x2",
+    "section": "Chapitre 3 : Filtrage et Pooling",
+    "type": "image",
+    "seconds": 192.417,
+    "notes": "Juste après le passage de cette fameuse loupe, le réseau applique le pooling, ou sous-échantillonnage. Le principe est redoutable : on prend un petit carré de 4 pixels et on ne garde que le signal dominant, le plus fort. Le reste est ignoré.\n\nÇa permet de compresser la taille de l'image de moitié tout en gardant l'essence visuelle. L'avantage énorme du pooling, c'est que si l'écriture tremble un peu ou est légèrement décalée, le réseau s'en fiche complètement car le signal fort est toujours là dans la zone condensée.",
+    "number": "13",
+    "file": "slides_exported/slide_13.png",
+    "timestamp": "03:12.417"
+  },
+  {
+    "id": 14,
+    "title": "Animation : Le Sous-échantillonnage (Average Pooling 2x2)",
+    "section": "Chapitre 3 : Filtrage et Pooling",
+    "type": "video",
+    "media": {
+      "mp4": "animations/03_pooling.mp4",
+      "gif": "animations/03_pooling.gif",
+      "poster": "animations/03_pooling_poster.png",
+      "duration": 5.0
+    },
+    "seconds": 205.0,
+    "notes": "Visualisation de la compression spatiale 2×2 par sous-échantillonnage : réduction de résolution d'un facteur 2 et acquisition d'invariance aux translations et distorsions d'écriture.",
+    "number": "14",
+    "file": "slides_exported/slide_14.png",
+    "timestamp": "03:25.000"
+  },
+  {
+    "id": 15,
+    "title": "4. L'architecture LeNet-5 : La structure historique",
+    "section": "Chapitre 4 : Architecture LeNet-5",
+    "type": "image",
+    "seconds": 219.458,
+    "notes": "Maintenant qu'on a les outils, voyons comment tout ça s'assemble avec l'architecture complète en sept couches.",
+    "number": "15",
+    "file": "slides_exported/slide_15.png",
+    "timestamp": "03:39.458"
+  },
+  {
+    "id": 16,
+    "title": "Architecture Complète LeNet-5 : Les 7 couches de Yann LeCun",
+    "section": "Chapitre 4 : Architecture LeNet-5",
+    "type": "video",
+    "media": {
+      "mp4": "animations/04_lenet5_pipeline.mp4",
+      "gif": "animations/04_lenet5_pipeline.gif",
+      "poster": "animations/04_lenet5_pipeline_poster.png",
+      "duration": 8.0
+    },
+    "seconds": 225.225,
+    "notes": "Voici le légendaire pipeline visuel de LeNet-5. C'est le trajet exact que suit l'image de notre chèque bancaire. Tout à gauche, on entre la grille brute de 32 par 32 pixels. Ensuite, le signal va rebondir de couche en couche à travers différents blocs imbriqués pour finalement arriver tout à droite. Et là, on trouve les 10 neurones de sortie qui correspondent aux chiffres de 0 à 9. Le neurone qui crie le plus fort donne la décision finale de la machine.\n\nCe qui est brillant, c'est la logique d'alternance de ces couches : on commence par extraire des traits de base avec six filtres dans la couche C1. Bam ! On compresse immédiatement avec la couche S2 pour stabiliser l'image. Ensuite, on relance l'extraction dans la couche C3 avec 16 filtres cette fois pour repérer des formes plus complexes comme le croisement de deux lignes. Nouvelle compression avec S4. Et pour finir, les couches denses C5 avec ses 120 unités et F6 avec ses 84 unités jouent le rôle du cerveau final : elles rassemblent toutes les pièces du puzzle pour prendre la décision. C'est un entonnoir absolument parfait.",
+    "number": "16",
+    "file": "slides_exported/slide_16.png",
+    "timestamp": "03:45.225"
+  },
+  {
+    "id": 17,
+    "title": "Apprentissage : Rétropropagation du gradient (Prédiction, Erreur, Correction)",
+    "section": "Chapitre 4 : Architecture LeNet-5",
+    "type": "image",
+    "seconds": 260.25,
+    "notes": "4e étape : l'apprentissage et les données chiffrées. Car oui, sans entraînement, tout ça ne sert à rien. Mais alors, comment ce réseau devient-il intelligent ? Et bien, par l'erreur, c'est le mécanisme de la rétropropagation du gradient.\n\nImaginons un archer débutant : son tout premier tir atterrit loin de la cible. C'est la prédiction initiale de la machine. On calcule l'écart avec le centre, donc l'erreur, et l'archer ajuste très légèrement son arc pour le prochain tir. Le réseau fait exactement la même chose : l'erreur mathématique remonte à l'envers à travers les couches pour corriger infimement chaque petit poids interne. On répète ce cycle des dizaines de milliers de fois et le modèle finit par viser juste.",
+    "number": "17",
+    "file": "slides_exported/slide_17.png",
+    "timestamp": "04:20.250"
+  },
+  {
+    "id": 18,
+    "title": "Performances Records (1998) : 60 000 Paramètres et Précision Élite",
+    "section": "Chapitre 4 : Architecture LeNet-5",
+    "type": "image",
+    "seconds": 284.708,
+    "notes": "Et le chiffre qu'il faut absolument garder en tête ici, c'est 60 000. LeNet-5 parvient à analyser l'image de façon ultra fiable en utilisant seulement 60 000 paramètres ajustables. À notre époque où les IA tournent avec des centaines de milliards de paramètres, c'est microscopique mais c'est d'une élégance absolue.\n\nEn 1998, cette compacité mathématique de 60 000 poids, c'était le secret pour que le système puisse fonctionner en temps réel sur les processeurs de l'époque. Les résultats de cette optimisation ont brisé tous les standards : LeNet-5 a été entraîné sur la fameuse base de données MNIST qui contient 70 000 chiffres manuscrits et a atteint un taux d'erreurs record de seulement 0,8 % sur des données de test qu'il n'avait jamais vues, même avec des ratures et des distorsions. Ce niveau de précision prouvait enfin qu'un algorithme pouvait vraiment rivaliser avec l'œil humain sur ce type de tâche.",
+    "number": "18",
+    "file": "slides_exported/slide_18.png",
+    "timestamp": "04:44.708"
+  },
+  {
+    "id": 19,
+    "title": "5. Déploiement NCR : Succès industriel massif",
+    "section": "Chapitre 5 : Déploiement & Impact Industriel",
+    "type": "video",
+    "media": {
+      "mp4": "animations/ncr-slide.mp4",
+      "duration": 5.0
+    },
+    "seconds": 311.542,
+    "notes": "Ce qui nous mène logiquement à notre dernier acte, l'impact industriel et l'IA moderne. Ce qui mène à la cinquième étape : le déploiement industriel chez NCR.",
+    "number": "19",
+    "file": "slides_exported/slide_19.png",
+    "timestamp": "05:11.542"
+  },
+  {
+    "id": 20,
+    "title": "Intégration Matérielle : Trieuses Bancaires NCR & Puces DSP",
+    "section": "Chapitre 5 : Déploiement & Impact Industriel",
+    "type": "image",
+    "seconds": 316.292,
+    "notes": "Parce que LeNet-5, ce n'est pas juste resté un projet dans un laboratoire. Dès l'été 1996, l'entreprise NCR l'a intégré directement dans ses trieuses bancaires aux États-Unis.\n\nCes machines tournaient à plein régime, déchiffrant de manière totalement autonome des millions de chèques par jour grâce à une puce DSP dédiée. C'était une application commerciale réelle dès 1998, assurant la reconnaissance automatique de près de 10 % des chèques circulant sur le territoire américain.",
+    "number": "20",
+    "file": "slides_exported/slide_20.png",
+    "timestamp": "05:16.292"
+  },
+  {
+    "id": 21,
+    "title": "Impact Industriel : 20 Millions de Chèques / Jour & Évolution des Activations",
+    "section": "Chapitre 5 : Déploiement & Impact Industriel",
+    "type": "image",
+    "seconds": 340.208,
+    "notes": "Ces machines tournaient à plein régime, déchiffrant de manière totalement autonome environ 20 millions de chèques par jour. Ça représentait à peu près 10 % de tout le volume bancaire américain. C'était littéralement de l'intelligence artificielle de pointe utilisée tous les jours au cœur de l'économie réelle.\n\nD'ailleurs, petit détail technique en passant, certains se demandent peut-être pourquoi LeNet-5 utilisait la fonction d'activation tanh ou la sigmoïde au lieu de la fonction ReLU qu'on voit absolument partout dans l'IA moderne. La réponse est simple, c'est une question d'époque : en 98, ces fonctions étaient la norme théorique héritée directement des recherches en neurosciences sur le cerveau. La fonction ReLU n'a vraiment été popularisée qu'en 2012 avec l'arrivée d'AlexNet pour contourner certains blocages sur des réseaux beaucoup plus gros.",
+    "number": "21",
+    "file": "slides_exported/slide_21.png",
+    "timestamp": "05:40.208"
+  },
+  {
+    "id": 22,
+    "title": "6. L'héritage dans l'IA : La vision par ordinateur",
+    "section": "Chapitre 6 : Héritage & Postérité",
+    "type": "image",
+    "seconds": 356.917,
+    "notes": "L'héritage technologique de LeNet-5 donne vraiment le vertige. Il a posé le standard incontournable : la convolution suivie du pooling. C'est ce modèle qui a directement inspiré AlexNet en 2012, déclenchant la révolution du deep learning qu'on connaît.",
+    "number": "22",
+    "file": "slides_exported/slide_22.png",
+    "timestamp": "05:56.917"
+  },
+  {
+    "id": 23,
+    "title": "Applications Contemporaines : Les 4 Domaines Héritiers",
+    "section": "Chapitre 6 : Héritage & Postérité",
+    "type": "image",
+    "seconds": 361.625,
+    "notes": "Aujourd'hui, les principes exacts inventés pour lire des chèques en 1998 sont utilisés quand un téléphone se déverrouille avec Face ID, quand une IA analyse une radiographie ou quand une voiture autonome détecte un piéton. Tout cet arbre technologique puise ses racines ici.",
+    "number": "23",
+    "file": "slides_exported/slide_23.png",
+    "timestamp": "06:01.625"
+  },
+  {
+    "id": 24,
+    "title": "Synthèse Animée & Démonstration Complète LeNet-5",
+    "section": "Chapitre 6 : Héritage & Démonstration",
+    "type": "video",
+    "media": {
+      "mp4": "animations/lenet5_pedagogique.mp4",
+      "duration": 30.0
+    },
+    "seconds": 380.0,
+    "notes": "Recapitulons et démonstration dans le google colab. Synthèse animée du pipeline complet et ouverture vers l'expérimentation interactive du modèle sous Google Colab.",
+    "number": "24",
+    "file": "slides_exported/slide_24.png",
+    "timestamp": "06:20.000"
+  },
+  {
+    "id": 25,
+    "title": "⭐ Les 10 points clés à retenir absolument",
+    "section": "Synthèse",
+    "type": "image",
+    "seconds": 400.0,
+    "notes": "⭐ Les 10 points clés à retenir absolument :\n1. Une image est une grille de pixels contenant des valeurs de luminosité de 0 à 255.\n2. Un neurone effectue une somme pondérée de ses entrées et la compare à un seuil d'activation.\n3. Un réseau empile des couches successives pour construire des représentations hiérarchisées.\n4. L'entraînement ajuste automatiquement les poids pour réduire l'erreur par rétropropagation.\n5. La convolution utilise une fenêtre glissante pour repérer les contours et les formes locales.\n6. Le pooling compresse les dimensions et tolère les légères déformations de l'écriture.\n7. LeNet-5 alterne deux blocs Convolution-Pooling avant ses couches denses de décision.\n8. LeNet-5 compte environ 60 000 paramètres entraînables pour classer les chiffres 0 à 9.\n9. LeNet-5 a été validé sur le terrain en traitant des millions de chèques bancaires par mois chez NCR.\n10. Ces principes historiques constituent le socle de toute la vision par ordinateur contemporaine.",
+    "number": "25",
+    "file": "slides_exported/slide_25.png",
+    "timestamp": "06:40.000"
+  },
+  {
+    "id": 26,
+    "title": "Questions / Réponses & Quiz d'Auto-Évaluation",
+    "section": "Évaluation",
+    "type": "image",
+    "seconds": 420.0,
+    "notes": "Session interactive de questions/réponses et quiz d'auto-évaluation pour consolider la compréhension de l'architecture LeNet-5, de ses hyperparamètres et de son impact industriel.",
+    "number": "26",
+    "file": "slides_exported/slide_26.png",
+    "timestamp": "07:00.000"
+  },
+  {
+    "id": 27,
+    "title": "Démonstration Pratique : Google Colab & Entraînement MNIST",
+    "section": "Pratique",
+    "type": "image",
+    "seconds": 435.0,
+    "notes": "Démonstration pratique en direct : exécution du code PyTorch/TensorFlow de LeNet-5 sur le jeu de données MNIST dans Google Colab.",
+    "number": "27",
+    "file": "slides_exported/slide_27.png",
+    "timestamp": "07:15.000"
+  },
+  {
+    "id": 28,
+    "title": "Perspectives & Conclusion : Quelles futures limites l'IA va-t-elle pulvériser ?",
+    "section": "Conclusion",
+    "type": "image",
+    "seconds": 450.0,
+    "notes": "Ce qui amène une réflexion plutôt provocatrice pour terminer : aujourd'hui, on s'extasie tous devant des modèles d'IA titanesques qui engloutissent des milliards de paramètres et une énergie colossale. Mais dans un quart de siècle, comment est-ce qu'on regardera ces géants ? Face à la pureté, l'élégance et l'incroyable efficacité des 60 000 paramètres de LeNet, la course au gigantisme est-elle vraiment le seul avenir de l'intelligence artificielle, ou l'industrie finira-t-elle par revenir à cette ingéniosité minimaliste ? C'est une excellente question qui mérite qu'on s'y attarde.",
+    "number": "28",
+    "file": "slides_exported/slide_28.png",
+    "timestamp": "07:30.000"
+  }
+];
+
+    let slidesData = fallbackSlides;
+    let currentIndex = 0;
+    let autoplayInterval = null;
+    let timerInterval = null;
+    let timerSeconds = 0;
+    let timerRunning = true;
+    let slideMediaMode = 'video';
+
+    // ==========================================================================
+    // SÉLECTEUR DE THÈMES (RÉFÉRENCE EXACTE CHECKLIST)
+    // ==========================================================================
+    const themeLabels = {
+      'origine': '📜 Origine',
+      'theme-1': '🌌 Zero-G Quantum',
+      'theme-2': '🛰️ Orbital HUD',
+      'theme-3': '💥 Supernova'
+    };
+
+    function toggleThemeDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('themeDropdown');
+      if (dd) dd.classList.toggle('open');
+    }
+
+    function closeThemeDropdown() {
+      const dd = document.getElementById('themeDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      const dd = document.getElementById('themeDropdown');
+      if (dd && !dd.contains(e.target)) {
+        closeThemeDropdown();
+      }
+    });
+
+    function switchTheme(themeName) {
+      document.body.setAttribute("data-theme", themeName);
+      document.documentElement.setAttribute("data-theme", themeName);
+
+      // Update dropdown label
+      const labelElem = document.getElementById('themeCurrentLabel');
+      if (labelElem && themeLabels[themeName]) {
+        labelElem.innerText = themeLabels[themeName];
+      }
+
+      // Update active state in menu items
+      document.querySelectorAll('.theme-menu-item').forEach(item => {
+        if (item.getAttribute('data-theme-val') === themeName) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      closeThemeDropdown();
+
+      try {
+        localStorage.setItem("lenet5_active_theme", themeName);
+        localStorage.setItem("agent_checklist_theme", themeName);
+      } catch(e) {}
+    }
+
+    // Charger les métadonnées depuis l'API locale si disponible
+    fetch('/api/slides')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          slidesData = data;
+        }
+        initApp();
+      })
+      .catch(err => {
+        console.warn('Utilisation des données intégrées:', err);
+        initApp();
+      });
+
+    function initApp() {
+      const selector = document.getElementById('slideSelector');
+      const strip = document.getElementById('thumbnailsStrip');
+
+      selector.innerHTML = '';
+      strip.innerHTML = '';
+
+      slidesData.forEach((s, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        const vidIcon = s.type === 'video' ? '🎬 ' : '';
+        opt.innerText = `${s.number}. ${vidIcon}${s.title}`;
+        selector.appendChild(opt);
+
+        const node = document.createElement('div');
+        node.className = 'thumb-node' + (idx === 0 ? ' active' : '');
+        node.id = `thumb-${idx}`;
+        node.onclick = () => goToSlide(idx);
+        const videoBadge = s.type === 'video' ? '<span class="thumb-badge-video">🎬 VIDÉO</span>' : '';
+        node.innerHTML = `
+          ${videoBadge}
+          <img src="${s.file}" alt="${s.title}">
+          <div class="thumb-node-title">${s.number}. ${s.title}</div>
+        `;
+        strip.appendChild(node);
+      });
+
+      renderCurrentSlide();
+      startTimer();
+      studioSelectModule(0);
+    }
+
+    function toggleSlideMediaMode() {
+      slideMediaMode = (slideMediaMode === 'video') ? 'image' : 'video';
+      renderCurrentSlide();
+    }
+
+    function renderCurrentSlide() {
+      if (!slidesData || slidesData.length === 0) return;
+      const s = slidesData[currentIndex];
+      const total = slidesData.length;
+      const pct = Math.round(((currentIndex + 1) / total) * 100);
+
+      // Metriques Télémetrie
+      document.getElementById('count-verified').innerText = `${currentIndex + 1} / ${total}`;
+      document.getElementById('seg-slide').style.width = `${pct}%`;
+      document.getElementById('txt-slide').innerText = `Diapositive ${currentIndex + 1} / ${total} (${pct}%)`;
+
+      // Onglet 1 : Diaporama (Image / Vidéo intégrée)
+      document.getElementById('slidePhaseNum').innerText = `SLIDE ${s.number}`;
+      document.getElementById('stageSlideHeader').innerText = `${s.number}. ${s.title}`;
+      document.getElementById('stageTimestampTag').innerText = `⏱ ${s.timestamp}`;
+      document.getElementById('slideSelector').value = currentIndex;
+      document.getElementById('notesTitleLabel').innerText = `${s.number}. ${s.title}`;
+      document.getElementById('notesTextBody').innerText = s.notes;
+
+      const imgEl = document.getElementById('mainSlideImg');
+      const videoEl = document.getElementById('mainSlideVideo');
+      const toggleBtn = document.getElementById('slideMediaToggleBtn');
+
+      if (s.type === 'video' && s.media) {
+        toggleBtn.style.display = 'inline-block';
+        if (slideMediaMode === 'video') {
+          imgEl.style.display = 'none';
+          videoEl.style.display = 'block';
+          if (!videoEl.src.endsWith(s.media.mp4)) {
+            videoEl.src = s.media.mp4;
+            videoEl.poster = s.media.poster || s.file;
+          }
+          toggleBtn.innerText = '🖼️ Basculer Image Fixe';
+          toggleBtn.classList.add('btn-primary');
+        } else {
+          videoEl.pause();
+          videoEl.style.display = 'none';
+          imgEl.style.display = 'block';
+          imgEl.src = s.file;
+          toggleBtn.innerText = '🎬 Activer Vidéo Remotion';
+          toggleBtn.classList.remove('btn-primary');
+        }
+      } else {
+        toggleBtn.style.display = 'none';
+        videoEl.pause();
+        videoEl.style.display = 'none';
+        imgEl.style.display = 'block';
+        imgEl.src = s.file;
+      }
+
+      // Vignettes actives
+      document.querySelectorAll('.thumb-node').forEach((el, idx) => {
+        if (idx === currentIndex) {
+          el.classList.add('active');
+          el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      // Onglet 2 : Mode Présentateur
+      document.getElementById('pSlideTitle').innerText = `${s.number}. ${s.title}`;
+      document.getElementById('pTimestamp').innerText = `⏱ ${s.timestamp}`;
+      document.getElementById('pSlideIndexDisplay').innerText = currentIndex + 1;
+      document.getElementById('pNotesText').innerText = s.notes;
+
+      const pImg = document.getElementById('pMainImg');
+      const pVid = document.getElementById('pMainVideo');
+      if (s.type === 'video' && s.media) {
+        pImg.style.display = 'none';
+        pVid.style.display = 'block';
+        if (!pVid.src.endsWith(s.media.mp4)) {
+          pVid.src = s.media.mp4;
+          pVid.poster = s.media.poster || s.file;
+        }
+      } else {
+        pVid.pause();
+        pVid.style.display = 'none';
+        pImg.style.display = 'block';
+        pImg.src = s.file;
+      }
+
+      // Prochaine diapositive
+      const nextIdx = (currentIndex + 1) % total;
+      const nextS = slidesData[nextIdx];
+      document.getElementById('pNextImg').src = nextS.file;
+      document.getElementById('pNextTitle').innerText = `${nextS.number}. ${nextS.title}`;
+      document.getElementById('pNextTimestamp').innerText = `⏱ ${nextS.timestamp}`;
+      const nextVidBadge = document.getElementById('pNextVideoBadge');
+      if (nextVidBadge) {
+        nextVidBadge.style.display = (nextS.type === 'video') ? 'inline-block' : 'none';
+      }
+    }
+
+    // ==========================================================================
+    // STUDIO ANIMATIONS REMOTION (6 MODULES COMPLETS)
+    // ==========================================================================
+    const studioModules = [
+      {
+        id: "01_convolution",
+        badge: "MODULE 01",
+        title: "Animation Remotion : 01. Convolution 2D",
+        slideIdx: 11, // Slide 12
+        slideNum: "12",
+        mp4: "animations/01_convolution.mp4",
+        gif: "animations/01_convolution.gif",
+        poster: "animations/01_convolution_poster.png",
+        duration: "5.0s (150 FRAMES)",
+        codec: "H.264 @ 30 FPS",
+        weight: "528 Ko (MP4) • 882 Ko (GIF)",
+        concept: "FONDATION THÉORIQUE : CONVOLUTION 2D",
+        conceptTitle: "Balayage Convolutif 2D par Filtre Glissant 5×5",
+        conceptDesc: "Extraction déterministe des contours primaires locaux sur l'image source avec partage invariant des poids synaptiques. Réduction spectaculaire à seulement 156 paramètres pour la couche C1.",
+        showFrames: false
+      },
+      {
+        id: "02_neurone",
+        badge: "MODULE 02",
+        title: "Animation Remotion : 02. Neurone Formel",
+        slideIdx: 8, // Slide 09
+        slideNum: "09",
+        mp4: "animations/02_neurone.mp4",
+        gif: "animations/02_neurone.gif",
+        poster: "animations/02_neurone_poster.png",
+        duration: "5.0s (150 FRAMES)",
+        codec: "H.264 @ 30 FPS",
+        weight: "708 Ko (MP4) • 1.37 Mo (GIF)",
+        concept: "FONDATION MATHÉMATIQUE : NEURONE FORMEL",
+        conceptTitle: "Somme Pondérée Synaptique & Seuil d'Activation",
+        conceptDesc: "Calcul de la somme pondérée (entrées x1=1, x2=2, x3=1 avec poids respectifs 0.5, 0.8, 0.4) atteignant 1.50. Dépassement du seuil 1.0 provoquant l'émission déterministe du signal binaire vers la couche suivante.",
+        showFrames: false
+      },
+      {
+        id: "03_pooling",
+        badge: "MODULE 03",
+        title: "Animation Remotion : 03. Pooling 2×2",
+        slideIdx: 13, // Slide 14
+        slideNum: "14",
+        mp4: "animations/03_pooling.mp4",
+        gif: "animations/03_pooling.gif",
+        poster: "animations/03_pooling_poster.png",
+        duration: "5.0s (150 FRAMES)",
+        codec: "H.264 @ 30 FPS",
+        weight: "384 Ko (MP4) • 320 Ko (GIF)",
+        concept: "COMPRESSION & INVARIANCE GÉOMÉTRIQUE",
+        conceptTitle: "Sous-Échantillonnage Spatial 2×2 (Average/Max Pooling)",
+        conceptDesc: "Division par deux des dimensions des cartes (28×28 -> 14×14 puis 10×10 -> 5×5). Confère au réseau une robustesse absolue face aux petites déformations manuelles du tracé.",
+        showFrames: false
+      },
+      {
+        id: "04_lenet5_pipeline",
+        badge: "MODULE 04",
+        title: "Animation Remotion : 04. Pipeline 7 Couches",
+        slideIdx: 15, // Slide 16
+        slideNum: "16",
+        mp4: "animations/04_lenet5_pipeline.mp4",
+        gif: "animations/04_lenet5_pipeline.gif",
+        poster: "animations/04_lenet5_pipeline_poster.png",
+        duration: "8.0s (240 FRAMES)",
+        codec: "H.264 @ 30 FPS",
+        weight: "592 Ko (MP4) • 1.36 Mo (GIF)",
+        concept: "ARCHITECTURE INTÉGRALE YANN LECUN",
+        conceptTitle: "Traversée Complète des 7 Couches LeNet-5 (1998)",
+        conceptDesc: "Enchaînement hiérarchique : Entrée 32×32 -> C1 (6 cartes 28×28) -> S2 (6 cartes 14×14) -> C3 (16 cartes 10×10) -> S4 (16 cartes 5×5) -> C5 (120 denses) -> F6 (84 denses) -> Sortie (10 RBF). 60 000 paramètres au total.",
+        showFrames: false
+      },
+      {
+        id: "ncr_slide",
+        badge: "MODULE 05",
+        title: "Animation Remotion : 05. Déploiement Industriel NCR",
+        slideIdx: 18, // Slide 19
+        slideNum: "19",
+        mp4: "animations/ncr-slide.mp4",
+        gif: null,
+        poster: "remotion-lenet5-ncr/out/frames/frame_06_4.0s.png",
+        duration: "5.0s (150 FRAMES)",
+        codec: "H.264 @ 30 FPS • Easing Cubic Out",
+        weight: "446 Ko (MP4)",
+        concept: "DÉPLOIEMENT INDUSTRIEL & SUCCÈS MASSIF",
+        conceptTitle: "Trieuses Bancaires NCR & Puces DSP (1996-1998)",
+        conceptDesc: "Automatisation du tri de plus de 20 millions de chèques par jour aux États-Unis avec 99.2% de précision. Première preuve historique de la viabilité industrielle des réseaux neuronaux profonds.",
+        showFrames: true
+      },
+      {
+        id: "lenet5_pedagogique",
+        badge: "MODULE 06",
+        title: "Animation Remotion : 06. Synthèse & Colab",
+        slideIdx: 23, // Slide 24
+        slideNum: "24",
+        mp4: "animations/lenet5_pedagogique.mp4",
+        gif: null,
+        poster: "slides_exported/slide_24.png",
+        duration: "30.0s",
+        codec: "H.264 @ 30 FPS",
+        weight: "1.89 Mo (MP4)",
+        concept: "SYNTHÈSE GLOBALE & EXPÉRIMENTATION",
+        conceptTitle: "Film Pédagogique Complet & Démonstration Google Colab",
+        conceptDesc: "Synthèse audio-visuelle complète reliant les concepts de 1998 aux frameworks modernes (PyTorch / TensorFlow) avec exécution interactive sous Google Colab.",
+        showFrames: false
+      }
+    ];
+
+    let currentStudioIdx = 0;
+    let studioIsGifMode = false;
+
+    function studioSelectModule(idx) {
+      if (idx < 0 || idx >= studioModules.length) return;
+      currentStudioIdx = idx;
+      studioIsGifMode = false;
+      const mod = studioModules[idx];
+
+      // Update button active state
+      document.querySelectorAll('.studio-module-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === idx);
+      });
+
+      // Update header & badges
+      document.getElementById('studioModuleBadge').innerText = mod.badge;
+      document.getElementById('studioModuleHeader').innerText = mod.title;
+      document.getElementById('studioTagCodec').innerText = `CODEC: ${mod.codec}`;
+      document.getElementById('studioTagDuration').innerText = `DURÉE: ${mod.duration}`;
+      document.getElementById('studioTagSlide').innerText = `ASSOCIÉ: SLIDE ${mod.slideNum}`;
+
+      // Update media
+      const video = document.getElementById('studioVideo');
+      const gif = document.getElementById('studioGif');
+      const gifBtn = document.getElementById('studioGifToggleBtn');
+
+      video.style.display = 'block';
+      gif.style.display = 'none';
+      video.poster = mod.poster;
+      video.src = mod.mp4;
+
+      if (mod.gif) {
+        gifBtn.style.display = 'inline-block';
+        gifBtn.innerText = '🎞️ Mode GIF Animé';
+        gifBtn.classList.remove('btn-primary');
+      } else {
+        gifBtn.style.display = 'none';
+      }
+
+      // Update downloads
+      const dMp4 = document.getElementById('studioDownloadMp4');
+      dMp4.href = mod.mp4;
+      dMp4.innerText = `⬇ MP4 HD (${mod.weight.split('•')[0].trim()})`;
+
+      const dGif = document.getElementById('studioDownloadGif');
+      if (mod.gif) {
+        dGif.style.display = 'inline-block';
+        dGif.href = mod.gif;
+      } else {
+        dGif.style.display = 'none';
+      }
+
+      const dPoster = document.getElementById('studioDownloadPoster');
+      if (mod.poster) {
+        dPoster.style.display = 'inline-block';
+        dPoster.href = mod.poster;
+      } else {
+        dPoster.style.display = 'none';
+      }
+
+      // Update description
+      document.getElementById('studioDescConcept').innerText = mod.concept;
+      document.getElementById('studioDescTitle').innerText = mod.conceptTitle;
+      document.getElementById('studioDescText').innerText = mod.conceptDesc;
+
+      // Update gallery section
+      const galSec = document.getElementById('ncrGallerySection');
+      if (galSec) {
+        galSec.style.display = mod.showFrames ? 'block' : 'none';
+      }
+    }
+
+    function studioToggleGifMode() {
+      const mod = studioModules[currentStudioIdx];
+      if (!mod.gif) return;
+      studioIsGifMode = !studioIsGifMode;
+      const video = document.getElementById('studioVideo');
+      const gif = document.getElementById('studioGif');
+      const gifBtn = document.getElementById('studioGifToggleBtn');
+
+      if (studioIsGifMode) {
+        video.pause();
+        video.style.display = 'none';
+        gif.style.display = 'block';
+        gif.src = mod.gif;
+        gifBtn.innerText = '📹 Mode Vidéo MP4';
+        gifBtn.classList.add('btn-primary');
+      } else {
+        gif.style.display = 'none';
+        video.style.display = 'block';
+        gifBtn.innerText = '🎞️ Mode GIF Animé';
+        gifBtn.classList.remove('btn-primary');
+      }
+    }
+
+    function studioJumpToSlide() {
+      const mod = studioModules[currentStudioIdx];
+      switchTab('tab-slides', document.querySelectorAll('.tab-btn')[0]);
+      goToSlide(mod.slideIdx);
+    }
+
+    function nextSlide() {
+      if (currentIndex < slidesData.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      renderCurrentSlide();
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = slidesData.length - 1;
+      }
+      renderCurrentSlide();
+    }
+
+    function goToSlide(idx) {
+      if (idx >= 0 && idx < slidesData.length) {
+        currentIndex = idx;
+        renderCurrentSlide();
+      }
+    }
+
+
+    // ==========================================================================
+    // ROUTAGE PAR ANCRE HASH (#tab-video, #tab-slides, etc.)
+    // ==========================================================================
+    function checkUrlHash() {
+      const hash = window.location.hash;
+      if (hash) {
+        const tabId = hash.replace('#', '');
+        const targetPane = document.getElementById(tabId);
+        if (targetPane && targetPane.classList.contains('tab-pane')) {
+          let matchingBtn = null;
+          document.querySelectorAll('.tab-btn').forEach(b => {
+            if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+              matchingBtn = b;
+            }
+          });
+          switchTab(tabId, matchingBtn);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', checkUrlHash);
+    window.addEventListener('hashchange', checkUrlHash);
+
+    // Navigation par Onglets
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById(tabId);
+      if (target) target.style.display = 'block';
+      if (btn) btn.classList.add('active');
+    }
+
+    // Mode Plein Écran
+    function toggleFullscreen() {
+      const stage = document.getElementById('slideStage');
+      if (!document.fullscreenElement) {
+        stage.requestFullscreen().catch(err => alert("Erreur plein écran: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Lecture Automatique
+    function toggleAutoplay() {
+      const btn = document.getElementById('autoplayBtn');
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+        btn.innerText = '▶ Lecture Auto';
+        btn.classList.remove('btn-primary');
+      } else {
+        autoplayInterval = setInterval(nextSlide, 7000);
+        btn.innerText = '⏸ Pause Auto';
+        btn.classList.add('btn-primary');
+      }
+    }
+
+    // Chronomètre Présentateur
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timerRunning) {
+          timerSeconds++;
+          const hrs = String(Math.floor(timerSeconds / 3600)).padStart(2, '0');
+          const mins = String(Math.floor((timerSeconds % 3600) / 60)).padStart(2, '0');
+          const secs = String(timerSeconds % 60).padStart(2, '0');
+          document.getElementById('timerDisplay').innerText = `${hrs}:${mins}:${secs}`;
+        }
+      }, 1000);
+    }
+
+    function toggleTimer() {
+      timerRunning = !timerRunning;
+      document.getElementById('timerToggleBtn').innerText = timerRunning ? 'Pause' : 'Reprendre';
+    }
+
+    function resetTimer() {
+      timerSeconds = 0;
+      document.getElementById('timerDisplay').innerText = '00:00:00';
+    }
+
+    // Raccourcis Clavier
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    // Support Swipe Tactile (Appareils Mobiles & Tablettes)
+    let touchStartX = 0;
+    const stage = document.getElementById('slideStage');
+    if (stage) {
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      stage.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) nextSlide();
+        if (touchEndX > touchStartX + 50) prevSlide();
+      }, { passive: true });
+    }
+
+    // Initialisation du Thème mémorisé (exactement comme checklist)
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const savedTheme = localStorage.getItem("lenet5_active_theme") || localStorage.getItem("agent_checklist_theme") || "origine";
+        switchTheme(savedTheme);
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

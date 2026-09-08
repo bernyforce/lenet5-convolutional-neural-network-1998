@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="origine">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -518,11 +518,830 @@
         padding: 20px 16px;
       }
     }
+
+    /* ==========================================================================
+       SHOWCASE BAR & NAVIGATION STYLES
+       ========================================================================== */
+    body {
+      padding-top: 64px !important;
+    }
+
+    .showcase-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 999;
+      background: rgba(11, 17, 32, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .showcase-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .pulsar {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .showcase-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link-pill {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.32rem 0.8rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link-pill:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-link-pill.colab-pill {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: rgba(37, 99, 235, 0.6);
+      color: #93c5fd;
+    }
+
+    .nav-link-pill.colab-pill:hover {
+      background: rgba(37, 99, 235, 0.4);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    }
+
+    /* ==========================================================================
+       SÉLECTEUR DE THÈME DÉROULANT ET DISCRET
+       ========================================================================== */
+    .theme-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .theme-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .theme-dropdown-trigger:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .theme-dropdown.open .theme-chevron {
+      transform: rotate(180deg);
+    }
+
+    .theme-dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      padding: 6px;
+      min-width: 250px;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .theme-dropdown.open .theme-dropdown-menu {
+      display: flex;
+    }
+
+    .theme-menu-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      padding: 6px 10px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 3px;
+    }
+
+    .theme-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+      font-family: inherit;
+    }
+
+    .theme-menu-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-menu-item.active {
+      background: rgba(9, 105, 218, 0.18);
+      border-color: rgba(9, 105, 218, 0.4);
+    }
+
+    .theme-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dot-origine { background: #0969da; border-color: #0969da; }
+    .dot-theme1 { background: linear-gradient(135deg, #10b981, #00f0ff); }
+    .dot-theme2 { background: #00ffaa; box-shadow: 0 0 6px #00ffaa; }
+    .dot-theme3 { background: linear-gradient(135deg, #fb7185, #c084fc); }
+
+    .theme-menu-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .theme-menu-text b {
+      font-size: 0.82rem;
+      color: #f8fafc;
+    }
+
+    .theme-menu-text small {
+      font-size: 0.70rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       THEME 1 : ZERO-G QUANTUM (ÉMERAUDE & CYAN)
+       ========================================================================== */
+    body[data-theme="theme-1"] {
+      --bg-main: #020813;
+      --bg-card: rgba(8, 20, 36, 0.9);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #00f0ff;
+      --primary-light: rgba(0, 240, 255, 0.12);
+      --border: rgba(0, 240, 255, 0.2);
+      --border-strong: rgba(0, 240, 255, 0.4);
+      background-color: #020813;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: #f8fafc;
+    }
+
+    body[data-theme="theme-1"] .container {
+      background: rgba(8, 20, 36, 0.9) !important;
+      border: 1px solid rgba(0, 240, 255, 0.25) !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    body[data-theme="theme-1"] p,
+    body[data-theme="theme-1"] li {
+      color: #e2e8f0;
+    }
+
+    /* ==========================================================================
+       THEME 2 : ORBITAL HUD (PHOSPHORESCENCE MATRICIELLE)
+       ========================================================================== */
+    body[data-theme="theme-2"] {
+      --bg-main: #020307;
+      --bg-card: rgba(4, 14, 18, 0.92);
+      --text-main: #f8fafc;
+      --text-muted: #64748b;
+      --primary: #00ffaa;
+      --primary-light: rgba(0, 255, 170, 0.12);
+      --border: rgba(0, 255, 170, 0.25);
+      --border-strong: rgba(0, 255, 170, 0.5);
+      background-color: #020307;
+      background-image: 
+        linear-gradient(rgba(0, 255, 170, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 170, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      background-attachment: fixed;
+      color: #f8fafc;
+    }
+
+    body[data-theme="theme-2"] .container {
+      background: rgba(4, 14, 18, 0.92) !important;
+      border: 1px solid rgba(0, 255, 170, 0.3) !important;
+      box-shadow: 0 0 30px rgba(0, 255, 170, 0.08) !important;
+    }
+
+    body[data-theme="theme-2"] p,
+    body[data-theme="theme-2"] li {
+      color: #e2e8f0;
+    }
+
+    /* ==========================================================================
+       THEME 3 : SUPERNOVA (CYBERPUNK ULTRAVIOLET)
+       ========================================================================== */
+    body[data-theme="theme-3"] {
+      --bg-main: #06020c;
+      --bg-card: rgba(22, 10, 32, 0.9);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --primary: #fb7185;
+      --primary-light: rgba(244, 63, 94, 0.15);
+      --border: rgba(244, 63, 94, 0.3);
+      --border-strong: rgba(244, 63, 94, 0.5);
+      background-color: #06020c;
+      background-image: 
+        radial-gradient(circle at 80% 20%, rgba(244, 63, 94, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: #f8fafc;
+    }
+
+    body[data-theme="theme-3"] .container {
+      background: rgba(22, 10, 32, 0.9) !important;
+      border: 1px solid rgba(244, 63, 94, 0.35) !important;
+      box-shadow: 0 20px 50px rgba(244, 63, 94, 0.15) !important;
+    }
+
+    body[data-theme="theme-3"] p,
+    body[data-theme="theme-3"] li {
+      color: #e2e8f0;
+    }
+
+    /* Adaptations Contraste Thèmes Sombres (Zero-G, Orbital HUD, Supernova) */
+    body[data-theme="theme-1"] .colab-banner,
+    body[data-theme="theme-2"] .colab-banner,
+    body[data-theme="theme-3"] .colab-banner {
+      background: rgba(15, 23, 42, 0.8) !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body[data-theme="theme-1"] .colab-banner span,
+    body[data-theme="theme-2"] .colab-banner span,
+    body[data-theme="theme-3"] .colab-banner span {
+      color: #38bdf8 !important;
+    }
+
+    body[data-theme="theme-1"] .colab-banner p,
+    body[data-theme="theme-2"] .colab-banner p,
+    body[data-theme="theme-3"] .colab-banner p {
+      color: #cbd5e1 !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember,
+    body[data-theme="theme-2"] .box-remember,
+    body[data-theme="theme-3"] .box-remember {
+      background: rgba(6, 78, 59, 0.25) !important;
+      border: 1.5px solid rgba(16, 185, 129, 0.45) !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember h4,
+    body[data-theme="theme-2"] .box-remember h4,
+    body[data-theme="theme-3"] .box-remember h4 {
+      color: #34d399 !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember ul,
+    body[data-theme="theme-1"] .box-remember ol,
+    body[data-theme="theme-1"] .box-remember li,
+    body[data-theme="theme-2"] .box-remember ul,
+    body[data-theme="theme-2"] .box-remember ol,
+    body[data-theme="theme-2"] .box-remember li,
+    body[data-theme="theme-3"] .box-remember ul,
+    body[data-theme="theme-3"] .box-remember ol,
+    body[data-theme="theme-3"] .box-remember li {
+      color: #e2e8f0 !important;
+    }
+
+    body[data-theme="theme-1"] .quiz-options label,
+    body[data-theme="theme-2"] .quiz-options label,
+    body[data-theme="theme-3"] .quiz-options label {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      color: #e2e8f0 !important;
+    }
+
+    body[data-theme="theme-1"] .quiz-question,
+    body[data-theme="theme-2"] .quiz-question,
+    body[data-theme="theme-3"] .quiz-question {
+      color: #f8fafc !important;
+    }
+
+    /* ==========================================================================
+       THEME ORIGINE (PAR DÉFAUT • HAUT CONTRASTE FOND CLAIR)
+       ========================================================================== */
+    body[data-theme="origine"] {
+      background-color: #f8fafc !important;
+      background-image: none !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .showcase-bar {
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    body[data-theme="origine"] .showcase-brand {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .pulsar {
+      background: #0969da !important;
+      box-shadow: 0 0 10px rgba(9, 105, 218, 0.6) !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill {
+      color: #475569 !important;
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill:hover {
+      color: #0f172a !important;
+      background: #e2e8f0 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill.colab-pill {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+      color: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] .container {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-trigger {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-trigger:hover {
+      background: #e2e8f0 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-menu {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-header {
+      color: #64748b !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item:hover {
+      background: #f8fafc !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item.active {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text b {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text small {
+      color: #64748b !important;
+    }
+
+
+    /* ==========================================================================
+       ADAPTATIONS HAUT CONTRASTE UNIVERSELLES (ORIGINE ET THÈMES SOMBRES)
+       ========================================================================== */
+    /* En thème Origine : garantir lisibilité absolue des textes foncés */
+    body[data-theme="origine"] .colab-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%) !important;
+      border: 1.5px solid #93c5fd !important;
+    }
+    body[data-theme="origine"] .colab-banner-title {
+      color: #1e3a8a !important;
+    }
+    body[data-theme="origine"] .colab-banner-desc {
+      color: #475569 !important;
+    }
+    body[data-theme="origine"] .box-remember-title {
+      color: #15803d !important;
+    }
+    body[data-theme="origine"] .box-remember-list {
+      color: #166534 !important;
+    }
+    body[data-theme="origine"] .playground-label {
+      color: #1e293b !important;
+    }
+
+    /* En thèmes Sombres (Zero-G, Orbital HUD, Supernova) : contraste éclatant */
+    body[data-theme="theme-1"] .colab-banner,
+    body[data-theme="theme-2"] .colab-banner,
+    body[data-theme="theme-3"] .colab-banner {
+      background: rgba(15, 23, 42, 0.85) !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+    }
+    body[data-theme="theme-1"] .colab-banner-title,
+    body[data-theme="theme-2"] .colab-banner-title,
+    body[data-theme="theme-3"] .colab-banner-title {
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .colab-banner-desc,
+    body[data-theme="theme-2"] .colab-banner-desc,
+    body[data-theme="theme-3"] .colab-banner-desc {
+      color: #cbd5e1 !important;
+    }
+    body[data-theme="theme-1"] .box-remember-title,
+    body[data-theme="theme-2"] .box-remember-title,
+    body[data-theme="theme-3"] .box-remember-title {
+      color: #34d399 !important;
+    }
+    body[data-theme="theme-1"] .box-remember-list,
+    body[data-theme="theme-2"] .box-remember-list,
+    body[data-theme="theme-3"] .box-remember-list {
+      color: #e2e8f0 !important;
+    }
+    body[data-theme="theme-1"] .playground-label,
+    body[data-theme="theme-2"] .playground-label,
+    body[data-theme="theme-3"] .playground-label {
+      color: #f8fafc !important;
+    }
+    body[data-theme="theme-1"] .playground-container,
+    body[data-theme="theme-2"] .playground-container,
+    body[data-theme="theme-3"] .playground-container {
+      background: rgba(15, 23, 42, 0.7) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+
+    /* Classes thématiques pour les titres des couches */
+    .layer-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .layer-title.conv { color: #0969da; }
+    .layer-title.pool { color: #16a34a; }
+    .layer-title.dense { color: #9333ea; }
+    .layer-title.out { color: #d97706; }
+
+    body[data-theme="origine"] .layer-title.conv { color: #0969da !important; }
+    body[data-theme="origine"] .layer-title.pool { color: #16a34a !important; }
+    body[data-theme="origine"] .layer-title.dense { color: #9333ea !important; }
+    body[data-theme="origine"] .layer-title.out { color: #d97706 !important; }
+
+    body[data-theme="theme-1"] .layer-title.conv,
+    body[data-theme="theme-2"] .layer-title.conv,
+    body[data-theme="theme-3"] .layer-title.conv {
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .layer-title.pool,
+    body[data-theme="theme-2"] .layer-title.pool,
+    body[data-theme="theme-3"] .layer-title.pool {
+      color: #4ade80 !important;
+    }
+    body[data-theme="theme-1"] .layer-title.dense,
+    body[data-theme="theme-2"] .layer-title.dense,
+    body[data-theme="theme-3"] .layer-title.dense {
+      color: #c084fc !important;
+    }
+    body[data-theme="theme-1"] .layer-title.out,
+    body[data-theme="theme-2"] .layer-title.out,
+    body[data-theme="theme-3"] .layer-title.out {
+      color: #fbbf24 !important;
+    }
+
+
+    /* ==========================================================================
+       SÉLECTEUR DE THÈMES DÉROULANT AU PIED DE PAGE (DROPUP)
+       ========================================================================== */
+    .theme-dropdown.dropup .theme-dropdown-menu {
+      bottom: calc(100% + 10px);
+      top: auto;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    body[data-theme="origine"] .theme-dropdown.dropup .theme-dropdown-menu {
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+  
+    /* ==========================================================================
+       NOUVEAUX ENCADRÉS DIDACTIQUES : ARCHER-PYTORCH & PONT 1998 -> MODERNE
+       ========================================================================== */
+    .box-pytorch-bridge {
+      background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);
+      border: 1.5px solid #3b82f6;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 24px 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .bridge-title {
+      color: #1d4ed8;
+      margin-bottom: 12px;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bridge-intro {
+      font-size: 0.94rem;
+      color: #334155;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .bridge-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bridge-step-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .step-label {
+      color: #0f172a;
+      font-size: 0.92rem;
+    }
+    .step-code {
+      background: #f1f5f9;
+      color: #0969da;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.88rem;
+      font-family: monospace;
+    }
+    .step-desc {
+      color: #475569;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Le Pont 1998 -> Moderne */
+    .box-modern-bridge {
+      background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+      border: 1.5px solid #8b5cf6;
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin: 28px 0;
+      box-shadow: 0 4px 12px -2px rgba(139, 92, 246, 0.12);
+    }
+    .modern-bridge-title {
+      color: #6d28d9;
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modern-bridge-intro {
+      font-size: 0.94rem;
+      color: #334155;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .modern-bridge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 700px) {
+      .modern-bridge-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .modern-card {
+      background: #ffffff;
+      border: 1px solid #ddd6fe;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .modern-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #5b21b6;
+      font-size: 0.98rem;
+    }
+    .modern-card-body p {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .modern-solution {
+      font-size: 0.88rem;
+      color: #166534;
+      line-height: 1.5;
+      background: #f0fdf4;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #86efac;
+    }
+    .modern-bridge-note {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px dashed #a78bfa;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.86rem;
+      color: #4c1d95;
+      line-height: 1.5;
+    }
+
+    /* Support Thèmes Sombres */
+    body[data-theme="theme-1"] .box-pytorch-bridge,
+    body[data-theme="theme-2"] .box-pytorch-bridge,
+    body[data-theme="theme-3"] .box-pytorch-bridge {
+      background: rgba(8, 20, 36, 0.85) !important;
+      border-color: rgba(56, 189, 248, 0.45) !important;
+    }
+    body[data-theme="theme-1"] .bridge-title,
+    body[data-theme="theme-2"] .bridge-title,
+    body[data-theme="theme-3"] .bridge-title {
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .bridge-intro,
+    body[data-theme="theme-2"] .bridge-intro,
+    body[data-theme="theme-3"] .bridge-intro {
+      color: #94a3b8 !important;
+    }
+    body[data-theme="theme-1"] .bridge-step-card,
+    body[data-theme="theme-2"] .bridge-step-card,
+    body[data-theme="theme-3"] .bridge-step-card {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    body[data-theme="theme-1"] .step-label,
+    body[data-theme="theme-2"] .step-label,
+    body[data-theme="theme-3"] .step-label {
+      color: #f8fafc !important;
+    }
+    body[data-theme="theme-1"] .step-code,
+    body[data-theme="theme-2"] .step-code,
+    body[data-theme="theme-3"] .step-code {
+      background: rgba(56, 189, 248, 0.15) !important;
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .step-desc,
+    body[data-theme="theme-2"] .step-desc,
+    body[data-theme="theme-3"] .step-desc {
+      color: #cbd5e1 !important;
+    }
+
+    body[data-theme="theme-1"] .box-modern-bridge,
+    body[data-theme="theme-2"] .box-modern-bridge,
+    body[data-theme="theme-3"] .box-modern-bridge {
+      background: rgba(15, 23, 42, 0.85) !important;
+      border-color: rgba(192, 132, 252, 0.45) !important;
+    }
+    body[data-theme="theme-1"] .modern-bridge-title,
+    body[data-theme="theme-2"] .modern-bridge-title,
+    body[data-theme="theme-3"] .modern-bridge-title {
+      color: #c084fc !important;
+    }
+    body[data-theme="theme-1"] .modern-bridge-intro,
+    body[data-theme="theme-2"] .modern-bridge-intro,
+    body[data-theme="theme-3"] .modern-bridge-intro {
+      color: #94a3b8 !important;
+    }
+    body[data-theme="theme-1"] .modern-card,
+    body[data-theme="theme-2"] .modern-card,
+    body[data-theme="theme-3"] .modern-card {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    body[data-theme="theme-1"] .modern-card-header,
+    body[data-theme="theme-2"] .modern-card-header,
+    body[data-theme="theme-3"] .modern-card-header {
+      color: #e9d5ff !important;
+    }
+    body[data-theme="theme-1"] .modern-card-body p,
+    body[data-theme="theme-2"] .modern-card-body p,
+    body[data-theme="theme-3"] .modern-card-body p {
+      color: #cbd5e1 !important;
+    }
+    body[data-theme="theme-1"] .modern-solution,
+    body[data-theme="theme-2"] .modern-solution,
+    body[data-theme="theme-3"] .modern-solution {
+      background: rgba(6, 78, 59, 0.3) !important;
+      border-color: rgba(52, 211, 153, 0.4) !important;
+      color: #a7f3d0 !important;
+    }
+    body[data-theme="theme-1"] .modern-bridge-note,
+    body[data-theme="theme-2"] .modern-bridge-note,
+    body[data-theme="theme-3"] .modern-bridge-note {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(192, 132, 252, 0.3) !important;
+      color: #e9d5ff !important;
+    }
+
   </style>
 </head>
-<body>
+<body data-theme="origine">
+  <!-- SHOWCASE BAR FIXE AVEC SÉLECTEUR DE THÈMES DÉROULANT DISCRET -->
+  <div class="showcase-bar">
+    <div class="showcase-brand">
+      <div class="pulsar"></div>
+      <span>LENET-5 // DOSSIER DOCUMENTAIRE ORIGINAL (1998)</span>
+    </div>
 
-<div class="container">
+    <div class="showcase-nav-links">
+      <a href="index.html" class="nav-link-pill">🖥️ Diaporama (28 Slides)</a>
+      <a href="index.html#tab-video" class="nav-link-pill">🎬 Studio Animations</a>
+      <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="nav-link-pill github-pill">⭐ GitHub Repository ↗</a>
+      <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="nav-link-pill colab-pill">
+        <span>🚀 Google Colab (PyTorch) ↗</span>
+      </a>
+      <a href="LeNet-5.pptx" download class="nav-link-pill">📥 PPTX (27 Mo)</a>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="container">
 
   <!-- HEADER -->
   <header>
@@ -534,9 +1353,27 @@
     <div class="meta-bar">
       <span>👤 Auteure de référence : <b>Neila Mezghani (2024)</b></span>
       <span>📄 Référence historique : <b>Yann LeCun et al. (1998)</b></span>
-      <span>🧩 Format : <b>TSA-Friendly (Concret &amp; Structuré)</b></span>
+      <span>🧩 Format : <b>Concret &amp; Structuré</b></span>
     </div>
   </header>
+
+  <!-- BANNIÈRE GOOGLE COLAB -->
+  <div class="colab-banner" style="margin: 20px 0; padding: 16px 20px; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1.5px solid #93c5fd; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+    <div style="flex: 1; min-width: 260px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.25rem;">🧠</span>
+        <span class="colab-banner-title" style="font-weight: 700; font-size: 1.05rem;">Atelier Pratique Interactif dans Google Colab</span>
+      </div>
+      <p class="colab-banner-desc" style="margin: 4px 0 0; font-size: 0.9rem; line-height: 1.5;">
+        Testez en direct l'architecture LeNet-5 sur MNIST avec PyTorch, visualisez les filtres convolutifs et observez les 6 animations Remotion intégrées dans votre navigateur.
+      </p>
+    </div>
+    <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(37,99,235,0.3); transition: all 0.2s;">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="height: 22px; vertical-align: middle;">
+      <span>Lancer le Notebook</span>
+    </a>
+  </div>
+
 
   <!-- SECTION 0: Page de garde & Sommaire -->
   <section id="sec0" class="dossier-section" style="border-top: none; padding-top: 0; margin-top: 0;">
@@ -548,8 +1385,8 @@
     </div>
 
     <div class="box-remember" style="background: var(--primary-light); border-color: #bfdbfe;">
-      <h4 style="color: #1d4ed8;">📌 Comment lire ce dossier (3 conseils simples)</h4>
-      <ul style="color: #1e40af;">
+      <h4 class="box-remember-title">📌 Comment lire ce dossier (3 conseils simples)</h4>
+      <ul class="box-remember-list">
         <li><b>Lisez dans l'ordre</b> : Chaque section s'appuie sur la précédente pour une assimilation sans effort.</li>
         <li><b>Suivez le fil rouge</b> : Un chiffre « 7 » manuscrit sur un chèque traverse toutes les étapes, de la photo à la décision.</li>
         <li><b>Testez à votre rythme</b> : Utilisez les animations et le quiz interactif sans limite de temps.</li>
@@ -570,6 +1407,7 @@
         <li><a href="#sec9">9. À quoi ça sert aujourd'hui (4 cas)</a></li>
         <li><a href="#sec10">10. Glossaire &amp; 10 points à retenir</a></li>
         <li><a href="#sec11">11. Quiz d'auto-évaluation (10 questions)</a></li>
+        <li><a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" style="color:#2563eb; font-weight:700;">🚀 Démonstration Google Colab (PyTorch) ↗</a></li>
       </ul>
     </div>
 
@@ -985,6 +1823,57 @@
       <li><b>Enfin, la rétropropagation</b> : L'erreur remonte en sens inverse pour ajuster légèrement chaque poids dans la bonne direction.</li>
     </ol>
 
+    <!-- Encadré Didactique : Passerelle Archer <-> PyTorch -->
+    <div class="box-pytorch-bridge">
+      <h4 class="bridge-title">
+        <span>🏹</span> <b>La Passerelle Code : De l'Archer au Code PyTorch (Les 5 Verbes Clés)</b>
+      </h4>
+      <p class="bridge-intro">
+        Pour un débutant, la boucle d'apprentissage d'un réseau de neurones en Python ressemble souvent à une suite d'instructions magiques. En réalité, elle traduit mot pour mot le geste physique d'un <b>archer face à sa cible</b> :
+      </p>
+      <div class="bridge-steps">
+        <div class="bridge-step-card">
+          <div class="step-header">
+            <b class="step-label">🏹 Geste 0 : Baisser l'arc et vider la mémoire résiduelle</b>
+            <code class="step-code">optimizer.zero_grad()</code>
+          </div>
+          <p class="step-desc">Remet les compteurs de correction (gradients) à zéro avant chaque tir pour ne pas cumuler les erreurs du tour précédent.</p>
+        </div>
+
+        <div class="bridge-step-card">
+          <div class="step-header">
+            <b class="step-label">🏹 Geste 1 : Décocher la flèche (Passe Avant / Forward Pass)</b>
+            <code class="step-code">outputs = model(images)</code>
+          </div>
+          <p class="step-desc">L'image de 32×32 pixels traverse tous les étages de l'immeuble (C1 à Sortie) jusqu'au bureau de direction pour émettre une prédiction.</p>
+        </div>
+
+        <div class="bridge-step-card">
+          <div class="step-header">
+            <b class="step-label">🏹 Geste 2 : Mesurer la distance à la cible (Fonction de Perte / Loss)</b>
+            <code class="step-code">loss = criterion(outputs, labels)</code>
+          </div>
+          <p class="step-desc">On calcule l'écart mathématique exact entre le chiffre proposé par le réseau et la cible réelle (l'étiquette du chiffre « 7 »).</p>
+        </div>
+
+        <div class="bridge-step-card">
+          <div class="step-header">
+            <b class="step-label">🏹 Geste 3 : Rétropropagation — Calcul des angles de correction (Backward)</b>
+            <code class="step-code">loss.backward()</code>
+          </div>
+          <p class="step-desc">L'erreur remonte de la sortie vers l'entrée par dérivation en chaîne, calculant le réglage exact nécessaire pour chacun des 61 706 poids.</p>
+        </div>
+
+        <div class="bridge-step-card">
+          <div class="step-header">
+            <b class="step-label">🏹 Geste 4 : Ajustement effectif de la posture (Mise à jour des poids / Step)</b>
+            <code class="step-code">optimizer.step()</code>
+          </div>
+          <p class="step-desc">Tous les poids du réseau sont modifiés d'une infime fraction vers une position plus précise : l'archer est prêt pour un tir plus ajusté au tour suivant !</p>
+        </div>
+      </div>
+    </div>
+
     <div class="svg-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
         <rect width="600" height="300" fill="#f8fafc" rx="12"/>
@@ -1176,7 +2065,7 @@
         
         <!-- Grille 6x6 -->
         <div style="text-align: center;">
-          <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; color: #1e293b;">Image d'entrée (6×6)</div>
+          <div class="playground-label" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Image d'entrée (6×6)</div>
           <div id="grid-conv-input" style="display: grid; grid-template-columns: repeat(6, 26px); gap: 2px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
             <!-- Généré en JS -->
           </div>
@@ -1186,7 +2075,7 @@
 
         <!-- Carte 4x4 -->
         <div style="text-align: center;">
-          <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px; color: #1e293b;">Carte produite (4×4)</div>
+          <div class="playground-label" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Carte produite (4×4)</div>
           <div id="grid-conv-output" style="display: grid; grid-template-columns: repeat(4, 34px); gap: 3px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
             <!-- Généré en JS -->
           </div>
@@ -1426,43 +2315,43 @@
       </div>
 
       <div class="layer-card conv">
-        <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C1 (Convolution 5×5)</div>
+        <div class="layer-title conv">🔍 Couche C1 (Convolution 5×5)</div>
         <div class="layer-role">Extrait 6 types de traits élémentaires (lignes, angles et bordures).</div>
         <div class="layer-meta">Sortie : 6 plans 28×28 | 156 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card pool">
-        <div class="layer-title" style="color: #15803d;">📉 Couche S2 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-title pool">📉 Couche S2 (Sous-échantillonnage 2×2)</div>
         <div class="layer-role">Compresse de moitié la résolution pour stabiliser les motifs détectés.</div>
         <div class="layer-meta">Sortie : 6 plans 14×14 | 12 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card conv">
-        <div class="layer-title" style="color: #1d4ed8;">🔍 Couche C3 (Convolution 5×5)</div>
+        <div class="layer-title conv">🔍 Couche C3 (Convolution 5×5)</div>
         <div class="layer-role">Combine les traits simples pour reconnaître des parties complexes de chiffres.</div>
         <div class="layer-meta">Sortie : 16 plans 10×10 | 1 516 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card pool">
-        <div class="layer-title" style="color: #15803d;">📉 Couche S4 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-title pool">📉 Couche S4 (Sous-échantillonnage 2×2)</div>
         <div class="layer-role">Seconde réduction spatiale pour rendre le modèle robuste aux déformations.</div>
         <div class="layer-meta">Sortie : 16 plans 5×5 | 32 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card dense">
-        <div class="layer-title" style="color: #7e22ce;">🧠 Couche C5 (Convolution dense)</div>
+        <div class="layer-title dense">🧠 Couche C5 (Convolution dense)</div>
         <div class="layer-role">Connecte toutes les caractéristiques spatiales dans 120 unités de décision.</div>
         <div class="layer-meta">Sortie : 120 unités | 48 120 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card dense">
-        <div class="layer-title" style="color: #7e22ce;">🧠 Couche F6 (Couche connectée)</div>
+        <div class="layer-title dense">🧠 Couche F6 (Couche connectée)</div>
         <div class="layer-role">Effectue la synthèse finale des formes pour chaque style d'écriture.</div>
         <div class="layer-meta">Sortie : 84 unités | 10 164 paramètres [LeCun et al., 1998, Sect. II-B]</div>
       </div>
 
       <div class="layer-card out">
-        <div class="layer-title" style="color: #b45309;">🎯 Sortie (10 classes 0 à 9)</div>
+        <div class="layer-title out">🎯 Sortie (10 classes 0 à 9)</div>
         <div class="layer-role">Émet la probabilité de chaque chiffre et valide le pic sur le « 7 ».</div>
         <div class="layer-meta">Sortie : 10 valeurs RBF | 840 paramètres fixes</div>
       </div>
@@ -1476,6 +2365,52 @@
     <div class="citation">
       Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B].
     </div>
+
+    <!-- Encadré Didactique : Le Pont 1998 -> Moderne -->
+    <div class="box-modern-bridge">
+      <h3 class="modern-bridge-title">
+        <span>🏛️</span> <b>Le Pont 1998 → Moderne : Les Deux Verrous Historiques qui ont Sauté</b>
+      </h3>
+      <p class="modern-bridge-intro">
+        Si l'architecture de Yann LeCun en 1998 contenait déjà tous les principes fondamentaux du Deep Learning (convolutions, pooling, rétropropagation), pourquoi a-t-il fallu attendre 14 ans (l'avènement d'AlexNet en 2012) pour déclencher la révolution mondiale de l'IA ? Deux verrous majeurs bloquaient le passage à l'échelle :
+      </p>
+
+      <div class="modern-bridge-grid">
+        <!-- Verrou 1 : Mathématique -->
+        <div class="modern-card">
+          <div class="modern-card-header">
+            <span style="font-size: 1.25rem;">📉</span>
+            <b>1. Le Verrou Mathématique : Tanh vs ReLU</b>
+          </div>
+          <div class="modern-card-body">
+            <p><b>En 1998 (Tangente Hyperbolique $\tanh$) :</b> Les neurones utilisaient la fonction $\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$. Dès que l'entrée dépasse $+2$ ou $-2$, la courbe devient quasi horizontale et sa dérivée s'effondre vers zéro ($1 - \tanh^2 \approx 0$). Lors de la rétropropagation, multiplier ces petites dérivées d'étage en étage fait disparaître le gradient ($0.25^N \to 0$, le phénomène du <i>Vanishing Gradient</i>). Les premières couches ne recevaient plus aucun signal d'apprentissage, interdisant d'empiler plus de 5 couches.</p>
+            <div class="modern-solution">
+              <b>🚀 La Solution Moderne (ReLU, 2012) :</b> $\text{ReLU}(z) = \max(0, z)$. Sa dérivée est <b>strictement égale à 1</b> pour tout $z > 0$. Le signal d'erreur traverse 50 à 1 000 couches (comme dans ResNet) sans aucune atténuation, ouvrant une véritable autoroute pour l'apprentissage profond.
+            </div>
+          </div>
+        </div>
+
+        <!-- Verrou 2 : Matériel -->
+        <div class="modern-card">
+          <div class="modern-card-header">
+            <span style="font-size: 1.25rem;">⚡</span>
+            <b>2. Le Verrou Matériel : CPU Séquentiel vs GPU Massif</b>
+          </div>
+          <div class="modern-card-body">
+            <p><b>En 1998 (CPU x86 & DSP AT&T) :</b> Les processeurs Pentium II (300 MHz) traitaient les millions d'opérations de convolution de façon essentiellement séquentielle (un pixel à la fois). Entraîner LeNet-5 nécessitait plusieurs jours de calcul sur stations de travail spécialisées.</p>
+            <div class="modern-solution">
+              <b>🚀 La Solution Moderne (GPU NVIDIA & CUDA) :</b> Détournées des jeux vidéo 3D, les puces graphiques intègrent des <b>milliers de cœurs arithmétiques (ALU)</b> travaillant en parallèle massif (SIMD). Les convolutions sont calculées simultanément sur toute l'image : ce qui prenait des jours en 1998 se calcule en moins de 3 minutes dans un notebook Colab.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modern-bridge-note">
+        💡 <b>Respect scrupuleux de la fidélité historique :</b> Dans notre démonstration officielle et notre notebook Colab, nous conservons rigoureusement les fonctions d'activation <code>nn.Tanh()</code> et le sous-échantillonnage <code>nn.AvgPool2d()</code> de Yann LeCun (1998), garantissant le décompte historique exact de <b>61 706 paramètres entraînables</b>.
+      </div>
+    </div>
+
+
 
     <div class="box-remember">
       <h4>💡 À retenir</h4>
@@ -1737,8 +2672,8 @@
     </table>
 
     <div class="box-remember" style="background: var(--primary-light); border-color: #93c5fd; margin-top: 24px;">
-      <h4 style="color: #1e40af;">⭐ Les 10 points clés à retenir absolument</h4>
-      <ol style="margin-left: 20px; color: #1e3a8a; font-size: 0.95rem; line-height: 1.6;">
+      <h4 class="box-remember-title">⭐ Les 10 points clés à retenir absolument</h4>
+      <ol class="box-remember-list" style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6;">
         <li>Une image est une grille de pixels contenant des valeurs de luminosité de 0 à 255.</li>
         <li>Un neurone effectue une somme pondérée de ses entrées et la compare à un seuil d'activation.</li>
         <li>Un réseau empile des couches successives pour construire des représentations hiérarchisées.</li>
@@ -2134,12 +3069,127 @@
     }
   }
 
+
+  /* ==========================================================================
+     SÉLECTEUR DE THÈMES DÉROULANT & PERSISTANT DANS LOCALSTORAGE
+     ========================================================================== */
+  const themeLabels = {
+    'origine': '📜 Origine',
+    'theme-1': '🌌 Zero-G Quantum',
+    'theme-2': '🛰️ Orbital HUD',
+    'theme-3': '💥 Supernova'
+  };
+
+  function toggleThemeDropdown(e) {
+    if (e) e.stopPropagation();
+    const dd = document.getElementById('themeDropdown');
+    if (dd) dd.classList.toggle('open');
+  }
+
+  function closeThemeDropdown() {
+    const dd = document.getElementById('themeDropdown');
+    if (dd) dd.classList.remove('open');
+  }
+
+  document.addEventListener('click', (e) => {
+    const dd = document.getElementById('themeDropdown');
+    if (dd && !dd.contains(e.target)) {
+      closeThemeDropdown();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeThemeDropdown();
+  });
+
+  function switchTheme(themeName) {
+    document.body.setAttribute("data-theme", themeName);
+    document.documentElement.setAttribute("data-theme", themeName);
+
+    const labelElem = document.getElementById('themeCurrentLabel');
+    if (labelElem && themeLabels[themeName]) {
+      labelElem.innerText = themeLabels[themeName];
+    }
+
+    document.querySelectorAll('.theme-menu-item').forEach(item => {
+      if (item.getAttribute('data-theme-val') === themeName) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    closeThemeDropdown();
+
+    try {
+      localStorage.setItem("lenet5_active_theme", themeName);
+      localStorage.setItem("agent_checklist_theme", themeName);
+    } catch(e) {}
+  }
+
   // Initialisation au chargement de la page
   window.addEventListener('DOMContentLoaded', () => {
+    try {
+      const savedTheme = localStorage.getItem("lenet5_active_theme") || localStorage.getItem("agent_checklist_theme") || "origine";
+      switchTheme(savedTheme);
+    } catch(e) {}
     updateNeuronInteractive();
     initConvVisual();
   });
 </script>
 
+    <footer>
+      <!-- SÉLECTEUR DE THÈMES AU PIED DE PAGE (DROPUP) -->
+      <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+        <div class="theme-dropdown dropup" id="themeDropdown">
+          <button class="theme-dropdown-trigger" id="themeDropdownBtn" onclick="toggleThemeDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Changer le thème visuel">
+            <span>🎨</span>
+            <span id="themeCurrentLabel">📜 Origine</span>
+            <svg class="theme-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+          <div class="theme-dropdown-menu" id="themeDropdownMenu">
+            <div class="theme-menu-header">Thème Visuel</div>
+            <button class="theme-menu-item active" data-theme-val="origine" onclick="switchTheme('origine')">
+              <span class="theme-preview dot-origine"></span>
+              <span class="theme-menu-text">
+                <b>📜 Origine</b>
+                <small>Vue d'origine documentaire (Défaut)</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-1" onclick="switchTheme('theme-1')">
+              <span class="theme-preview dot-theme1"></span>
+              <span class="theme-menu-text">
+                <b>🌌 Zero-G Quantum</b>
+                <small>Fond nébuleuse émeraude &amp; cyan</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-2" onclick="switchTheme('theme-2')">
+              <span class="theme-preview dot-theme2"></span>
+              <span class="theme-menu-text">
+                <b>🛰️ Orbital HUD</b>
+                <small>Matrice technique phosphorescente</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-3" onclick="switchTheme('theme-3')">
+              <span class="theme-preview dot-theme3"></span>
+              <span class="theme-menu-text">
+                <b>💥 Supernova</b>
+                <small>Cyberpunk cosmique ultraviolet</small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; letter-spacing: 0.02em; color: var(--text-main);">
+        Projet d'Étude &amp; Rétrospective Historique LeNet-5 (1998)
+      </div>
+      <p style="margin: 4px 0; font-size: 0.88rem; color: var(--text-muted);">
+        Travail réalisé par <b>Bernard Feugang Noussi</b> dans le cadre du <b>Cours d'Apprentissage Profond &amp; Réseaux de Neurones</b>
+      </p>
+      <p style="margin-top: 4px; font-size: 0.82rem; color: var(--text-dim);">
+        <b>Collège de Bois-de-Boulogne</b> • Montréal (Québec) • Spécialisation technique en intelligence artificielle
+      </p>
+    </footer>
 </body>
 </html>

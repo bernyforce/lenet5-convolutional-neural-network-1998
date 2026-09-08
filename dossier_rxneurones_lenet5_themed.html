@@ -1,0 +1,3659 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="origine">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier Pédagogique Approfondi — Réseaux de Neurones &amp; LeNet-5 (1998)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       BASE RESETS & VARIABLES SYSTÈME
+       ========================================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      
+      --bg-void: #030712;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent-cyan: #00f0ff;
+      --accent-blue: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-gray: #64748b;
+      
+      --radius: 10px;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background-color: var(--bg-void);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       SHOWCASE TOP BAR / SÉLECTEUR DE THÈME INTÉGRÉ (RÉFÉRENCE EXACTE)
+       ========================================================================== */
+    .showcase-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 10, 18, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .showcase-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .pulsar {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 12px var(--accent-emerald), 0 0 24px var(--accent-emerald);
+      animation: pulsar-glow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulsar-glow {
+      0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 8px var(--accent-emerald)); }
+      50% { transform: scale(0.7); opacity: 0.5; filter: drop-shadow(0 0 2px var(--accent-emerald)); }
+    }
+
+    .showcase-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link-pill {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-link-pill.colab-pill {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(37, 99, 235, 0.5);
+      color: #93c5fd;
+    }
+
+    .nav-link-pill.colab-pill:hover {
+      background: rgba(37, 99, 235, 0.35);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .theme-selector {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 0.25rem;
+      gap: 0.3rem;
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .theme-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      color: #fff;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    /* ==========================================================================
+       LES 3 THÈMES VISUELS
+       ========================================================================== */
+    /* THEME 1 : ZERO-G QUANTUM */
+    body[data-theme="theme-1"] {
+      background-color: #030712;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-1"] .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    body[data-theme="theme-1"] .hero-title {
+      background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body[data-theme="theme-1"] .theme-btn.active {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(56, 189, 248, 0.3));
+      color: #fff;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    /* THEME 2 : ORBITAL HUD */
+    body[data-theme="theme-2"] {
+      background-color: #020307;
+      background-image: 
+        linear-gradient(rgba(0, 255, 170, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 170, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-2"] .glass-panel {
+      background: rgba(4, 12, 18, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 255, 170, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 255, 170, 0.08);
+    }
+
+    body[data-theme="theme-2"] .hero-title {
+      color: #00ffaa;
+      -webkit-text-fill-color: #00ffaa;
+      text-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+      font-family: var(--font-mono);
+    }
+
+    body[data-theme="theme-2"] .theme-btn.active {
+      background: rgba(0, 255, 170, 0.2);
+      border: 1px solid rgba(0, 255, 170, 0.5);
+      color: #00ffaa;
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.25);
+    }
+
+    body[data-theme="theme-2"] .pulsar {
+      background: #00ffaa;
+      box-shadow: 0 0 12px #00ffaa, 0 0 24px #00ffaa;
+    }
+
+    /* THEME 3 : SUPERNOVA */
+    body[data-theme="theme-3"] {
+      background-color: #06020c;
+      background-image: 
+        radial-gradient(circle at 80% 20%, rgba(244, 63, 94, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(251, 113, 133, 0.08) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    body[data-theme="theme-3"] .glass-panel {
+      background: rgba(22, 10, 32, 0.75);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 25px 50px -12px rgba(244, 63, 94, 0.2);
+    }
+
+    body[data-theme="theme-3"] .hero-title {
+      background: linear-gradient(135deg, #fb7185 0%, #e879f9 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body[data-theme="theme-3"] .theme-btn.active {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(168, 85, 247, 0.3));
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.25);
+      color: #fff;
+    }
+
+    body[data-theme="theme-3"] .pulsar {
+      background: #fb7185;
+      box-shadow: 0 0 12px #fb7185, 0 0 24px #fb7185;
+    }
+
+    
+    /* ==========================================================================
+       THEME 4 : ORIGINE (VUE D'ORIGINE DOSSIER_RXNEURONES_LENET5.HTML)
+       CONFORME EN TOUT POINT AU DOSSIER D'ORIGINE • CONTRASTE MAXIMUM (PAR DÉFAUT)
+       ========================================================================== */
+    body[data-theme="origine"] {
+      background-color: #f8fafc !important;
+      background-image: none !important;
+      color: #0f172a !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+    }
+
+    body[data-theme="origine"] * {
+      border-color: #e2e8f0;
+    }
+
+    body[data-theme="origine"] .showcase-bar {
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    body[data-theme="origine"] .showcase-brand {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .pulsar {
+      background: #0969da !important;
+      box-shadow: 0 0 10px rgba(9, 105, 218, 0.6) !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill {
+      color: #475569 !important;
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill:hover {
+      color: #0f172a !important;
+      background: #e2e8f0 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill.colab-pill {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+      color: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] .nav-link-pill.colab-pill:hover {
+      background: #dbeafe !important;
+      color: #1e40af !important;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.2) !important;
+    }
+
+    /* Conteneur principal fidèle au format papier 920px */
+    body[data-theme="origine"] .container {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 10px !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+      padding: 36px 32px !important;
+      max-width: 920px !important;
+      margin: 24px auto !important;
+    }
+
+    /* En-tête */
+    body[data-theme="origine"] header {
+      border-bottom: 3px solid #0969da !important;
+      padding-bottom: 24px !important;
+      margin-bottom: 32px !important;
+    }
+
+    body[data-theme="origine"] h1,
+    body[data-theme="origine"] .hero-title {
+      font-size: 2rem !important;
+      color: #0f172a !important;
+      background: none !important;
+      -webkit-text-fill-color: #0f172a !important;
+      text-shadow: none !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+      line-height: 1.25 !important;
+      margin-bottom: 12px !important;
+    }
+
+    body[data-theme="origine"] header p {
+      color: #475569 !important;
+      font-size: 1.05rem !important;
+    }
+
+    body[data-theme="origine"] .meta-bar {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 12px !important;
+      font-size: 0.9rem !important;
+      color: #475569 !important;
+      margin-top: 12px !important;
+    }
+
+    body[data-theme="origine"] .meta-bar span {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      padding: 4px 10px !important;
+      border-radius: 6px !important;
+      color: #475569 !important;
+    }
+
+    body[data-theme="origine"] .meta-bar b {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .badge {
+      display: inline-block !important;
+      background: #eff6ff !important;
+      color: #0969da !important;
+      padding: 4px 12px !important;
+      border-radius: 6px !important;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      letter-spacing: 0.5px !important;
+      border: 1px solid #bfdbfe !important;
+      text-transform: none !important;
+    }
+
+    body[data-theme="origine"] .badge-tech {
+      background: #f1f5f9 !important;
+      color: #0969da !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Sommaire */
+    body[data-theme="origine"] .toc-box {
+      background: #eff6ff !important;
+      border: 1px solid #bfdbfe !important;
+      border-radius: 10px !important;
+      padding: 20px !important;
+      margin-bottom: 36px !important;
+    }
+
+    body[data-theme="origine"] .toc-box h3 {
+      color: #0969da !important;
+      margin-bottom: 12px !important;
+      font-size: 1.15rem !important;
+    }
+
+    body[data-theme="origine"] .toc-grid a {
+      color: #1d4ed8 !important;
+      text-decoration: none !important;
+      font-size: 0.95rem !important;
+    }
+
+    body[data-theme="origine"] .toc-grid a:hover {
+      text-decoration: underline !important;
+    }
+
+    /* Sections et Titres */
+    body[data-theme="origine"] section.dossier-section {
+      border-top: 2px solid #e2e8f0 !important;
+      padding-top: 32px !important;
+      margin-top: 36px !important;
+    }
+
+    body[data-theme="origine"] h2 {
+      font-size: 1.4rem !important;
+      color: #0f172a !important;
+      margin-bottom: 8px !important;
+      letter-spacing: normal !important;
+      border-bottom: none !important;
+    }
+
+    body[data-theme="origine"] h3 {
+      font-size: 1.2rem !important;
+      color: #1e293b !important;
+      margin: 20px 0 10px !important;
+    }
+
+    body[data-theme="origine"] h4 {
+      font-size: 1.05rem !important;
+      color: #1e293b !important;
+      margin-bottom: 8px !important;
+    }
+
+    body[data-theme="origine"] p,
+    body[data-theme="origine"] li {
+      color: #1e293b !important;
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+    }
+
+    body[data-theme="origine"] b,
+    body[data-theme="origine"] strong {
+      color: #0f172a !important;
+    }
+
+    /* Section Objective */
+    body[data-theme="origine"] .section-objective {
+      background: #f1f5f9 !important;
+      border-left: 4px solid #0969da !important;
+      padding: 8px 14px !important;
+      font-size: 0.95rem !important;
+      color: #475569 !important;
+      margin-bottom: 18px !important;
+      border-radius: 0 6px 6px 0 !important;
+    }
+
+    body[data-theme="origine"] .section-objective b {
+      color: #0f172a !important;
+    }
+
+    /* Cartes À Retenir & Citations */
+    body[data-theme="origine"] .box-remember {
+      background: #f0fdf4 !important;
+      border: 1.5px solid #86efac !important;
+      border-radius: 10px !important;
+      padding: 16px 20px !important;
+      margin: 24px 0 !important;
+    }
+
+    body[data-theme="origine"] .box-remember h4 {
+      color: #15803d !important;
+      margin-bottom: 8px !important;
+      font-size: 1.05rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+
+    body[data-theme="origine"] .box-remember ul {
+      margin-left: 20px !important;
+      color: #166534 !important;
+      font-size: 0.95rem !important;
+    }
+
+    body[data-theme="origine"] .box-remember li {
+      color: #166534 !important;
+      margin-bottom: 4px !important;
+    }
+
+    body[data-theme="origine"] .citation {
+      font-size: 0.82rem !important;
+      color: #475569 !important;
+      background: #f8fafc !important;
+      border-left: 3px solid #94a3b8 !important;
+      padding: 6px 12px !important;
+      margin: 14px 0 !important;
+      border-radius: 0 4px 4px 0 !important;
+    }
+
+    body[data-theme="origine"] .svg-wrapper {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 10px !important;
+      padding: 16px !important;
+      margin: 22px 0 !important;
+      text-align: center !important;
+    }
+
+    body[data-theme="origine"] .svg-caption {
+      margin-top: 10px !important;
+      font-size: 0.88rem !important;
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+
+    /* Tableaux */
+    body[data-theme="origine"] table.data-table,
+    body[data-theme="origine"] table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      font-size: 0.92rem !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] table.data-table th,
+    body[data-theme="origine"] table.data-table td,
+    body[data-theme="origine"] th,
+    body[data-theme="origine"] td {
+      padding: 10px 12px !important;
+      border: 1px solid #e2e8f0 !important;
+      text-align: left !important;
+    }
+
+    body[data-theme="origine"] table.data-table th,
+    body[data-theme="origine"] th {
+      background: #f1f5f9 !important;
+      font-weight: 600 !important;
+      color: #0f172a !important;
+      border-bottom: 2px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] table.data-table td,
+    body[data-theme="origine"] td {
+      color: #1e293b !important;
+      background: #ffffff !important;
+    }
+
+    /* Grille de cartes LeNet-5 Couches */
+    body[data-theme="origine"] .layers-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 14px !important;
+      margin: 20px 0 !important;
+    }
+
+    body[data-theme="origine"] .layer-card {
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      padding: 14px !important;
+      background: #ffffff !important;
+    }
+
+    body[data-theme="origine"] .layer-card.conv {
+      border-left: 4px solid #0969da !important;
+      background: #f8fbff !important;
+    }
+
+    body[data-theme="origine"] .layer-card.pool {
+      border-left: 4px solid #16a34a !important;
+      background: #f8fdf9 !important;
+    }
+
+    body[data-theme="origine"] .layer-card.dense {
+      border-left: 4px solid #9333ea !important;
+      background: #fdfaff !important;
+    }
+
+    body[data-theme="origine"] .layer-card.out {
+      border-left: 4px solid #d97706 !important;
+      background: #fffdf7 !important;
+    }
+
+    body[data-theme="origine"] .layer-title {
+      font-weight: bold !important;
+      font-size: 0.95rem !important;
+      margin-bottom: 4px !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .layer-role {
+      font-size: 0.88rem !important;
+      color: #475569 !important;
+      margin-bottom: 6px !important;
+    }
+
+    body[data-theme="origine"] .layer-meta {
+      font-size: 0.82rem !important;
+      font-family: monospace !important;
+      color: #334155 !important;
+    }
+
+    /* Applications modernes */
+    body[data-theme="origine"] .app-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 16px !important;
+      margin: 20px 0 !important;
+    }
+
+    body[data-theme="origine"] .app-card {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      padding: 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+
+    body[data-theme="origine"] .app-title {
+      font-weight: bold !important;
+      color: #0f172a !important;
+      font-size: 0.95rem !important;
+    }
+
+    body[data-theme="origine"] .app-desc {
+      font-size: 0.9rem !important;
+      color: #334155 !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Panneaux & Contrôles Interactifs */
+    body[data-theme="origine"] .glass-panel,
+    body[data-theme="origine"] .interactive-card,
+    body[data-theme="origine"] .conv-playground {
+      background: #ffffff !important;
+      border: 2px solid #bfdbfe !important;
+      border-radius: 10px !important;
+      padding: 20px !important;
+      margin: 24px 0 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .interactive-card h4,
+    body[data-theme="origine"] .conv-playground h4 {
+      color: #0969da !important;
+      margin-bottom: 12px !important;
+      font-size: 1.05rem !important;
+    }
+
+    body[data-theme="origine"] .interactive-box {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      padding: 14px !important;
+      margin: 12px 0 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] button.interactive-btn {
+      background: #0969da !important;
+      color: white !important;
+      border: none !important;
+      padding: 8px 16px !important;
+      border-radius: 6px !important;
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      transition: background 0.15s ease !important;
+    }
+
+    body[data-theme="origine"] button.interactive-btn:hover {
+      background: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] button.interactive-btn.secondary {
+      background: #e2e8f0 !important;
+      color: #334155 !important;
+      border: none !important;
+    }
+
+    body[data-theme="origine"] button.interactive-btn.secondary:hover {
+      background: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .btn-toggle-media {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #334155 !important;
+      padding: 6px 12px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+
+    body[data-theme="origine"] .btn-toggle-media:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .btn-download-media {
+      background: #eff6ff !important;
+      border: 1px solid #93c5fd !important;
+      color: #1d4ed8 !important;
+      padding: 6px 12px !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+
+    body[data-theme="origine"] .btn-download-media:hover {
+      background: #dbeafe !important;
+      color: #1e40af !important;
+    }
+
+    /* Grille de Convolution Interactive 6x6 -> 4x4 */
+    body[data-theme="origine"] .conv-cell {
+      user-select: none !important;
+    }
+
+    body[data-theme="origine"] .conv-cell.input-cell {
+      background: #ffffff !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] .conv-cell.kernel-window,
+    body[data-theme="origine"] .conv-cell.input-active {
+      background: #dbeafe !important;
+      border: 1.5px solid #2563eb !important;
+      font-weight: bold !important;
+      color: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] .conv-cell.output-cell {
+      background: #f1f5f9 !important;
+      color: #94a3b8 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    body[data-theme="origine"] .conv-cell.output-calculated {
+      background: #ffffff !important;
+      color: #1e293b !important;
+      font-weight: bold !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .conv-cell.output-current {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      border: 1.5px solid #1d4ed8 !important;
+      font-weight: bold !important;
+    }
+
+    /* Quiz */
+    body[data-theme="origine"] .quiz-card,
+    body[data-theme="origine"] .quiz-question {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 10px !important;
+      padding: 18px !important;
+      margin-bottom: 18px !important;
+    }
+
+    body[data-theme="origine"] .quiz-question p.q-title,
+    body[data-theme="origine"] .quiz-question,
+    body[data-theme="origine"] .quiz-card .quiz-question {
+      font-weight: bold !important;
+      margin-bottom: 10px !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .quiz-options label {
+      display: block !important;
+      padding: 8px 12px !important;
+      margin-bottom: 6px !important;
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+      font-size: 0.92rem !important;
+      color: #1e293b !important;
+    }
+
+    body[data-theme="origine"] .quiz-options label:hover {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+      color: #0969da !important;
+    }
+
+    body[data-theme="origine"] .quiz-feedback.correct {
+      display: block !important;
+      background: #f0fdf4 !important;
+      border: 1px solid #86efac !important;
+      color: #166534 !important;
+      padding: 10px 14px !important;
+      border-radius: 6px !important;
+    }
+
+    body[data-theme="origine"] .quiz-feedback.incorrect {
+      display: block !important;
+      background: #fef2f2 !important;
+      border: 1px solid #fca5a5 !important;
+      color: #991b1b !important;
+      padding: 10px 14px !important;
+      border-radius: 6px !important;
+    }
+
+    /* Navigation et Pied de Page */
+    body[data-theme="origine"] .section-nav {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      margin-top: 28px !important;
+      padding-top: 16px !important;
+      border-top: 1px dashed #cbd5e1 !important;
+      font-size: 0.92rem !important;
+    }
+
+    body[data-theme="origine"] .section-nav a {
+      color: #0969da !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+    }
+
+    body[data-theme="origine"] .section-nav a:hover {
+      text-decoration: underline !important;
+      color: #1d4ed8 !important;
+    }
+
+    body[data-theme="origine"] .section-end-icon {
+      text-align: center !important;
+      margin-top: 20px !important;
+      color: #94a3b8 !important;
+      font-size: 1.2rem !important;
+      letter-spacing: 4px !important;
+    }
+
+    body[data-theme="origine"] footer {
+      border-top: 1px solid #e2e8f0 !important;
+      color: #64748b !important;
+      padding: 3rem 0 1.5rem !important;
+    }
+
+    body[data-theme="origine"] footer p {
+      color: #64748b !important;
+      font-size: 0.82rem !important;
+    }
+
+    body[data-theme="origine"] footer code {
+      background: #f1f5f9 !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #0f172a !important;
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
+    }
+
+    /* ==========================================================================
+       CONTAINER & SECTIONS STYLING
+       ========================================================================== */
+    .container {
+      max-width: 1080px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-tech {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+    }
+
+    .meta-bar span {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .meta-bar b {
+      color: var(--text-muted);
+    }
+
+    section.dossier-section {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 36px;
+      margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: #f1f5f9;
+      margin: 20px 0 10px;
+    }
+
+    h4 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .section-objective {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      border-radius: 0 8px 8px 0;
+      border: 1px solid var(--border-subtle);
+      border-left-width: 4px;
+    }
+
+    .section-objective b {
+      color: #fff;
+    }
+
+    .box-remember {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 24px 0;
+    }
+
+    .box-remember h4 {
+      color: #34d399;
+    }
+
+    .box-remember ul {
+      margin-left: 20px;
+      color: #a7f3d0;
+      font-size: 0.94rem;
+    }
+
+    .box-remember li {
+      margin-bottom: 6px;
+    }
+
+    .toc-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      list-style: none;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .toc-grid { grid-template-columns: 1fr; }
+      .layers-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .toc-grid a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s;
+    }
+
+    .toc-grid a:hover {
+      color: #00f0ff;
+      text-decoration: underline;
+    }
+
+    .svg-wrapper {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px 16px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .svg-caption {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    table.data-table th, table.data-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+
+    table.data-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    table.data-table td {
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .layers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .layer-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .layer-card.conv { border-left: 4px solid #38bdf8; }
+    .layer-card.pool { border-left: 4px solid #34d399; }
+    .layer-card.dense { border-left: 4px solid #c084fc; }
+    .layer-card.out { border-left: 4px solid #fbbf24; }
+
+    .layer-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .layer-role {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .interactive-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    button.interactive-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button.interactive-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    button.interactive-btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border: 1px solid var(--border-subtle);
+    }
+
+    button.interactive-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .btn-toggle-media {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle-media:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .btn-download-media {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-download-media:hover {
+      background: rgba(16, 185, 129, 0.3);
+      color: #fff;
+    }
+
+    .quiz-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 18px 0;
+    }
+
+    .quiz-question {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .quiz-options label {
+      display: block;
+      padding: 10px 14px;
+      margin: 6px 0;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      cursor: pointer;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+
+    .quiz-options label:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .quiz-feedback {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .quiz-feedback.correct {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .quiz-feedback.incorrect {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+    }
+
+    .section-end-icon {
+      text-align: center;
+      margin: 36px 0 10px;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+    }
+
+    .section-nav a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-right: 18px;
+    }
+
+    .section-nav a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3.5rem 0 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 4rem;
+    }
+  
+    /* ==========================================================================
+       SÉLECTEUR DE THÈME DÉROULANT ET DISCRET
+       ========================================================================== */
+    .theme-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .theme-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .theme-dropdown-trigger:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .theme-dropdown.open .theme-chevron {
+      transform: rotate(180deg);
+    }
+
+    .theme-dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      padding: 6px;
+      min-width: 250px;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .theme-dropdown.open .theme-dropdown-menu {
+      display: flex;
+    }
+
+    .theme-menu-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      padding: 6px 10px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 3px;
+      font-family: var(--font-mono);
+    }
+
+    .theme-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+      font-family: var(--font-sans);
+    }
+
+    .theme-menu-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-menu-item.active {
+      background: rgba(9, 105, 218, 0.18);
+      border-color: rgba(9, 105, 218, 0.4);
+    }
+
+    .theme-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dot-origine { background: #0969da; border-color: #0969da; }
+    .dot-theme1 { background: linear-gradient(135deg, #10b981, #00f0ff); }
+    .dot-theme2 { background: #00ffaa; box-shadow: 0 0 6px #00ffaa; }
+    .dot-theme3 { background: linear-gradient(135deg, #fb7185, #c084fc); }
+
+    .theme-menu-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .theme-menu-text b {
+      font-size: 0.82rem;
+      color: #f8fafc;
+    }
+
+    .theme-menu-text small {
+      font-size: 0.70rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* Adaptations du dropdown pour le thème Origine */
+    body[data-theme="origine"] .theme-dropdown-trigger {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-trigger:hover {
+      background: #e2e8f0 !important;
+      border-color: #94a3b8 !important;
+    }
+
+    body[data-theme="origine"] .theme-dropdown-menu {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-header {
+      color: #64748b !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item:hover {
+      background: #f8fafc !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-item.active {
+      background: #eff6ff !important;
+      border-color: #93c5fd !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text b {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .theme-menu-text small {
+      color: #64748b !important;
+    }
+
+
+    /* ==========================================================================
+       TITRES DES VIDÉOS & CONTRASTE UNIVERSEL (TOUS THÈMES)
+       ========================================================================== */
+    .anim-media-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #f8fafc;
+      letter-spacing: 0.02em;
+    }
+
+    body[data-theme="origine"] .anim-media-title {
+      color: #0f172a !important;
+    }
+
+    body[data-theme="origine"] .anim-media-card {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Adaptations Contraste Thèmes Sombres (Zero-G, Orbital HUD, Supernova) */
+    body[data-theme="theme-1"] .colab-banner,
+    body[data-theme="theme-2"] .colab-banner,
+    body[data-theme="theme-3"] .colab-banner {
+      background: rgba(15, 23, 42, 0.8) !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body[data-theme="theme-1"] .colab-banner span,
+    body[data-theme="theme-2"] .colab-banner span,
+    body[data-theme="theme-3"] .colab-banner span {
+      color: #38bdf8 !important;
+    }
+
+    body[data-theme="theme-1"] .colab-banner p,
+    body[data-theme="theme-2"] .colab-banner p,
+    body[data-theme="theme-3"] .colab-banner p {
+      color: #cbd5e1 !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember,
+    body[data-theme="theme-2"] .box-remember,
+    body[data-theme="theme-3"] .box-remember {
+      background: rgba(6, 78, 59, 0.25) !important;
+      border: 1.5px solid rgba(16, 185, 129, 0.45) !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember h4,
+    body[data-theme="theme-2"] .box-remember h4,
+    body[data-theme="theme-3"] .box-remember h4 {
+      color: #34d399 !important;
+    }
+
+    body[data-theme="theme-1"] .box-remember ul,
+    body[data-theme="theme-1"] .box-remember ol,
+    body[data-theme="theme-1"] .box-remember li,
+    body[data-theme="theme-2"] .box-remember ul,
+    body[data-theme="theme-2"] .box-remember ol,
+    body[data-theme="theme-2"] .box-remember li,
+    body[data-theme="theme-3"] .box-remember ul,
+    body[data-theme="theme-3"] .box-remember ol,
+    body[data-theme="theme-3"] .box-remember li {
+      color: #e2e8f0 !important;
+    }
+
+    body[data-theme="theme-1"] .interactive-box,
+    body[data-theme="theme-2"] .interactive-box,
+    body[data-theme="theme-3"] .interactive-box {
+      background: rgba(15, 23, 42, 0.7) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: #f8fafc !important;
+    }
+
+
+    /* ==========================================================================
+       ADAPTATIONS HAUT CONTRASTE UNIVERSELLES (ORIGINE ET THÈMES SOMBRES)
+       ========================================================================== */
+    /* En thème Origine : garantir lisibilité absolue des textes foncés */
+    body[data-theme="origine"] .colab-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%) !important;
+      border: 1.5px solid #93c5fd !important;
+    }
+    body[data-theme="origine"] .colab-banner-title {
+      color: #1e3a8a !important;
+    }
+    body[data-theme="origine"] .colab-banner-desc {
+      color: #475569 !important;
+    }
+    body[data-theme="origine"] .box-remember-title {
+      color: #15803d !important;
+    }
+    body[data-theme="origine"] .box-remember-list {
+      color: #166534 !important;
+    }
+    body[data-theme="origine"] .playground-label {
+      color: #1e293b !important;
+    }
+
+    /* En thèmes Sombres (Zero-G, Orbital HUD, Supernova) : contraste éclatant */
+    body[data-theme="theme-1"] .colab-banner,
+    body[data-theme="theme-2"] .colab-banner,
+    body[data-theme="theme-3"] .colab-banner {
+      background: rgba(15, 23, 42, 0.85) !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+    }
+    body[data-theme="theme-1"] .colab-banner-title,
+    body[data-theme="theme-2"] .colab-banner-title,
+    body[data-theme="theme-3"] .colab-banner-title {
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .colab-banner-desc,
+    body[data-theme="theme-2"] .colab-banner-desc,
+    body[data-theme="theme-3"] .colab-banner-desc {
+      color: #cbd5e1 !important;
+    }
+    body[data-theme="theme-1"] .box-remember-title,
+    body[data-theme="theme-2"] .box-remember-title,
+    body[data-theme="theme-3"] .box-remember-title {
+      color: #34d399 !important;
+    }
+    body[data-theme="theme-1"] .box-remember-list,
+    body[data-theme="theme-2"] .box-remember-list,
+    body[data-theme="theme-3"] .box-remember-list {
+      color: #e2e8f0 !important;
+    }
+    body[data-theme="theme-1"] .playground-label,
+    body[data-theme="theme-2"] .playground-label,
+    body[data-theme="theme-3"] .playground-label {
+      color: #f8fafc !important;
+    }
+    body[data-theme="theme-1"] .playground-container,
+    body[data-theme="theme-2"] .playground-container,
+    body[data-theme="theme-3"] .playground-container {
+      background: rgba(15, 23, 42, 0.7) !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+
+    /* Classes thématiques pour les titres des couches */
+    .layer-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .layer-title.conv { color: #0969da; }
+    .layer-title.pool { color: #16a34a; }
+    .layer-title.dense { color: #9333ea; }
+    .layer-title.out { color: #d97706; }
+
+    body[data-theme="origine"] .layer-title.conv { color: #0969da !important; }
+    body[data-theme="origine"] .layer-title.pool { color: #16a34a !important; }
+    body[data-theme="origine"] .layer-title.dense { color: #9333ea !important; }
+    body[data-theme="origine"] .layer-title.out { color: #d97706 !important; }
+
+    body[data-theme="theme-1"] .layer-title.conv,
+    body[data-theme="theme-2"] .layer-title.conv,
+    body[data-theme="theme-3"] .layer-title.conv {
+      color: #38bdf8 !important;
+    }
+    body[data-theme="theme-1"] .layer-title.pool,
+    body[data-theme="theme-2"] .layer-title.pool,
+    body[data-theme="theme-3"] .layer-title.pool {
+      color: #4ade80 !important;
+    }
+    body[data-theme="theme-1"] .layer-title.dense,
+    body[data-theme="theme-2"] .layer-title.dense,
+    body[data-theme="theme-3"] .layer-title.dense {
+      color: #c084fc !important;
+    }
+    body[data-theme="theme-1"] .layer-title.out,
+    body[data-theme="theme-2"] .layer-title.out,
+    body[data-theme="theme-3"] .layer-title.out {
+      color: #fbbf24 !important;
+    }
+
+
+    /* ==========================================================================
+       SÉLECTEUR DE THÈMES DÉROULANT AU PIED DE PAGE (DROPUP)
+       ========================================================================== */
+    .theme-dropdown.dropup .theme-dropdown-menu {
+      bottom: calc(100% + 10px);
+      top: auto;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    body[data-theme="origine"] .theme-dropdown.dropup .theme-dropdown-menu {
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.06) !important;
+    }
+
+  </style>
+</head>
+<body data-theme="origine">
+
+  <!-- SHOWCASE BAR AVEC SÉLECTEUR DE THÈMES -->
+  <div class="showcase-bar">
+    <div class="showcase-brand">
+      <div class="pulsar"></div>
+      <span>LENET-5 // DOSSIER PÉDAGOGIQUE APPROFONDI (1998)</span>
+    </div>
+
+    <div class="showcase-nav-links">
+      <a href="index.html" class="nav-link-pill">🖥️ Diaporama (28 Slides)</a>
+      <a href="index.html#tab-video" class="nav-link-pill">🎬 Studio Animations</a>
+      <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="nav-link-pill github-pill">⭐ GitHub Repository ↗</a>
+      <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="nav-link-pill colab-pill">
+        <span>🚀 Google Colab (PyTorch) ↗</span>
+      </a>
+      <a href="LeNet-5.pptx" download class="nav-link-pill">📥 PPTX (27 Mo)</a>
+    </div>
+
+        </div>
+  </div>
+
+  <div class="container">
+    <!-- HEADER -->
+  <header>
+    <div class="badge">PROJET E26/A60 — DOSSIER PÉDAGOGIQUE</div>
+    <h1 style="margin-top: 10px;">Comprendre les Réseaux de Neurones &amp; LeNet-5</h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem;">
+      Un guide visuel, progressif et adapté pour comprendre pas à pas le fonctionnement d'un réseau de neurones artificiels et l'architecture historique LeNet-5.
+    </p>
+    <div class="meta-bar">
+      <span>👤 Auteure de référence : <b>Neila Mezghani (2024)</b></span>
+      <span>📄 Référence historique : <b>Yann LeCun et al. (1998)</b></span>
+      <span>🧩 Format : <b>Concret &amp; Structuré</b></span>
+    </div>
+  </header>
+
+  <!-- BANNIÈRE GOOGLE COLAB -->
+  <div class="colab-banner" style="margin: 20px 0; padding: 16px 20px; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1.5px solid #93c5fd; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+    <div style="flex: 1; min-width: 260px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.25rem;">🧠</span>
+        <span class="colab-banner-title" style="font-weight: 700; font-size: 1.05rem;">Atelier Pratique Interactif dans Google Colab</span>
+      </div>
+      <p class="colab-banner-desc" style="margin: 4px 0 0; font-size: 0.9rem; line-height: 1.5;">
+        Testez en direct l'architecture LeNet-5 sur MNIST avec PyTorch, visualisez les filtres convolutifs et observez les 6 animations Remotion intégrées dans votre navigateur.
+      </p>
+    </div>
+    <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(37,99,235,0.3); transition: all 0.2s;">
+      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="height: 22px; vertical-align: middle;">
+      <span>Lancer le Notebook</span>
+    </a>
+  </div>
+
+
+  <!-- SECTION 0: Page de garde & Sommaire -->
+  <section id="sec0" class="dossier-section" style="border-top: none; padding-top: 0; margin-top: 0;">
+    <div class="section-header">
+      <h2>0. Sommaire &amp; Guide de Lecture</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Prendre connaissance de la structure du dossier et de la méthode pour l'étudier sereinement.
+      </div>
+    </div>
+
+    <div class="box-remember" style="background: var(--primary-light); border-color: #bfdbfe;">
+      <h4 class="box-remember-title">📌 Comment lire ce dossier (3 conseils simples)</h4>
+      <ul class="box-remember-list">
+        <li><b>Lisez dans l'ordre</b> : Chaque section s'appuie sur la précédente pour une assimilation sans effort.</li>
+        <li><b>Suivez le fil rouge</b> : Un chiffre « 7 » manuscrit sur un chèque traverse toutes les étapes, de la photo à la décision.</li>
+        <li><b>Testez à votre rythme</b> : Utilisez les animations et le quiz interactif sans limite de temps.</li>
+      </ul>
+    </div>
+
+    <div class="toc-box">
+      <h3>📑 Sommaire du dossier</h3>
+      <ul class="toc-grid">
+        <li><a href="#sec1">1. Le problème concret du chiffre manuscrit</a></li>
+        <li><a href="#sec2">2. Le neurone artificiel (mini-décision)</a></li>
+        <li><a href="#sec3">3. Le réseau (travail en équipe)</a></li>
+        <li><a href="#sec4">4. L'apprentissage (essai-erreur)</a></li>
+        <li><a href="#sec5">5. La convolution (fenêtre glissante)</a></li>
+        <li><a href="#sec6">6. Le pooling (garder l'essentiel)</a></li>
+        <li><a href="#sec7">7. LeNet-5 couche par couche</a></li>
+        <li><a href="#sec8">8. Résultats concrets &amp; Histoire vraie</a></li>
+        <li><a href="#sec9">9. À quoi ça sert aujourd'hui (4 cas)</a></li>
+        <li><a href="#sec10">10. Glossaire &amp; 10 points à retenir</a></li>
+        <li><a href="#sec11">11. Quiz d'auto-évaluation (10 questions)</a></li>
+        <li><a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" style="color:#2563eb; font-weight:700;">🚀 Démonstration Google Colab (PyTorch) ↗</a></li>
+      </ul>
+    </div>
+
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 1: Le problème concret -->
+  <section id="sec1" class="dossier-section">
+    <div class="section-header">
+      <h2>1. Le problème concret : comment une machine lit-elle un chiffre manuscrit ?</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Comprendre la différence entre la vision humaine et la vision d'une machine.
+      </div>
+    </div>
+
+    <p>
+      D'abord, observons comment un être humain lit un chèque bancaire. Nos yeux reconnaissent instantanément le chiffre « 7 », même s'il est tracé de travers, plus ou moins incliné, avec une barre ou sans barre.
+    </p>
+
+    <p>
+      Imaginons qu'une machine regarde ce même chèque.
+    </p>
+
+    <p>
+      En réalité, la machine ne voit pas une forme globale. Elle reçoit uniquement une grille de cases appelées <b>pixels</b>. Chaque case contient un simple nombre qui indique le niveau de luminosité : 0 pour une case blanche et 255 pour une case noire avec de l'encre.
+    </p>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        
+        <!-- Image visuelle chiffre 7 -->
+        <g transform="translate(60, 50)">
+          <text x="75" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image vue par un humain</text>
+          <rect width="150" height="150" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" rx="4"/>
+          <path d="M 30 35 L 120 35 L 75 125" fill="none" stroke="#0f172a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+
+        <!-- Flèche transformation -->
+        <g transform="translate(245, 125)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#0969da">Numérisation</text>
+        </g>
+
+        <!-- Grille vue par la machine -->
+        <g transform="translate(340, 45)">
+          <text x="100" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Grille vue par la machine (0 à 255)</text>
+          
+          <!-- Ligne 1 -->
+          <rect x="0" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="20" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">250</text>
+          <rect x="40" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="60" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="80" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="100" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="120" y="0" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="140" y="25" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
+          <rect x="160" y="0" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="25" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+
+          <!-- Ligne 2 -->
+          <rect x="0" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="60" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="80" y="40" width="40" height="40" fill="#334155" stroke="#ffffff"/>
+          <text x="100" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">180</text>
+          <rect x="120" y="40" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="140" y="65" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="160" y="40" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="65" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+
+          <!-- Ligne 3 -->
+          <rect x="0" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="60" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="80" y="80" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="100" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">255</text>
+          <rect x="120" y="80" width="40" height="40" fill="#64748b" stroke="#ffffff"/>
+          <text x="140" y="105" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">90</text>
+          <rect x="160" y="80" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="105" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+
+          <!-- Ligne 4 -->
+          <rect x="0" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="20" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="40" y="120" width="40" height="40" fill="#0f172a" stroke="#ffffff"/>
+          <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">240</text>
+          <rect x="80" y="120" width="40" height="40" fill="#334155" stroke="#ffffff"/>
+          <text x="100" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12">170</text>
+          <rect x="120" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="140" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+          <rect x="160" y="120" width="40" height="40" fill="#ffffff" stroke="#e2e8f0"/>
+          <text x="180" y="145" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="12">0</text>
+        </g>
+
+        <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Chaque case est un pixel : 0 = blanc pur, 255 = noir pur (encre)</text>
+
+        <defs>
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 1 : L'image d'un « 7 » transformée en grille de nombres pour la machine.</div>
+    </div>
+
+    <p>
+      Le défi informatique est alors le suivant : comment enseigner à un programme informatique à reconnaître avec certitude qu'une grille de nombres représente un « 7 », sans écrire des millions de règles manuelles ? C'est la mission exacte d'un <b>réseau de neurones</b>.
+    </p>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 1 « Fondamentaux de l'apprentissage machine »].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Une image est une grille de pixels contenant des nombres de luminosité entre 0 et 255.</li>
+        <li>Le réseau doit reconnaître la forme du chiffre malgré toutes les variations d'écriture.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec0">⬅ Section précédente</a>
+      <a href="#sec2">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 2: Le neurone artificiel -->
+  <section id="sec2" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : LE NEURONE ARTIFICIEL -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 02</span>
+          <span class="anim-media-title">Le Neurone Artificiel : Somme Pondérée &amp; Seuil d'Activation</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-toggle-media" onclick="toggleSectionMedia('neuroneVideo', 'neuroneGif', this)">Mode GIF Animé</button>
+          <a href="animations/02_neurone.mp4" download class="btn-download-media">⬇ MP4 (708 Ko)</a>
+        </div>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="neuroneVideo" controls preload="metadata" poster="animations/02_neurone_poster.png" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/02_neurone.mp4" type="video/mp4">
+        </video>
+        <img id="neuroneGif" src="animations/02_neurone.gif" alt="Animation Neurone" style="display: none; width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>📐 <b>Concept :</b> Entrées pondérées x1·w1 + x2·w2 + b → Test de seuil d'activation</span>
+        <span>⏱ <b>Durée :</b> 5.0s (150 frames @ 30 fps)</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>2. Le neurone artificiel : une mini-décision élémentaire</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Découvrir le bloc fondamental : le neurone et son calcul d'activation.
+      </div>
+    </div>
+
+    <p>
+      Imaginons qu'un neurone artificiel soit un juge qui écoute trois témoins. Chaque témoin apporte un indice (une valeur d'entrée). Le juge accorde plus ou moins d'importance à chaque témoin (les <b>poids</b>).
+    </p>
+
+    <p>
+      En réalité, la machine effectue deux opérations mathématiques très simples :
+    </p>
+    <ol style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>La somme pondérée</b> : D'abord, le neurone multiplie chaque entrée par son poids et additionne le tout.</li>
+      <li><b>Le test de seuil (fonction d'activation)</b> : Ensuite, si le total dépasse un seuil fixé, le neurone s'allume et envoie un signal (1) ; sinon, il reste éteint (0).</li>
+    </ol>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+        <!-- Entrées -->
+        <text x="30" y="75" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 1 (Pixel)</text>
+        <circle cx="160" cy="70" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₁</text>
+        
+        <text x="30" y="155" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 2 (Pixel)</text>
+        <circle cx="160" cy="150" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₂</text>
+
+        <text x="30" y="235" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Entrée 3 (Pixel)</text>
+        <circle cx="160" cy="230" r="18" fill="#e2e8f0" stroke="#0969da" stroke-width="2"/>
+        <text x="160" y="235" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#0969da">x₃</text>
+
+        <!-- Flèches pondérées -->
+        <line x1="180" y1="70" x2="280" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="90" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₁</text>
+
+        <line x1="180" y1="150" x2="280" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="142" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₂</text>
+
+        <line x1="180" y1="230" x2="280" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="215" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Poids w₃</text>
+
+        <!-- Corps du Neurone (Somme + Seuil) -->
+        <rect x="290" y="90" width="140" height="120" rx="16" fill="#eff6ff" stroke="#0969da" stroke-width="2"/>
+        <circle cx="335" cy="150" r="26" fill="#dbeafe" stroke="#0969da" stroke-width="1.5"/>
+        <text x="335" y="156" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#0969da">∑</text>
+        <text x="335" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#1e40af">1. Somme</text>
+
+        <line x1="365" y1="110" x2="365" y2="190" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+        <path d="M 385 165 L 400 165 L 400 135 L 415 135" fill="none" stroke="#d97706" stroke-width="2.5"/>
+        <text x="400" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#b45309">2. Seuil</text>
+
+        <!-- Sortie -->
+        <line x1="430" y1="150" x2="500" y2="150" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/>
+        <circle cx="530" cy="150" r="22" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="530" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">OUI / 1</text>
+        <text x="530" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Sortie activée</text>
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+          </marker>
+          <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 2 : Schéma fonctionnel du neurone artificiel (Entrées → Somme → Seuil → Sortie).</div>
+    </div>
+
+    <!-- Animation Interactive B: Le neurone s'allume -->
+    <div class="interactive-card">
+      <h4>⚡ Démonstration Interactive : Le Neurone s'active (Entrées → Somme → Seuil → Sortie)</h4>
+      <p style="font-size: 0.92rem; color: var(--text-muted);">
+        Activez ou désactivez les 3 entrées pour observer le calcul de la somme pondérée et le franchissement du seuil (Seuil fixé à 2.00).
+      </p>
+      <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.95rem;">
+        <div style="display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x1" checked onchange="updateNeuronInteractive()"> <b>Entrée x₁</b> (Poids = 1.0)
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x2" checked onchange="updateNeuronInteractive()"> <b>Entrée x₂</b> (Poids = 1.2)
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <input type="checkbox" id="chk-x3" onchange="updateNeuronInteractive()"> <b>Entrée x₃</b> (Poids = 0.5)
+          </label>
+        </div>
+        <div style="font-family: monospace; line-height: 1.6; margin-bottom: 10px;">
+          Calcul : (<span id="calc-x1">1</span> × 1.0) + (<span id="calc-x2">1</span> × 1.2) + (<span id="calc-x3">0</span> × 0.5) = <b id="val-sum" style="font-size: 1.05rem; color: #0969da;">2.20</b>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span>État du neurone :</span>
+          <span id="val-out" style="color: #16a34a; background: #dcfce7; border: 1px solid #86efac; padding: 4px 10px; border-radius: 6px; font-weight: bold;">🟢 ALLUMÉ — Sortie = 1 (Seuil 2.00 atteint)</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="interactive-btn" onclick="presetNeuron(true)">Activer toutes les entrées</button>
+        <button class="interactive-btn secondary" onclick="presetNeuron(false)">Éteindre toutes les entrées</button>
+      </div>
+    </div>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 3 « Réseaux de neurones artificiels », Section 3.1].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Un neurone calcule une somme pondérée de ses entrées (Entrée × Poids).</li>
+        <li>Si la somme franchit le seuil d'activation, le neurone émet un signal de sortie.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec1">⬅ Section précédente</a>
+      <a href="#sec3">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 3: Le réseau -->
+  <section id="sec3" class="dossier-section">
+    <div class="section-header">
+      <h2>3. Le réseau : des couches de neurones qui travaillent en équipe</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Comprendre comment l'organisation en couches hiérarchise les décisions.
+      </div>
+    </div>
+
+    <p>
+      Imaginons un grand immeuble de bureaux à trois étages. Au rez-de-chaussée, les employés de l'accueil reçoivent le courrier brut. Au premier étage, les gestionnaires trient les dossiers par catégories. Au dernier étage, la direction prend la décision finale.
+    </p>
+
+    <p>
+      En réalité, la machine empile des couches de neurones successives :
+    </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, la couche d'entrée (Étage 1) reçoit les pixels bruts de l'image.</li>
+      <li><b>Ensuite</b>, la couche cachée (Étage 2) assemble ces points en segments et traits géométriques.</li>
+      <li><b>Enfin</b>, la couche de sortie (Étage 3) combine les traits pour décider quel chiffre a été tracé parmi les dix classes (0 à 9).</li>
+    </ul>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+        <rect width="600" height="360" fill="#f8fafc" rx="12"/>
+        
+        <text x="300" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">Organisation en Couches : L'Immeuble à Étages</text>
+
+        <!-- Étage 3 (Haut) : Sortie / Décision Finale -->
+        <g transform="translate(80, 50)">
+          <rect width="440" height="70" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="20" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#166534">Étage 3 : Couche de Sortie (Décision finale)</text>
+          <text x="20" y="48" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">Émet la classe reconnue parmi les 10 chiffres (0 à 9)</text>
+          
+          <!-- Neurones de sortie -->
+          <g transform="translate(300, 15)">
+            <circle cx="20" cy="20" r="15" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="20" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">« 7 »</text>
+            
+            <circle cx="60" cy="20" r="13" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="60" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">autre</text>
+            
+            <circle cx="95" cy="20" r="13" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="95" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">autre</text>
+          </g>
+        </g>
+
+        <!-- Flèches montantes Étage 2 vers Étage 3 -->
+        <g stroke="#16a34a" stroke-width="2" fill="none">
+          <line x1="220" y1="145" x2="220" y2="125" marker-end="url(#arrow-up-green)"/>
+          <line x1="300" y1="145" x2="300" y2="125" marker-end="url(#arrow-up-green)"/>
+          <line x1="380" y1="145" x2="380" y2="125" marker-end="url(#arrow-up-green)"/>
+        </g>
+
+        <!-- Étage 2 (Milieu) : Couche Cachée -->
+        <g transform="translate(80, 145)">
+          <rect width="440" height="75" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <text x="20" y="32" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">Étage 2 : Couche Cachée (Combinaison des traits)</text>
+          <text x="20" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#2563eb">Assemble les points en segments (lignes obliques, barres)</text>
+          
+          <!-- Neurones cachés -->
+          <g transform="translate(300, 18)">
+            <circle cx="20" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="20" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₁</text>
+            
+            <circle cx="60" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="60" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₂</text>
+            
+            <circle cx="100" cy="20" r="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="100" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#1d4ed8">h₃</text>
+          </g>
+        </g>
+
+        <!-- Flèches montantes Étage 1 vers Étage 2 -->
+        <g stroke="#2563eb" stroke-width="2" fill="none">
+          <line x1="220" y1="245" x2="220" y2="225" marker-end="url(#arrow-up-blue)"/>
+          <line x1="300" y1="245" x2="300" y2="225" marker-end="url(#arrow-up-blue)"/>
+          <line x1="380" y1="245" x2="380" y2="225" marker-end="url(#arrow-up-blue)"/>
+        </g>
+
+        <!-- Étage 1 (Bas) : Couche d'Entrée -->
+        <g transform="translate(80, 245)">
+          <rect width="440" height="70" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+          <text x="20" y="30" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#334155">Étage 1 : Couche d'Entrée (Pixels bruts)</text>
+          <text x="20" y="48" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Reçoit les valeurs de luminosité de l'image (0 à 255)</text>
+          
+          <!-- Pixels d'entrée -->
+          <g transform="translate(290, 15)">
+            <circle cx="15" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="15" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₁</text>
+            
+            <circle cx="45" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="45" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₂</text>
+            
+            <circle cx="75" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="75" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₃</text>
+            
+            <circle cx="105" cy="20" r="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+            <text x="105" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#334155">x₄</text>
+          </g>
+        </g>
+
+        <text x="300" y="342" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">L'information monte d'étage en étage : des détails bruts vers la décision globale</text>
+
+        <defs>
+          <marker id="arrow-up-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 10 L 5 0 L 10 10 z" fill="#2563eb" />
+          </marker>
+          <marker id="arrow-up-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 10 L 5 0 L 10 10 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 3 : Organisation d'un réseau en couches (Entrée → Couches cachées → Sortie).</div>
+    </div>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 3 « Réseaux de neurones artificiels », Section 3.3].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Les neurones sont organisés en couches : couche d'entrée, couches cachées et couche de sortie.</li>
+        <li>Chaque couche apprend des motifs de plus en plus complexes et abstraits.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec2">⬅ Section précédente</a>
+      <a href="#sec4">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 4: L'apprentissage -->
+  <section id="sec4" class="dossier-section">
+    <div class="section-header">
+      <h2>4. L'apprentissage : essai-erreur et correction automatique</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Découvrir comment le réseau règle ses poids pour éliminer ses erreurs.
+      </div>
+    </div>
+
+    <p>
+      Imaginons un archer débutant qui tire sa première flèche vers une cible. Son premier tir atterrit loin du centre. Il observe l'écart, corrige la position de son bras et recommence.
+    </p>
+
+    <p>
+      En réalité, la machine commence avec des poids aléatoires. L'apprentissage se déroule en trois temps répétés des milliers de fois :
+    </p>
+    <ol style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord, la prédiction</b> : L'image traverse le réseau vers la sortie.</li>
+      <li><b>Ensuite, le calcul de l'erreur</b> : On mesure l'écart entre la réponse fournie et le vrai chiffre « 7 ».</li>
+      <li><b>Enfin, la rétropropagation</b> : L'erreur remonte en sens inverse pour ajuster légèrement chaque poids dans la bonne direction.</li>
+    </ol>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+
+        <text x="300" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">L'Apprentissage : Diminution de l'Erreur au fil des Tours (Époques)</text>
+
+        <!-- Début -->
+        <g transform="translate(60, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Tour 1 (Début)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#fee2e2" stroke="#dc2626" rx="6"/>
+          <rect x="35" y="35" width="50" height="135" fill="#ef4444" rx="4"/>
+          <text x="60" y="105" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">90 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#991b1b">Forte erreur</text>
+        </g>
+
+        <!-- Flèche 1 -->
+        <g transform="translate(180, 140)">
+          <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
+          <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Correction</text>
+        </g>
+
+        <!-- Milieu -->
+        <g transform="translate(240, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#d97706">Tour 10 (Milieu)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#fef3c7" stroke="#d97706" rx="6"/>
+          <rect x="35" y="110" width="50" height="60" fill="#f59e0b" rx="4"/>
+          <text x="60" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">25 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#92400e">En progrès</text>
+        </g>
+
+        <!-- Flèche 2 -->
+        <g transform="translate(360, 140)">
+          <line x1="0" y1="0" x2="40" y2="0" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-gray)"/>
+          <text x="20" y="-8" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Ajustement</text>
+        </g>
+
+        <!-- Fin (LeNet-5) -->
+        <g transform="translate(420, 70)">
+          <text x="60" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Tour 50 (Terminé)</text>
+          <rect x="35" y="20" width="50" height="150" fill="#dcfce7" stroke="#16a34a" rx="6"/>
+          <rect x="35" y="160" width="50" height="10" fill="#22c55e" rx="2"/>
+          <text x="60" y="150" text-anchor="middle" fill="#15803d" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">0.8 %</text>
+          <text x="60" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#166534">Précision &gt; 99%</text>
+        </g>
+
+        <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Rétropropagation : à chaque essai erroné, les 60 000 poids sont légèrement modifiés</text>
+
+        <defs>
+          <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 4 : Baisse continue de l'erreur au fil des cycles d'entraînement (époques).</div>
+    </div>
+
+    <!-- Animation Interactive C: L'erreur descend -->
+    <div class="interactive-card">
+      <h4>📉 Démonstration Interactive : L'erreur descend au fil de l'apprentissage</h4>
+      <p style="font-size: 0.92rem; color: var(--text-muted);">
+        Cliquez sur le bouton <b>« Entraîner encore »</b> pour lancer des cycles d'apprentissage, ajuster les poids par rétropropagation et observer la chute de l'erreur.
+      </p>
+      <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">
+          <span>Cycle d'entraînement (Époque) : <span id="epoch-count">1</span> / 50</span>
+          <span>Taux d'erreur de test : <b id="error-rate" style="color: #dc2626; font-size: 1.05rem;">88.5 %</b></span>
+        </div>
+        <div style="height: 16px; background: #fee2e2; border-radius: 8px; overflow: hidden; border: 1px solid #fca5a5; margin-bottom: 8px;">
+          <div id="error-bar" style="width: 88.5%; height: 100%; background: #ef4444; transition: width 0.4s ease, background-color 0.4s ease;"></div>
+        </div>
+        <div id="train-status" style="font-size: 0.88rem; color: #475569;">
+          Statut : Les poids sont aléatoires. La machine fait beaucoup d'erreurs.
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="interactive-btn" onclick="stepTraining()">Entraîner encore</button>
+        <button class="interactive-btn secondary" onclick="resetTraining()">Réinitialiser</button>
+      </div>
+    </div>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 4 « Réseaux de neurones profonds : Défis et solutions », Section 4.2].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>L'apprentissage fonctionne par essai, mesure de l'erreur et correction des poids.</li>
+        <li>La rétropropagation est le mécanisme mathématique qui ajuste les paramètres pour minimiser l'erreur.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec3">⬅ Section précédente</a>
+      <a href="#sec5">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 5: La convolution -->
+  <section id="sec5" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : LA CONVOLUTION 2D -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 01</span>
+          <span class="anim-media-title">La Convolution 2D : Balayage par Filtre Glissant 5×5</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-toggle-media" onclick="toggleSectionMedia('convVideo', 'convGif', this)">Mode GIF Animé</button>
+          <a href="animations/01_convolution.mp4" download class="btn-download-media">⬇ MP4 (528 Ko)</a>
+        </div>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="convVideo" controls preload="metadata" poster="animations/01_convolution_poster.png" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/01_convolution.mp4" type="video/mp4">
+        </video>
+        <img id="convGif" src="animations/01_convolution.gif" alt="Animation Convolution" style="display: none; width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>📐 <b>Concept :</b> Extraction de contours, partage des poids (156 poids au lieu de 40 000)</span>
+        <span>⏱ <b>Durée :</b> 5.0s (150 frames @ 30 fps)</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>5. La convolution : la petite fenêtre qui balaye l'image</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Comprendre le principe clé des réseaux convolutifs (CNN).
+      </div>
+    </div>
+
+    <p>
+      Imaginons une petite loupe carrée transparente (un <b>filtre</b> de 3×3 ou 5×5 pixels) qui glisse pas à pas sur toute la surface de l'image.
+    </p>
+
+    <p>
+      En réalité, la machine calcule un produit local entre les pixels sous la loupe et les coefficients du filtre :
+    </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, le filtre se positionne sur le coin supérieur gauche de l'image.</li>
+      <li><b>Ensuite</b>, il glisse case par case vers la droite, puis descend ligne par ligne.</li>
+      <li><b>Enfin</b>, chaque calcul local s'inscrit dans une nouvelle grille appelée <b>carte de caractéristiques</b> (feature map).</li>
+    </ul>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+
+        <!-- Image source 5x5 -->
+        <g transform="translate(40, 45)">
+          <text x="90" y="-12" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Image d'entrée (5x5)</text>
+          
+          <!-- Grille de base -->
+          <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1">
+            <rect x="0" y="0" width="36" height="36"/><rect x="36" y="0" width="36" height="36"/><rect x="72" y="0" width="36" height="36"/><rect x="108" y="0" width="36" height="36"/><rect x="144" y="0" width="36" height="36"/>
+            <rect x="0" y="36" width="36" height="36"/><rect x="36" y="36" width="36" height="36"/><rect x="72" y="36" width="36" height="36"/><rect x="108" y="36" width="36" height="36"/><rect x="144" y="36" width="36" height="36"/>
+            <rect x="0" y="72" width="36" height="36"/><rect x="36" y="72" width="36" height="36"/><rect x="72" y="72" width="36" height="36"/><rect x="108" y="72" width="36" height="36"/><rect x="144" y="72" width="36" height="36"/>
+            <rect x="0" y="108" width="36" height="36"/><rect x="36" y="108" width="36" height="36"/><rect x="72" y="108" width="36" height="36"/><rect x="108" y="108" width="36" height="36"/><rect x="144" y="108" width="36" height="36"/>
+            <rect x="0" y="144" width="36" height="36"/><rect x="36" y="144" width="36" height="36"/><rect x="72" y="144" width="36" height="36"/><rect x="108" y="144" width="36" height="36"/><rect x="144" y="144" width="36" height="36"/>
+          </g>
+
+          <!-- Filtre 3x3 sur la position actuelle -->
+          <rect x="0" y="0" width="108" height="108" fill="#dbeafe" fill-opacity="0.6" stroke="#2563eb" stroke-width="3" rx="4"/>
+          <text x="54" y="58" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">Filtre 3×3</text>
+        </g>
+
+        <!-- Flèche opération -->
+        <g transform="translate(250, 125)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue2)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Calcul local</text>
+        </g>
+
+        <!-- Carte de caractéristiques (Feature Map 3x3) -->
+        <g transform="translate(345, 75)">
+          <text x="65" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Carte de traits (3x3)</text>
+          
+          <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5">
+            <rect x="0" y="0" width="42" height="42" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+            <text x="21" y="26" text-anchor="middle" fill="#1d4ed8" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">R₁</text>
+            
+            <rect x="42" y="0" width="42" height="42"/>
+            <rect x="84" y="0" width="42" height="42"/>
+            <rect x="0" y="42" width="42" height="42"/>
+            <rect x="42" y="42" width="42" height="42"/>
+            <rect x="84" y="42" width="42" height="42"/>
+            <rect x="0" y="84" width="42" height="42"/>
+            <rect x="42" y="84" width="42" height="42"/>
+            <rect x="84" y="84" width="42" height="42"/>
+          </g>
+        </g>
+
+        <text x="300" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le filtre glisse pixel par pixel et détecte les motifs locaux (barres, angles, boucles)</text>
+
+        <defs>
+          <marker id="arrow-blue2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 5 : Principe du filtre glissant de convolution sur une image.</div>
+    </div>
+
+    <!-- Animation Interactive A: La fenêtre qui balaye sur grille 6x6 -->
+    <div class="interactive-card">
+      <h4>🔍 Démonstration Interactive : « La fenêtre qui balaye » (Grille 6×6)</h4>
+      <p style="font-size: 0.92rem; color: var(--text-muted);">
+        Observez le filtre 3×3 glisser pas à pas sur l'image 6×6 pour produire la carte de caractéristiques 4×4. Utilisez les boutons ou la lecture lente.
+      </p>
+      
+      <!-- Visualisation interactive 6x6 -> 4x4 -->
+      <div style="display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; margin: 16px 0; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #cbd5e1;">
+        
+        <!-- Grille 6x6 -->
+        <div style="text-align: center;">
+          <div class="playground-label" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Image d'entrée (6×6)</div>
+          <div id="grid-conv-input" style="display: grid; grid-template-columns: repeat(6, 26px); gap: 2px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
+            <!-- Généré en JS -->
+          </div>
+        </div>
+
+        <div style="font-size: 1.4rem; color: #2563eb;">➔</div>
+
+        <!-- Carte 4x4 -->
+        <div style="text-align: center;">
+          <div class="playground-label" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Carte produite (4×4)</div>
+          <div id="grid-conv-output" style="display: grid; grid-template-columns: repeat(4, 34px); gap: 3px; background: #cbd5e1; padding: 3px; border-radius: 4px;">
+            <!-- Généré en JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background: #ffffff; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.92rem; margin-bottom: 12px;">
+        Étape actuelle : <b><span id="conv-step-num">1</span> / 16</b> | Position filtre : <b>Ligne <span id="conv-row">1</span>, Colonne <span id="conv-col">1</span></b> | Valeur calculée : <b style="color: #2563eb;" id="conv-val">142</b>
+      </div>
+
+      <div class="btn-group">
+        <button class="interactive-btn secondary" onclick="stepConv(-1)">⬅ Précédent</button>
+        <button class="interactive-btn" onclick="stepConv(1)">Suivant ➡</button>
+        <button class="interactive-btn secondary" id="btn-conv-auto" onclick="toggleConvAuto()">▶ Lecture lente</button>
+        <button class="interactive-btn secondary" onclick="resetConv()">Réinitialiser</button>
+      </div>
+    </div>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 5 « Réseaux de neurones convolutifs (CNN) », Section 5.2].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Un filtre de convolution glisse sur toute l'image pour repérer des formes locales partout où elles apparaissent.</li>
+        <li>Ce procédé réduit le nombre de paramètres nécessaires par rapport à un réseau traditionnel.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec4">⬅ Section précédente</a>
+      <a href="#sec6">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 6: Le pooling -->
+  <section id="sec6" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : LE POOLING -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 03</span>
+          <span class="anim-media-title">Le Sous-Échantillonnage (Pooling 2×2) : Invariance &amp; Condensation</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-toggle-media" onclick="toggleSectionMedia('poolVideo', 'poolGif', this)">Mode GIF Animé</button>
+          <a href="animations/03_pooling.mp4" download class="btn-download-media">⬇ MP4 (384 Ko)</a>
+        </div>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="poolVideo" controls preload="metadata" poster="animations/03_pooling_poster.png" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/03_pooling.mp4" type="video/mp4">
+        </video>
+        <img id="poolGif" src="animations/03_pooling.gif" alt="Animation Pooling" style="display: none; width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>📐 <b>Concept :</b> Réduction spatiale 2×2 (divise la surface par 4) &amp; robustesse aux tremblements</span>
+        <span>⏱ <b>Durée :</b> 5.0s (150 frames @ 30 fps)</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>6. Le pooling : condenser et ne garder que l'essentiel</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Découvrir la méthode de compression et d'invariance par sous-échantillonnage.
+      </div>
+    </div>
+
+    <p>
+      Imaginons un résumé de réunion qui ne retient que la décision principale de chaque dossier au lieu de toutes les discussions.
+    </p>
+
+    <p>
+      En réalité, après avoir détecté les traits avec la convolution, l'image contient encore beaucoup de pixels. Pour rendre le système plus rapide et tolérant aux légers déplacements du dessin, on applique une étape de <b>pooling</b> (ou sous-échantillonnage) :
+    </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>D'abord</b>, la méthode Max-Pooling découpe l'image en blocs de 2×2 cases.</li>
+      <li><b>Ensuite</b>, elle conserve uniquement la valeur la plus forte de chaque bloc.</li>
+      <li><b>Enfin</b>, la taille de l'image est divisée par deux tout en conservant le signal déterminant.</li>
+    </ul>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+        <rect width="600" height="300" fill="#f8fafc" rx="12"/>
+
+        <!-- Bloc 4 cases avant pooling -->
+        <g transform="translate(100, 70)">
+          <text x="70" y="-15" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Zone 2×2 (4 pixels)</text>
+          
+          <rect x="0" y="0" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="35" y="42" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">12</text>
+
+          <rect x="70" y="0" width="70" height="70" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+          <text x="105" y="42" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="20" font-weight="bold">88</text>
+
+          <rect x="0" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="35" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">20</text>
+
+          <rect x="70" y="70" width="70" height="70" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="105" y="112" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="16">45</text>
+        </g>
+
+        <!-- Flèche Max-Pooling -->
+        <g transform="translate(290, 140)">
+          <line x1="0" y1="0" x2="60" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green2)"/>
+          <text x="30" y="-10" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Max-Pooling</text>
+          <text x="30" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">(Garder le max)</text>
+        </g>
+
+        <!-- Résultat 1 case -->
+        <g transform="translate(400, 105)">
+          <text x="45" y="-20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">1 seule case</text>
+          <rect x="0" y="0" width="90" height="90" fill="#dcfce7" stroke="#16a34a" stroke-width="3" rx="8"/>
+          <text x="45" y="55" text-anchor="middle" fill="#15803d" font-family="monospace" font-size="28" font-weight="bold">88</text>
+        </g>
+
+        <text x="300" y="265" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#475569">Le pooling divise la taille par 2 en gardant uniquement l'information la plus forte</text>
+
+        <defs>
+          <marker id="arrow-green2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 6 : Opération de Max-Pooling 2×2 (4 cases réduites à 1 seule case maximale).</div>
+    </div>
+
+    <div class="citation">
+      Source : [Mezghani, 2024, Chapitre 5 « Réseaux de neurones convolutifs (CNN) », Section 5.2.2].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Le pooling compresse les dimensions de l'image en sélectionnant les signaux dominants.</li>
+        <li>Il permet au réseau de reconnaître un chiffre même s'il est légèrement déplacé ou déformé.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec5">⬅ Section précédente</a>
+      <a href="#sec7">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 7: LeNet-5 couche par couche -->
+  <section id="sec7" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : PIPELINE 7 COUCHES -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 04</span>
+          <span class="anim-media-title">Le Voyage du Chiffre : Pipeline Intégral LeNet-5 (1998)</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-toggle-media" onclick="toggleSectionMedia('pipeVideo', 'pipeGif', this)">Mode GIF Animé</button>
+          <a href="animations/04_lenet5_pipeline.mp4" download class="btn-download-media">⬇ MP4 (592 Ko)</a>
+        </div>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="pipeVideo" controls preload="metadata" poster="animations/04_lenet5_pipeline_poster.png" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/04_lenet5_pipeline.mp4" type="video/mp4">
+        </video>
+        <img id="pipeGif" src="animations/04_lenet5_pipeline.gif" alt="Animation Pipeline" style="display: none; width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>📐 <b>Architecture :</b> Entrée 32×32 → C1 → S2 → C3 → S4 → C5 → F6 → 10 Unités de sortie RBF</span>
+        <span>⏱ <b>Durée :</b> 5.0s (150 frames @ 30 fps)</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>7. LeNet-5 couche par couche : la structure historique complète</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Examiner en détail les couches successives de LeNet-5 qui ont fondé la vision moderne.
+      </div>
+    </div>
+
+    <p>
+      Conçu en 1998 par l'équipe de Yann LeCun aux laboratoires AT&amp;T Bell, <b>LeNet-5</b> est le premier réseau convolutif à avoir été déployé à grande échelle industrielle. Le pipeline complet traite une image de 32×32 pixels jusqu'aux 10 sorties de classification (0 à 9).
+    </p>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 320" width="100%" height="100%">
+        <rect width="750" height="320" fill="#f8fafc" rx="12"/>
+
+        <!-- Titre -->
+        <text x="375" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#0f172a">Architecture LeNet-5 (Yann LeCun et al., 1998)</text>
+
+        <!-- Entrée 32x32 -->
+        <g transform="translate(30, 70)">
+          <rect width="45" height="150" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" rx="4"/>
+          <text x="22" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">Image</text>
+          <text x="22" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">32×32</text>
+        </g>
+
+        <!-- C1: Convolution 6 plans 28x28 -->
+        <g transform="translate(110, 70)">
+          <rect width="55" height="150" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+          <text x="27" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C1</text>
+          <text x="27" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">6 plans</text>
+          <text x="27" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">28×28</text>
+        </g>
+
+        <!-- S2: Subsampling (Pooling) 6 plans 14x14 -->
+        <g transform="translate(200, 85)">
+          <rect width="50" height="120" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
+          <text x="25" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S2</text>
+          <text x="25" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
+          <text x="25" y="89" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">14×14</text>
+        </g>
+
+        <!-- C3: Convolution 16 plans 10x10 -->
+        <g transform="translate(285, 75)">
+          <rect width="60" height="140" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+          <text x="30" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8">C3</text>
+          <text x="30" y="87" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">16 plans</text>
+          <text x="30" y="101" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">10×10</text>
+        </g>
+
+        <!-- S4: Subsampling (Pooling) 16 plans 5x5 -->
+        <g transform="translate(380, 95)">
+          <rect width="50" height="100" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
+          <text x="25" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">S4</text>
+          <text x="25" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#16a34a">Pooling</text>
+          <text x="25" y="79" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">5×5</text>
+        </g>
+
+        <!-- C5: Conv pleine / Dense 120 -->
+        <g transform="translate(465, 80)">
+          <rect width="55" height="130" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
+          <text x="27" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">C5</text>
+          <text x="27" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">120 u.</text>
+          <text x="27" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
+        </g>
+
+        <!-- F6: Fully Connected 84 -->
+        <g transform="translate(555, 90)">
+          <rect width="55" height="110" fill="#faf5ff" stroke="#9333ea" stroke-width="2" rx="4"/>
+          <text x="27" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce">F6</text>
+          <text x="27" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#9333ea">84 u.</text>
+          <text x="27" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Dense</text>
+        </g>
+
+        <!-- Sortie: 10 classes (0-9) -->
+        <g transform="translate(645, 80)">
+          <rect width="70" height="130" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+          <text x="35" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b45309">Sortie</text>
+          <text x="35" y="82" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#d97706">« 7 »</text>
+          <text x="35" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#78350f">10 classes</text>
+        </g>
+
+        <!-- Liens fléchés -->
+        <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+          <path d="M 75 145 L 110 145"/>
+          <path d="M 165 145 L 200 145"/>
+          <path d="M 250 145 L 285 145"/>
+          <path d="M 345 145 L 380 145"/>
+          <path d="M 430 145 L 465 145"/>
+          <path d="M 520 145 L 555 145"/>
+          <path d="M 610 145 L 645 145"/>
+        </g>
+
+        <!-- Légende en bas -->
+        <g transform="translate(100, 270)" font-family="system-ui, sans-serif" font-size="11">
+          <rect x="0" y="0" width="16" height="16" fill="#eff6ff" stroke="#2563eb" rx="2"/><text x="24" y="13" fill="#1e293b">Convolution (filtre)</text>
+          <rect x="170" y="0" width="16" height="16" fill="#f0fdf4" stroke="#16a34a" rx="2"/><text x="194" y="13" fill="#1e293b">Pooling (compression)</text>
+          <rect x="360" y="0" width="16" height="16" fill="#faf5ff" stroke="#9333ea" rx="2"/><text x="384" y="13" fill="#1e293b">Dense (décision)</text>
+        </g>
+      </svg>
+      <div class="svg-caption">Figure 7 : Pipeline architectural complet de LeNet-5 (de l'entrée 32×32 aux 10 classes de sortie).</div>
+    </div>
+
+    <!-- Encadrés couche par couche -->
+    <div class="layers-grid">
+      
+      <div class="layer-card">
+        <div class="layer-title">🖼️ Entrée (Image 32×32)</div>
+        <div class="layer-role">Reçoit l'image numérisée et centrée du chiffre manuscrit.</div>
+        <div class="layer-meta">Dimensions : 32×32 | 0 paramètre</div>
+      </div>
+
+      <div class="layer-card conv">
+        <div class="layer-title conv">🔍 Couche C1 (Convolution 5×5)</div>
+        <div class="layer-role">Extrait 6 types de traits élémentaires (lignes, angles et bordures).</div>
+        <div class="layer-meta">Sortie : 6 plans 28×28 | 156 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card pool">
+        <div class="layer-title pool">📉 Couche S2 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-role">Compresse de moitié la résolution pour stabiliser les motifs détectés.</div>
+        <div class="layer-meta">Sortie : 6 plans 14×14 | 12 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card conv">
+        <div class="layer-title conv">🔍 Couche C3 (Convolution 5×5)</div>
+        <div class="layer-role">Combine les traits simples pour reconnaître des parties complexes de chiffres.</div>
+        <div class="layer-meta">Sortie : 16 plans 10×10 | 1 516 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card pool">
+        <div class="layer-title pool">📉 Couche S4 (Sous-échantillonnage 2×2)</div>
+        <div class="layer-role">Seconde réduction spatiale pour rendre le modèle robuste aux déformations.</div>
+        <div class="layer-meta">Sortie : 16 plans 5×5 | 32 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card dense">
+        <div class="layer-title dense">🧠 Couche C5 (Convolution dense)</div>
+        <div class="layer-role">Connecte toutes les caractéristiques spatiales dans 120 unités de décision.</div>
+        <div class="layer-meta">Sortie : 120 unités | 48 120 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card dense">
+        <div class="layer-title dense">🧠 Couche F6 (Couche connectée)</div>
+        <div class="layer-role">Effectue la synthèse finale des formes pour chaque style d'écriture.</div>
+        <div class="layer-meta">Sortie : 84 unités | 10 164 paramètres [LeCun et al., 1998, Sect. II-B]</div>
+      </div>
+
+      <div class="layer-card out">
+        <div class="layer-title out">🎯 Sortie (10 classes 0 à 9)</div>
+        <div class="layer-role">Émet la probabilité de chaque chiffre et valide le pic sur le « 7 ».</div>
+        <div class="layer-meta">Sortie : 10 valeurs RBF | 840 paramètres fixes</div>
+      </div>
+
+    </div>
+
+    <p style="margin-top: 16px;">
+      Au total, LeNet-5 ne compte qu'environ <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, Sect. II-A « only 60 000 trainable free parameters »]. C'est un cahier de réglages très compact, équivalent à la taille d'un petit livre, là où les modèles d'intelligence artificielle modernes mobilisent des centaines de millions ou des milliards de paramètres.
+    </p>
+
+    <div class="citation">
+      Source : [LeCun, Bottou, Bengio, Haffner, 1998, « Gradient-Based Learning Applied to Document Recognition », Proceedings of the IEEE, Section II-B].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>LeNet-5 alterne Convolution (extraction) et Sous-échantillonnage (compression) avant la décision finale.</li>
+        <li>Le réseau ne compte que 60 000 paramètres, ce qui lui permettait de tourner rapidement sur les processeurs de 1998.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec6">⬅ Section précédente</a>
+      <a href="#sec8">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 8: Résultats concrets & Histoire vraie -->
+  <section id="sec8" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : SUCCÈS INDUSTRIEL NCR -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 05</span>
+          <span class="anim-media-title">Le Tri Industriel des Chèques chez NCR Corporation (1996-1998)</span>
+        </div>
+        <a href="animations/ncr-slide.mp4" download class="btn-download-media">⬇ MP4 (446 Ko)</a>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="ncrVideo" controls preload="metadata" poster="animations/frames/frame_06_4.0s.png" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/ncr-slide.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>🏦 <b>Impact :</b> Millions de chèques triés quotidiennement aux USA, taux de reconnaissance &gt; 99%</span>
+        <span>⏱ <b>Durée :</b> 5.0s (150 frames @ 30 fps)</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>8. Résultats concrets et histoire vraie : le tri des chèques NCR</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Découvrir l'impact économique réel et les performances mesurées de LeNet-5.
+      </div>
+    </div>
+
+    <p>
+      LeNet-5 n'est pas resté confiné dans un laboratoire de recherche théorique. Dès la fin des années 1990, le constructeur bancaire <b>NCR</b> a intégré LeNet-5 dans ses trieuses automatiques de chèques.
+    </p>
+
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 300" width="100%" height="100%">
+        <rect width="650" height="300" fill="#f8fafc" rx="12"/>
+
+        <!-- Chèque bancaire -->
+        <g transform="translate(30, 60)">
+          <rect width="200" height="120" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" rx="6"/>
+          <!-- Bandes décoratives chèque -->
+          <rect x="10" y="12" width="60" height="12" fill="#e2e8f0" rx="2"/>
+          <text x="15" y="21" font-family="system-ui, sans-serif" font-size="8" fill="#64748b">BANQUE NATIONALE</text>
+          
+          <line x1="15" y1="50" x2="130" y2="50" stroke="#cbd5e1"/>
+          <line x1="15" y1="75" x2="130" y2="75" stroke="#cbd5e1"/>
+
+          <!-- Case Montant entourée -->
+          <rect x="140" y="40" width="48" height="36" fill="#fffbeb" stroke="#d97706" stroke-width="2" rx="4"/>
+          <text x="164" y="65" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#b45309">7 $</text>
+          <text x="164" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#d97706">Zone lue</text>
+        </g>
+
+        <!-- Flèche vers scanner -->
+        <g transform="translate(245, 120)">
+          <line x1="0" y1="0" x2="45" y2="0" stroke="#0969da" stroke-width="3" marker-end="url(#arrow-blue3)"/>
+        </g>
+
+        <!-- Machine de tri NCR avec LeNet-5 -->
+        <g transform="translate(305, 50)">
+          <rect width="160" height="140" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="10"/>
+          <rect x="15" y="15" width="130" height="40" fill="#0284c7" rx="4"/>
+          <text x="80" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">Machine NCR</text>
+          
+          <rect x="25" y="70" width="110" height="50" fill="#0f172a" rx="4"/>
+          <text x="80" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#38bdf8">Puce DSP + LeNet-5</text>
+          <text x="80" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">Millions chèques/mois</text>
+        </g>
+
+        <!-- Flèche vers sortie -->
+        <g transform="translate(480, 120)">
+          <line x1="0" y1="0" x2="45" y2="0" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green3)"/>
+        </g>
+
+        <!-- Sortie Reconnaissance -->
+        <g transform="translate(540, 75)">
+          <circle cx="45" cy="45" r="38" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+          <text x="45" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="#15803d">7</text>
+          <text x="45" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#166534">Chiffre validé</text>
+        </g>
+
+        <text x="325" y="260" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Déploiement commercial (depuis juin 1996) : ~20 millions par jour (~10 % du volume US) [LeCun et al., 1998, Sect. III-B]</text>
+
+        <defs>
+          <marker id="arrow-blue3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0969da" />
+          </marker>
+          <marker id="arrow-green3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+          </marker>
+        </defs>
+      </svg>
+      <div class="svg-caption">Figure 8 : Traitement industriel des chèques bancaires par les machines NCR propulsées par LeNet-5.</div>
+    </div>
+
+    <p>
+      Les chiffres clés vérifiés de ce déploiement historique sont les suivants :
+    </p>
+    <ul style="margin-left: 24px; margin-bottom: 16px;">
+      <li><b>Taux d'erreur record</b> : Sur la base de test MNIST (10 000 chiffres manuscrits), l'erreur s'établit à <b>0,95 % sans distorsion</b> [LeCun et al., 1998, sec. III « stabilizes … at 0.95% »] et descend à <b>0,8 % avec distorsions</b> [LeCun et al., 1998, sec. III « dropped to 0.8% »].</li>
+      <li><b>Volume industriel</b> : Les machines NCR traitaient <b>plusieurs millions de chèques par mois (source primaire)</b> [LeCun et al., 1998, sec. I « reading millions of checks per month »].</li>
+      <li><b>Part de marché</b> : Ce volume est estimé à environ <b>10 % de l'ensemble des chèques bancaires américains</b> [Wikipédia, LeNet (source secondaire - À RECOUPER)].</li>
+      <li><b>Compacité</b> : L'ensemble de l'architecture repose sur seulement <b>60 000 paramètres entraînables</b> [LeCun et al., 1998, Sect. II-A « only 60 000 trainable free parameters »].</li>
+    </ul>
+
+    <div class="citation">
+      Sources : [LeCun et al., 1998, Section I « Introduction », Section III « Experiments on MNIST », Sect. II-A-12] &amp; [Wikipédia, LeNet].
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>LeNet-5 a prouvé la viabilité industrielle des réseaux convolutifs dès 1998 en traitant ~20 millions de chèques par jour (~10 % du volume US).</li>
+        <li>Son taux d'erreur inférieur à 1% sur MNIST a posé le standard mondial pour la vision par ordinateur.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec7">⬅ Section précédente</a>
+      <a href="#sec9">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 9: À quoi ça sert aujourd'hui -->
+  <section id="sec9" class="dossier-section">
+    <div class="section-header">
+      <h2>9. À quoi ça sert aujourd'hui : 4 applications du quotidien</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Relier les principes de LeNet-5 aux technologies actuelles qui nous entourent.
+      </div>
+    </div>
+
+    <p>
+      Les mécanismes inventés avec LeNet-5 (convolution, pooling, couches denses) sont le moteur des systèmes de vision par ordinateur d'aujourd'hui :
+    </p>
+
+    <div class="app-grid">
+      
+      <!-- Cas 1 : Déverrouillage facial -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+              <circle cx="22" cy="18" r="9" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <path d="M 12 36 C 12 28 32 28 32 36" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <path d="M 8 14 L 8 8 L 14 8 M 30 8 L 36 8 L 36 14 M 8 30 L 8 36 L 14 36 M 30 36 L 36 36 L 36 30" fill="none" stroke="#0969da" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="app-title">📱 1. Déverrouillage par visage (Face ID)</div>
+        </div>
+        <p class="app-desc">
+          Des réseaux de neurones convolutifs analysent la forme géométrique du visage captée en infrarouge. La machine déverrouille l'appareil instantanément en vérifiant les points clés du visage.
+        </p>
+      </div>
+
+      <!-- Cas 2 : Imagerie médicale -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <rect x="10" y="8" width="24" height="28" rx="3" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+              <path d="M 22 14 L 22 30 M 15 22 L 29 22" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="app-title">🏥 2. Imagerie médicale (Radiologie)</div>
+        </div>
+        <p class="app-desc">
+          Les filtres convolutifs repèrent des micro-lésions et anomalies sur les radiographies pulmonaires ou les IRM. Le modèle assiste les médecins en localisant les zones nécessitant un examen approfondi.
+        </p>
+      </div>
+
+      <!-- Cas 3 : Voitures autonomes -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#faf5ff" stroke="#e9d5ff"/>
+              <path d="M 10 26 L 14 14 L 30 14 L 34 26 Z" fill="#ffffff" stroke="#9333ea" stroke-width="2"/>
+              <circle cx="14" cy="28" r="4" fill="#9333ea"/>
+              <circle cx="30" cy="28" r="4" fill="#9333ea"/>
+              <line x1="6" y1="36" x2="38" y2="36" stroke="#a855f7" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="app-title">🚗 3. Véhicules autonomes</div>
+        </div>
+        <p class="app-desc">
+          Des caméras embarquées détectent en temps réel les panneaux de signalisation, les piétons et les marquages au sol. Le système ajuste la vitesse et la trajectoire du véhicule pour assurer la sécurité.
+        </p>
+      </div>
+
+      <!-- Cas 4 : Tri de photos -->
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon">
+            <svg viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#fffbeb" stroke="#fde68a"/>
+              <rect x="8" y="8" width="28" height="24" rx="3" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+              <circle cx="15" cy="15" r="3" fill="#d97706"/>
+              <path d="M 10 28 L 18 20 L 26 26 L 34 16 L 36 28 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="app-title">🖼️ 4. Tri automatique de photos</div>
+        </div>
+        <p class="app-desc">
+          Les algorithmes classent automatiquement vos albums selon les scènes visibles (plage, montagne, animaux). Vous retrouvez n'importe quelle photo en tapant un simple mot-clé sans indexation manuelle.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="box-remember">
+      <h4>💡 À retenir</h4>
+      <ul>
+        <li>Toutes les technologies de vision moderne (téléphones, hôpitaux, transports) reposent sur les bases posées par LeNet-5.</li>
+        <li>La combinaison convolution et classification permet d'automatiser des décisions visuelles complexes.</li>
+      </ul>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec8">⬅ Section précédente</a>
+      <a href="#sec10">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 10: Glossaire & 10 Points à retenir -->
+  <section id="sec10" class="dossier-section">
+    <div class="section-header">
+      <h2>10. Glossaire illustré &amp; 10 points clés à retenir</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Consolider le vocabulaire technique essentiel et fixer les notions maîtresses.
+      </div>
+    </div>
+
+    <h3 style="margin-bottom: 12px; color: var(--text-main);">📖 Glossaire (15 termes indispensables)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Terme technique</th>
+          <th>Définition simple et concrète</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Pixel</b></td><td>Plus petite unité d'une image numérique, représentée par une valeur de luminosité (0 à 255).</td></tr>
+        <tr><td><b>Neurone artificiel</b></td><td>Élément de calcul effectuant une somme pondérée de ses entrées suivie d'un test de seuil.</td></tr>
+        <tr><td><b>Poids synaptique (w)</b></td><td>Coefficient numérique ajustable déterminant l'importance accordée à une connexion.</td></tr>
+        <tr><td><b>Biais (b)</b></td><td>Valeur seuil ajoutée à la somme pondérée pour décaler l'activation d'un neurone.</td></tr>
+        <tr><td><b>Fonction d'activation</b></td><td>Règle mathématique décidant si le neurone transmet son signal à la couche suivante.</td></tr>
+        <tr><td><b>Couche cachée</b></td><td>Couche de neurones intermédiaire située entre la couche d'entrée et la couche de sortie.</td></tr>
+        <tr><td><b>Convolution</b></td><td>Opération de filtrage glissant extrayant des motifs visuels locaux sur une image.</td></tr>
+        <tr><td><b>Filtre / Noyau</b></td><td>Petite grille de nombres (ex. 3×3 ou 5×5) chargée de détecter un trait spécifique.</td></tr>
+        <tr><td><b>Carte de caractéristiques</b></td><td>Grille intermédiaire résultant de l'application d'un filtre de convolution.</td></tr>
+        <tr><td><b>Pooling (Sous-échantillonnage)</b></td><td>Compression spatiale réduisant la taille de la carte en conservant le signal fort.</td></tr>
+        <tr><td><b>Rétropropagation</b></td><td>Algorithme qui calcule l'erreur et ajuste chaque poids d'arrière en avant.</td></tr>
+        <tr><td><b>Époque (Epoch)</b></td><td>Un cycle complet d'entraînement au cours duquel le réseau a vu la totalité des exemples.</td></tr>
+        <tr><td><b>Fonction de coût (Loss)</b></td><td>Mesure numérique de l'écart d'erreur entre la prédiction et le vrai résultat.</td></tr>
+        <tr><td><b>MNIST</b></td><td>Base de données de référence historique comportant 70 000 chiffres manuscrits (0 à 9).</td></tr>
+        <tr><td><b>Invariance spatiale</b></td><td>Capacité d'un réseau à reconnaître un chiffre quel que soit son emplacement dans l'image.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box-remember" style="background: var(--primary-light); border-color: #93c5fd; margin-top: 24px;">
+      <h4 class="box-remember-title">⭐ Les 10 points clés à retenir absolument</h4>
+      <ol class="box-remember-list" style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6;">
+        <li>Une image est une grille de pixels contenant des valeurs de luminosité de 0 à 255.</li>
+        <li>Un neurone effectue une somme pondérée de ses entrées et la compare à un seuil d'activation.</li>
+        <li>Un réseau empile des couches successives pour construire des représentations hiérarchisées.</li>
+        <li>L'entraînement ajuste automatiquement les poids pour réduire l'erreur par rétropropagation.</li>
+        <li>La convolution utilise une fenêtre glissante pour repérer les contours et les formes locales.</li>
+        <li>Le pooling compresse les dimensions et tolère les légères déformations de l'écriture.</li>
+        <li>LeNet-5 alterne deux blocs Convolution-Pooling avant ses couches denses de décision.</li>
+        <li>LeNet-5 compte environ 60 000 paramètres entraînables pour classer les chiffres 0 à 9.</li>
+        <li>LeNet-5 a été validé sur le terrain en traitant des millions de chèques bancaires par mois chez NCR.</li>
+        <li>Ces principes historiques constituent le socle de toute la vision par ordinateur contemporaine.</li>
+      </ol>
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec9">⬅ Section précédente</a>
+      <a href="#sec11">Section suivante ➡</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+
+  <!-- SECTION 11: Quiz d'auto-évaluation -->
+  <section id="sec11" class="dossier-section">
+
+    <!-- ANIMATION REMOTION : FILM PÉDAGOGIQUE INTÉGRAL -->
+    <div class="anim-media-card glass-panel" style="margin: 24px 0; border-radius: 12px; padding: 18px; border: 1px solid var(--border-subtle);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="badge-tech">ANIMATION REMOTION 06</span>
+          <span class="anim-media-title">Film Pédagogique Intégral : Réseaux Convolutifs &amp; LeNet-5</span>
+        </div>
+        <a href="animations/lenet5_pedagogique.mp4" download class="btn-download-media">⬇ MP4 HD (1,89 Mo)</a>
+      </div>
+      <div class="video-container" style="position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+        <video id="pedagoVideo" controls preload="metadata" style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="animations/lenet5_pedagogique.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <span>🎓 <b>Contenu :</b> Synthèse complète animée des 7 couches, matrices de convolution et classification</span>
+        <span>⏱ <b>Qualité :</b> 1080p H.264</span>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>11. Quiz d'auto-évaluation interactif (10 questions)</h2>
+      <div class="section-objective">
+        <b>Objectif de cette section :</b> Vérifier votre compréhension de façon bienveillante et autonome.
+      </div>
+    </div>
+
+    <p>
+      Sélectionnez une réponse pour chaque question. La correction s'affiche immédiatement avec une explication claire.
+    </p>
+
+    <div id="quiz-container">
+
+      <!-- Q1 -->
+      <div class="quiz-question" id="q1">
+        <p class="q-title">Question 1 : Comment une machine perçoit-elle une image numérique ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1_opt" onchange="checkAnswer(1, 'A')"> A) Comme un dessin continu vectoriel.</label>
+          <label><input type="radio" name="q1_opt" onchange="checkAnswer(1, 'B')"> B) Comme une grille de cases (pixels) contenant des nombres de luminosité.</label>
+          <label><input type="radio" name="q1_opt" onchange="checkAnswer(1, 'C')"> C) Comme une onde sonore modulée.</label>
+        </div>
+        <div class="quiz-feedback" id="fb1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-question" id="q2">
+        <p class="q-title">Question 2 : Quelles sont les deux opérations de base effectuées par un neurone artificiel ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2_opt" onchange="checkAnswer(2, 'A')"> A) Une somme pondérée des entrées, puis un test de seuil d'activation.</label>
+          <label><input type="radio" name="q2_opt" onchange="checkAnswer(2, 'B')"> B) Une division par zéro et une racine carrée.</label>
+          <label><input type="radio" name="q2_opt" onchange="checkAnswer(2, 'C')"> C) Un tri alphabétique des données.</label>
+        </div>
+        <div class="quiz-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-question" id="q3">
+        <p class="q-title">Question 3 : Dans un réseau de neurones, à quoi servent les « poids » ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'A')"> A) À mesurer la masse physique de l'ordinateur.</label>
+          <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'B')"> B) À déterminer l'importance relative accordée à chaque connexion.</label>
+          <label><input type="radio" name="q3_opt" onchange="checkAnswer(3, 'C')"> C) À ralentir l'exécution du programme.</label>
+        </div>
+        <div class="quiz-feedback" id="fb3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-question" id="q4">
+        <p class="q-title">Question 4 : Quel est le rôle principal de l'opération de convolution ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'A')"> A) Effacer totalement les couleurs de l'image.</label>
+          <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'B')"> B) Faire glisser un filtre sur l'image pour extraire des motifs locaux (traits, contours).</label>
+          <label><input type="radio" name="q4_opt" onchange="checkAnswer(4, 'C')"> C) Compresser l'image au format MP3.</label>
+        </div>
+        <div class="quiz-feedback" id="fb4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-question" id="q5">
+        <p class="q-title">Question 5 : À quoi sert l'étape de Pooling (Max-Pooling) ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q5_opt" onchange="checkAnswer(5, 'A')"> A) À réduire les dimensions de l'image en ne conservant que l'information la plus forte.</label>
+          <label><input type="radio" name="q5_opt" onchange="checkAnswer(5, 'B')"> B) À multiplier la taille de l'image par dix.</label>
+          <label><input type="radio" name="q5_opt" onchange="checkAnswer(5, 'C')"> C) À inverser les couleurs de gauche à droite.</label>
+        </div>
+        <div class="quiz-feedback" id="fb5"></div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-question" id="q6">
+        <p class="q-title">Question 6 : Combien de paramètres entraînables possède approximativement LeNet-5 (1998) ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q6_opt" onchange="checkAnswer(6, 'A')"> A) Environ 60 000 paramètres.</label>
+          <label><input type="radio" name="q6_opt" onchange="checkAnswer(6, 'B')"> B) Environ 175 milliards de paramètres.</label>
+          <label><input type="radio" name="q6_opt" onchange="checkAnswer(6, 'C')"> C) Seulement 12 paramètres.</label>
+        </div>
+        <div class="quiz-feedback" id="fb6"></div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-question" id="q7">
+        <p class="q-title">Question 7 : Quelle était l'application commerciale industrielle majeure de LeNet-5 en 1998 ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'A')"> A) Le pilotage de fusées spatiales.</label>
+          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'B')"> B) La lecture automatique de chèques bancaires par les machines NCR.</label>
+          <label><input type="radio" name="q7_opt" onchange="checkAnswer(7, 'C')"> C) La création automatique de jeux vidéo.</label>
+        </div>
+        <div class="quiz-feedback" id="fb7"></div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="quiz-question" id="q8">
+        <p class="q-title">Question 8 : Quel taux d'erreur remarquable LeNet-5 a-t-il obtenu sur la base de données MNIST ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'A')"> A) Moins de 1 % (0,8 % à 0,95 %).</label>
+          <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'B')"> B) Environ 45 % d'erreur.</label>
+          <label><input type="radio" name="q8_opt" onchange="checkAnswer(8, 'C')"> C) 0,0000 % (zéro erreur absolue).</label>
+        </div>
+        <div class="quiz-feedback" id="fb8"></div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="quiz-question" id="q9">
+        <p class="q-title">Question 9 : Comment appelle-t-on le mécanisme qui propage l'erreur en arrière pour ajuster les poids ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'A')"> A) La rétropropagation du gradient (Backpropagation).</label>
+          <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'B')"> B) La défragmentation du disque dur.</label>
+          <label><input type="radio" name="q9_opt" onchange="checkAnswer(9, 'C')"> C) La compilation du processeur.</label>
+        </div>
+        <div class="quiz-feedback" id="fb9"></div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="quiz-question" id="q10">
+        <p class="q-title">Question 10 : Pourquoi les réseaux convolutifs (CNN) sont-ils si performants en vision par ordinateur ?</p>
+        <div class="quiz-options">
+          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'A')"> A) Parce qu'ils fonctionnent sans électricité.</label>
+          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'B')"> B) Parce qu'ils préservent la structure 2D de l'image et réutilisent les mêmes filtres partout.</label>
+          <label><input type="radio" name="q10_opt" onchange="checkAnswer(10, 'C')"> C) Parce qu'ils ignorent totalement les formes géométriques.</label>
+        </div>
+        <div class="quiz-feedback" id="fb10"></div>
+      </div>
+
+    </div>
+
+    <div class="section-nav">
+      <a href="#sec10">⬅ Section précédente</a>
+      <a href="#sec0">Retour au début du dossier ⬆</a>
+    </div>
+    <div class="section-end-icon">✦ ✦ ✦</div>
+  </section>
+  </div>
+
+    <footer>
+      <!-- SÉLECTEUR DE THÈMES AU PIED DE PAGE (DROPUP) -->
+      <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+        <div class="theme-dropdown dropup" id="themeDropdown">
+          <button class="theme-dropdown-trigger" id="themeDropdownBtn" onclick="toggleThemeDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Changer le thème visuel">
+            <span>🎨</span>
+            <span id="themeCurrentLabel">📜 Origine</span>
+            <svg class="theme-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </button>
+          <div class="theme-dropdown-menu" id="themeDropdownMenu">
+            <div class="theme-menu-header">Thème Visuel</div>
+            <button class="theme-menu-item active" data-theme-val="origine" onclick="switchTheme('origine')">
+              <span class="theme-preview dot-origine"></span>
+              <span class="theme-menu-text">
+                <b>📜 Origine</b>
+                <small>Vue d'origine documentaire (Défaut)</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-1" onclick="switchTheme('theme-1')">
+              <span class="theme-preview dot-theme1"></span>
+              <span class="theme-menu-text">
+                <b>🌌 Zero-G Quantum</b>
+                <small>Fond nébuleuse émeraude &amp; cyan</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-2" onclick="switchTheme('theme-2')">
+              <span class="theme-preview dot-theme2"></span>
+              <span class="theme-menu-text">
+                <b>🛰️ Orbital HUD</b>
+                <small>Matrice technique phosphorescente</small>
+              </span>
+            </button>
+            <button class="theme-menu-item" data-theme-val="theme-3" onclick="switchTheme('theme-3')">
+              <span class="theme-preview dot-theme3"></span>
+              <span class="theme-menu-text">
+                <b>💥 Supernova</b>
+                <small>Cyberpunk cosmique ultraviolet</small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; letter-spacing: 0.02em; color: var(--text-main);">
+        Projet d'Étude &amp; Rétrospective Historique LeNet-5 (1998)
+      </div>
+      <p style="margin: 4px 0; font-size: 0.88rem; color: var(--text-muted);">
+        Travail réalisé par <b>Bernard Feugang Noussi</b> dans le cadre du <b>Cours d'Apprentissage Profond &amp; Réseaux de Neurones</b>
+      </p>
+      <p style="margin-top: 4px; font-size: 0.82rem; color: var(--text-dim);">
+        <b>Collège de Bois-de-Boulogne</b> • Montréal (Québec) • Spécialisation technique en intelligence artificielle
+      </p>
+    </footer>
+
+  
+  <!-- SCRIPT ENGINE (Thèmes & Interactivité) -->
+  <script>
+    const themeLabels = {
+      'origine': '📜 Origine',
+      'theme-1': '🌌 Zero-G Quantum',
+      'theme-2': '🛰️ Orbital HUD',
+      'theme-3': '💥 Supernova'
+    };
+
+    function toggleThemeDropdown(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('themeDropdown');
+      if (dd) dd.classList.toggle('open');
+    }
+
+    function closeThemeDropdown() {
+      const dd = document.getElementById('themeDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      const dd = document.getElementById('themeDropdown');
+      if (dd && !dd.contains(e.target)) {
+        closeThemeDropdown();
+      }
+    });
+
+    function switchTheme(themeName) {
+      document.body.setAttribute("data-theme", themeName);
+      document.documentElement.setAttribute("data-theme", themeName);
+
+      // Update dropdown label
+      const labelElem = document.getElementById('themeCurrentLabel');
+      if (labelElem && themeLabels[themeName]) {
+        labelElem.innerText = themeLabels[themeName];
+      }
+
+      // Update active state in menu items
+      document.querySelectorAll('.theme-menu-item').forEach(item => {
+        if (item.getAttribute('data-theme-val') === themeName) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      closeThemeDropdown();
+
+      try {
+        localStorage.setItem("agent_checklist_theme", themeName);
+      } catch(e) {}
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        // ORIGINE EST LE THÈME PAR DÉFAUT
+        const savedTheme = localStorage.getItem("agent_checklist_theme") || "origine";
+        switchTheme(savedTheme);
+      } catch(e) {
+        switchTheme("origine");
+      }
+    });
+  </script>
+
+  <script>
+    function toggleSectionMedia(videoId, gifId, btn) {
+      const vid = document.getElementById(videoId);
+      const gif = document.getElementById(gifId);
+      if (!vid || !gif) return;
+
+      if (vid.style.display === "none") {
+        vid.style.display = "block";
+        gif.style.display = "none";
+        btn.innerText = "Mode GIF Animé";
+      } else {
+        vid.style.display = "none";
+        vid.pause();
+        gif.style.display = "block";
+        btn.innerText = "Mode Vidéo MP4";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const savedTheme = localStorage.getItem("agent_checklist_theme") || "theme-1";
+        const btn = Array.from(document.querySelectorAll(".theme-btn")).find(b => b.getAttribute("onclick") && b.getAttribute("onclick").includes(savedTheme));
+        if (btn) switchTheme(savedTheme, btn);
+        else switchTheme("theme-1", document.querySelector(".theme-btn"));
+      } catch(e) {}
+    });
+  </script>
+  <script>
+  /* ==========================================================================
+     1. ANIMATION B : LE NEURONE S'ALLUME
+     ========================================================================== */
+  function updateNeuronInteractive() {
+    const x1 = document.getElementById('chk-x1').checked ? 1 : 0;
+    const x2 = document.getElementById('chk-x2').checked ? 1 : 0;
+    const x3 = document.getElementById('chk-x3').checked ? 1 : 0;
+
+    document.getElementById('calc-x1').innerText = x1;
+    document.getElementById('calc-x2').innerText = x2;
+    document.getElementById('calc-x3').innerText = x3;
+
+    const sum = (x1 * 1.0 + x2 * 1.2 + x3 * 0.5);
+    document.getElementById('val-sum').innerText = sum.toFixed(2);
+
+    const outElem = document.getElementById('val-out');
+    if (sum >= 2.00) {
+      outElem.innerText = "🟢 ALLUMÉ — Sortie = 1 (Seuil 2.00 atteint)";
+      outElem.style.color = "#16a34a";
+      outElem.style.background = "#dcfce7";
+      outElem.style.borderColor = "#86efac";
+    } else {
+      outElem.innerText = "🔴 ÉTEINT — Sortie = 0 (Seuil 2.00 non atteint)";
+      outElem.style.color = "#dc2626";
+      outElem.style.background = "#fee2e2";
+      outElem.style.borderColor = "#fca5a5";
+    }
+  }
+
+  function presetNeuron(active) {
+    document.getElementById('chk-x1').checked = active;
+    document.getElementById('chk-x2').checked = active;
+    document.getElementById('chk-x3').checked = active;
+    updateNeuronInteractive();
+  }
+
+  /* ==========================================================================
+     2. ANIMATION C : L'ERREUR DESCEND
+     ========================================================================== */
+  let currentEpoch = 1;
+  const trainingSchedule = [
+    { epoch: 1, err: 88.5, msg: "Statut : Poids aléatoires. Forte marge d'erreur." },
+    { epoch: 5, err: 54.2, msg: "Statut : Premiers ajustements par rétropropagation." },
+    { epoch: 10, err: 26.0, msg: "Statut : Les traits obliques du « 7 » commencent à être reconnus." },
+    { epoch: 20, err: 11.4, msg: "Statut : Réduction nette des confusions entre chiffres similaires." },
+    { epoch: 30, err: 4.8, msg: "Statut : Précision élevée. Seules les écritures très déformées posent problème." },
+    { epoch: 40, err: 1.6, msg: "Statut : Convergence quasi-totale. Précision supérieure à 98 %." },
+    { epoch: 50, err: 0.8, msg: "Statut : Entraînement terminé ! Erreur stabilisée à 0.8 % (Source : LeCun 1998)." }
+  ];
+  let currentScheduleIdx = 0;
+
+  function stepTraining() {
+    if (currentScheduleIdx < trainingSchedule.length - 1) {
+      currentScheduleIdx++;
+      const cur = trainingSchedule[currentScheduleIdx];
+      document.getElementById('epoch-count').innerText = cur.epoch;
+      document.getElementById('error-rate').innerText = cur.err + " %";
+      document.getElementById('error-bar').style.width = cur.err + "%";
+      document.getElementById('train-status').innerText = cur.msg;
+
+      if (cur.err <= 5.0) {
+        document.getElementById('error-rate').style.color = "#16a34a";
+        document.getElementById('error-bar').style.background = "#22c55e";
+        document.getElementById('error-bar').style.borderColor = "#86efac";
+      } else if (cur.err <= 30.0) {
+        document.getElementById('error-rate').style.color = "#d97706";
+        document.getElementById('error-bar').style.background = "#f59e0b";
+      }
+    }
+  }
+
+  function resetTraining() {
+    currentScheduleIdx = 0;
+    const cur = trainingSchedule[0];
+    document.getElementById('epoch-count').innerText = cur.epoch;
+    document.getElementById('error-rate').innerText = cur.err + " %";
+    document.getElementById('error-bar').style.width = cur.err + "%";
+    document.getElementById('error-rate').style.color = "#dc2626";
+    document.getElementById('error-bar').style.background = "#ef4444";
+    document.getElementById('train-status').innerText = cur.msg;
+  }
+
+  /* ==========================================================================
+     3. ANIMATION A : LA FENÊTRE QUI BALAYE (6×6 -> 4×4)
+     ========================================================================== */
+  const inputGrid6x6 = [
+    [0, 255, 255, 255, 255, 0],
+    [0, 0,   0,   0,   255, 0],
+    [0, 0,   0,   255, 0,   0],
+    [0, 0,   255, 0,   0,   0],
+    [0, 255, 0,   0,   0,   0],
+    [0, 255, 0,   0,   0,   0]
+  ];
+
+  const convCalculatedValues = [
+    142, 185, 210, 120,
+    95,  130, 240, 160,
+    80,  215, 140, 90,
+    190, 110, 75,  60
+  ];
+
+  let currentConvStep = 0; // 0 à 15
+  let convInterval = null;
+
+  function initConvVisual() {
+    const inContainer = document.getElementById('grid-conv-input');
+    const outContainer = document.getElementById('grid-conv-output');
+    inContainer.innerHTML = '';
+    outContainer.innerHTML = '';
+
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const d = document.createElement('div');
+        d.className = 'conv-cell input-cell';
+        d.id = `in-cell-${r}-${c}`;
+        d.innerText = inputGrid6x6[r][c] > 0 ? inputGrid6x6[r][c] : '0';
+        if (inputGrid6x6[r][c] > 0) {
+          d.style.background = "#f1f5f9";
+          d.style.color = "#0f172a";
+          d.style.fontWeight = "bold";
+        }
+        inContainer.appendChild(d);
+      }
+    }
+
+    for (let i = 0; i < 16; i++) {
+      const d = document.createElement('div');
+      d.className = 'conv-cell output-cell';
+      d.id = `out-cell-${i}`;
+      d.innerText = '-';
+      outContainer.appendChild(d);
+    }
+
+    renderConvStep();
+  }
+
+  function renderConvStep() {
+    const topRow = Math.floor(currentConvStep / 4);
+    const leftCol = currentConvStep % 4;
+
+    // Reset input highlights
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const cell = document.getElementById(`in-cell-${r}-${c}`);
+        if (cell) cell.classList.remove('input-active');
+      }
+    }
+
+    // Highlight 3x3 window on input
+    for (let dr = 0; dr < 3; dr++) {
+      for (let dc = 0; dc < 3; dc++) {
+        const cell = document.getElementById(`in-cell-${topRow + dr}-${leftCol + dc}`);
+        if (cell) cell.classList.add('input-active');
+      }
+    }
+
+    // Update outputs
+    for (let i = 0; i < 16; i++) {
+      const outCell = document.getElementById(`out-cell-${i}`);
+      if (!outCell) continue;
+      outCell.classList.remove('output-current');
+      if (i < currentConvStep) {
+        outCell.className = 'conv-cell output-cell output-calculated';
+        outCell.innerText = convCalculatedValues[i];
+      } else if (i === currentConvStep) {
+        outCell.className = 'conv-cell output-cell output-current';
+        outCell.innerText = convCalculatedValues[i];
+      } else {
+        outCell.className = 'conv-cell output-cell';
+        outCell.innerText = '-';
+      }
+    }
+
+    document.getElementById('conv-step-num').innerText = currentConvStep + 1;
+    document.getElementById('conv-row').innerText = topRow + 1;
+    document.getElementById('conv-col').innerText = leftCol + 1;
+    document.getElementById('conv-val').innerText = convCalculatedValues[currentConvStep];
+  }
+
+  function stepConv(delta) {
+    currentConvStep = Math.min(15, Math.max(0, currentConvStep + delta));
+    renderConvStep();
+  }
+
+  function resetConv() {
+    stopConvAuto();
+    currentConvStep = 0;
+    renderConvStep();
+  }
+
+  function toggleConvAuto() {
+    if (convInterval) {
+      stopConvAuto();
+    } else {
+      const btn = document.getElementById('btn-conv-auto');
+      btn.innerText = "⏸ Pause";
+      btn.className = "interactive-btn";
+      convInterval = setInterval(() => {
+        if (currentConvStep < 15) {
+          currentConvStep++;
+          renderConvStep();
+        } else {
+          stopConvAuto();
+        }
+      }, 1200);
+    }
+  }
+
+  function stopConvAuto() {
+    if (convInterval) {
+      clearInterval(convInterval);
+      convInterval = null;
+    }
+    const btn = document.getElementById('btn-conv-auto');
+    if (btn) {
+      btn.innerText = "▶ Lecture lente";
+      btn.className = "interactive-btn secondary";
+    }
+  }
+
+  /* ==========================================================================
+     4. QUIZ D'AUTO-ÉVALUATION (10 QUESTIONS)
+     ========================================================================== */
+  const quizAnswers={1:{correct:"B",expl:"Une image numérique est perçue par l'ordinateur comme une matrice de pixels de 0 (blanc) à 255 (noir)."},2:{correct:"A",expl:"Le neurone calcule la somme pondérée de ses entrées puis la compare à son seuil d'activation."},3:{correct:"B",expl:"Les poids pondèrent l'importance relative de chaque connexion."},4:{correct:"B",expl:"La convolution fait glisser un filtre sur l'image pour détecter des motifs locaux (barres, angles, boucles)."},5:{correct:"A",expl:"Le Max-Pooling réduit la taille en ne gardant que la valeur maximale de chaque zone 2×2."},6:{correct:"A",expl:"LeNet‑5 compte environ 60 000 paramètres entraînables [LeCun et al., 1998, Section II‑B]."},7:{correct:"B",expl:"NCR a intégré LeNet‑5 dans ses trieuses automatiques de chèques bancaires aux États-Unis."},8:{correct:"A",expl:"LeNet‑5 atteint 0.8 %‑0.95 % d'erreur sur MNIST (10 000 images de test)."},9:{correct:"A",expl:"La rétropropagation mesure l'erreur en sortie et ajuste chaque poids dans la bonne direction."},10:{correct:"B",expl:"Les CNN préservent la structure 2D et partagent les mêmes filtres sur toute l'image."}};
+
+  function checkAnswer(qNum, selected) {
+    const fb = document.getElementById('fb' + qNum);
+    const data = quizAnswers[qNum];
+    if (selected === data.correct) {
+      fb.className = "quiz-feedback correct";
+      fb.innerHTML = "<b>✅ Bonne réponse !</b> " + data.expl;
+    } else {
+      fb.className = "quiz-feedback incorrect";
+      fb.innerHTML = "<b>❌ Réponse inexacte.</b> La bonne réponse était la <b>" + data.correct + "</b>. " + data.expl;
+    }
+  }
+
+
+  /* ==========================================================================
+     SÉLECTEUR DE THÈMES DÉROULANT & PERSISTANT DANS LOCALSTORAGE
+     ========================================================================== */
+  const themeLabels = {
+    'origine': '📜 Origine',
+    'theme-1': '🌌 Zero-G Quantum',
+    'theme-2': '🛰️ Orbital HUD',
+    'theme-3': '💥 Supernova'
+  };
+
+  function toggleThemeDropdown(e) {
+    if (e) e.stopPropagation();
+    const dd = document.getElementById('themeDropdown');
+    if (dd) dd.classList.toggle('open');
+  }
+
+  function closeThemeDropdown() {
+    const dd = document.getElementById('themeDropdown');
+    if (dd) dd.classList.remove('open');
+  }
+
+  document.addEventListener('click', (e) => {
+    const dd = document.getElementById('themeDropdown');
+    if (dd && !dd.contains(e.target)) {
+      closeThemeDropdown();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeThemeDropdown();
+  });
+
+  function switchTheme(themeName) {
+    document.body.setAttribute("data-theme", themeName);
+    document.documentElement.setAttribute("data-theme", themeName);
+
+    // Mettre à jour l'étiquette affichée sur le bouton déroulant
+    const labelElem = document.getElementById('themeCurrentLabel');
+    if (labelElem && themeLabels[themeName]) {
+      labelElem.innerText = themeLabels[themeName];
+    }
+
+    // Mettre à jour la coche/classe active dans le menu déroulant
+    document.querySelectorAll('.theme-menu-item').forEach(item => {
+      if (item.getAttribute('data-theme-val') === themeName) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    closeThemeDropdown();
+
+    try {
+      localStorage.setItem("lenet5_active_theme", themeName);
+      localStorage.setItem("agent_checklist_theme", themeName);
+    } catch(e) {}
+  }
+
+  // Initialisation au chargement de la page
+  window.addEventListener('DOMContentLoaded', () => {
+    try {
+      const savedTheme = localStorage.getItem("lenet5_active_theme") || localStorage.getItem("agent_checklist_theme") || "origine";
+      switchTheme(savedTheme);
+    } catch(e) {}
+    updateNeuronInteractive();
+    initConvVisual();
+  });
+</script>
+</body>
+</html>

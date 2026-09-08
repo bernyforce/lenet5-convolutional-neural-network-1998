@@ -1,0 +1,25 @@
+# Node & dependencies
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Remotion build cache
+.remotion/
+**/.remotion/
+
+# Temporary and backup files
+*.bak*
+**/*.bak*
+~$*
+ppt3FF*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment and local configs
+.env.local
+.env.*.local
