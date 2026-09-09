@@ -116,7 +116,26 @@ récupérable côté distant. Aucun push n'a été effectué depuis, et aucun n'
 ## 8. Commits de ce cycle
 
 Chemins explicites uniquement, aucun `git add .`, aucun `reset --hard`, aucun force-push, aucun push.
-SHA réels et portée détaillés en fin de section après exécution des commits.
+Branche `reprise-qualite-003`, à partir de `2aeee3bf8acd18b6ca061444a56c88f7776d8baf`.
+
+| Commit | Portée | Fichiers |
+|---|---|---|
+| `0f83460fd32e4787f3d40b5af9515c8228923b5c` | M0 — exclusions `_backups` (Git + HTTP), cartographie | `.gitignore`, `server.js`, `reprise-M0-plan.md`, `reprise-M0-execution.md`, `preuves/reprise-M0/…`, `codex-redirection-003.md` |
+| `a6ea15d` (M2) | M2 partiel — correction des 8 liens A03 | `codex-merge-links-report.md`, `reprise-M2-execution.md`, `preuves/reprise-M2/…`, `codex-reprise-modulaire-report.md` |
+
+Scan de secrets exécuté sur les fichiers avant indexation : `secret-scan.py` → aucun secret détecté.
+Diff indexé inspecté avant chaque commit ; le code source ne représente que 5 lignes ajoutées
+(4 dans `.gitignore`, 1 dans `server.js`). Aucun contenu de `_backups/` n'a été indexé.
+
+Contrôle final mesuré après commits : `http://127.0.0.1:8971/` sert
+`37429e33e03882c4ba92f2f91cffb74728f65b8c6138f87c4c3ed7386ecdb081`, identique au `index.html` du
+commit ; `/_backups/` → 403 ; port 8080 préexistant inchangé, servant toujours
+`7031157870b79d93…`. Un commit ne prouve pas une livraison : la page publique reste celle de
+l'arbre Downloads, non corrigée.
+
+Note technique : `git` signale `could not write multi-pack-index: Permission denied` lors du
+repack de maintenance sur ce montage réseau. Les commits eux-mêmes aboutissent et sont vérifiés par
+`git log` ; l'incident ne concerne que l'optimisation d'empaquetage.
 
 ## 9. Ce qu'il faut pour débloquer
 
