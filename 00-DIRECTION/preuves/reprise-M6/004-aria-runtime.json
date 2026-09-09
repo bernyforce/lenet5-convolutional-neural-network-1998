@@ -1,0 +1,81 @@
+{
+ "axTablist": [
+  {
+   "nom": "Sections principales du dossier",
+   "nbEnfants": 5,
+   "rolesEnfants": [
+    "tab",
+    "tab",
+    "tab",
+    "tab",
+    "tab"
+   ]
+  }
+ ],
+ "axTabs": [
+  {
+   "nom": "🖥️ Diaporama",
+   "selected": true
+  },
+  {
+   "nom": "🎙️ Mode Présentateu",
+   "selected": false
+  },
+  {
+   "nom": "🎬 Studio Animations",
+   "selected": false
+  },
+  {
+   "nom": "🏛️ Pipeline 7 Couch",
+   "selected": false
+  },
+  {
+   "nom": "📥 Téléchargements &",
+   "selected": false
+  }
+ ],
+ "clavier": [
+  {
+   "touche": "ArrowRight",
+   "focus": "btn-tab-presenter",
+   "selected": "true",
+   "tabindex": "0",
+   "panneauVisible": true
+  },
+  {
+   "touche": "ArrowRight",
+   "focus": "btn-tab-video",
+   "selected": "true",
+   "tabindex": "0",
+   "panneauVisible": true
+  },
+  {
+   "touche": "End",
+   "focus": "btn-tab-downloads",
+   "selected": "true",
+   "tabindex": "0",
+   "panneauVisible": true
+  },
+  {
+   "touche": "Home",
+   "focus": "btn-tab-slides",
+   "selected": "true",
+   "tabindex": "0",
+   "panneauVisible": true
+  },
+  {
+   "touche": "ArrowLeft",
+   "focus": "btn-tab-downloads",
+   "selected": "true",
+   "tabindex": "0",
+   "panneauVisible": true
+  }
+ ],
+ "tabindexApres": [
+  "btn-tab-slides:-1",
+  "btn-tab-presenter:-1",
+  "btn-tab-video:-1",
+  "btn-tab-pipeline:-1",
+  "btn-tab-downloads:0"
+ ]
+}

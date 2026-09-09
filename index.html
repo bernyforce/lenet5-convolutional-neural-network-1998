@@ -1705,6 +1705,10 @@
        Preuves: 00-DIRECTION/preuves/reprise-M3/
        ========================================================================== */
 
+    /* Proprietaire tablist: display:contents le retire du flux, les onglets restent
+       enfants flex directs de .tabs. Aucune incidence de mise en page. */
+    .tablist-owner { display: contents; }
+
     /* Pilule Colab — pilotee par theme au lieu d'une couleur inline unique.
        Sombre: #7dd3fc sur fond compose = 9.64:1 ; bordure 60% = 3.9:1 */
     .colab-pill {
@@ -1859,11 +1863,13 @@
     <!-- Navigation par Onglets -->
     <div class="filter-bar">
       <div class="tabs">
-        <button class="tab-btn active" id="btn-tab-slides" role="tab" aria-controls="tab-slides" aria-selected="true" onclick="switchTab('tab-slides', this)">🖥️ Diaporama</button>
-        <button class="tab-btn" id="btn-tab-presenter" role="tab" aria-controls="tab-presenter" aria-selected="false" onclick="switchTab('tab-presenter', this)">🎙️ Mode Présentateur</button>
-        <button class="tab-btn" id="btn-tab-video" role="tab" aria-controls="tab-video" aria-selected="false" onclick="switchTab('tab-video', this)">🎬 Studio Animations</button>
-        <button class="tab-btn" id="btn-tab-pipeline" role="tab" aria-controls="tab-pipeline" aria-selected="false" onclick="switchTab('tab-pipeline', this)">🏛️ Pipeline 7 Couches</button>
-        <button class="tab-btn" id="btn-tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false" onclick="switchTab('tab-downloads', this)">📥 Téléchargements &amp; Accès</button>
+        <div class="tablist-owner" role="tablist" aria-label="Sections principales du dossier">
+        <button class="tab-btn active" id="btn-tab-slides" role="tab" tabindex="0" aria-controls="tab-slides" aria-selected="true" onclick="switchTab('tab-slides', this)">🖥️ Diaporama</button>
+        <button class="tab-btn" id="btn-tab-presenter" role="tab" tabindex="-1" aria-controls="tab-presenter" aria-selected="false" onclick="switchTab('tab-presenter', this)">🎙️ Mode Présentateur</button>
+        <button class="tab-btn" id="btn-tab-video" role="tab" tabindex="-1" aria-controls="tab-video" aria-selected="false" onclick="switchTab('tab-video', this)">🎬 Studio Animations</button>
+        <button class="tab-btn" id="btn-tab-pipeline" role="tab" tabindex="-1" aria-controls="tab-pipeline" aria-selected="false" onclick="switchTab('tab-pipeline', this)">🏛️ Pipeline 7 Couches</button>
+        <button class="tab-btn" id="btn-tab-downloads" role="tab" tabindex="-1" aria-controls="tab-downloads" aria-selected="false" onclick="switchTab('tab-downloads', this)">📥 Téléchargements &amp; Accès</button>
+        </div>
         <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="tab-btn" style="text-decoration:none; color:var(--text-main);">⭐ GitHub Repo ↗</a>
         <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="tab-btn" style="text-decoration:none;">🚀 Google Colab ↗</a>
       </div>
@@ -3275,17 +3281,43 @@
     window.addEventListener('hashchange', checkUrlHash);
 
     // Navigation par Onglets
+
+    // Navigation clavier du groupe d'onglets (patron WAI-ARIA Tabs).
+    // Fleches gauche/droite, Home et Fin. Les liens externes ne sont pas dans le tablist.
+    document.addEventListener('keydown', function (e) {
+      const tab = e.target.closest && e.target.closest('[role="tab"]');
+      if (!tab) return;
+      const tabs = [...document.querySelectorAll('[role="tablist"] [role="tab"]')];
+      const i = tabs.indexOf(tab);
+      if (i < 0) return;
+      let j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') j = 0;
+      else if (e.key === 'End') j = tabs.length - 1;
+      if (j === null) return;
+      e.preventDefault();
+      tabs[j].focus();
+      tabs[j].click();
+    });
+
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('active');
-        if (b.hasAttribute('role')) b.setAttribute('aria-selected', 'false');
+        if (b.getAttribute('role') === 'tab') {
+          b.setAttribute('aria-selected', 'false');
+          b.setAttribute('tabindex', '-1');
+        }
       });
       const target = document.getElementById(tabId);
       if (target) target.style.display = 'block';
       if (btn) {
         btn.classList.add('active');
-        if (btn.hasAttribute('role')) btn.setAttribute('aria-selected', 'true');
+        if (btn.getAttribute('role') === 'tab') {
+          btn.setAttribute('aria-selected', 'true');
+          btn.setAttribute('tabindex', '0');
+        }
       }
     }
 
