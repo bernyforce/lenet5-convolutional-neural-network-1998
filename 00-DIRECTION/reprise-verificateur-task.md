@@ -75,6 +75,13 @@ Commits à auditer sur `reprise-qualite-003`, parent `2aeee3bf8acd18b6ca061444a5
 Racine projet, notée `$P` ci-dessous :
 `/home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones`
 
+**Valeurs historiques contre valeurs à HEAD.** Chaque valeur attendue ci-dessous vaut pour le commit
+nommé dans le critère, pas pour HEAD. Les modules successifs modifient `index.html` : sa taille et
+son empreinte changent à chaque module. Un écart constaté à HEAD sur un critère daté d'un commit
+antérieur n'est donc **pas** un FAIL : compare toujours au commit indiqué, avec
+`git show <commit>:<fichier>`. Les critères V25 et suivants portent sur des commits plus récents que
+V01-V24.
+
 ### V01 — Page publique et page locale 8080 identiques, hash exact
 
 ```bash
@@ -313,7 +320,7 @@ où un fond est translucide. Formule WCAG 2.x : luminance relative sRGB, `(L1+0.
 | Lien Colab, onglet, clair | `#334155` sur `#ffffff` (via `.tab-btn`, couleur imposée par le bloc M3 qui suit la règle d'origine) | 10,35:1 | 4,5 |
 | Bordure de contrôle, clair | `#8c959f` sur `#ffffff` | 3,04:1 | 3,0 |
 | Texte secondaire, clair | `#656d76` sur `#eef2f7` | 4,67:1 | 4,5 |
-| Texte principal, clair | `#0f172a` sur `#eef2f7` | ≈17:1 | 4,5 |
+| Texte principal, clair | `#0f172a` sur `#eef2f7` | **15,8797:1** | 4,5 |
 | Lien Colab, pilule, sombre | `#7dd3fc` sur `rgba(56,189,248,0.14)` composé sur la barre sombre | 9,64:1 | 4,5 |
 | Bordure pilule, sombre | `rgba(56,189,248,0.6)` composé sur la barre sombre | ≈3,9:1 | 3,0 |
 

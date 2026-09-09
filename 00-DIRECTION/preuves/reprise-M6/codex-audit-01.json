@@ -1,0 +1,72 @@
+{
+  "time": "2026-09-09T02:29:04.137Z",
+  "head": "81aee4c30146a2c9438001cda7be7c3577bc45a4",
+  "checks": {
+    "V30": {
+      "status": "BLOQUÉ",
+      "detail": {
+        "themes": [
+          {
+            "theme": "theme-1",
+            "css": "\n      background-color: #030712;\n      background-image: \n        radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),\n        radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),\n        radial-gradient(circle at 50% 85%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);\n      background-attachment: fixed;\n    "
+          },
+          {
+            "theme": "theme-2",
+            "css": "\n      background-color: #020307;\n      background-image: \n        linear-gradient(rgba(0, 255, 170, 0.04) 1px, transparent 1px),\n        linear-gradient(90deg, rgba(0, 255, 170, 0.04) 1px, transparent 1px);\n      background-size: 36px 36px;\n      background-attachment: fixed;\n    "
+          },
+          {
+            "theme": "theme-3",
+            "css": "\n      background-color: #06020c;\n      background-image: \n        radial-gradient(circle at 80% 20%, rgba(244, 63, 94, 0.18) 0%, transparent 45%),\n        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),\n        radial-gradient(circle at 50% 50%, rgba(251, 113, 133, 0.08) 0%, transparent 60%);\n      background-attachment: fixed;\n    "
+          }
+        ],
+        "note": "Pire cas des dégradés et transparences à mesurer au rendu; ratio marginal non preuve globale."
+      }
+    },
+    "V31": {
+      "status": "PASS",
+      "detail": {
+        "definitions": [
+          "--text-dim: #8b98ab;",
+          "--text-dim: #656d76;"
+        ],
+        "lightRatio": 4.667043336095934
+      }
+    },
+    "V32": {
+      "status": "BLOQUÉ",
+      "detail": {
+        "tabs": 5,
+        "panels": 5,
+        "timers": 1,
+        "note": "Attributs présents et fonctions lues; synchronisation runtime non testée."
+      }
+    },
+    "V33": {
+      "status": "FAIL",
+      "detail": {
+        "tablist": false,
+        "note": "role tab sans propriétaire tablist; navigation par flèches absente. Modèle ARIA incomplet à corriger."
+      }
+    },
+    "V34": {
+      "status": "BLOQUÉ",
+      "detail": "Aucun lecteur écran pilotable disponible."
+    }
+  },
+  "auditServer": {
+    "pid": 38528,
+    "port": 56208
+  },
+  "review": {
+    "verifier": "Codex CLI, désigné explicitement par utilisateur",
+    "ledger": "f405f2a8-76dc-42a8-9aea-2683d62a36e8",
+    "independence": "Distinct de l’exécuteur Claude Code. Participation antérieure au cadrage; aucune revendication d’indépendance du planificateur.",
+    "browser": "CUA: trusted Node process exited unexpectedly; kernel reset. Échec aussi après réinitialisation. Aucun clic ni capture de rendu validé.",
+    "global": "FAIL — livraison refusée; contrôles complémentaires BLOQUÉS; M1 non livré.",
+    "sources": [
+      "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html"
+    ],
+    "note": "Résultats automatiques relus; les statuts du présent JSON et des rapports remplacent les classifications provisoires du script."
+  }
+}

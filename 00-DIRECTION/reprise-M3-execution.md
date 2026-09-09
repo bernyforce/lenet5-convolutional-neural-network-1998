@@ -33,9 +33,14 @@ restent conformes (`#7dd3fc` à 9,64:1).
 
 ## 3. Cause du rendu « terne », mesurée
 
-La page `#f8fafc` contre des cartes `#ffffff` ne donnait que **1,046:1**, soit ΔL\* = 1,8 :
-imperceptible. Avec des bordures à 1,23:1 et une ombre à 0,05 d'alpha, les cartes n'avaient ni
-remplissage distinct, ni arête, ni ombre — d'où l'aplatissement général.
+La page `#f8fafc` contre des cartes `#ffffff` ne donnait que **1,046:1**, soit ΔL\* = 1,8.
+S'y ajoutaient des bordures à 1,23:1 et une ombre à 0,05 d'alpha.
+
+**Statut de cette explication : hypothèse, non observation.** Ces trois chiffres sont mesurés. En
+revanche, l'affirmation qu'un tel écart serait « imperceptible », et qu'il constituerait *la* cause
+du rendu terne signalé par l'utilisateur, n'a **pas** été établie par observation. Aucune étude de
+perception n'a été conduite et aucun rendu n'avait été inspecté au moment de cette rédaction. Il
+s'agit d'une hypothèse de travail cohérente avec les mesures, qui reste à confirmer ou à infirmer.
 
 Correction : page `#eef2f7` (ΔL\* = 4,7), bordures `#d0d7de` (1,45:1, la valeur par défaut de
 Primer/GitHub), ombre à deux niveaux. Les contrôles passent sur surface blanche pour se détacher de
@@ -46,9 +51,14 @@ unifiée sur Inter, sans nouvelle requête réseau.
 
 ## 4. Accessibilité ajoutée
 
-- **2.4.7 Focus visible** : le document ne contenait **aucun** `:focus` ni `outline` (0 occurrence).
-  Anneau `:focus-visible` ajouté, 6,44:1 en clair et 11,85:1 en sombre.
+- **2.4.7 Focus visible** : le document ne contenait aucune **règle CSS** `:focus` ni `outline`
+  (0 occurrence). Ce n'est **pas** la même chose que l'absence d'indicateur de focus : à défaut de
+  règle d'auteur, le navigateur applique son propre anneau natif. L'affirmation initiale « navigation
+  clavier invisible » était donc excessive. Ce qui manquait était un indicateur **maîtrisé et
+  contrasté**, pas tout indicateur. Anneau `:focus-visible` ajouté, 6,44:1 en clair, 11,85:1 en sombre.
 - **2.3.3 Animations** : aucune prise en charge de `prefers-reduced-motion` (0 occurrence). Ajoutée.
+  Portée exacte : la règle neutralise les animations et transitions **CSS**. Elle ne prouve pas
+  l'arrêt d'animations pilotées par du JavaScript ni de minuteurs.
 
 ## 5. Modularité préservée
 
