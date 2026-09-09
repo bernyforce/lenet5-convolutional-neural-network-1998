@@ -18,7 +18,7 @@ reel, focus, zoom 200%, mobile) n'est PAS verifie ici.
 | Element | Avant | Apres | Seuil | Verdict |
 |---|---|---|---|---|
 | Lien Colab, pilule (clair) | #93c5fd sur pilule = 1.36:1 | #0a58ca sur #ddf4ff = 5.66:1 | >=4.5 | PASS |
-| Lien Colab, onglet (clair) | #38bdf8 sur barre = 2.13:1 | #475569 via .tab-btn = 7.58:1 | >=4.5 | PASS |
+| Lien Colab, onglet (clair) | #38bdf8 sur barre = 2.13:1 | #334155 via .tab-btn = 10.35:1 | >=4.5 | PASS |
 | Bordure pilule Colab (clair) | bleu 50% sur barre = 2.14:1 | #0969da sur #ddf4ff = 4.56:1 | >=3.0 | PASS |
 | Bordure de controle (clair) | #cbd5e1 sur #f1f5f9 = 1.36:1 | #8c959f sur blanc = 3.04:1 | >=3.0 | PASS |
 | Texte secondaire (clair) | #64748b sur page = 4.55:1 | #656d76 sur page = 4.67:1 | >=4.5 | PASS |

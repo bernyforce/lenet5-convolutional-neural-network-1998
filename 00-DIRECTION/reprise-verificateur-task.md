@@ -1,13 +1,14 @@
-# Mandat d'audit indépendant — M0 et M2 de l'ordre 003
+# Mandat d'audit indépendant — M0, M2 et M3 de l'ordre 003
 
 Mission : E26-REPRISE-QUALITE-003. Ordre canonique : `00-DIRECTION/codex-redirection-003.md`.
-Émis par : Claude Code (Opus 5), rôle **exécuteur** des modules M0 et M2, le 2026-09-08.
-Ledger de l'exécution auditée : `256ee070-a45f-4e17-afb9-24430389c2f0` (clos en **PARTIEL**).
+Émis par : Claude Code (Opus 5), rôle **exécuteur** des modules M0, M2 et M3, le 2026-09-08.
+Ledgers de l'exécution auditée, tous clos en **PARTIEL** :
+`256ee070-a45f-4e17-afb9-24430389c2f0` (M0 et M2), `407c43b5-11fc-4b05-9884-e587295832b8` (M3).
 Branche portant les travaux : `reprise-qualite-003`.
 
 ## 0. Condition d'indépendance — lis ceci d'abord
 
-Tu ne dois accepter ce mandat que si tu n'as **ni planifié ni exécuté** M0 ou M2. L'agent qui a
+Tu ne dois accepter ce mandat que si tu n'as **ni planifié ni exécuté** M0, M2 ou M3. L'agent qui a
 produit les travaux audités est Claude Code, session unique, et il a lui-même déclaré ne pas pouvoir
 se vérifier. Si tu es cette même session, **refuse** et déclare BLOQUÉ.
 
@@ -19,7 +20,8 @@ un **FAIL** à documenter, pas à arrondir.
 
 - `00-DIRECTION/reprise-M0-verification-01.md`
 - `00-DIRECTION/reprise-M2-verification-01.md`
-- Preuves sous `00-DIRECTION/preuves/reprise-M0/` et `00-DIRECTION/preuves/reprise-M2/`
+- `00-DIRECTION/reprise-M3-verification-01.md`
+- Preuves sous `00-DIRECTION/preuves/reprise-M0/`, `.../reprise-M2/` et `.../reprise-M3/`
   (commandes exactes, sorties expurgées, hashes).
 
 Format par critère : identifiant, commande exécutée, sortie obtenue, valeur attendue, verdict
@@ -45,8 +47,10 @@ secrets avant écriture.
 | `00-DIRECTION/reprise-M0-plan.md` | Plan M0 |
 | `00-DIRECTION/reprise-M0-execution.md` | Exécution M0 |
 | `00-DIRECTION/reprise-M2-execution.md` | Exécution M2 (partielle) |
+| `00-DIRECTION/reprise-M3-execution.md` | Exécution M3 (partielle) |
 | `00-DIRECTION/preuves/reprise-M0/m0-cartographie-et-exclusions.md` | Preuves M0 |
 | `00-DIRECTION/preuves/reprise-M2/m2-a03-liens-rapport-fusion.md` | Preuves M2 |
+| `00-DIRECTION/preuves/reprise-M3/m3-mesures-contraste.md` | Preuves M3 |
 
 Commits à auditer sur `reprise-qualite-003`, parent `2aeee3bf8acd18b6ca061444a56c88f7776d8baf` :
 
@@ -55,6 +59,8 @@ Commits à auditer sur `reprise-qualite-003`, parent `2aeee3bf8acd18b6ca061444a5
 | `0f83460fd32e4787f3d40b5af9515c8228923b5c` | M0 — exclusions `_backups`, cartographie |
 | `a6ea15d71820ef1a324eacae918571acada0462b` | M2 — correction des 8 liens A03 |
 | `0379a57b193c321de51de609718097d406a7ba51` | docs — SHA consignés |
+| `a99b52...` | docs — le présent mandat |
+| `b20a08faaab81a6adac35ba95401d676af4e7155` | M3 — contraste et profondeur du thème origine |
 
 ## 4. Critères à contrôler
 
@@ -250,8 +256,159 @@ Contrôle que les rapports ne revendiquent rien au-delà du prouvé. En particul
 Si tu trouves une affirmation non étayée, c'est un **FAIL** de rapport, indépendamment de l'état
 technique du code.
 
-## 5. Verdict attendu
+## 5. Critères M3 — contraste et lisibilité du thème origine
 
-Un verdict par module, M0 et M2, chacun PASS / FAIL / BLOQUÉ, avec le détail par critère V01-V14.
-Un FAIL renvoie à l'exécuteur, puis à un **nouveau** vérificateur indépendant. Aucun PASS global de
-la mission n'est possible tant que M1, M3, M4 restent non livrés.
+Module audité : commit `b20a08faaab81a6adac35ba95401d676af4e7155`, fichier `index.html`
+(132 513 → 135 561 octets ; SHA-256 après :
+`61f850e496f3e81b7ce544c3236909ee2539bdd65eee802aafe6b17ecba0a34c`).
+
+Avertissement méthodologique à contrôler en priorité : l'exécuteur a d'abord mesuré le **mauvais
+thème**. Il a pris les jetons sombres de `:root` pour la palette d'`origine`, et a conclu à tort que
+le lien Colab était conforme à 9,30:1 avant de se corriger à 1,36:1. Vérifie que cette erreur est
+bien documentée dans `reprise-M3-execution.md` §1 et qu'aucune valeur issue de la première série
+erronée ne subsiste dans les rapports.
+
+### V15 — `origine` est bien un thème clair, et les jetons `:root` sont des replis
+
+```bash
+cd "$P"
+sed -n '/body\[data-theme="origine"\] {/,/}/p' index.html
+grep -c 'body\[data-theme="origine"\]' index.html
+grep -n -- '--text-main\|--bg-void' index.html | head -4
+```
+Attendu : le bloc `origine` fixe `background-color` clair et `color: #0f172a` en `!important` ; les
+jetons sombres de `:root` ne s'appliquent donc pas à `origine`. Toute mesure de contraste d'`origine`
+faite contre `#030712` est invalide.
+
+### V16 — Recalcul indépendant des ratios corrigés
+
+Recalcule sans réutiliser le script de l'exécuteur, ou réécris-le. Composition alpha obligatoire là
+où un fond est translucide. Formule WCAG 2.x : luminance relative sRGB, `(L1+0.05)/(L2+0.05)`.
+
+| Élément | Couleurs déclarées | Ratio attendu | Seuil |
+|---|---|---|---|
+| Lien Colab, pilule, clair | `#0a58ca` sur `#ddf4ff` | 5,66:1 | 4,5 |
+| Bordure pilule Colab, clair | `#0969da` sur `#ddf4ff` | 4,56:1 | 3,0 |
+| Lien Colab, onglet, clair | `#334155` sur `#ffffff` (via `.tab-btn`, couleur imposée par le bloc M3 qui suit la règle d'origine) | 10,35:1 | 4,5 |
+| Bordure de contrôle, clair | `#8c959f` sur `#ffffff` | 3,04:1 | 3,0 |
+| Texte secondaire, clair | `#656d76` sur `#eef2f7` | 4,67:1 | 4,5 |
+| Texte principal, clair | `#0f172a` sur `#eef2f7` | ≈17:1 | 4,5 |
+| Lien Colab, pilule, sombre | `#7dd3fc` sur `rgba(56,189,248,0.14)` composé sur la barre sombre | 9,64:1 | 4,5 |
+| Bordure pilule, sombre | `rgba(56,189,248,0.6)` composé sur la barre sombre | ≈3,9:1 | 3,0 |
+
+Un écart supérieur à 0,05 sur un ratio est un **FAIL** à documenter. Conteste aussi le **cadrage** :
+l'exécuteur a appliqué 1.4.11 (≥3:1) aux bordures de **composants** et non aux séparateurs
+décoratifs de cartes, qu'il a seulement rendus visibles (`#d0d7de` = 1,45:1). Dis si cette
+distinction est correcte au regard de WCAG 2.2, ou si des bordures essentielles restent sous 3:1.
+Référence : https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html
+
+### V17 — Plus aucune couleur Colab en style inline
+
+```bash
+cd "$P"
+grep -n 'color:#93c5fd\|color:#38bdf8' index.html
+grep -c 'colab-pill' index.html
+grep -n 'Google Colab' index.html | head -3
+```
+Attendu : **0** occurrence des deux couleurs inline ; `colab-pill` présent (1 usage HTML +
+2 définitions CSS) ; le lien en onglet ne porte plus que `text-decoration:none`. Le point de fond :
+un style inline échappe aux surcharges de thème, ce qui est la cause d'origine du défaut.
+
+### V18 — Confinement : les thèmes sombres ne sont pas modifiés
+
+```bash
+cd "$P"
+git diff 0379a57..b20a08f -- index.html
+git diff 0379a57..b20a08f --stat
+```
+Attendu : uniquement des **ajouts** en fin de `<style>` (bloc délimité `M3 — CONTRASTE`), plus les
+deux retraits de couleur inline. **Aucune** modification des blocs `theme-1`, `theme-2`, `theme-3`,
+ni des jetons `:root`. Signale toute réécriture de règle existante ou tout « nettoyage » adjacent.
+
+### V19 — Focus visible et animations réduites
+
+```bash
+cd "$P"
+grep -c ':focus-visible' index.html
+grep -c 'prefers-reduced-motion' index.html
+git show 0379a57:index.html | grep -c ':focus\|outline'
+```
+Attendu : `:focus-visible` présent (2 règles), `prefers-reduced-motion` présent (1 bloc), et **0**
+dans la version d'avant — le document n'avait aucun indicateur de focus. Vérifie que l'anneau atteint
+≥3:1 : `#0a58ca` sur blanc = 6,44:1 ; `#7dd3fc` sur fond sombre = 11,85:1.
+Références : 2.4.7 Focus Visible, 2.3.3 Animation from Interactions.
+
+### V20 — Profondeur : la cause du rendu plat
+
+Calcule la clarté CIE L\* (`L* = 116·Y^(1/3) − 16` pour `Y > 0.008856`) :
+
+| Mesure | Avant | Après | Attendu |
+|---|---|---|---|
+| page vs carte, ratio | `#f8fafc`/`#ffffff` | `#eef2f7`/`#ffffff` | 1,046 → 1,124 |
+| page vs carte, ΔL\* | — | — | 1,8 → 4,7 |
+| bordure de carte | `#e2e8f0` | `#d0d7de` | 1,23 → 1,45:1 |
+
+Juge si la justification tient : l'exécuteur soutient que le ratio de contraste est un mauvais
+indicateur de séparation de surfaces et qu'il faut raisonner en L\* perceptuel. Valide ou réfute.
+
+### V21 — Intégrité technique après patch
+
+```bash
+cd "$P"
+python3 - <<'EOF'
+import re
+h=open("index.html",encoding="utf-8").read()
+st=re.search(r'<style>(.*?)</style>',h,re.S).group(1)
+print("accolades:", st.count('{'), st.count('}'), st.count('{')==st.count('}'))
+for i,s in enumerate(re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',h,re.S)):
+    open(f"/tmp/v21_{i}.js","w",encoding="utf-8").write(s)
+EOF
+for f in /tmp/v21_*.js; do node --check "$f" && echo "$f rc=0"; done
+```
+Attendu : accolades équilibrées (256/256) et `node --check` à 0 sur chaque bloc.
+
+### V22 — La prévisualisation sert bien le fichier du commit
+
+```bash
+cd "$P" && git show b20a08f:index.html | sha256sum
+curl -s http://127.0.0.1:<TON_PORT_LIBRE>/ | sha256sum
+```
+Attendu : les deux égaux à
+`61f850e496f3e81b7ce544c3236909ee2539bdd65eee802aafe6b17ecba0a34c`.
+Rappel : le port 8080 et le domaine public servent un **autre** arbre et ne refléteront pas ce
+correctif — ne conclus pas à un échec du patch sur cette base (voir V04, V05).
+
+### V23 — Vérification au rendu : BLOQUÉ à lever si tu es équipé
+
+L'exécuteur n'a produit que des mesures **statiques** sur valeurs déclarées. Si tu disposes d'un
+navigateur piloté, exécute et documente, sur le thème `origine` **et** sur les trois thèmes sombres :
+
+1. Couleurs **calculées** (`getComputedStyle`) et fonds composites réels de chaque composant.
+2. États `:hover`, `:focus-visible` et `:active` de chaque contrôle, ratio mesuré à chacun.
+3. Visibilité effective de l'anneau de focus au parcours clavier complet (Tab / Shift+Tab).
+4. Zoom 200 % et rendu mobile : pas de perte de texte, cibles tactiles ≥ 44 px.
+5. `prefers-reduced-motion: reduce` activé : les animations cessent réellement.
+6. `pageerror`, `console.error` et erreurs réseau capturés pendant le parcours.
+
+Sinon, maintiens **BLOQUÉ** sur chacun de ces six points. Ne convertis aucun calcul statique en
+validation de rendu.
+
+### V24 — Périmètre non couvert, à confirmer comme tel
+
+L'exécuteur déclare hors périmètre : les thèmes 1, 2 et 3 (non audités en contraste), l'échelle
+typographique, la longueur de ligne, les cibles tactiles, et la dette de jetons (250 couleurs codées
+en dur pour 101 usages de jetons, 44 teintes distinctes). Confirme que ces éléments sont bien
+déclarés non traités et non présentés comme réglés.
+
+## 6. Verdict attendu
+
+Un verdict par module — M0, M2 et M3 — chacun PASS / FAIL / BLOQUÉ, avec le détail par critère
+V01-V24. Un FAIL renvoie à l'exécuteur, puis à un **nouveau** vérificateur indépendant. Aucun PASS
+global de la mission n'est possible tant que M1 et M4 restent non livrés, et M3 ne peut être PASS
+complet sans la vérification au rendu de V23.
+
+Pour la suppression des sauvegardes, le critère V13 s'applique aussi à M3 : la version d'avant
+modification d'`index.html` est
+`37429e33e03882c4ba92f2f91cffb74728f65b8c6138f87c4c3ed7386ecdb081` (132 513 octets), récupérable via
+`git show 0379a57:index.html`, et sauvegardée sous
+`_backups/E26-REPRISE-QUALITE-003/M3/20260908-215021/index.html`.

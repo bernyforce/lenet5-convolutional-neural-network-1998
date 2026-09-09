@@ -21,7 +21,7 @@ ordre de grandeur, et l'avertissement de l'ordre sur les surcharges de thème é
 | Élément | Avant | Après | Seuil |
 |---|---|---|---|
 | Lien Colab, pilule d'en-tête | 1,36:1 | 5,66:1 | 4,5 |
-| Lien Colab, onglet | 2,13:1 | 7,58:1 | 4,5 |
+| Lien Colab, onglet | 2,13:1 | 10,35:1 | 4,5 |
 | Bordure de la pilule Colab | 2,14:1 | 4,56:1 | 3,0 |
 | Bordures de contrôles | 1,36:1 | 3,04:1 | 3,0 |
 | Texte secondaire | 4,55:1 | 4,67:1 | 4,5 |
