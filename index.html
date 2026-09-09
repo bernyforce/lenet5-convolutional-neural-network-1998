@@ -2057,7 +2057,7 @@
           <!-- Lecteur Vidéo / GIF -->
           <div class="video-viewport" style="position:relative; aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
             <video id="studioVideo" controls preload="metadata" playsinline poster="animations/01_convolution_poster.webp" style="width:100%; height:100%; object-fit:contain;">
-              <source id="studioVideoSrc" src="animations/01_convolution.mp4" type="video/mp4">
+              <source id="studioVideoSrc" src="animations/01_convolution.gif" type="image/gif">
               Votre navigateur ne supporte pas la lecture vidéo.
             </video>
             <img id="studioGif" style="display:none; width:100%; height:100%; object-fit:contain;" alt="Animation GIF en boucle">
@@ -2074,7 +2074,7 @@
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
               <button class="btn" id="studioGifToggleBtn" onclick="studioToggleGifMode()">🎞️ Mode GIF Animé</button>
               <button class="btn" id="studioJumpSlideBtn" onclick="studioJumpToSlide()">🖥️ Voir sur Diapo</button>
-              <a id="studioDownloadMp4" href="animations/01_convolution.mp4" download class="btn btn-primary">⬇ MP4 HD (528 Ko)</a>
+              <a id="studioDownloadMp4" href="animations/01_convolution.gif" download class="btn btn-primary">⬇ MP4 HD (528 Ko)</a>
               <a id="studioDownloadGif" href="animations/01_convolution.gif" download class="btn">⬇ GIF (882 Ko)</a>
               <a id="studioDownloadPoster" href="animations/01_convolution_poster.png" download class="btn">⬇ Poster</a>
             </div>
@@ -2139,12 +2139,10 @@
           <div style="background:rgba(0,0,0,0.4); border:1px solid var(--border-subtle); border-radius:12px; padding:1.25rem;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:8px;">
               <div class="remotion-feature-title">🎬 Animation Remotion : Traversée Complète des 7 Couches (Slide 16)</div>
-              <a href="animations/04_lenet5_pipeline.mp4" download class="btn btn-primary" style="font-size:0.75rem; padding:0.3rem 0.75rem;">⬇ Télécharger 04_lenet5_pipeline.mp4 (592 Ko)</a>
+              <a href="animations/04_lenet5_pipeline.gif" download class="btn btn-primary" style="font-size:0.75rem; padding:0.3rem 0.75rem;">⬇ Télécharger 04_lenet5_pipeline.mp4 (592 Ko)</a>
             </div>
-            <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:8px; overflow:hidden;">
-              <video controls preload="metadata" playsinline poster="animations/04_lenet5_pipeline_poster.webp" style="width:100%; height:100%; object-fit:contain;">
-                <source src="animations/04_lenet5_pipeline.mp4" type="video/mp4">
-              </video>
+            <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+              <img src="animations/04_lenet5_pipeline.gif" alt="Animation 04 LeNet-5 Pipeline 7 Couches" style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
             </div>
           </div>
 
@@ -2251,7 +2249,7 @@
               <p style="font-size:0.85rem; color:var(--text-muted);">Animation 1080p @ 30 fps de la traversée intégrale des 7 couches convolutives, de sous-échantillonnage et denses.</p>
             </div>
             <div style="display:flex; gap:8px;">
-              <a href="animations/04_lenet5_pipeline.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (592 Ko)</a>
+              <a href="animations/04_lenet5_pipeline.gif" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (592 Ko)</a>
               <a href="animations/04_lenet5_pipeline.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (1.36 Mo)</a>
             </div>
           </div>
@@ -2264,7 +2262,7 @@
               <p style="font-size:0.85rem; color:var(--text-muted);">Balayage 2D par filtre glissant 5×5, extraction de contours élémentaires et partage des poids.</p>
             </div>
             <div style="display:flex; gap:8px;">
-              <a href="animations/01_convolution.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (528 Ko)</a>
+              <a href="animations/01_convolution.gif" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (528 Ko)</a>
               <a href="animations/01_convolution.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (882 Ko)</a>
             </div>
           </div>
@@ -2277,7 +2275,7 @@
               <p style="font-size:0.85rem; color:var(--text-muted);">Somme pondérée synaptique et test de seuil d'activation déterministe.</p>
             </div>
             <div style="display:flex; gap:8px;">
-              <a href="animations/02_neurone.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (708 Ko)</a>
+              <a href="animations/02_neurone.gif" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (708 Ko)</a>
               <a href="animations/02_neurone.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (1.37 Mo)</a>
             </div>
           </div>
@@ -2290,7 +2288,7 @@
               <p style="font-size:0.85rem; color:var(--text-muted);">Sous-échantillonnage 2×2, compression spatiale de moitié et invariance géométrique.</p>
             </div>
             <div style="display:flex; gap:8px;">
-              <a href="animations/03_pooling.mp4" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (384 Ko)</a>
+              <a href="animations/03_pooling.gif" download class="btn btn-primary" style="flex:1; text-align:center;">⬇ MP4 (384 Ko)</a>
               <a href="animations/03_pooling.gif" download class="btn" style="flex:1; text-align:center;">⬇ GIF (320 Ko)</a>
             </div>
           </div>
@@ -2302,7 +2300,7 @@
               <h3 class="resource-title">ncr-slide.mp4</h3>
               <p style="font-size:0.85rem; color:var(--text-muted);">Figure 8 animée : Traitement des chèques bancaires par les machines NCR propulsées par LeNet-5 (20M chèques/jour, précision 99.2%).</p>
             </div>
-            <a href="animations/ncr-slide.mp4" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 HD (1.63 Mo)</a>
+            <a href="animations/ncr-slide.gif" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 HD (1.63 Mo)</a>
           </div>
 
           <!-- Carte Synthèse Colab MP4 -->
@@ -2312,7 +2310,7 @@
               <h3 class="resource-title">lenet5_pedagogique.mp4</h3>
               <p style="font-size:0.85rem; color:var(--text-muted);">Film complet de synthèse de la vision par ordinateur et démonstration du modèle interactif.</p>
             </div>
-            <a href="animations/lenet5_pedagogique.mp4" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 (1.89 Mo)</a>
+            <a href="animations/lenet5_pedagogique.gif" download class="btn btn-primary" style="text-align:center;">⬇ Télécharger MP4 (1.89 Mo)</a>
           </div>
 
           <!-- Carte slides.json -->
@@ -2524,7 +2522,7 @@
     "section": "Chapitre 2 : Outils Révolutionnaires",
     "type": "video",
     "media": {
-      "mp4": "animations/02_neurone.mp4",
+      "mp4": "animations/02_neurone.gif",
       "gif": "animations/02_neurone.gif",
       "poster": "animations/02_neurone_poster.webp",
       "duration": 5.0
@@ -2569,7 +2567,7 @@
     "section": "Chapitre 3 : Filtrage et Pooling",
     "type": "video",
     "media": {
-      "mp4": "animations/01_convolution.mp4",
+      "mp4": "animations/01_convolution.gif",
       "gif": "animations/01_convolution.gif",
       "poster": "animations/01_convolution_poster.webp",
       "duration": 5.0
@@ -2601,7 +2599,7 @@
     "section": "Chapitre 3 : Filtrage et Pooling",
     "type": "video",
     "media": {
-      "mp4": "animations/03_pooling.mp4",
+      "mp4": "animations/03_pooling.gif",
       "gif": "animations/03_pooling.gif",
       "poster": "animations/03_pooling_poster.webp",
       "duration": 5.0
@@ -2633,7 +2631,7 @@
     "section": "Chapitre 4 : Architecture LeNet-5",
     "type": "video",
     "media": {
-      "mp4": "animations/04_lenet5_pipeline.mp4",
+      "mp4": "animations/04_lenet5_pipeline.gif",
       "gif": "animations/04_lenet5_pipeline.gif",
       "poster": "animations/04_lenet5_pipeline_poster.webp",
       "duration": 8.0
@@ -2678,7 +2676,7 @@
     "section": "Chapitre 5 : Déploiement & Impact Industriel",
     "type": "video",
     "media": {
-      "mp4": "animations/ncr-slide.mp4",
+      "mp4": "animations/ncr-slide.gif",
       "duration": 5.0
     },
     "seconds": 311.542,
@@ -2747,7 +2745,7 @@
     "section": "Chapitre 6 : Héritage & Démonstration",
     "type": "video",
     "media": {
-      "mp4": "animations/lenet5_pedagogique.mp4",
+      "mp4": "animations/lenet5_pedagogique.gif",
       "duration": 30.0
     },
     "seconds": 380.0,
@@ -2961,12 +2959,10 @@
       if (s.type === 'video' && s.media) {
         toggleBtn.style.display = 'inline-block';
         if (slideMediaMode === 'video') {
-          imgEl.style.display = 'none';
-          videoEl.style.display = 'block';
-          if (!videoEl.src.endsWith(s.media.mp4)) {
-            videoEl.src = s.media.mp4;
-            videoEl.poster = s.media.poster || s.file;
-          }
+          videoEl.pause();
+          videoEl.style.display = 'none';
+          imgEl.style.display = 'block';
+          imgEl.src = s.media.gif || s.file;
           toggleBtn.innerText = '🖼️ Basculer Image Fixe';
           toggleBtn.classList.add('btn-primary');
         } else {
@@ -2974,7 +2970,7 @@
           videoEl.style.display = 'none';
           imgEl.style.display = 'block';
           imgEl.src = s.file;
-          toggleBtn.innerText = '🎬 Activer Vidéo Remotion';
+          toggleBtn.innerText = '🎬 Activer Animation GIF';
           toggleBtn.classList.remove('btn-primary');
         }
       } else {
@@ -3004,12 +3000,10 @@
       const pImg = document.getElementById('pMainImg');
       const pVid = document.getElementById('pMainVideo');
       if (s.type === 'video' && s.media) {
-        pImg.style.display = 'none';
-        pVid.style.display = 'block';
-        if (!pVid.src.endsWith(s.media.mp4)) {
-          pVid.src = s.media.mp4;
-          pVid.poster = s.media.poster || s.file;
-        }
+        pVid.pause();
+        pVid.style.display = 'none';
+        pImg.style.display = 'block';
+        pImg.src = s.media.gif || s.file;
       } else {
         pVid.pause();
         pVid.style.display = 'none';
@@ -3048,7 +3042,7 @@
         title: "Animation Remotion : 01. Convolution 2D",
         slideIdx: 11, // Slide 12
         slideNum: "12",
-        mp4: "animations/01_convolution.mp4",
+        mp4: "animations/01_convolution.gif",
         gif: "animations/01_convolution.gif",
         poster: "animations/01_convolution_poster.webp",
         duration: "5.0s (150 FRAMES)",
@@ -3065,7 +3059,7 @@
         title: "Animation Remotion : 02. Neurone Formel",
         slideIdx: 8, // Slide 09
         slideNum: "09",
-        mp4: "animations/02_neurone.mp4",
+        mp4: "animations/02_neurone.gif",
         gif: "animations/02_neurone.gif",
         poster: "animations/02_neurone_poster.webp",
         duration: "5.0s (150 FRAMES)",
@@ -3082,7 +3076,7 @@
         title: "Animation Remotion : 03. Pooling 2×2",
         slideIdx: 13, // Slide 14
         slideNum: "14",
-        mp4: "animations/03_pooling.mp4",
+        mp4: "animations/03_pooling.gif",
         gif: "animations/03_pooling.gif",
         poster: "animations/03_pooling_poster.webp",
         duration: "5.0s (150 FRAMES)",
@@ -3099,7 +3093,7 @@
         title: "Animation Remotion : 04. Pipeline 7 Couches",
         slideIdx: 15, // Slide 16
         slideNum: "16",
-        mp4: "animations/04_lenet5_pipeline.mp4",
+        mp4: "animations/04_lenet5_pipeline.gif",
         gif: "animations/04_lenet5_pipeline.gif",
         poster: "animations/04_lenet5_pipeline_poster.webp",
         duration: "8.0s (240 FRAMES)",
@@ -3116,8 +3110,8 @@
         title: "Animation Remotion : 05. Tri Industriel des Chèques NCR (Figure 8)",
         slideIdx: 18, // Slide 19
         slideNum: "19",
-        mp4: "animations/ncr-slide.mp4",
-        gif: null,
+        mp4: "animations/ncr-slide.gif",
+        gif: "animations/ncr-slide.gif",
         poster: "animations/frames/frame_06_4.0s_poster1280.webp",
         duration: "5.0s (150 FRAMES)",
         codec: "H.264 @ 30 FPS • Easing Cubic Out",
@@ -3133,8 +3127,8 @@
         title: "Animation Remotion : 06. Synthèse & Colab",
         slideIdx: 23, // Slide 24
         slideNum: "24",
-        mp4: "animations/lenet5_pedagogique.mp4",
-        gif: null,
+        mp4: "animations/lenet5_pedagogique.gif",
+        gif: "animations/ncr-slide.gif",
         poster: "slides_exported/slide_24.webp",
         duration: "30.0s",
         codec: "H.264 @ 30 FPS",
@@ -3172,8 +3166,9 @@
       const gif = document.getElementById('studioGif');
       const gifBtn = document.getElementById('studioGifToggleBtn');
 
-      video.style.display = 'block';
-      gif.style.display = 'none';
+      video.style.display = 'none';
+      gif.style.display = 'block';
+      if (mod.gif) gif.src = mod.gif;
       video.poster = mod.poster;
       video.src = mod.mp4;
 

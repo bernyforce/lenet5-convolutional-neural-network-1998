@@ -109,7 +109,7 @@
     "section": "Chapitre 2 : Outils Révolutionnaires",
     "type": "video",
     "media": {
-      "mp4": "animations/02_neurone.mp4",
+      "mp4": "animations/02_neurone.gif",
       "gif": "animations/02_neurone.gif",
       "poster": "animations/02_neurone_poster.png",
       "duration": 5.0
@@ -154,7 +154,7 @@
     "section": "Chapitre 3 : Filtrage et Pooling",
     "type": "video",
     "media": {
-      "mp4": "animations/01_convolution.mp4",
+      "mp4": "animations/01_convolution.gif",
       "gif": "animations/01_convolution.gif",
       "poster": "animations/01_convolution_poster.png",
       "duration": 5.0
@@ -186,7 +186,7 @@
     "section": "Chapitre 3 : Filtrage et Pooling",
     "type": "video",
     "media": {
-      "mp4": "animations/03_pooling.mp4",
+      "mp4": "animations/03_pooling.gif",
       "gif": "animations/03_pooling.gif",
       "poster": "animations/03_pooling_poster.png",
       "duration": 5.0
@@ -218,7 +218,7 @@
     "section": "Chapitre 4 : Architecture LeNet-5",
     "type": "video",
     "media": {
-      "mp4": "animations/04_lenet5_pipeline.mp4",
+      "mp4": "animations/04_lenet5_pipeline.gif",
       "gif": "animations/04_lenet5_pipeline.gif",
       "poster": "animations/04_lenet5_pipeline_poster.png",
       "duration": 8.0
@@ -263,7 +263,7 @@
     "section": "Chapitre 5 : Déploiement & Impact Industriel",
     "type": "video",
     "media": {
-      "mp4": "animations/ncr-slide.mp4",
+      "mp4": "animations/ncr-slide.gif",
       "duration": 5.0
     },
     "seconds": 311.542,
@@ -332,7 +332,7 @@
     "section": "Chapitre 6 : Héritage & Démonstration",
     "type": "video",
     "media": {
-      "mp4": "animations/lenet5_pedagogique.mp4",
+      "mp4": "animations/lenet5_pedagogique.gif",
       "duration": 30.0
     },
     "seconds": 380.0,
