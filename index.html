@@ -1698,6 +1698,93 @@
       box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.06) !important;
     }
 
+
+    /* ==========================================================================
+       M3 — CONTRASTE WCAG AA ET PROFONDEUR VISUELLE (ordre 003)
+       Chaque valeur est mesuree. Reference: WCAG 2.2 1.4.3 / 1.4.11 / 2.4.7.
+       Preuves: 00-DIRECTION/preuves/reprise-M3/
+       ========================================================================== */
+
+    /* Pilule Colab — pilotee par theme au lieu d'une couleur inline unique.
+       Sombre: #7dd3fc sur fond compose = 9.64:1 ; bordure 60% = 3.9:1 */
+    .colab-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #7dd3fc;
+    }
+
+    /* Clair: #0a58ca sur #ddf4ff = 5.66:1 ; bordure #0969da = 4.56:1 */
+    body[data-theme="origine"] .colab-pill {
+      background: #ddf4ff !important;
+      border: 1px solid #0969da !important;
+      color: #0a58ca !important;
+    }
+
+    /* Profondeur: page #eef2f7 contre cartes blanches = deltaL* 4.7
+       (l'ancien #f8fafc ne donnait que 1.8, d'ou le rendu plat) */
+    body[data-theme="origine"] {
+      background-color: #eef2f7 !important;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    }
+
+    /* Bordures de cartes #d0d7de (1.45:1, visible) + ombre a deux niveaux */
+    body[data-theme="origine"] .glass-panel,
+    body[data-theme="origine"] .telemetry-card,
+    body[data-theme="origine"] .frame-item,
+    body[data-theme="origine"] .download-tile,
+    body[data-theme="origine"] .studio-concept-box {
+      border-color: #d0d7de !important;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px -12px rgba(16, 24, 40, 0.14) !important;
+    }
+
+    /* Controles: surface blanche + bordure #8c959f = 3.04:1 (1.4.11 respecte) */
+    body[data-theme="origine"] .tab-btn,
+    body[data-theme="origine"] .nav-link-pill,
+    body[data-theme="origine"] .studio-module-btn,
+    body[data-theme="origine"] .btn-media-toggle {
+      background: #ffffff !important;
+      border: 1px solid #8c959f !important;
+      color: #334155 !important;
+    }
+
+    /* Texte secondaire #656d76 = 4.67:1 sur la page (l'ancien #64748b tombait a 4.23) */
+    body[data-theme="origine"] .telemetry-label,
+    body[data-theme="origine"] .telemetry-sub,
+    body[data-theme="origine"] .metric-label,
+    body[data-theme="origine"] .frame-item-info,
+    body[data-theme="origine"] .theme-menu-text small {
+      color: #656d76 !important;
+    }
+
+    /* 2.4.7 Focus visible — aucun indicateur n'existait dans le document */
+    :focus-visible {
+      outline: 2px solid #0a58ca;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    body:not([data-theme="origine"]) :focus-visible {
+      outline-color: #7dd3fc;
+    }
+
+    /* 2.3.3 Animations a la demande */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
   </style>
 </head>
 <body data-theme="origine">
@@ -1715,7 +1802,7 @@
     <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
       <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="nav-link-pill github-pill" style="color:var(--text-main); text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); display:inline-flex; align-items:center; gap:5px;">⭐ GitHub Repository ↗</a>
       <a href="dossier_rxneurones_lenet5.html" class="nav-link-pill" style="color:var(--text-main); text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); display:inline-flex; align-items:center; gap:4px;">📄 Dossier Pédagogique</a>
-      <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" style="color:#93c5fd; text-decoration:none; font-size:0.78rem; font-weight:600; padding:0.35rem 0.8rem; border-radius:9999px; background:rgba(37,99,235,0.2); border:1px solid rgba(37,99,235,0.5); display:inline-flex; align-items:center; gap:4px;">🚀 Google Colab ↗</a>
+      <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="colab-pill">🚀 Google Colab ↗</a>
     </div>
   </div>
 
@@ -1776,7 +1863,7 @@
         <button class="tab-btn" onclick="switchTab('tab-pipeline', this)">🏛️ Pipeline 7 Couches</button>
         <button class="tab-btn" onclick="switchTab('tab-downloads', this)">📥 Téléchargements &amp; Accès</button>
         <a href="https://github.com/bernyforce/lenet5-convolutional-neural-network-1998" target="_blank" class="tab-btn" style="text-decoration:none; color:var(--text-main);">⭐ GitHub Repo ↗</a>
-        <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="tab-btn" style="text-decoration:none; color:#38bdf8;">🚀 Google Colab ↗</a>
+        <a href="https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb" target="_blank" class="tab-btn" style="text-decoration:none;">🚀 Google Colab ↗</a>
       </div>
       <div>
         <span class="tag-ledger">LIVE: lenet5.iatuto.com</span>
