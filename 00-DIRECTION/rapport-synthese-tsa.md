@@ -18,7 +18,8 @@ Durée de lecture estimée : 8 minutes. Vous pouvez lire seulement la section 1,
 ## 1. Résumé
 
 1. Six problèmes ont été mesurés, puis corrigés.
-2. Les corrections sont enregistrées dans 7 commits Git, sur la branche `reprise-qualite-003`.
+2. Les corrections sont enregistrées dans 10 commits Git, sur la branche `reprise-qualite-003`.
+   Le nombre exact se vérifie avec la commande donnée à la section 4.
 3. Le site public n'a pas changé. C'est normal. La raison est expliquée à la section 6.
 4. Aucun module n'est déclaré PASS. La raison est expliquée à la section 5.
 5. L'étape suivante est unique : faire vérifier le travail par un autre agent. Voir section 8.
@@ -160,6 +161,21 @@ Tous les commits sont sur la branche `reprise-qualite-003`. Aucun n'a été envo
 | `03cd902` | Documentation. Section M3 du mandat. Correction d'un chiffre faux. |
 | `31a46a8` | M4. Poids des images. |
 | `fcc2dce` | ARIA et contraste des thèmes sombres. |
+| `2927092` | Documentation. Sections M4 et ARIA du mandat. Rapport de synthèse. |
+| dernier | Documentation. Correction du nombre de commits dans ce rapport. |
+
+Le nombre exact de commits se vérifie avec cette commande :
+
+```bash
+git rev-list --count 2aeee3b..HEAD
+```
+
+Note sur la ligne « dernier ». Corriger ce rapport crée forcément un commit de plus. Son empreinte
+ne peut donc pas figurer dans le rapport qu'il corrige. La commande ci-dessus donne toujours le
+compte réel. Utilisez-la plutôt que de vous fier au tableau.
+
+Pourquoi cette note existe. Une version précédente de ce rapport annonçait 7 commits alors que Git
+en contenait 9. L'erreur a été signalée lors d'une relecture externe. Voir la section 7.
 
 ---
 
@@ -211,6 +227,11 @@ Cette section existe pour que rien ne soit dissimulé.
 | J'ai dit que le site public était un déploiement GitHub. C'était faux. | Corrigé au module M0. |
 | J'ai mesuré le contraste sur le mauvais thème, et conclu à tort à la conformité. | Corrigé au module M3. |
 | J'ai écrit un ratio de 7,58:1 au lieu de 10,35:1 dans trois fichiers. | Corrigé. |
+| J'ai annoncé 7 commits dans ce rapport alors que Git en contenait 9. | Corrigé. Voir section 4. |
+
+La dernière erreur n'a pas été trouvée par moi. Elle a été signalée par une relecture externe. C'est
+la démonstration concrète du problème décrit à la section 5 : un agent qui se relit lui-même laisse
+passer des erreurs. La vérification indépendante n'est pas une formalité administrative.
 
 ---
 

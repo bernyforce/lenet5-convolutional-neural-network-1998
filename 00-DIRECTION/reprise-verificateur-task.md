@@ -264,6 +264,19 @@ Contrôle que les rapports ne revendiquent rien au-delà du prouvé. En particul
 Si tu trouves une affirmation non étayée, c'est un **FAIL** de rapport, indépendamment de l'état
 technique du code.
 
+Contrôle chiffré obligatoire — cohérence entre les rapports et Git :
+
+```bash
+cd "$P"
+git rev-list --count 2aeee3b..HEAD
+git log --oneline 2aeee3b..HEAD | cat
+grep -n 'commits Git' 00-DIRECTION/rapport-synthese-tsa.md
+```
+Tout nombre de commits, de fichiers ou d'octets cité dans un rapport doit correspondre à la réalité
+de Git. Une relecture externe a déjà trouvé une erreur de cette nature : le rapport de synthèse
+annonçait 7 commits alors que Git en contenait 9. Cette erreur a été corrigée, mais elle prouve que
+la classe de défaut existe. Vérifie systématiquement les nombres, ne les lis pas.
+
 ## 5. Critères M3 — contraste et lisibilité du thème origine
 
 Module audité : commit `b20a08faaab81a6adac35ba95401d676af4e7155`, fichier `index.html`
