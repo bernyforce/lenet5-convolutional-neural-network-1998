@@ -2,7 +2,7 @@
 
 ## 1. Métadonnées de la Mission
 - **Mission :** `E26-MERGE-LINKS-20260908` (Fusion des liens validés dans l'original)
-- **Ordre source :** [`00-DIRECTION/codex-merge-links-task.md`](00-DIRECTION/codex-merge-links-task.md)
+- **Ordre source :** [`00-DIRECTION/codex-merge-links-task.md`](codex-merge-links-task.md)
 - **Horodatage début :** 2026-09-08T20:10:00-04:00
 - **Horodatage fin :** 2026-09-08T20:21:00-04:00
 - **Statut :** **TERMINÉ — PASS**
@@ -26,7 +26,7 @@ Avant toute modification de `index.html`, une sauvegarde préventive complète a
 - **Dossier de sauvegarde :** `/home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-links-20260908-200955/`
 - **Fichier sauvegardé :** `index.html` (132 485 octets)
 - **SHA-256 pré-fusion :** `127e96edefcc0a0646addbbd8b3b4cc728bc2dce90cd8cab7af2c08f7025a8f4`
-- **Manifeste scellé :** [`00-DIRECTION/preuves/merge-links/manifest-backup-links-sha256.txt`](00-DIRECTION/preuves/merge-links/manifest-backup-links-sha256.txt) (`201c583777428ec9c0ec3d9f69c066c6e9e4b999253cb917c2ee16591b555fb7`)
+- **Manifeste scellé :** [`00-DIRECTION/preuves/merge-links/manifest-backup-links-sha256.txt`](preuves/merge-links/manifest-backup-links-sha256.txt) (`201c583777428ec9c0ec3d9f69c066c6e9e4b999253cb917c2ee16591b555fb7`)
 - **Contrôle d'intégrité :** `sha256sum -c manifest-backup-links-sha256.txt` -> **OK**
 
 ---
@@ -34,11 +34,11 @@ Avant toute modification de `index.html`, une sauvegarde préventive complète a
 ## 3. Déroulement Chronologique des Phases
 
 ### Phase 0 : Contrôle des Prérequis & Validation Candidat
-- Rapport de validation des liens vérifié : [`00-DIRECTION/links-verificateur-report.md`](00-DIRECTION/links-verificateur-report.md) (SHA-256 : `94aab523d589a9613f02df9214e3cb11c9415cc2e13b85bb9e98a7f0fbf55f48`) avec verdict **PASS 9/9**.
-- Manifeste candidat vérifié : [`00-DIRECTION/preuves/links/manifest-links-candidat-sha256.txt`](00-DIRECTION/preuves/links/manifest-links-candidat-sha256.txt) (13 571 fichiers).
+- Rapport de validation des liens vérifié : [`00-DIRECTION/links-verificateur-report.md`](links-verificateur-report.md) (SHA-256 : `94aab523d589a9613f02df9214e3cb11c9415cc2e13b85bb9e98a7f0fbf55f48`) avec verdict **PASS 9/9**.
+- Manifeste candidat vérifié : [`00-DIRECTION/preuves/links/manifest-links-candidat-sha256.txt`](preuves/links/manifest-links-candidat-sha256.txt) (13 571 fichiers).
 
 ### Phase 1 : Cadrage de l'Exécution
-- Mandat d'exécution formalisé sous verrou : [`00-DIRECTION/merge-links-executeur-task.md`](00-DIRECTION/merge-links-executeur-task.md).
+- Mandat d'exécution formalisé sous verrou : [`00-DIRECTION/merge-links-executeur-task.md`](merge-links-executeur-task.md).
 - Fiche de présence Ledger ouverte par l'Exécuteur : `2a7f1960-8b5b-46e6-82e4-9cadf06f93e3`.
 
 ### Phase 2 : Exécution Technique de Fusion (Sous-agent Exécuteur Distinct)
@@ -46,11 +46,11 @@ Avant toute modification de `index.html`, une sauvegarde préventive complète a
 - Copie certifiée de `index.html` (132 513 octets) et `index.tsv` (686 octets) appliquée.
 - Validation syntaxique inline : `node --check` -> **0 SyntaxError**.
 - Vérification git : 0 fichier supprimé (`git diff --diff-filter=D` vide).
-- Rapport d'exécution scellé sans auto-validation : [`00-DIRECTION/merge-links-executeur-report.md`](00-DIRECTION/merge-links-executeur-report.md).
+- Rapport d'exécution scellé sans auto-validation : [`00-DIRECTION/merge-links-executeur-report.md`](merge-links-executeur-report.md).
 - Clôture Ledger Exécuteur : `2a7f1960-8b5b-46e6-82e4-9cadf06f93e3` (Statut : PASS modification).
 
 ### Phase 3 : Audit & Vérification Post-Fusion (Sous-agent Vérificateur Indépendant)
-- Mandat d'audit contradictoire rédigé : [`00-DIRECTION/merge-links-verificateur-task.md`](00-DIRECTION/merge-links-verificateur-task.md).
+- Mandat d'audit contradictoire rédigé : [`00-DIRECTION/merge-links-verificateur-task.md`](merge-links-verificateur-task.md).
 - Fiche de présence Ledger ouverte par le Vérificateur : `0e68d569-1028-42e6-b831-f6e60d81b201`.
 - Contrôle contradictoire exhaustif sans échantillonnage réalisé :
   1. Intégrité de la sauvegarde préalable vérifiée par `sha256sum -c` (132 485 octets).
@@ -61,7 +61,7 @@ Avant toute modification de `index.html`, une sauvegarde préventive complète a
   6. Streaming vidéo HTTP Range 206 vérifié sur `animations/01_convolution.mp4`.
   7. Filtrage défensif HTTP 403 vérifié sur `/00-DIRECTION/` et `/.agent-ledger.jsonl`.
   8. Scan déterministe `secret-scan.py` : 0 secret détecté.
-- Rapport d'audit indépendant scellé sous `.lock` : [`00-DIRECTION/merge-links-verificateur-report.md`](00-DIRECTION/merge-links-verificateur-report.md) (SHA-256 : `74970d132c0fcd4a1fb1b81d4c8c56a72c2f2f26eaeebcb01603edf5567bec90`).
+- Rapport d'audit indépendant scellé sous `.lock` : [`00-DIRECTION/merge-links-verificateur-report.md`](merge-links-verificateur-report.md) (SHA-256 : `74970d132c0fcd4a1fb1b81d4c8c56a72c2f2f26eaeebcb01603edf5567bec90`).
 - Clôture Ledger Vérificateur : `0e68d569-1028-42e6-b831-f6e60d81b201` (Statut : PASS lecture).
 
 ---
