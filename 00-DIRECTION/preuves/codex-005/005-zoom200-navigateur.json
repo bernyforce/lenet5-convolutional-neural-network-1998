@@ -1,0 +1,44 @@
+{
+ "zoom": {
+  "mecanisme": {
+   "devicePixelRatio": 2,
+   "innerWidth": 618,
+   "outerWidth": 640,
+   "visualViewportScale": 1,
+   "note": "Chrome lance avec --force-device-scale-factor=2 et --window-size=640,450 (soit 1280x900 physiques a facteur 2). Le zoom navigateur 200% se caracterise par devicePixelRatio=2 avec un viewport CSS divise par deux a taille de fenetre physique constante. Une simple reduction de viewport laisserait devicePixelRatio a 1; un pinch-zoom modifierait visualViewport.scale."
+  },
+  "panneauxOuverts": 5
+ },
+ "mesure": {
+  "devicePixelRatio": 2,
+  "innerWidth": 618,
+  "clientWidth": 603,
+  "scrollWidth": 603,
+  "debordementHorizontal": false,
+  "imagesTestees": 6,
+  "imagesNonTestees": 0,
+  "detail": [
+   {
+    "src": "frame_01_0.5s_960.webp",
+    "affichee": 248,
+    "naturelle": 960,
+    "complete": true,
+    "testee": true
+   },
+   {
+    "src": "frame_02_1.2s_960.webp",
+    "affichee": 248,
+    "naturelle": 960,
+    "complete": true,
+    "testee": true
+   },
+   {
+    "src": "frame_03_1.8s_960.webp",
+    "affichee": 248,
+    "naturelle": 960,
+    "complete": true,
+    "testee": true
+   }
+  ]
+ }
+}

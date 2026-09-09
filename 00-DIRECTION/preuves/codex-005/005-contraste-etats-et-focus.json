@@ -1,0 +1,112 @@
+{
+ "contrasteEtats": {
+  "ongletActif": {
+   "element": "btn-tab-slides",
+   "ratio": 5.1921,
+   "couleur": "rgb(255, 255, 255)",
+   "fond": "rgb(9,105,218)",
+   "px": 13.12,
+   "poids": "600",
+   "grandTexte": false,
+   "seuil": 4.5,
+   "verdict": "PASS"
+  },
+  "ongletInactif": {
+   "element": "btn-tab-presenter",
+   "ratio": 10.3547,
+   "couleur": "rgb(51, 65, 85)",
+   "fond": "rgb(255,255,255)",
+   "px": 13.12,
+   "poids": "600",
+   "grandTexte": false,
+   "seuil": 4.5,
+   "verdict": "PASS"
+  },
+  "ongletFocus": {
+   "element": "btn-tab-presenter",
+   "ratio": 10.3547,
+   "couleur": "rgb(51, 65, 85)",
+   "fond": "rgb(255,255,255)",
+   "px": 13.12,
+   "poids": "600",
+   "grandTexte": false,
+   "seuil": 4.5,
+   "verdict": "PASS",
+   "note": "mesure apres focus, styles stabilises"
+  }
+ },
+ "focusParcoursTabReel": [
+  {
+   "element": "A.tab-btn",
+   "texte": "⭐ GitHub Repo ↗",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "A.tab-btn",
+   "texte": "🚀 Google Colab ↗",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "BUTTON.stage-arrow",
+   "texte": "❮",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "BUTTON.stage-arrow",
+   "texte": "❯",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "BUTTON.btn",
+   "texte": "◀ Précédente",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "BUTTON.btn",
+   "texte": "Suivante ▶",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "SELECT#slideSelector.btn",
+   "texte": "01. Décoder LeNet-5 (199",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  },
+  {
+   "element": "BUTTON#autoplayBtn.btn",
+   "texte": "▶ Lecture Auto",
+   "outlineStyle": "solid",
+   "outlineWidth": "2px",
+   "outlineColor": "rgb(10, 88, 202)",
+   "outlineOffset": "2px",
+   "focusVisible": true
+  }
+ ]
+}

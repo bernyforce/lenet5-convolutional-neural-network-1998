@@ -3389,7 +3389,12 @@
 
     // Raccourcis Clavier
     window.addEventListener('keydown', (e) => {
+      // Deja traite en amont (navigation du groupe d'onglets) : ne pas deplacer la diapositive.
+      if (e.defaultPrevented) return;
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      // Espace appartient a l'activation native des controles focalises : ne pas la doubler.
+      if (e.key === ' ' && e.target.closest &&
+          e.target.closest('button, a[href], [role="tab"], [role="button"], textarea, [contenteditable]')) return;
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         nextSlide();

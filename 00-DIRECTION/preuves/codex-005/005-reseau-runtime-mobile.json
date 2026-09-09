@@ -1,0 +1,79 @@
+{
+ "reseauFroid": {
+  "cacheDesactiveAvantNavigation": true,
+  "viewport": "1280x900 dSF=1",
+  "dureeMesureMs": 8025,
+  "requetes": 20,
+  "octetsTotal": 685045,
+  "octetsImages": 438738,
+  "budgetImagesTotal": 1000000,
+  "budgetTotalRespecte": true,
+  "imagePlusLourde": {
+   "f": "slide_01.webp",
+   "o": 196179
+  },
+  "budgetParImage": 200000,
+  "budgetParImageRespecte": true,
+  "galerieDiffereeNonChargee": true
+ },
+ "runtime": {
+  "exceptionsJS": [],
+  "consoleError": 0,
+  "http4xx5xx": [],
+  "requetesAnnulees": [
+   "net::ERR_ABORTED Media",
+   "net::ERR_ABORTED Media",
+   "net::ERR_ABORTED Media"
+  ]
+ },
+ "mobile390": {
+  "innerWidth": 390,
+  "clientWidth": 390,
+  "scrollWidth": 390,
+  "debordementGlobal": false,
+  "panneaux": [
+   {
+    "onglet": "btn-tab-slides",
+    "panneau": "tab-slides",
+    "visible": true
+   },
+   {
+    "onglet": "btn-tab-presenter",
+    "panneau": "tab-presenter",
+    "visible": true
+   },
+   {
+    "onglet": "btn-tab-video",
+    "panneau": "tab-video",
+    "visible": true
+   },
+   {
+    "onglet": "btn-tab-pipeline",
+    "panneau": "tab-pipeline",
+    "visible": true
+   },
+   {
+    "onglet": "btn-tab-downloads",
+    "panneau": "tab-downloads",
+    "visible": true
+   }
+  ],
+  "panneauxAffiches": 5,
+  "zonesDefilementInterne": [
+   {
+    "el": "DIV.tabs",
+    "scrollWidth": 1208,
+    "clientWidth": 348
+   }
+  ],
+  "controles": 39,
+  "sous44px": 31,
+  "hauteursObservees": [
+   0,
+   33,
+   37,
+   39,
+   60
+  ]
+ }
+}
