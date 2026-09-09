@@ -23,3 +23,7 @@ desktop.ini
 # Environment and local configs
 .env.local
 .env.*.local
+
+# Sauvegardes de mission (ordre 003) - jamais suivies ni servies
+_backups/
+**/_backups/

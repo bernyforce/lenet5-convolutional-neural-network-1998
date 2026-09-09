@@ -69,6 +69,7 @@ const server = http.createServer((req, res) => {
     basename.startsWith('.') ||
     relPath.startsWith('00-DIRECTION') ||
     relPath.includes('00-DIRECTION') ||
+    pathParts.includes('_backups') ||
     relPath.includes('.bak') ||
     relPath.endsWith('.jsonl') ||
     relPath.endsWith('.key')
