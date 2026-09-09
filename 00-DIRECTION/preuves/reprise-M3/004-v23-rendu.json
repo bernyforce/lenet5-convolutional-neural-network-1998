@@ -1,0 +1,77 @@
+{
+ "etats": {
+  "normal": 10.35,
+  "actif": 10.35,
+  "focus": 10.35
+ },
+ "zoom200": {
+  "largeurViewport": 625,
+  "scrollWidth": 625,
+  "debordementHorizontal": false,
+  "imagesGalerie": [
+   {
+    "w": 0,
+    "naturel": 0
+   },
+   {
+    "w": 0,
+    "naturel": 0
+   },
+   {
+    "w": 0,
+    "naturel": 0
+   }
+  ],
+  "ratioCorps": 15.88
+ },
+ "mobile": {
+  "scrollWidth": 390,
+  "clientWidth": 390,
+  "debordementHorizontal": false,
+  "nbControles": 10,
+  "ciblesSous44px": 10,
+  "exemples": [
+   {
+    "t": "⭐ GitHub Repos",
+    "w": 170,
+    "h": 33
+   },
+   {
+    "t": "📄 Dossier Péd",
+    "w": 177,
+    "h": 33
+   },
+   {
+    "t": "🚀 Google Cola",
+    "w": 141,
+    "h": 33
+   },
+   {
+    "t": "🖥️ Diaporama",
+    "w": 124,
+    "h": 37
+   },
+   {
+    "t": "🎙️ Mode Prése",
+    "w": 177,
+    "h": 37
+   }
+  ]
+ },
+ "mouvementReduit": {
+  "elementsAnimesRestants": 0,
+  "transitionsRestantes": 0,
+  "note": "compte les animations CSS actives sous prefers-reduced-motion: reduce"
+ },
+ "erreurs": {
+  "exceptions": [],
+  "consoleErrors": 0,
+  "reseauEchecs": [
+   "net::ERR_ABORTED Other",
+   "net::ERR_ABORTED Other",
+   "net::ERR_ABORTED Media",
+   "net::ERR_ABORTED Media",
+   "net::ERR_ABORTED Media"
+  ]
+
+[exited with code 0]
