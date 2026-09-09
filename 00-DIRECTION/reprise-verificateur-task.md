@@ -1,14 +1,15 @@
-# Mandat d'audit indépendant — M0, M2 et M3 de l'ordre 003
+# Mandat d'audit indépendant — M0, M2, M3, M4 et ARIA/thèmes de l'ordre 003
 
 Mission : E26-REPRISE-QUALITE-003. Ordre canonique : `00-DIRECTION/codex-redirection-003.md`.
-Émis par : Claude Code (Opus 5), rôle **exécuteur** des modules M0, M2 et M3, le 2026-09-08.
+Émis par : Claude Code (Opus 5), rôle **exécuteur** de tous les modules audités, le 2026-09-08.
 Ledgers de l'exécution auditée, tous clos en **PARTIEL** :
-`256ee070-a45f-4e17-afb9-24430389c2f0` (M0 et M2), `407c43b5-11fc-4b05-9884-e587295832b8` (M3).
+`256ee070-a45f-4e17-afb9-24430389c2f0` (M0 et M2), `407c43b5-11fc-4b05-9884-e587295832b8` (M3),
+`a8b3f9ce-ccc7-4199-8a01-d13e6e0bd4d2` (M4), `da641fb4-76a8-40ad-bd56-93e75b34b0aa` (ARIA/thèmes).
 Branche portant les travaux : `reprise-qualite-003`.
 
 ## 0. Condition d'indépendance — lis ceci d'abord
 
-Tu ne dois accepter ce mandat que si tu n'as **ni planifié ni exécuté** M0, M2 ou M3. L'agent qui a
+Tu ne dois accepter ce mandat que si tu n'as **ni planifié ni exécuté** l'un de ces modules. L'agent qui a
 produit les travaux audités est Claude Code, session unique, et il a lui-même déclaré ne pas pouvoir
 se vérifier. Si tu es cette même session, **refuse** et déclare BLOQUÉ.
 
@@ -21,8 +22,10 @@ un **FAIL** à documenter, pas à arrondir.
 - `00-DIRECTION/reprise-M0-verification-01.md`
 - `00-DIRECTION/reprise-M2-verification-01.md`
 - `00-DIRECTION/reprise-M3-verification-01.md`
-- Preuves sous `00-DIRECTION/preuves/reprise-M0/`, `.../reprise-M2/` et `.../reprise-M3/`
-  (commandes exactes, sorties expurgées, hashes).
+- `00-DIRECTION/reprise-M4-verification-01.md`
+- `00-DIRECTION/reprise-M6-verification-01.md` (module ARIA et thèmes sombres)
+- Preuves sous `00-DIRECTION/preuves/reprise-M0/`, `.../reprise-M2/`, `.../reprise-M3/`,
+  `.../reprise-M4/` et `.../reprise-M6/` (commandes exactes, sorties expurgées, hashes).
 
 Format par critère : identifiant, commande exécutée, sortie obtenue, valeur attendue, verdict
 PASS / FAIL / BLOQUÉ. Fiche de présence agent-ledger `start` avant, `end` après, même si FAIL.
@@ -51,6 +54,8 @@ secrets avant écriture.
 | `00-DIRECTION/preuves/reprise-M0/m0-cartographie-et-exclusions.md` | Preuves M0 |
 | `00-DIRECTION/preuves/reprise-M2/m2-a03-liens-rapport-fusion.md` | Preuves M2 |
 | `00-DIRECTION/preuves/reprise-M3/m3-mesures-contraste.md` | Preuves M3 |
+| `00-DIRECTION/preuves/reprise-M4/m4-poids-chargement.md` | Preuves M4 |
+| `00-DIRECTION/preuves/reprise-M6/m6-aria-et-themes-sombres.md` | Preuves ARIA et thèmes |
 
 Commits à auditer sur `reprise-qualite-003`, parent `2aeee3bf8acd18b6ca061444a56c88f7776d8baf` :
 
@@ -61,6 +66,9 @@ Commits à auditer sur `reprise-qualite-003`, parent `2aeee3bf8acd18b6ca061444a5
 | `0379a57b193c321de51de609718097d406a7ba51` | docs — SHA consignés |
 | `a99b52...` | docs — le présent mandat |
 | `b20a08faaab81a6adac35ba95401d676af4e7155` | M3 — contraste et profondeur du thème origine |
+| `03cd902` | docs — section M3 du mandat, correction d'une valeur erronée |
+| `31a46a8` | M4 — poids de la galerie et chargement différé |
+| `fcc2dce` | ARIA des onglets et contraste des thèmes sombres |
 
 ## 4. Critères à contrôler
 
@@ -400,15 +408,147 @@ typographique, la longueur de ligne, les cibles tactiles, et la dette de jetons 
 en dur pour 101 usages de jetons, 44 teintes distinctes). Confirme que ces éléments sont bien
 déclarés non traités et non présentés comme réglés.
 
-## 6. Verdict attendu
+## 6. Critères M4 — poids et chargement
 
-Un verdict par module — M0, M2 et M3 — chacun PASS / FAIL / BLOQUÉ, avec le détail par critère
-V01-V24. Un FAIL renvoie à l'exécuteur, puis à un **nouveau** vérificateur indépendant. Aucun PASS
-global de la mission n'est possible tant que M1 et M4 restent non livrés, et M3 ne peut être PASS
-complet sans la vérification au rendu de V23.
+Module audité : commit `31a46a8`. Fichier `index.html` plus 7 fichiers média neufs.
 
-Pour la suppression des sauvegardes, le critère V13 s'applique aussi à M3 : la version d'avant
-modification d'`index.html` est
-`37429e33e03882c4ba92f2f91cffb74728f65b8c6138f87c4c3ed7386ecdb081` (132 513 octets), récupérable via
-`git show 0379a57:index.html`, et sauvegardée sous
-`_backups/E26-REPRISE-QUALITE-003/M3/20260908-215021/index.html`.
+### V25 — Budgets de l'ordre 003
+
+```bash
+cd "$P"
+ls -l animations/frames/*_960.webp | awk '{print $5, $9}'
+du -cb animations/frames/*_960.webp | tail -1
+```
+Attendu : chaque image ≤ **200 000** octets (la plus lourde est `frame_06` à 31 198 o) ; total
+**60 746** octets, sous le budget de 1 000 000 d'octets d'images transférées au chargement.
+Mesure de départ, à recalculer sur le commit parent : 1 918 508 octets pour les 6 PNG.
+
+### V26 — Chargement différé et stabilité de mise en page
+
+```bash
+cd "$P"
+grep -c 'loading="lazy"' index.html
+git show 0379a57:index.html | grep -c 'loading='
+grep -o 'frames/frame_0[1-6][^>]*>' index.html
+```
+Attendu : les 6 images de galerie portent `loading="lazy"`, `decoding="async"` et des attributs
+`width`/`height` explicites. Avant le module, ces images n'avaient **aucun** attribut `loading`.
+Les dimensions explicites servent à éviter le décalage de mise en page (CLS).
+
+### V27 — Cache immutable et péremption des médias
+
+```bash
+cd "$P"
+grep -n 'max-age=31536000' server.js
+curl -sI http://127.0.0.1:<TON_PORT_LIBRE>/animations/frames/frame_06_4.0s_960.webp | tr -d '\r'
+```
+Attendu : `Cache-Control: public, max-age=31536000, immutable` et `Content-Type: image/webp`.
+Point à juger : l'exécuteur soutient que le risque de média périmé signalé par l'ordre est écarté
+parce que les nouveaux médias portent des **noms neufs** (`_960.webp`, `_poster1280.webp`), et non
+parce que la politique de cache aurait changé. Valide ou réfute ce raisonnement.
+
+### V28 — Masters conservés et lisibilité
+
+```bash
+cd "$P"
+ls -l animations/frames/*.png | awk '{print $5, $9}'
+curl -s -o /dev/null -w '%{http_code} %{size_download}\n' http://127.0.0.1:<TON_PORT_LIBRE>/animations/frames/frame_06_4.0s.png
+```
+Attendu : les 7 PNG 1920×1080 d'origine sont conservés et toujours servis (frame_06 = 1 301 575 o).
+L'ordre exige de conserver les masters utiles et de contrôler visuellement schémas et chiffres.
+L'exécuteur déclare avoir inspecté visuellement l'image encodée : titres et chiffres lisibles, les
+annotations fines ne le sont pas à 960 px — ni à la taille d'affichage réelle. **Contrôle-le
+toi-même en ouvrant l'image.** La cible de 960 px est justifiée par la grille CSS
+`minmax(220px, 1fr)` et par le zoom 200 % (affichage jusqu'à environ 880 px).
+
+### V29 — Distinction disque / réseau
+
+```bash
+cd "$P"
+grep -o 'src="[^"]*\.gif"' index.html | wc -l
+grep -o 'href="[^"]*\.gif"' index.html | wc -l
+```
+Attendu : **0** GIF en `src`, 5 en `href`. Les GIF (1 371 036 et 1 357 725 octets) sont des liens de
+téléchargement et ne sont donc pas transférés au chargement de la page. L'ordre interdit de
+confondre volume disque et volume réseau. Vérifie qu'aucun rapport ne les compte comme du poids réseau.
+
+## 7. Critères hors modules de l'ordre — sémantique ARIA et thèmes sombres
+
+Module audité : commit `fcc2dce`. Ces travaux ne figurent pas dans la liste M0-M5 de l'ordre 003 :
+ils proviennent de constats faits pendant M3. Juge-les comme les autres.
+
+### V30 — `--text-dim` échouait sur les trois thèmes sombres
+
+Recalcule en composant les dégradés à leur **pic**, c'est-à-dire au point le plus clair de chaque
+thème, qui est le pire cas pour du texte clair. Les thèmes 1, 2 et 3 ne surchargent aucun jeton
+`--*` : la valeur de `:root` s'y applique.
+
+| Fond | Avant `#64748b` | Après `#8b98ab` | Seuil |
+|---|---|---|---|
+| thème 1, pic | 2,82:1 | 4,59:1 | 4,5 |
+| thème 2, pic | 4,14:1 | 6,73:1 | 4,5 |
+| thème 3, pic | 2,80:1 | 4,55:1 | 4,5 |
+| panneaux `rgba(15,23,42,0.75)` | 3,55 à 3,87:1 | 5,77 à 6,30:1 | 4,5 |
+
+Deux points à contester : la marge est **mince** au thème 3 (4,55 contre 4,50) ; et le pic de
+dégradé est estimé depuis les déclarations CSS, non échantillonné sur un rendu réel. Dis si cette
+estimation est acceptable ou si elle doit être refaite au navigateur.
+
+### V31 — Le jeton est scopé par thème
+
+```bash
+cd "$P" && grep -n -- '--text-dim:' index.html
+```
+Attendu : deux définitions. `:root` → `#8b98ab` pour les thèmes sombres ;
+`body[data-theme="origine"]` → `#656d76` pour le thème clair (4,67:1 sur la page). Éclaircir le
+jeton globalement aurait dégradé le thème clair, où l'ancien `#64748b` était déjà à 4,23:1.
+
+### V32 — Rôles ARIA effectivement posés et pilotés
+
+```bash
+cd "$P"
+grep -c 'role="tab"' index.html; grep -c 'role="tabpanel"' index.html; grep -c 'role="timer"' index.html
+grep -n 'aria-selected' index.html | head
+sed -n "/function switchTab/,+16p" index.html
+sed -n "/function toggleThemeDropdown/,+10p" index.html
+```
+Attendu : 5 `role="tab"`, 5 `role="tabpanel"`, 1 `role="timer"` ; `switchTab()` remet
+`aria-selected` à `false` partout puis à `true` sur l'onglet actif ; `aria-expanded` du menu de
+thèmes est mis à jour à l'ouverture **et** à la fermeture, alors qu'il était figé à `false`.
+Le minuteur porte `aria-live="off"` : ce choix est délibéré, une annonce par seconde nuirait aux
+utilisateurs de lecteurs d'écran. Confirme ou conteste ce choix.
+
+### V33 — Écart ARIA déclaré, à trancher
+
+`role="tablist"` n'est **pas** posé et la navigation par flèches n'est **pas** implémentée. Motif
+donné : le conteneur `.tabs` contient 5 boutons d'onglet **et** 2 liens externes, or un `tablist`
+conforme ne doit contenir que des onglets ; restructurer le DOM aurait un impact de mise en page
+non vérifiable sans rendu. Juge si cette abstention est justifiée, ou si elle laisse le patron ARIA
+dans un état incomplet qui nuit plus qu'il n'aide.
+
+### V34 — Aucun test avec lecteur d'écran
+
+L'exécuteur n'a testé aucun lecteur d'écran. Si tu es équipé, vérifie l'annonce des onglets, de
+l'état sélectionné, de l'ouverture du menu et du minuteur. Sinon, maintiens **BLOQUÉ**.
+
+## 8. Verdict attendu
+
+Un verdict par module — M0, M2, M3, M4 et le module ARIA/thèmes — chacun PASS / FAIL / BLOQUÉ, avec
+le détail par critère V01-V34. Un FAIL renvoie à l'exécuteur, puis à un **nouveau** vérificateur
+indépendant. Aucun PASS global de la mission n'est possible tant que **M1 reste non livré** (parcours
+d'interaction complet : 28 diapositives, 4 thèmes, onglets, clavier, minuteur, vidéos,
+téléchargements, capture de `pageerror` et `console.error`), et M3, M4 et le module ARIA ne peuvent
+être PASS complets sans les vérifications au rendu de V23, V28 et V34.
+
+Pour la suppression des sauvegardes, le critère V13 s'applique à chaque module. Les versions
+d'`index.html` d'avant chaque modification sont récupérables ainsi :
+
+| Module | Version d'avant | Récupération |
+|---|---|---|
+| M3 | `37429e33e03882c4…` (132 513 o) | `git show 0379a57:index.html` |
+| M4 | `61f850e496f3e81b…` (135 561 o) | `git show b20a08f:index.html` |
+| ARIA/thèmes | version issue de M4 (136 1xx o) | `git show 31a46a8:index.html` |
+
+Chaque version est aussi sauvegardée sous `_backups/E26-REPRISE-QUALITE-003/<module>/<horodatage>/`.
+Aucune sauvegarde n'a été supprimée : la condition posée par l'ordre — commit **et** vérification
+indépendante — n'est pas remplie.
