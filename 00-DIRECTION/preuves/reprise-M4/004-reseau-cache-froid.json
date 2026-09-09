@@ -1,0 +1,44 @@
+{
+ "cacheFroid": true,
+ "requetes": 27,
+ "octetsTotal": 1223340,
+ "octetsImages": 424435,
+ "budgetImages": 1000000,
+ "budgetRespecte": true,
+ "nbImages": 14,
+ "imagesTop": [
+  {
+   "f": "slide_01.webp",
+   "o": 196179
+  },
+  {
+   "f": "slide_02.webp",
+   "o": 82418
+  },
+  {
+   "f": "01_convolution_poster.webp",
+   "o": 33552
+  },
+  {
+   "f": "04_lenet5_pipeline_poster.webp",
+   "o": 27682
+  },
+  {
+   "f": "thumb_01.webp",
+   "o": 13920
+  },
+  {
+   "f": "thumb_07.webp",
+   "o": 12452
+  },
+  {
+   "f": "thumb_06.webp",
+   "o": 11710
+  },
+  {
+   "f": "thumb_04.webp",
+   "o": 11130
+  }
+ ],
+ "galerieLazyChargee": 0
+}
