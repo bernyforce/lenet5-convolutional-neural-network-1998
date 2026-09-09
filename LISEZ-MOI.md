@@ -36,6 +36,8 @@ Le projet se compose exactement des livrables requis :
 3. 📄 [`LISEZ-MOI.md`](./LISEZ-MOI.md) : Présentation des livrables, guide de lecture et checklist de conformité TSA détaillée.
 4. 📄 [`rapport_execution.md`](./rapport_execution.md) : Rapport d'exécution formel (Fait / Preuve / Écart).
 5. 📁 [`ressources/`](./ressources/) : Documents de référence en lecture seule (articles fondateurs, chapitres théoriques).
+6. 📊 [`LeNet-5.pptx`](./LeNet-5.pptx) : Présentation PowerPoint complète de 28 diapositives au format 16:9 Widescreen (alias canonique conforme de `LeNet-5_Presentation_Finale.pptx`, 27 Mo).
+7. 🌐 [`index.html`](./index.html) : Portail interactif et studio d'animations Remotion (720p & 1080p) avec console conférencier.
 
 ---
 

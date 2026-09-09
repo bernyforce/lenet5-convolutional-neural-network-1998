@@ -1,0 +1,8 @@
+AUDIT CRITÈRE C06 - DOSSIER PÉDAGOGIQUE ET AUTONOMIE 100% HORS-LIGNE
+Date audit : 2026-09-08 10:21:31
+Nombre de questions de quiz détectées : 10 (attendu: 10)
+Nombre de requêtes d'images distantes (https://...) : 0 (attendu: 0)
+Sections h2 détectées (0 à 11) : 12 sections ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+Présence du badge Colab vectoriel SVG inline : True
+
+VERDICT CRITÈRE C06 : PASS (12 sections, 10 questions de quiz et autonomie 100% hors-ligne vérifiées)

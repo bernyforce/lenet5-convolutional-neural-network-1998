@@ -1,0 +1,16 @@
+AUDIT CRITÈRE C05 - NAVIGATION INTERACTIVE, CONSOLE, MINUTEUR ET TÉLÉCHARGEMENTS
+Date audit : 2026-09-08 10:21:31
+
+Contrôles dans index.html :
+  - Gestionnaire keydown : CONFORME
+  - Gestionnaire tactile/touch : CONFORME
+  - Console présentateur (pNextImg) : CONFORME
+  - Console présentateur (pNotes) : CONFORME
+  - Minuteur soutenance (timer) : CONFORME
+  - Sélecteur de thèmes : CONFORME
+  - Téléchargement LeNet-5.pptx : CONFORME
+  - Téléchargement slides.json : CONFORME
+
+Fichier LeNet-5.pptx cible téléchargeable : True (27459064 octets / 26.19 Mo)
+
+VERDICT CRITÈRE C05 : PASS (Interactions, console et téléchargements validés)

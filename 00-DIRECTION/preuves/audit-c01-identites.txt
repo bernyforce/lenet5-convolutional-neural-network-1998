@@ -1,0 +1,20 @@
+AUDIT CRITÈRE C01 - TRAÇABILITÉ DES 3 SESSIONS ET COMMUNICATION PAR FICHIERS
+Date audit : 2026-09-08 10:21:30
+Vérificateur : Antigravity CLI (Agent Vérificateur Indépendant)
+Session Vérificateur : be088ddf-64eb-498a-9ba8-0cc256c0209c
+
+1. Sessions détectées :
+  - Planificateur (d4a9448e) : d4a9448e-d328-4d63-b83f-514a39d80026
+  - Exécuteur     (2b862d06) : 2b862d06-cb03-4ab8-a3b9-af823c57c75a
+  - Vérificateur  (be088ddf) : be088ddf-64eb-498a-9ba8-0cc256c0209c
+
+Disjonction stricte : 3 sessions uniques sur 3 rôles.
+
+2. Fichiers de passation sous 00-DIRECTION/ :
+  - planificateur-task.md: PRÉSENT (3768 octets)
+  - planificateur-report.md: PRÉSENT (27330 octets)
+  - executeur-task.md: PRÉSENT (3374 octets)
+  - executeur-report.md: PRÉSENT (16747 octets)
+  - verificateur-task.md: PRÉSENT (3732 octets)
+
+VERDICT CRITÈRE C01 : PASS

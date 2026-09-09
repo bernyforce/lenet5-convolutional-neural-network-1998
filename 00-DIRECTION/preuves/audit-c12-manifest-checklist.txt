@@ -1,0 +1,7 @@
+AUDIT CRITÈRE C12 - DOSSIER DE LIVRAISON ET MANIFESTE CANDIDAT SCELLÉ
+Date audit : 2026-09-08 10:21:45
+Présence du manifeste candidat SHA-256 : OUI (3077897 octets, 13537 fichiers indexés)
+Preuves archivées pour C01 à C11 : 11/11 présentes dans /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones/00-DIRECTION/preuves
+Critères sans preuve archivée : []
+
+VERDICT CRITÈRE C12 : PASS (Manifeste scellé de 13 537 fichiers et 12/12 preuves réunies)

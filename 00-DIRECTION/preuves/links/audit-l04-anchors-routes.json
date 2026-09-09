@@ -1,0 +1,861 @@
+{
+  "anchors": [
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1399,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">",
+      "anchor_id": "sec1",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1400,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1401,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1402,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1403,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1404,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1405,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1406,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1407,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1408,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1409,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">",
+      "anchor_id": "sec11",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1536,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">",
+      "anchor_id": "sec0",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1537,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1663,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">",
+      "anchor_id": "sec1",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1664,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1798,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1799,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1970,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1971,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2111,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2112,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2198,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2199,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2424,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2425,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2548,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2549,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2652,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2653,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2711,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2712,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">",
+      "anchor_id": "sec11",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2845,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2846,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">",
+      "anchor_id": "sec0",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1726,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">",
+      "anchor_id": "sec1",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1727,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1728,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1729,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1730,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1731,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1732,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1733,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1734,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1735,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1736,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">",
+      "anchor_id": "sec11",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1863,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">",
+      "anchor_id": "sec0",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1864,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2015,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">",
+      "anchor_id": "sec1",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2016,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2150,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">",
+      "anchor_id": "sec2",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2151,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2271,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">",
+      "anchor_id": "sec3",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2272,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2437,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">",
+      "anchor_id": "sec4",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2438,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2549,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">",
+      "anchor_id": "sec5",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2550,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2754,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">",
+      "anchor_id": "sec6",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2755,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2879,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">",
+      "anchor_id": "sec7",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2880,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2983,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">",
+      "anchor_id": "sec8",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2984,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3042,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">",
+      "anchor_id": "sec9",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3043,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">",
+      "anchor_id": "sec11",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3197,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">",
+      "anchor_id": "sec10",
+      "status": "PASS"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3198,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">",
+      "anchor_id": "sec0",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 16,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-vue-densemble--contexte-historique",
+      "raw": "[Vue d'Ensemble & Contexte Historique](#-vue-densemble--contexte-historique)",
+      "anchor_id": "-vue-densemble--contexte-historique",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 17,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-architecture-7-couches-lenet-5",
+      "raw": "[Architecture 7 Couches LeNet-5](#-architecture-7-couches-lenet-5)",
+      "anchor_id": "-architecture-7-couches-lenet-5",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 18,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-suite-des-6-animations-remotion-hd",
+      "raw": "[Suite des 6 Animations Remotion HD](#-suite-des-6-animations-remotion-hd)",
+      "anchor_id": "-suite-des-6-animations-remotion-hd",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 19,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-d\u00e9monstration-interactive-google-colab",
+      "raw": "[D\u00e9monstration Interactive Google Colab](#-d\u00e9monstration-interactive-google-colab)",
+      "anchor_id": "-d\u00e9monstration-interactive-google-colab",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 20,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-portail-web--console-conf\u00e9rencier",
+      "raw": "[Portail Web & Console Conf\u00e9rencier](#-portail-web--console-conf\u00e9rencier)",
+      "anchor_id": "-portail-web--console-conf\u00e9rencier",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 21,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-pr\u00e9sentation-powerpoint-master-28-diapositives-169",
+      "raw": "[Pr\u00e9sentation PowerPoint Master (28 Diapositives 16:9)](#-pr\u00e9sentation-powerpoint-master-28-diapositives-169)",
+      "anchor_id": "-pr\u00e9sentation-powerpoint-master-28-diapositives-169",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 22,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-dossier-p\u00e9dagogique-approfondi-multi-th\u00e8mes",
+      "raw": "[Dossier P\u00e9dagogique Approfondi (Multi-Th\u00e8mes)](#-dossier-p\u00e9dagogique-approfondi-multi-th\u00e8mes)",
+      "anchor_id": "-dossier-p\u00e9dagogique-approfondi-multi-th\u00e8mes",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 23,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-installation--d\u00e9marrage-rapide",
+      "raw": "[Installation & D\u00e9marrage Rapide](#-installation--d\u00e9marrage-rapide)",
+      "anchor_id": "-installation--d\u00e9marrage-rapide",
+      "status": "PASS"
+    },
+    {
+      "file": "README.md",
+      "line": 24,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-gouvernance--tra\u00e7abilit\u00e9-d\u00e9terministe",
+      "raw": "[Gouvernance & Tra\u00e7abilit\u00e9 D\u00e9terministe](#-gouvernance--tra\u00e7abilit\u00e9-d\u00e9terministe)",
+      "anchor_id": "-gouvernance--tra\u00e7abilit\u00e9-d\u00e9terministe",
+      "status": "PASS"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 19,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-1--pr\u00e9sentation-master-powerpoint-28-diapositives-169",
+      "raw": "[Domaine 1 : Pr\u00e9sentation Master PowerPoint (28 Diapositives 16:9)](#-domaine-1--pr\u00e9sentation-master-powerpoint-28-diapositives-169)",
+      "anchor_id": "-domaine-1--pr\u00e9sentation-master-powerpoint-28-diapositives-169",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 20,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-2--animation-remotion--d\u00e9ploiement-ncr--s\u00e9paration-des-3-r\u00f4les",
+      "raw": "[Domaine 2 : Animation Remotion \u00ab D\u00e9ploiement NCR \u00bb & S\u00e9paration des 3 R\u00f4les](#-domaine-2--animation-remotion--d\u00e9ploiement-ncr--s\u00e9paration-des-3-r\u00f4les)",
+      "anchor_id": "-domaine-2--animation-remotion--d\u00e9ploiement-ncr--s\u00e9paration-des-3-r\u00f4les",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 21,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-3--suite-des-6-animations-remotion--assets-multim\u00e9dia",
+      "raw": "[Domaine 3 : Suite des 6 Animations Remotion & Assets Multim\u00e9dia](#-domaine-3--suite-des-6-animations-remotion--assets-multim\u00e9dia)",
+      "anchor_id": "-domaine-3--suite-des-6-animations-remotion--assets-multim\u00e9dia",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 22,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-4--serveur-web-streaming-range-206--exposition-publique-cloudflare",
+      "raw": "[Domaine 4 : Serveur Web, Streaming Range 206 & Exposition Publique Cloudflare](#-domaine-4--serveur-web-streaming-range-206--exposition-publique-cloudflare)",
+      "anchor_id": "-domaine-4--serveur-web-streaming-range-206--exposition-publique-cloudflare",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 23,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-5--identit\u00e9-visuelle--conservation-stricte-des-3-th\u00e8mes",
+      "raw": "[Domaine 5 : Identit\u00e9 Visuelle & Conservation Stricte des 3 Th\u00e8mes](#-domaine-5--identit\u00e9-visuelle--conservation-stricte-des-3-th\u00e8mes)",
+      "anchor_id": "-domaine-5--identit\u00e9-visuelle--conservation-stricte-des-3-th\u00e8mes",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 24,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-6--dossier-d\u00e9tude-th\u00e9m\u00e9--composants-interactifs",
+      "raw": "[Domaine 6 : Dossier d'\u00c9tude Th\u00e9m\u00e9 & Composants Interactifs](#-domaine-6--dossier-d\u00e9tude-th\u00e9m\u00e9--composants-interactifs)",
+      "anchor_id": "-domaine-6--dossier-d\u00e9tude-th\u00e9m\u00e9--composants-interactifs",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 25,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-7--exp\u00e9rimentation-interactive-google-colab",
+      "raw": "[Domaine 7 : Exp\u00e9rimentation Interactive Google Colab](#-domaine-7--exp\u00e9rimentation-interactive-google-colab)",
+      "anchor_id": "-domaine-7--exp\u00e9rimentation-interactive-google-colab",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 26,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-8--documentation-du-projet--publication-github",
+      "raw": "[Domaine 8 : Documentation du Projet & Publication GitHub](#-domaine-8--documentation-du-projet--publication-github)",
+      "anchor_id": "-domaine-8--documentation-du-projet--publication-github",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 27,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-9--gouvernance-d\u00e9terministe--tra\u00e7abilit\u00e9-ledger--backups",
+      "raw": "[Domaine 9 : Gouvernance D\u00e9terministe & Tra\u00e7abilit\u00e9 (Ledger & Backups)](#-domaine-9--gouvernance-d\u00e9terministe--tra\u00e7abilit\u00e9-ledger--backups)",
+      "anchor_id": "-domaine-9--gouvernance-d\u00e9terministe--tra\u00e7abilit\u00e9-ledger--backups",
+      "status": "FAIL"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 28,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-grille-r\u00e9capitulative--formulaire-de-signature-finale",
+      "raw": "[Grille R\u00e9capitulative & Formulaire de Signature Finale](#-grille-r\u00e9capitulative--formulaire-de-signature-finale)",
+      "anchor_id": "-grille-r\u00e9capitulative--formulaire-de-signature-finale",
+      "status": "FAIL"
+    }
+  ],
+  "routes": [
+    {
+      "route": "/api/slides",
+      "status": "PASS",
+      "note": "Served by server.js line 37"
+    }
+  ]
+}

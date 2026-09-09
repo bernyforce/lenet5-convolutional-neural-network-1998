@@ -1,0 +1,11 @@
+638818115822d12010b6687acc08e0d47154299272f9ecccf4201a58a88608f0  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/LISEZ-MOI.md
+ee80fc4baecd70b79874f84023ad18e160cb11fe651350e7c58e3787bd698dea  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/README.md
+00ac0645fcd93af1a2bb8e39ec856fdd5120307c00659a0f571fd9fb1e89649c  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/animations/ncr-slide.mp4
+e6c1a37f3cd14e06b5d8cf59212af34b1db6913a286a8e18b4c66eb77e91377f  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/demonstration_lenet5_colab.ipynb
+6606233fae8bfc41ae04a7299747a3f9e83130e2784c4f6af0cb380ecdb43014  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/dossier_rxneurones_lenet5.html
+67248a9b2ba520a842e536edd83ad54d3eda04dca35c3f7a704e16c53a966c79  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/dossier_rxneurones_lenet5_themed.html
+7031157870b79d93eaffe8a421a65d6e0169ff107ab8411c2f0a2e1d12b52339  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/index.html
+f959eeb6e96caa8cd4f47fa5a280465be0d263e12ee4a2768145558feab769dd  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/remotion-lenet5/node_modules/dotenv/README-es.md
+2d1919cb803aa866a036b5dd7ce2cb7237138e003a3e0307a809aab56ad3be08  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/remotion-lenet5/node_modules/dotenv/README.md
+c5972fbf329afd80a10e31341f61c51dd883fac5e09a43d253c5da681b81c6b1  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/server.js
+0b59df8841d9f0c41257292fbf9678a1d700025561aee0b289faffe0970869f4  /home/bf/knowledge-share/projets-dev/e26-dossier-rxneurones-backup-20260908-114025/slides.json

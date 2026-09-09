@@ -1,0 +1,16 @@
+AUDIT CRITÈRE C04 - VISIBILITÉ DES 28 DIAPOSITIVES ET MÉDIAS (VIDÉOS/POSTERS)
+Date audit : 2026-09-08 10:21:31
+Anomalies diapositives WebP (28 slides + 28 miniatures) : 0
+Anomalies vidéos MP4 (6 modules du Studio) : 0
+Posters d'animation PNG vérifiés : 4/4
+Frames de contrôle vérifiées : 7/7
+
+Détail des 6 vidéos dans animations/ :
+  - 01_convolution.mp4 : 528103 octets (0.50 Mo)
+  - 02_neurone.mp4 : 707828 octets (0.68 Mo)
+  - 03_pooling.mp4 : 384089 octets (0.37 Mo)
+  - 04_lenet5_pipeline.mp4 : 592149 octets (0.56 Mo)
+  - ncr-slide.mp4 : 1634401 octets (1.56 Mo)
+  - lenet5_pedagogique.mp4 : 1893982 octets (1.81 Mo)
+
+VERDICT CRITÈRE C04 : PASS (28 slides WebP, 28 miniatures, 6 vidéos MP4 conformes)

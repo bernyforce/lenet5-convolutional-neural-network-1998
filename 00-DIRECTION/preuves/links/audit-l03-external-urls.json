@@ -1,0 +1,146 @@
+[
+  {
+    "url": "https://chaire-biodatamining.teluq.ca/fr/2025/06/22/livre-apprentissage-profond-theorie-et-applications-1ere-edition/",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://colab.research.google.com/assets/colab-badge.svg",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/LeNet",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://fonts.googleapis.com",
+    "http_code": 404,
+    "status": "PASS_PRECONNECT_ORIGIN",
+    "note": "Resource hint preconnect origin, root GET returns 404 by Google design."
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://fonts.gstatic.com",
+    "http_code": 404,
+    "status": "PASS_PRECONNECT_ORIGIN",
+    "note": "Resource hint preconnect origin, root GET returns 404 by Google design."
+  },
+  {
+    "url": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://hal.science/hal-03926082/document",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/Cloudflare-lenet5.iatuto.com-F38020?logo=cloudflare",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/GitHub-Repository-181717?logo=github",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/Portail%20Web-Animations%20Remotion%20HD-F38020?logo=cloudflare",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/PowerPoint-28%20Slides%20Widescreen-orange?logo=microsoftpowerpoint",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://img.shields.io/badge/Remotion-720p%20%26%201080p%20%40%2030fps-purple?logo=react",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://lenet5.iatuto.com/",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://lenet5.iatuto.com/dossier_rxneurones_lenet5.html",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://lenet5.iatuto.com/dossier_rxneurones_lenet5_themed.html",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://playground.tensorflow.org/",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://poloclub.github.io/cnn-explainer/",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://www.genspark.ai/api/files/s/K3Yo2Ayg",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://www.remotion.dev/",
+    "http_code": 200,
+    "status": "PASS",
+    "note": null
+  },
+  {
+    "url": "https://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf",
+    "http_code": null,
+    "status": "ERROR",
+    "note": "<urlopen error [Errno 111] Connection refused>"
+  }
+]

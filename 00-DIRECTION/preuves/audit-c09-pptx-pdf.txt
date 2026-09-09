@@ -1,0 +1,9 @@
+AUDIT CRITÈRE C09 - INTÉGRITÉ DU POWERPOINT ET DU PDF
+Date audit : 2026-09-08 10:21:31
+Nombre de diapositives XML dans LeNet-5.pptx : 28 (attendu: 28)
+Empreinte SHA-256 LeNet-5.pptx : f64e8178680963092ec0e281f46103b46d21f110b3672e0b8f4f17f3d45f8acf
+Empreinte SHA-256 LeNet-5_Presentation_Finale.pptx : f64e8178680963092ec0e281f46103b46d21f110b3672e0b8f4f17f3d45f8acf
+Identité stricte des deux fichiers PPTX : True
+Entête du fichier PDF : b'%PDF-1.6' (valide: True)
+
+VERDICT CRITÈRE C09 : PASS (PowerPoint 28 slides et PDF intègres)

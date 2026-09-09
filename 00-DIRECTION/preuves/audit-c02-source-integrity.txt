@@ -1,0 +1,12 @@
+AUDIT CRITÈRE C02 - INTÉGRITÉ DE LA SOURCE ORIGINALE
+Date audit : 2026-09-08 10:21:31
+Total fichiers contrôlés par rapport au manifeste source : 13648
+Fichiers manquants : 0
+Fichiers modifiés  : 0
+Changements git suivis (hors ledger) : 0
+
+Statut git brut :
+ M .agent-ledger.jsonl
+?? 00-DIRECTION/
+
+VERDICT CRITÈRE C02 : PASS (0 altération de la source d'origine)

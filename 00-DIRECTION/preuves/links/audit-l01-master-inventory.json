@@ -1,0 +1,2605 @@
+{
+  "mission": "E26-LINKS-VALIDATION-20260908",
+  "total_occurrences": 322,
+  "total_unique_targets": 160,
+  "categories_summary": {
+    "A_local_assets": {
+      "occurrences": 172,
+      "unique": 90
+    },
+    "B_local_nav": {
+      "occurrences": 21,
+      "unique": 14
+    },
+    "C_anchors": {
+      "occurrences": 85,
+      "unique": 31
+    },
+    "D_api_routes": {
+      "occurrences": 1,
+      "unique": 1
+    },
+    "E_external_urls": {
+      "occurrences": 43,
+      "unique": 24
+    }
+  },
+  "inventory": [
+    {
+      "file": "index.html",
+      "line": 7,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.googleapis.com",
+      "raw": "<link href=\"https://fonts.googleapis.com\">"
+    },
+    {
+      "file": "index.html",
+      "line": 8,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.gstatic.com",
+      "raw": "<link href=\"https://fonts.gstatic.com\">"
+    },
+    {
+      "file": "index.html",
+      "line": 9,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+      "raw": "<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1716,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "<a href=\"https://github.com/bernyforce/lenet5-convolutional-neural-network-1998\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1717,
+      "tag": "a",
+      "attr": "href",
+      "target": "dossier_rxneurones_lenet5.html",
+      "raw": "<a href=\"dossier_rxneurones_lenet5.html\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1718,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1778,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "<a href=\"https://github.com/bernyforce/lenet5-convolutional-neural-network-1998\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1779,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1799,
+      "tag": "img",
+      "attr": "src",
+      "target": "slides_exported/slide_01.webp",
+      "raw": "<img src=\"slides_exported/slide_01.webp\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1851,
+      "tag": "img",
+      "attr": "src",
+      "target": "slides_exported/slide_01.webp",
+      "raw": "<img src=\"slides_exported/slide_01.webp\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1865,
+      "tag": "img",
+      "attr": "src",
+      "target": "slides_exported/thumb_02.webp",
+      "raw": "<img src=\"slides_exported/thumb_02.webp\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1947,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/01_convolution_poster.png",
+      "raw": "<video poster=\"animations/01_convolution_poster.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1948,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/01_convolution.mp4",
+      "raw": "<source src=\"animations/01_convolution.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1965,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution.mp4",
+      "raw": "<a href=\"animations/01_convolution.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1966,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution.gif",
+      "raw": "<a href=\"animations/01_convolution.gif\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1967,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution_poster.png",
+      "raw": "<a href=\"animations/01_convolution_poster.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1985,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_01_0.5s.png",
+      "raw": "<img src=\"animations/frames/frame_01_0.5s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1989,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_02_1.2s.png",
+      "raw": "<img src=\"animations/frames/frame_02_1.2s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1993,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_03_1.8s.png",
+      "raw": "<img src=\"animations/frames/frame_03_1.8s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 1997,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_04_2.5s.png",
+      "raw": "<img src=\"animations/frames/frame_04_2.5s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2001,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_05_3.0s.png",
+      "raw": "<img src=\"animations/frames/frame_05_3.0s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2005,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/frames/frame_06_4.0s.png",
+      "raw": "<img src=\"animations/frames/frame_06_4.0s.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2030,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "<a href=\"animations/04_lenet5_pipeline.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2033,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/04_lenet5_pipeline_poster.png",
+      "raw": "<video poster=\"animations/04_lenet5_pipeline_poster.png\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2034,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "<source src=\"animations/04_lenet5_pipeline.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2131,
+      "tag": "a",
+      "attr": "href",
+      "target": "LeNet-5.pptx",
+      "raw": "<a href=\"LeNet-5.pptx\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2142,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "<a href=\"animations/04_lenet5_pipeline.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2143,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/04_lenet5_pipeline.gif",
+      "raw": "<a href=\"animations/04_lenet5_pipeline.gif\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2155,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution.mp4",
+      "raw": "<a href=\"animations/01_convolution.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2156,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution.gif",
+      "raw": "<a href=\"animations/01_convolution.gif\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2168,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/02_neurone.mp4",
+      "raw": "<a href=\"animations/02_neurone.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2169,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/02_neurone.gif",
+      "raw": "<a href=\"animations/02_neurone.gif\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2181,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/03_pooling.mp4",
+      "raw": "<a href=\"animations/03_pooling.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2182,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/03_pooling.gif",
+      "raw": "<a href=\"animations/03_pooling.gif\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2193,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "<a href=\"animations/ncr-slide.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2203,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/lenet5_pedagogique.mp4",
+      "raw": "<a href=\"animations/lenet5_pedagogique.mp4\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2213,
+      "tag": "a",
+      "attr": "href",
+      "target": "slides.json",
+      "raw": "<a href=\"slides.json\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2223,
+      "tag": "a",
+      "attr": "href",
+      "target": "index.tsv",
+      "raw": "<a href=\"index.tsv\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1332,
+      "tag": "a",
+      "attr": "href",
+      "target": "index.html",
+      "raw": "<a href=\"index.html\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1333,
+      "tag": "a",
+      "attr": "href",
+      "target": "index.html#tab-video",
+      "raw": "<a href=\"index.html#tab-video\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1334,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "<a href=\"https://github.com/bernyforce/lenet5-convolutional-neural-network-1998\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1335,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1338,
+      "tag": "a",
+      "attr": "href",
+      "target": "LeNet-5.pptx",
+      "raw": "<a href=\"LeNet-5.pptx\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1371,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1399,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1400,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1401,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1402,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1403,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1404,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1405,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1406,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1407,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1408,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1409,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1410,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1536,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1537,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1663,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1664,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1798,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1799,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1970,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 1971,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2111,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2112,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2198,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2199,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2424,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2425,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2512,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "<a href=\"animations/ncr-slide.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2515,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/frames/frame_06_4.0s.png",
+      "raw": "<video poster=\"animations/frames/frame_06_4.0s.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2516,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "<source src=\"animations/ncr-slide.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2548,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2549,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2652,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2653,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2711,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2712,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2845,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5.html",
+      "line": 2846,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 7,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.googleapis.com",
+      "raw": "<link href=\"https://fonts.googleapis.com\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 8,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.gstatic.com",
+      "raw": "<link href=\"https://fonts.gstatic.com\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 9,
+      "tag": "link",
+      "attr": "href",
+      "target": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+      "raw": "<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1660,
+      "tag": "a",
+      "attr": "href",
+      "target": "index.html",
+      "raw": "<a href=\"index.html\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1661,
+      "tag": "a",
+      "attr": "href",
+      "target": "index.html#tab-video",
+      "raw": "<a href=\"index.html#tab-video\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1662,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "<a href=\"https://github.com/bernyforce/lenet5-convolutional-neural-network-1998\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1663,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1666,
+      "tag": "a",
+      "attr": "href",
+      "target": "LeNet-5.pptx",
+      "raw": "<a href=\"LeNet-5.pptx\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1698,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1726,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1727,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1728,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1729,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1730,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1731,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1732,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1733,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1734,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1735,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1736,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1737,
+      "tag": "a",
+      "attr": "href",
+      "target": "https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1863,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1864,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1881,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/02_neurone.mp4",
+      "raw": "<a href=\"animations/02_neurone.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1885,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/02_neurone_poster.png",
+      "raw": "<video poster=\"animations/02_neurone_poster.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1886,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/02_neurone.mp4",
+      "raw": "<source src=\"animations/02_neurone.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 1888,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/02_neurone.gif",
+      "raw": "<img src=\"animations/02_neurone.gif\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2015,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec1",
+      "raw": "<a href=\"#sec1\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2016,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2150,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec2",
+      "raw": "<a href=\"#sec2\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2151,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2271,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec3",
+      "raw": "<a href=\"#sec3\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2272,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2289,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/01_convolution.mp4",
+      "raw": "<a href=\"animations/01_convolution.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2293,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/01_convolution_poster.png",
+      "raw": "<video poster=\"animations/01_convolution_poster.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2294,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/01_convolution.mp4",
+      "raw": "<source src=\"animations/01_convolution.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2296,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/01_convolution.gif",
+      "raw": "<img src=\"animations/01_convolution.gif\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2437,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec4",
+      "raw": "<a href=\"#sec4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2438,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2455,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/03_pooling.mp4",
+      "raw": "<a href=\"animations/03_pooling.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2459,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/03_pooling_poster.png",
+      "raw": "<video poster=\"animations/03_pooling_poster.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2460,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/03_pooling.mp4",
+      "raw": "<source src=\"animations/03_pooling.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2462,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/03_pooling.gif",
+      "raw": "<img src=\"animations/03_pooling.gif\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2549,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec5",
+      "raw": "<a href=\"#sec5\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2550,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2567,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "<a href=\"animations/04_lenet5_pipeline.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2571,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/04_lenet5_pipeline_poster.png",
+      "raw": "<video poster=\"animations/04_lenet5_pipeline_poster.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2572,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "<source src=\"animations/04_lenet5_pipeline.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2574,
+      "tag": "img",
+      "attr": "src",
+      "target": "animations/04_lenet5_pipeline.gif",
+      "raw": "<img src=\"animations/04_lenet5_pipeline.gif\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2754,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec6",
+      "raw": "<a href=\"#sec6\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2755,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2770,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "<a href=\"animations/ncr-slide.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2773,
+      "tag": "video",
+      "attr": "poster",
+      "target": "animations/frames/frame_06_4.0s.png",
+      "raw": "<video poster=\"animations/frames/frame_06_4.0s.png\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2774,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "<source src=\"animations/ncr-slide.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2879,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec7",
+      "raw": "<a href=\"#sec7\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2880,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2983,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec8",
+      "raw": "<a href=\"#sec8\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 2984,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3042,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec9",
+      "raw": "<a href=\"#sec9\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3043,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec11",
+      "raw": "<a href=\"#sec11\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3058,
+      "tag": "a",
+      "attr": "href",
+      "target": "animations/lenet5_pedagogique.mp4",
+      "raw": "<a href=\"animations/lenet5_pedagogique.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3062,
+      "tag": "source",
+      "attr": "src",
+      "target": "animations/lenet5_pedagogique.mp4",
+      "raw": "<source src=\"animations/lenet5_pedagogique.mp4\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3197,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec10",
+      "raw": "<a href=\"#sec10\">"
+    },
+    {
+      "file": "dossier_rxneurones_lenet5_themed.html",
+      "line": 3198,
+      "tag": "a",
+      "attr": "href",
+      "target": "#sec0",
+      "raw": "<a href=\"#sec0\">"
+    },
+    {
+      "file": "guide_logique_presentation.html",
+      "line": 252,
+      "tag": "a",
+      "attr": "href",
+      "target": "presentation_rxneurones_lenet5.pptx",
+      "raw": "<a href=\"presentation_rxneurones_lenet5.pptx\">"
+    },
+    {
+      "file": "guide_logique_presentation.html",
+      "line": 253,
+      "tag": "a",
+      "attr": "href",
+      "target": "dossier_rxneurones_lenet5.html",
+      "raw": "<a href=\"dossier_rxneurones_lenet5.html\">"
+    },
+    {
+      "file": "guide_logique_presentation.html",
+      "line": 254,
+      "tag": "a",
+      "attr": "href",
+      "target": "demonstration_lenet5_colab.ipynb",
+      "raw": "<a href=\"demonstration_lenet5_colab.ipynb\">"
+    },
+    {
+      "file": "index.html",
+      "line": 2795,
+      "tag": "script",
+      "attr": "fetch()",
+      "target": "/api/slides",
+      "raw": "fetch('/api/slides'"
+    },
+    {
+      "file": "README.md",
+      "line": 3,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://colab.research.google.com/assets/colab-badge.svg",
+      "raw": "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)"
+    },
+    {
+      "file": "README.md",
+      "line": 4,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/Cloudflare-lenet5.iatuto.com-F38020?logo=cloudflare",
+      "raw": "[![Cloudflare Live](https://img.shields.io/badge/Cloudflare-lenet5.iatuto.com-F38020?logo=cloudflare)"
+    },
+    {
+      "file": "README.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch",
+      "raw": "[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch)"
+    },
+    {
+      "file": "README.md",
+      "line": 6,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/Remotion-720p%20%26%201080p%20%40%2030fps-purple?logo=react",
+      "raw": "[![Remotion 720p & 1080p](https://img.shields.io/badge/Remotion-720p%20%26%201080p%20%40%2030fps-purple?logo=react)"
+    },
+    {
+      "file": "README.md",
+      "line": 7,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/PowerPoint-28%20Slides%20Widescreen-orange?logo=microsoftpowerpoint",
+      "raw": "[![PowerPoint 16:9](https://img.shields.io/badge/PowerPoint-28%20Slides%20Widescreen-orange?logo=microsoftpowerpoint)"
+    },
+    {
+      "file": "README.md",
+      "line": 8,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/License-MIT-yellow.svg",
+      "raw": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)"
+    },
+    {
+      "file": "README.md",
+      "line": 16,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-vue-densemble--contexte-historique",
+      "raw": "[Vue d'Ensemble & Contexte Historique](#-vue-densemble--contexte-historique)"
+    },
+    {
+      "file": "README.md",
+      "line": 17,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-architecture-7-couches-lenet-5",
+      "raw": "[Architecture 7 Couches LeNet-5](#-architecture-7-couches-lenet-5)"
+    },
+    {
+      "file": "README.md",
+      "line": 18,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-suite-des-6-animations-remotion-hd",
+      "raw": "[Suite des 6 Animations Remotion HD](#-suite-des-6-animations-remotion-hd)"
+    },
+    {
+      "file": "README.md",
+      "line": 19,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-d\u00e9monstration-interactive-google-colab",
+      "raw": "[D\u00e9monstration Interactive Google Colab](#-d\u00e9monstration-interactive-google-colab)"
+    },
+    {
+      "file": "README.md",
+      "line": 20,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-portail-web--console-conf\u00e9rencier",
+      "raw": "[Portail Web & Console Conf\u00e9rencier](#-portail-web--console-conf\u00e9rencier)"
+    },
+    {
+      "file": "README.md",
+      "line": 21,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-pr\u00e9sentation-powerpoint-master-28-diapositives-169",
+      "raw": "[Pr\u00e9sentation PowerPoint Master (28 Diapositives 16:9)](#-pr\u00e9sentation-powerpoint-master-28-diapositives-169)"
+    },
+    {
+      "file": "README.md",
+      "line": 22,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-dossier-p\u00e9dagogique-approfondi-multi-th\u00e8mes",
+      "raw": "[Dossier P\u00e9dagogique Approfondi (Multi-Th\u00e8mes)](#-dossier-p\u00e9dagogique-approfondi-multi-th\u00e8mes)"
+    },
+    {
+      "file": "README.md",
+      "line": 23,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-installation--d\u00e9marrage-rapide",
+      "raw": "[Installation & D\u00e9marrage Rapide](#-installation--d\u00e9marrage-rapide)"
+    },
+    {
+      "file": "README.md",
+      "line": 24,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-gouvernance--tra\u00e7abilit\u00e9-d\u00e9terministe",
+      "raw": "[Gouvernance & Tra\u00e7abilit\u00e9 D\u00e9terministe](#-gouvernance--tra\u00e7abilit\u00e9-d\u00e9terministe)"
+    },
+    {
+      "file": "README.md",
+      "line": 75,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://www.remotion.dev/",
+      "raw": "[Remotion](https://www.remotion.dev/)"
+    },
+    {
+      "file": "README.md",
+      "line": 79,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/01_convolution.mp4",
+      "raw": "[`01_convolution`](animations/01_convolution.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 80,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/02_neurone.mp4",
+      "raw": "[`02_neurone`](animations/02_neurone.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 81,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/03_pooling.mp4",
+      "raw": "[`03_pooling`](animations/03_pooling.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 82,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "[`04_lenet5_pipeline`](animations/04_lenet5_pipeline.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 83,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "[`ncr-slide`](animations/ncr-slide.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 84,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "animations/lenet5_pedagogique.mp4",
+      "raw": "[`lenet5_pedagogique`](animations/lenet5_pedagogique.mp4)"
+    },
+    {
+      "file": "README.md",
+      "line": 90,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "demonstration_lenet5_colab.ipynb",
+      "raw": "[`demonstration_lenet5_colab.ipynb`](demonstration_lenet5_colab.ipynb)"
+    },
+    {
+      "file": "README.md",
+      "line": 92,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://colab.research.google.com/assets/colab-badge.svg",
+      "raw": "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)"
+    },
+    {
+      "file": "README.md",
+      "line": 105,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "index.html",
+      "raw": "[`index.html`](index.html)"
+    },
+    {
+      "file": "README.md",
+      "line": 121,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "LeNet-5.pptx",
+      "raw": "[**`LeNet-5.pptx`**](LeNet-5.pptx)"
+    },
+    {
+      "file": "README.md",
+      "line": 121,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "LeNet-5_Presentation_Finale.pptx",
+      "raw": "[**`LeNet-5_Presentation_Finale.pptx`**](LeNet-5_Presentation_Finale.pptx)"
+    },
+    {
+      "file": "README.md",
+      "line": 131,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "dossier_rxneurones_lenet5.html",
+      "raw": "[`dossier_rxneurones_lenet5.html`](dossier_rxneurones_lenet5.html)"
+    },
+    {
+      "file": "README.md",
+      "line": 132,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "dossier_rxneurones_lenet5_themed.html",
+      "raw": "[`dossier_rxneurones_lenet5_themed.html`](dossier_rxneurones_lenet5_themed.html)"
+    },
+    {
+      "file": "README.md",
+      "line": 140,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://lenet5.iatuto.com/",
+      "raw": "[**`https://lenet5.iatuto.com/`**](https://lenet5.iatuto.com/)"
+    },
+    {
+      "file": "README.md",
+      "line": 141,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://lenet5.iatuto.com/dossier_rxneurones_lenet5_themed.html",
+      "raw": "[**`https://lenet5.iatuto.com/dossier_rxneurones_lenet5_themed.html`**](https://lenet5.iatuto.com/dossier_rxneurones_lenet5_themed.html)"
+    },
+    {
+      "file": "README.md",
+      "line": 142,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://lenet5.iatuto.com/dossier_rxneurones_lenet5.html",
+      "raw": "[**`https://lenet5.iatuto.com/dossier_rxneurones_lenet5.html`**](https://lenet5.iatuto.com/dossier_rxneurones_lenet5.html)"
+    },
+    {
+      "file": "README.md",
+      "line": 167,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "00-DIRECTION/planificateur-report.md",
+      "raw": "[Rapport de Planification Ind\u00e9pendante](00-DIRECTION/planificateur-report.md)"
+    },
+    {
+      "file": "README.md",
+      "line": 168,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "00-DIRECTION/executeur-report.md",
+      "raw": "[Compte-Rendu d'Ex\u00e9cution](00-DIRECTION/executeur-report.md)"
+    },
+    {
+      "file": "README.md",
+      "line": 169,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "00-DIRECTION/verificateur-report-01.md",
+      "raw": "[Rapport d'Audit & Contr\u00f4le Ind\u00e9pendant (Grille C01-C12)](00-DIRECTION/verificateur-report-01.md)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 15,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./dossier_rxneurones_lenet5.html",
+      "raw": "[`dossier_rxneurones_lenet5.html`](./dossier_rxneurones_lenet5.html)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 26,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./dossier_rxneurones_lenet5.html",
+      "raw": "[`dossier_rxneurones_lenet5.html`](./dossier_rxneurones_lenet5.html)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 27,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/",
+      "raw": "[`figures/`](./figures/)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 28,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig01_neurone.svg",
+      "raw": "[`fig01_neurone.svg`](./figures/fig01_neurone.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 29,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig02_reseau.svg",
+      "raw": "[`fig02_reseau.svg`](./figures/fig02_reseau.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 30,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig03_image_pixels.svg",
+      "raw": "[`fig03_image_pixels.svg`](./figures/fig03_image_pixels.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 31,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig04_convolution.svg",
+      "raw": "[`fig04_convolution.svg`](./figures/fig04_convolution.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 32,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig05_pooling.svg",
+      "raw": "[`fig05_pooling.svg`](./figures/fig05_pooling.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 33,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig06_lenet5_pipeline.svg",
+      "raw": "[`fig06_lenet5_pipeline.svg`](./figures/fig06_lenet5_pipeline.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 34,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig07_apprentissage.svg",
+      "raw": "[`fig07_apprentissage.svg`](./figures/fig07_apprentissage.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 35,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./figures/fig08_cheque.svg",
+      "raw": "[`fig08_cheque.svg`](./figures/fig08_cheque.svg)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 36,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./LISEZ-MOI.md",
+      "raw": "[`LISEZ-MOI.md`](./LISEZ-MOI.md)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 37,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./rapport_execution.md",
+      "raw": "[`rapport_execution.md`](./rapport_execution.md)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 38,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./ressources/",
+      "raw": "[`ressources/`](./ressources/)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 39,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./LeNet-5.pptx",
+      "raw": "[`LeNet-5.pptx`](./LeNet-5.pptx)"
+    },
+    {
+      "file": "LISEZ-MOI.md",
+      "line": 40,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "./index.html",
+      "raw": "[`index.html`](./index.html)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 19,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-1--pr\u00e9sentation-master-powerpoint-28-diapositives-169",
+      "raw": "[Domaine 1 : Pr\u00e9sentation Master PowerPoint (28 Diapositives 16:9)](#-domaine-1--pr\u00e9sentation-master-powerpoint-28-diapositives-169)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 20,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-2--animation-remotion--d\u00e9ploiement-ncr--s\u00e9paration-des-3-r\u00f4les",
+      "raw": "[Domaine 2 : Animation Remotion \u00ab D\u00e9ploiement NCR \u00bb & S\u00e9paration des 3 R\u00f4les](#-domaine-2--animation-remotion--d\u00e9ploiement-ncr--s\u00e9paration-des-3-r\u00f4les)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 21,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-3--suite-des-6-animations-remotion--assets-multim\u00e9dia",
+      "raw": "[Domaine 3 : Suite des 6 Animations Remotion & Assets Multim\u00e9dia](#-domaine-3--suite-des-6-animations-remotion--assets-multim\u00e9dia)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 22,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-4--serveur-web-streaming-range-206--exposition-publique-cloudflare",
+      "raw": "[Domaine 4 : Serveur Web, Streaming Range 206 & Exposition Publique Cloudflare](#-domaine-4--serveur-web-streaming-range-206--exposition-publique-cloudflare)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 23,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-5--identit\u00e9-visuelle--conservation-stricte-des-3-th\u00e8mes",
+      "raw": "[Domaine 5 : Identit\u00e9 Visuelle & Conservation Stricte des 3 Th\u00e8mes](#-domaine-5--identit\u00e9-visuelle--conservation-stricte-des-3-th\u00e8mes)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 24,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-6--dossier-d\u00e9tude-th\u00e9m\u00e9--composants-interactifs",
+      "raw": "[Domaine 6 : Dossier d'\u00c9tude Th\u00e9m\u00e9 & Composants Interactifs](#-domaine-6--dossier-d\u00e9tude-th\u00e9m\u00e9--composants-interactifs)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 25,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-7--exp\u00e9rimentation-interactive-google-colab",
+      "raw": "[Domaine 7 : Exp\u00e9rimentation Interactive Google Colab](#-domaine-7--exp\u00e9rimentation-interactive-google-colab)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 26,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-8--documentation-du-projet--publication-github",
+      "raw": "[Domaine 8 : Documentation du Projet & Publication GitHub](#-domaine-8--documentation-du-projet--publication-github)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 27,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-domaine-9--gouvernance-d\u00e9terministe--tra\u00e7abilit\u00e9-ledger--backups",
+      "raw": "[Domaine 9 : Gouvernance D\u00e9terministe & Tra\u00e7abilit\u00e9 (Ledger & Backups)](#-domaine-9--gouvernance-d\u00e9terministe--tra\u00e7abilit\u00e9-ledger--backups)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 28,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "#-grille-r\u00e9capitulative--formulaire-de-signature-finale",
+      "raw": "[Grille R\u00e9capitulative & Formulaire de Signature Finale](#-grille-r\u00e9capitulative--formulaire-de-signature-finale)"
+    },
+    {
+      "file": "VERIFICATION_CONFORMITE.md",
+      "line": 265,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "[ ] **CRIT-8.1** : D\u00e9p\u00f4t public cr\u00e9\u00e9 et accessible : [https://github.com/bernyforce/lenet5-convolutional-neural-network-1998](https://github.com/bernyforce/lenet5-convolutional-neural-network-1998)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://www.genspark.ai/api/files/s/K3Yo2Ayg",
+      "raw": "[https://www.genspark.ai/api/files/s/K3Yo2Ayg](https://www.genspark.ai/api/files/s/K3Yo2Ayg)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf",
+      "raw": "[https://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf](https://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://chaire-biodatamining.teluq.ca/fr/2025/06/22/livre-apprentissage-profond-theorie-et-applications-1ere-edition/",
+      "raw": "[https://chaire-biodatamining.teluq.ca/fr/2025/06/22/livre-apprentissage-profond-theorie-et-applications-1ere-edition/](https://chaire-biodatamining.teluq.ca/fr/2025/06/22/livre-apprentissage-profond-theorie-et-applications-1ere-edition/)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://en.wikipedia.org/wiki/LeNet",
+      "raw": "[https://en.wikipedia.org/wiki/LeNet](https://en.wikipedia.org/wiki/LeNet)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://poloclub.github.io/cnn-explainer/",
+      "raw": "[https://poloclub.github.io/cnn-explainer/](https://poloclub.github.io/cnn-explainer/)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://playground.tensorflow.org/",
+      "raw": "[https://playground.tensorflow.org/](https://playground.tensorflow.org/)"
+    },
+    {
+      "file": "ressources/liens-ressources.md",
+      "line": 5,
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://hal.science/hal-03926082/document",
+      "raw": "[https://hal.science/hal-03926082/document](https://hal.science/hal-03926082/document)"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_1",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_01.webp",
+      "raw": "slide[1].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_1",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_01.webp",
+      "raw": "slide[1].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_1",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_01.webp",
+      "raw": "slide[1].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_2",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_02.webp",
+      "raw": "slide[2].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_2",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_02.webp",
+      "raw": "slide[2].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_2",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_02.webp",
+      "raw": "slide[2].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_3",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_03.webp",
+      "raw": "slide[3].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_3",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_03.webp",
+      "raw": "slide[3].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_3",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_03.webp",
+      "raw": "slide[3].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_4",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_04.webp",
+      "raw": "slide[4].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_4",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_04.webp",
+      "raw": "slide[4].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_4",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_04.webp",
+      "raw": "slide[4].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_5",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_05.webp",
+      "raw": "slide[5].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_5",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_05.webp",
+      "raw": "slide[5].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_5",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_05.webp",
+      "raw": "slide[5].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_6",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_06.webp",
+      "raw": "slide[6].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_6",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_06.webp",
+      "raw": "slide[6].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_6",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_06.webp",
+      "raw": "slide[6].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_7",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_07.webp",
+      "raw": "slide[7].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_7",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_07.webp",
+      "raw": "slide[7].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_7",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_07.webp",
+      "raw": "slide[7].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_8",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_08.webp",
+      "raw": "slide[8].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_8",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_08.webp",
+      "raw": "slide[8].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_8",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_08.webp",
+      "raw": "slide[8].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_09.webp",
+      "raw": "slide[9].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_09.webp",
+      "raw": "slide[9].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_09.webp",
+      "raw": "slide[9].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/02_neurone.mp4",
+      "raw": "slide[9].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "media.gif",
+      "target": "animations/02_neurone.gif",
+      "raw": "slide[9].media.gif"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_9",
+      "tag": "json",
+      "attr": "media.poster",
+      "target": "animations/02_neurone_poster.png",
+      "raw": "slide[9].media.poster"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_10",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_10.webp",
+      "raw": "slide[10].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_10",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_10.webp",
+      "raw": "slide[10].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_10",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_10.webp",
+      "raw": "slide[10].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_11",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_11.webp",
+      "raw": "slide[11].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_11",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_11.webp",
+      "raw": "slide[11].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_11",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_11.webp",
+      "raw": "slide[11].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_12.webp",
+      "raw": "slide[12].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_12.webp",
+      "raw": "slide[12].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_12.webp",
+      "raw": "slide[12].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/01_convolution.mp4",
+      "raw": "slide[12].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "media.gif",
+      "target": "animations/01_convolution.gif",
+      "raw": "slide[12].media.gif"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_12",
+      "tag": "json",
+      "attr": "media.poster",
+      "target": "animations/01_convolution_poster.png",
+      "raw": "slide[12].media.poster"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_13",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_13.webp",
+      "raw": "slide[13].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_13",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_13.webp",
+      "raw": "slide[13].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_13",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_13.webp",
+      "raw": "slide[13].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_14.webp",
+      "raw": "slide[14].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_14.webp",
+      "raw": "slide[14].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_14.webp",
+      "raw": "slide[14].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/03_pooling.mp4",
+      "raw": "slide[14].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "media.gif",
+      "target": "animations/03_pooling.gif",
+      "raw": "slide[14].media.gif"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_14",
+      "tag": "json",
+      "attr": "media.poster",
+      "target": "animations/03_pooling_poster.png",
+      "raw": "slide[14].media.poster"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_15",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_15.webp",
+      "raw": "slide[15].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_15",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_15.webp",
+      "raw": "slide[15].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_15",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_15.webp",
+      "raw": "slide[15].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_16.webp",
+      "raw": "slide[16].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_16.webp",
+      "raw": "slide[16].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_16.webp",
+      "raw": "slide[16].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/04_lenet5_pipeline.mp4",
+      "raw": "slide[16].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "media.gif",
+      "target": "animations/04_lenet5_pipeline.gif",
+      "raw": "slide[16].media.gif"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_16",
+      "tag": "json",
+      "attr": "media.poster",
+      "target": "animations/04_lenet5_pipeline_poster.png",
+      "raw": "slide[16].media.poster"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_17",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_17.webp",
+      "raw": "slide[17].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_17",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_17.webp",
+      "raw": "slide[17].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_17",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_17.webp",
+      "raw": "slide[17].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_18",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_18.webp",
+      "raw": "slide[18].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_18",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_18.webp",
+      "raw": "slide[18].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_18",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_18.webp",
+      "raw": "slide[18].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_19",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_19.webp",
+      "raw": "slide[19].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_19",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_19.webp",
+      "raw": "slide[19].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_19",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_19.webp",
+      "raw": "slide[19].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_19",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/ncr-slide.mp4",
+      "raw": "slide[19].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_20",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_20.webp",
+      "raw": "slide[20].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_20",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_20.webp",
+      "raw": "slide[20].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_20",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_20.webp",
+      "raw": "slide[20].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_21",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_21.webp",
+      "raw": "slide[21].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_21",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_21.webp",
+      "raw": "slide[21].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_21",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_21.webp",
+      "raw": "slide[21].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_22",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_22.webp",
+      "raw": "slide[22].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_22",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_22.webp",
+      "raw": "slide[22].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_22",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_22.webp",
+      "raw": "slide[22].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_23",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_23.webp",
+      "raw": "slide[23].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_23",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_23.webp",
+      "raw": "slide[23].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_23",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_23.webp",
+      "raw": "slide[23].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_24",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_24.webp",
+      "raw": "slide[24].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_24",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_24.webp",
+      "raw": "slide[24].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_24",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_24.webp",
+      "raw": "slide[24].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_24",
+      "tag": "json",
+      "attr": "media.mp4",
+      "target": "animations/lenet5_pedagogique.mp4",
+      "raw": "slide[24].media.mp4"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_25",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_25.webp",
+      "raw": "slide[25].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_25",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_25.webp",
+      "raw": "slide[25].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_25",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_25.webp",
+      "raw": "slide[25].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_26",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_26.webp",
+      "raw": "slide[26].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_26",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_26.webp",
+      "raw": "slide[26].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_26",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_26.webp",
+      "raw": "slide[26].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_27",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_27.webp",
+      "raw": "slide[27].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_27",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_27.webp",
+      "raw": "slide[27].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_27",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_27.webp",
+      "raw": "slide[27].thumb"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_28",
+      "tag": "json",
+      "attr": "file",
+      "target": "slides_exported/slide_28.webp",
+      "raw": "slide[28].file"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_28",
+      "tag": "json",
+      "attr": "webp",
+      "target": "slides_exported/slide_28.webp",
+      "raw": "slide[28].webp"
+    },
+    {
+      "file": "slides.json",
+      "line": "slide_28",
+      "tag": "json",
+      "attr": "thumb",
+      "target": "slides_exported/thumb_28.webp",
+      "raw": "slide[28].thumb"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_1_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://colab.research.google.com/assets/colab-badge.svg",
+      "raw": "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_1_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/Portail%20Web-Animations%20Remotion%20HD-F38020?logo=cloudflare",
+      "raw": "[![Portail Web & Animations](https://img.shields.io/badge/Portail%20Web-Animations%20Remotion%20HD-F38020?logo=cloudflare)"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_1_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://img.shields.io/badge/GitHub-Repository-181717?logo=github",
+      "raw": "[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_1_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://lenet5.iatuto.com/",
+      "raw": "[**https://lenet5.iatuto.com/**](https://lenet5.iatuto.com/)"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_18_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://lenet5.iatuto.com/",
+      "raw": "[**https://lenet5.iatuto.com/**](https://lenet5.iatuto.com/)"
+    },
+    {
+      "file": "demonstration_lenet5_colab.ipynb",
+      "line": "cell_18_md",
+      "tag": "markdown",
+      "attr": "link",
+      "target": "https://github.com/bernyforce/lenet5-convolutional-neural-network-1998",
+      "raw": "[**github.com/bernyforce/lenet5-convolutional-neural-network-1998**](https://github.com/bernyforce/lenet5-convolutional-neural-network-1998)"
+    }
+  ]
+}

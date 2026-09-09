@@ -1,0 +1,9 @@
+AUDIT CRITÈRE C08 - CONCORDANCE DE LA DOCUMENTATION (README.md & LISEZ-MOI.md)
+Date audit : 2026-09-08 10:21:31
+Mention de la résolution 720p HD : True
+Mention de la résolution 1080p Full HD (NCR) : True
+Mention du poids exact de ncr-slide.mp4 (1.63 Mo) : True
+Liens de gouvernance vers 00-DIRECTION/ : True
+Référencement du fichier LeNet-5.pptx : True
+
+VERDICT CRITÈRE C08 : PASS (Documentation concordante avec le livrable candidat)

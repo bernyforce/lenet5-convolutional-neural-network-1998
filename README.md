@@ -3,7 +3,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bernyforce/lenet5-convolutional-neural-network-1998/blob/main/demonstration_lenet5_colab.ipynb)
 [![Cloudflare Live](https://img.shields.io/badge/Cloudflare-lenet5.iatuto.com-F38020?logo=cloudflare)](https://lenet5.iatuto.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch)](demonstration_lenet5_colab.ipynb)
-[![Remotion 1080p](https://img.shields.io/badge/Remotion-1080p%20%40%2030fps-purple?logo=react)](animations/)
+[![Remotion 720p & 1080p](https://img.shields.io/badge/Remotion-720p%20%26%201080p%20%40%2030fps-purple?logo=react)](animations/)
 [![PowerPoint 16:9](https://img.shields.io/badge/PowerPoint-28%20Slides%20Widescreen-orange?logo=microsoftpowerpoint)](LeNet-5.pptx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -72,16 +72,16 @@ LeNet-5 est déployé avec succès par la société **NCR Corporation** dans les
 
 ## 🎬 Suite des 6 Animations Remotion HD
 
-Le projet intègre une suite de **6 animations graphiques procédurales** créées sous [Remotion](https://www.remotion.dev/) (React + TypeScript) en résolution Full HD 1080p @ 30 fps :
+Le projet intègre une suite de **6 animations graphiques procédurales** créées sous [Remotion](https://www.remotion.dev/) (React + TypeScript) en résolutions adaptées : HD 720p @ 30 fps (modules 01 à 04 et 06) et Full HD 1080p @ 30 fps (module 05 déploiement NCR) :
 
-| Module | Animation | Formats Disponibles | Thème Conceptuel Illustré | Diapositive Appariée |
-| :---: | :--- | :--- | :--- | :---: |
-| **01** | [`01_convolution`](animations/01_convolution.mp4) | MP4 (528 Ko) • GIF (882 Ko) • Poster | Balayage 2D par filtre glissant 5 × 5, extraction de contours et partage des poids. | **Slide 12** |
-| **02** | [`02_neurone`](animations/02_neurone.mp4) | MP4 (708 Ko) • GIF (1,37 Mo) • Poster | Somme pondérée (Σ wi·xi + b) et franchissement de seuil non-linéaire. | **Slide 09** |
-| **03** | [`03_pooling`](animations/03_pooling.mp4) | MP4 (384 Ko) • GIF (320 Ko) • Poster | Sous-échantillonnage 2 × 2, compression spatiale et invariance aux tremblements. | **Slide 14** |
-| **04** | [`04_lenet5_pipeline`](animations/04_lenet5_pipeline.mp4) | MP4 (592 Ko) • GIF (1,36 Mo) • Poster | Traversée séquentielle des 7 couches de l'entrée 32 × 32 aux 10 classes de sortie. | **Slide 16** |
-| **05** | [`ncr-slide`](animations/ncr-slide.mp4) | MP4 (446 Ko) • Galerie 6 captures | Déploiement industriel NCR, lecture autonome de millions de chèques par jour. | **Slide 19** |
-| **06** | [`lenet5_pedagogique`](animations/lenet5_pedagogique.mp4) | MP4 (1,89 Mo) | Film pédagogique complet de synthèse des réseaux neuronaux convolutifs. | **Slide 24** |
+| Module | Animation | Formats Disponibles | Résolution | Thème Conceptuel Illustré | Diapositive Appariée |
+| :---: | :--- | :--- | :---: | :--- | :---: |
+| **01** | [`01_convolution`](animations/01_convolution.mp4) | MP4 (528 Ko) • GIF (882 Ko) • Poster | 720p HD | Balayage 2D par filtre glissant 5 × 5, extraction de contours et partage des poids. | **Slide 12** |
+| **02** | [`02_neurone`](animations/02_neurone.mp4) | MP4 (708 Ko) • GIF (1,37 Mo) • Poster | 720p HD | Somme pondérée (Σ wi·xi + b) et franchissement de seuil non-linéaire. | **Slide 09** |
+| **03** | [`03_pooling`](animations/03_pooling.mp4) | MP4 (384 Ko) • GIF (320 Ko) • Poster | 720p HD | Sous-échantillonnage 2 × 2, compression spatiale et invariance aux tremblements. | **Slide 14** |
+| **04** | [`04_lenet5_pipeline`](animations/04_lenet5_pipeline.mp4) | MP4 (592 Ko) • GIF (1,36 Mo) • Poster | 720p HD | Traversée séquentielle des 7 couches de l'entrée 32 × 32 aux 10 classes de sortie. | **Slide 16** |
+| **05** | [`ncr-slide`](animations/ncr-slide.mp4) | MP4 (1,63 Mo) • Galerie 6 captures | 1080p Full HD | Déploiement industriel NCR, lecture autonome de millions de chèques par jour. | **Slide 19** |
+| **06** | [`lenet5_pedagogique`](animations/lenet5_pedagogique.mp4) | MP4 (1,89 Mo) • Poster | 720p HD | Film pédagogique complet de synthèse des réseaux neuronaux convolutifs. | **Slide 24** |
 
 ---
 
@@ -94,7 +94,7 @@ Le notebook [`demonstration_lenet5_colab.ipynb`](demonstration_lenet5_colab.ipyn
 ### Fonctionnalités Clés du Notebook :
 1. **Implémentation PyTorch native** de la classe `LeNet5(nn.Module)`.
 2. **Chargement et normalisation du jeu de données MNIST** avec mise en exergue du chiffre fil-rouge « 7 ».
-3. **Module interactif d'affichage des animations Remotion** : fonction `show_animation('nom')` intégrant les flux MP4 et GIFs animés directement dans les cellules de sortie.
+3. **Visualisation didactique et explications tensorielles** : structure pédagogique claire et renvoi vers le portail web pour visionner les animations Remotion (optimisation de la charge cognitive).
 4. **Visualisation des cartes d'activation de la couche C1** pour observer les contours verticaux et horizontaux extraits par les filtres.
 5. **Matrice de confusion complète sur 10 000 images de test** et calcul de la précision globale (> 98,5%).
 
@@ -164,9 +164,9 @@ Le projet est développé et validé selon les protocoles de traçabilité stric
 * **BACKUP-AVANT-MODIFICATION v1** : Sauvegardes horodatées obligatoires de tout fichier existant avant écriture (`.bak-YYYYMMDD-HHMMSS`).
 * **AGENT-LEDGER v1** : Fiches de présence et audit cryptographique des interventions (`agent-sign.py`).
 * **Séparation Stricte des Rôles** :
-  - 📋 [Rapport de Planification Indépendante](planificateur-report.md)
-  - ⚙️ [Compte-Rendu d'Exécution](executeur-report.md)
-  - ✅ [Rapport d'Audit & Contrôle Indépendant (12/12 PASS)](verificateur-report.md)
+  - 📋 [Rapport de Planification Indépendante](00-DIRECTION/planificateur-report.md)
+  - ⚙️ [Compte-Rendu d'Exécution](00-DIRECTION/executeur-report.md)
+  - ✅ [Rapport d'Audit & Contrôle Indépendant (Grille C01-C12)](00-DIRECTION/verificateur-report-01.md)
 
 ---
 

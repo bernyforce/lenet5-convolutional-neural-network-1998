@@ -1,0 +1,165 @@
+{
+  "port_tested": 8924,
+  "routes": [
+    {
+      "route": "/",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/index.html",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/api/slides",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "application/json; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/slides.json",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "application/json; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/dossier_rxneurones_lenet5.html",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/dossier_rxneurones_lenet5_themed.html",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/guide_logique_presentation.html",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/demonstration_lenet5_colab.ipynb",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "application/json; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/slides_exported/slide_01.webp",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "image/webp",
+      "match": true
+    },
+    {
+      "route": "/slides_exported/thumb_01.webp",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "image/webp",
+      "match": true
+    },
+    {
+      "route": "/animations/01_convolution.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/02_neurone.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/03_pooling.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/04_lenet5_pipeline.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/ncr-slide.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/lenet5_pedagogique.mp4",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "video/mp4",
+      "match": true
+    },
+    {
+      "route": "/animations/frames/frame_06_4.0s.png",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "image/png",
+      "match": true
+    },
+    {
+      "route": "/LeNet-5.pptx",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "match": true
+    },
+    {
+      "route": "/presentation_rxneurones_lenet5.pptx",
+      "expected_code": 200,
+      "actual_code": 200,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "match": true
+    },
+    {
+      "route": "/index.tsv",
+      "expected_code": 404,
+      "actual_code": 404,
+      "content_type": "text/html; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/00-DIRECTION/links-planificateur-task.md",
+      "expected_code": 403,
+      "actual_code": 403,
+      "content_type": "text/plain; charset=utf-8",
+      "match": true
+    },
+    {
+      "route": "/../../../etc/passwd",
+      "expected_code": 403,
+      "actual_code": 403,
+      "content_type": "text/plain; charset=utf-8",
+      "match": true
+    }
+  ],
+  "range_206_test": {
+    "code": 206,
+    "range": "bytes 0-1023/528103",
+    "length": "1024",
+    "status": "PASS"
+  }
+}

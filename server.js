@@ -4,7 +4,7 @@ const path = require('path');
 const url = require('url');
 
 const PORT = process.env.PORT || 8080;
-const HOST = process.env.HOST || '0.0.0.0';
+const HOST = process.env.HOST || '127.0.0.1';
 const ROOT_DIR = __dirname;
 
 const MIME_TYPES = {
@@ -54,8 +54,27 @@ const server = http.createServer((req, res) => {
   // Safe path resolving to prevent directory traversal
   const safePath = path.normalize(path.join(ROOT_DIR, pathname));
   if (!safePath.startsWith(ROOT_DIR)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('403 Forbidden');
+  }
+
+  // Defensive filtering: block hidden files/directories, coordination dossiers, backups, ledger, and keys
+  const basename = path.basename(safePath);
+  const relPath = path.relative(ROOT_DIR, safePath);
+  const pathParts = relPath.split(path.sep);
+  const hasHidden = pathParts.some(part => part.startsWith('.'));
+
+  if (
+    hasHidden ||
+    basename.startsWith('.') ||
+    relPath.startsWith('00-DIRECTION') ||
+    relPath.includes('00-DIRECTION') ||
+    relPath.includes('.bak') ||
+    relPath.endsWith('.jsonl') ||
+    relPath.endsWith('.key')
+  ) {
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('403 Forbidden: Access to private system files is denied.');
   }
 
   fs.stat(safePath, (err, stats) => {
